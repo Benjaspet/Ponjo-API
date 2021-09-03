@@ -1,0 +1,29 @@
+.badge-get {
+    color: #fff;
+    background-color: #28a745;
+}
+
+a.badge-get:focus,
+a.badge-get:hover {
+    color: #fff;
+    background-color: #1e7e34;
+}
+
+a.badge-get.focus,
+a.badge-get:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.3em 0.3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
