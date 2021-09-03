@@ -1289,13 +1289,11 @@ label {
 }
 
 .button-primary {
-    background: #097dea;
-    background: linear-gradient(65deg, #0270D7 0, #0F8AFD 100%)
+    background: #ad4fe8;
 }
 
 .button-primary:hover {
-    background: #0982f4;
-    background: linear-gradient(65deg, #0275e1 0, #198ffd 100%)
+    background: #ad4fe8;
 }
 
 .button-block {
