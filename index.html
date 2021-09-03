@@ -11,6 +11,7 @@
     <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.svg">
     <meta name="theme-color" content="#4295f4">
     <link rel="stylesheet" href="src/assets/css/style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
     <link rel="icon" href="src/assets/images/Crescent-Logo.svg" type="img/svg">
     <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
@@ -52,9 +53,9 @@
                         <div class="hero-figure-box hero-figure-box-02" data-rotation="-45deg"></div>
                         <div class="hero-figure-box hero-figure-box-03" data-rotation="0deg"></div>
                         <div class="hero-figure-box hero-figure-box-04" data-rotation="-135deg"></div>
-                        <div class="hero-figure-box hero-figure-box-05"></div>
-                        <div class="hero-figure-box hero-figure-box-06"></div>
-                        <div class="hero-figure-box hero-figure-box-07"></div>
+                        <div class="hero-figure-box hero-figure-box-05" data-rotation="0deg"></div>
+                        <div class="hero-figure-box hero-figure-box-06" data-rotation="0deg"></div>
+                        <div class="hero-figure-box hero-figure-box-07" data-rotation="0deg"></div>
                         <div class="hero-figure-box hero-figure-box-08" data-rotation="-22deg"></div>
                         <div class="hero-figure-box hero-figure-box-09" data-rotation="-52deg"></div>
                         <div class="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
@@ -62,42 +63,94 @@
                 </div>
             </div>
         </section>
-    </main>
-    <section class="features section">
-        <div class="container">
-            <div class="features-inner section-inner has-bottom-divider">
-                <div class="features-wrap">
-                    <div class="feature text-center is-revealing">
-                        <div class="feature-inner">
-                            <div class="feature-icon">
-                                <img src="src/assets/images/Feature-1.svg" alt="">
+        <section class="features section">
+            <div class="container">
+                <div class="features-inner section-inner has-bottom-divider">
+                    <div class="features-wrap">
+                        <div class="feature text-center is-revealing">
+                            <div class="feature-inner">
+                                <div class="feature-icon">
+                                    <img src="src/assets/images/Feature-1.svg" alt="">
+                                </div>
+                                <h4 class="feature-title mt-24">Countless Endpoints</h4>
+                                <p class="text-sm mb-0">The Crescent API has numerous utility endpoints to assist you in creating a flexible, responsive, and productive application.</p>
                             </div>
-                            <h4 class="feature-title mt-24">Countless Endpoints</h4>
-                            <p class="text-sm mb-0">The Crescent API has numerous utility endpoints to assist you in creating a flexible, responsive, and productive application.</p>
                         </div>
-                    </div>
-                    <div class="feature text-center is-revealing">
-                        <div class="feature-inner">
-                            <div class="feature-icon">
-                                <img src="src/assets/images/Feature-2.svg" alt="">
+                        <div class="feature text-center is-revealing">
+                            <div class="feature-inner">
+                                <div class="feature-icon">
+                                    <img src="src/assets/images/Feature-2.svg" alt="">
+                                </div>
+                                <h4 class="feature-title mt-24">Simple Responses</h4>
+                                <p class="text-sm mb-0">The API uses an easy-to-parse JSON response format to make it extremely simple for you to handle responses, with detailed documentation.</p>
                             </div>
-                            <h4 class="feature-title mt-24">Simple Responses</h4>
-                            <p class="text-sm mb-0">The API uses an easy-to-parse JSON response format to make it extremely simple for you to handle responses, with detailed documentation.</p>
                         </div>
-                    </div>
-                    <div class="feature text-center is-revealing">
-                        <div class="feature-inner">
-                            <div class="feature-icon">
-                                <img src="src/assets/images/Feature-3.svg" alt="">
+                        <div class="feature text-center is-revealing">
+                            <div class="feature-inner">
+                                <div class="feature-icon">
+                                    <img src="src/assets/images/Feature-3.svg" alt="">
+                                </div>
+                                <h4 class="feature-title mt-24">Helpful Support</h4>
+                                <p class="text-sm mb-0">If you've found a bug or error in our API, or simply need assistance with an endpoint, our support team is always available to be contacted <a href="https://ponjo.club/discord">here</a>.</p>
                             </div>
-                            <h4 class="feature-title mt-24">Helpful Support</h4>
-                            <p class="text-sm mb-0">If you've found a bug or error in our API, or simply need assistance with an endpoint, our support team is always available to be contacted <a href="https://ponjo.club/discord">here</a>.</p>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="site-footer-inner">
+                <div class="brand footer-brand">
+                    <a href="">
+                        <img src="src/assets/images/Crescent-Logo.svg" alt="">
+                    </a>
+                </div>
+                <ul class="footer-links list-reset">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Documentation</a>
+                    </li>
+                    <li>
+                        <a href="#">FAQs</a>
+                    </li>
+                    <li>
+                        <a href="#">Support</a>
+                    </li>
+                </ul>
+                <ul class="footer-social-links list-reset">
+                    <li>
+                        <a href="">
+                            <span class="screen-reader-text">Discord</span>
+                            <i class="fab fa-discord" style="color: #0270D7; font-size: 18px"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="screen-reader-text">Twitter</span>
+                            <i class="fab fa-twitter" style="color: #0270D7; font-size: 18px"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="screen-reader-text">Documentation</span>
+                            <i class="fas fa-bookmark" style="color: #0270D7; font-size: 18px"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="screen-reader-text">Contact</span>
+                            <i class="fas fa-paper-plane" style="color: #0270D7; font-size: 18px"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer-copyright">&copy; 2021 Ponjo Development. All rights reserved.</div>
+            </div>
         </div>
-    </section>
+    </footer>
 </div>
 <script src="src/assets/js/Main.js"></script>
 </body>
