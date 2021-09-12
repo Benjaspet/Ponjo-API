@@ -1,0 +1,27 @@
+{
+  "name": "crescent-api",
+  "version": "0.5.3",
+  "private": true,
+  "description": "The official Crescent API.",
+  "license": "MIT",
+  "author": "Ben Petrillo",
+  "main": "src/api/Server.ts",
+  "scripts": {
+    "start": "ts-node src/api/Server.ts",
+    "start:dev": "nodemon src/api/Server.ts"
+  },
+  "dependencies": {
+    "canvacord": "^5.2.3",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.3.0",
+    "nodemon": "^2.0.12",
+    "rate-limiter-flexible": "^2.2.4",
+    "redis": "^3.1.2",
+    "ts-node": "^10.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/redis": "^2.8.32",
+    "@types/express-rate-limit": "^5.1.3"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "include": ["./src/api"],
+  "compilerOptions": {
+    "outDir": "./target/",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  },
+}
