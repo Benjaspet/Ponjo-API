@@ -5,6 +5,7 @@ import GayRoute from "./routes/images/GayRoute";
 import ChatbotRoute from "./routes/utility/ChatbotRoute";
 import HealthRoute from "./routes/HealthRoute";
 import limiter from "./config/RateLimitConfig";
+import MCBedrock from "./routes/game/MCBedrock";
 
 const router = express.Router();
 router.use(limiter.rateLimiter);
@@ -23,5 +24,11 @@ router.get("/gay", GayRoute.gayImage);
 
 router.get("/health", HealthRoute.fetchApiHealth);
 router.get("/chatbot", ChatbotRoute.sendChatbotMessage);
+
+/*
+ * @description All game query endpoints.
+ */
+
+router.get("/mcbe", MCBedrock.queryBedrockServer);
 
 export = router;
