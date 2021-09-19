@@ -1,4 +1,3 @@
-import {Express, Request, Response} from "express";
 import APIUtil from "../util/APIUtil";
 
 export default class LogManager {

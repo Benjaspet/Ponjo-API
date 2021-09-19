@@ -3,18 +3,29 @@ import * as express from "express";
 import * as path from "path";
 import * as bodyParser from "body-parser";
 import Endpoints from "../Endpoints";
+import Uploader from "../Uploader";
 
 export class AppController {
 
     constructor(app: Express) {
 
         app.use("/v1", Endpoints);
-        app.use(express.static(path.join(__dirname, "../public")));
+        app.use("/uploads", Uploader);
+        app.use(express.static(path.join(__dirname, "/../public")));
+        app.use(express.static(path.join(__dirname, "/../uploads")));
         app.set("trust proxy", "8.8.8.8");
         app.set("trust proxy", 1);
         app.use(express.urlencoded({ extended: false }));
         app.use(bodyParser.urlencoded({ extended: true }));
         app.use(bodyParser.json());
+
+        app.get("/", (req: Request, res: Response) => {
+           return res.redirect("https://ponjo.club/api");
+        });
+
+        app.get("/hosting", (req: Request, res: Response) => {
+            return res.sendFile(path.join(__dirname + "/../public/index.html"));
+        });
 
         app.use((req: Request, res: Response) => {
             const error = new Error("The requested URL was not found on our servers.");
