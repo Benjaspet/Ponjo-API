@@ -12,19 +12,19 @@ export default class MCBedrock {
                 .then(response => {
                     return res.status(200).json({
                         status: 200,
-                        host: response.host,
-                        port: response.port,
-                        srvRecord: response.srvRecord,
-                        gameType: response.gameType,
-                        version: response.version,
-                        software: response.software,
-                        plugins: response.plugins,
-                        levelName: response.levelName,
-                        latency: response.roundTripLatency,
+                        host: response.host || null,
+                        port: response.port || null,
+                        srvRecord: response.srvRecord || null,
+                        gameType: response.gameType || null,
+                        version: response.version || null,
+                        software: response.software || null,
+                        plugins: response.plugins || null,
+                        levelName: response.levelName || null,
+                        latency: response.roundTripLatency || null,
                         players: {
-                            online: response.onlinePlayers,
-                            max: response.maxPlayers,
-                            list: response.players
+                            online: response.onlinePlayers || null,
+                            max: response.maxPlayers || null,
+                            list: response.players || null
                         }
                     });
                 }).catch(error => {

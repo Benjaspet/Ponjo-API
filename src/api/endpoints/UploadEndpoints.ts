@@ -60,10 +60,10 @@ router.get("/:image", (req: Request, res: Response) => {
                     '    <title>Ponjo Hosting</title>\n' +
                     '    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Ponjo-Hosting.png">\n' +
                     `    <meta name="twitter:image" content=${imagePath}>\n` +
-                    '    <meta property="og:title" content="Ponjo Team">\n' +
-                    '    <meta property="og:description" content="Developed by: Eerie#6560">\n' +
+                    `    <meta property="og:title" content="Ponjo | ${imageId}.png">\n` +
+                    '    <meta property="og:description" content="Easily upload and share your images across multiple platforms. Developed by Eerie#6560.">\n' +
                     '    <meta name="twitter:card" content="summary_large_image">\n' +
-                    '    <meta name="theme-color" content="#ffffff">\n' +
+                    '    <meta name="theme-color" content="#ad4fe8">\n' +
                     '</head>\n' +
                     '<body style="height: 100%; text-align: center; margin: 0px; background: #222222;">\n' +
                     `    <img id="imageTag" style="user-select: none; -webkit-user-select: none; cursor: zoom-in;" src=${imagePath} alt="https://miro.medium.com/max/800/1*hFwwQAW45673VGKrMPE2qQ.png" alt="">\n` +
