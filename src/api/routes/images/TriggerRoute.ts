@@ -10,7 +10,7 @@ export default class TriggerRoute {
             const data = result.toString("base64");
             const img = Buffer.from(data, "base64");
             res.writeHead(200, {
-                "Content-Type": "image/png",
+                "Content-Type": "image/gif",
                 "Content-Length": img.length
             });
             return res.end(img);
