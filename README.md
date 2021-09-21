@@ -2,7 +2,7 @@
     <img width="70px" src="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png" align="center" alt="GitHub Readme Stats" style="margin-bottom: -25px"/>
 </p>
 
-<h2 align="center">Crescent API</h2>
+<h2 align="center">Ponjo API</h2>
 
 <p align="center">
     A revolutionary API serving all of your developer utility needs.
@@ -21,7 +21,7 @@
     Countless endpoints, quick response times, and easy-to-parse JSON responses. Integrating utility services into your application has never been easier.
 </p>
 
-- The Crescent API has numerous utility endpoints to assist you in creating a flexible, responsive, and productive application.
+- The Ponjo API has numerous utility endpoints to assist you in creating a flexible, responsive, and productive application.
 - The API uses an easy-to-parse JSON response format to make it extremely simple for you to handle responses, with detailed documentation.
 - Our support team is always available to be contacted [here](https://ponjo.club/discord).
 
@@ -31,4 +31,4 @@
 
 ### License
 
-The Crescent API is licensed under the [MIT License](https://www.mit.edu/~amini/LICENSE.md), and modification is permitted provided that proper credit is given to the original author(s).
+The Ponjo API is licensed under the [MIT License](https://www.mit.edu/~amini/LICENSE.md), and modification is permitted provided that proper credit is given to the original author(s).
