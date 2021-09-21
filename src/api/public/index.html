@@ -33,6 +33,9 @@
                                     secure in our databases.
                                 </label>
                                 <label>
+                                    NOTE: Only JPEGs, PNGs, and SVGs are accepted.
+                                </label>
+                                <label>
                                     Before using our service, you are agreeing to abide by our Terms & Conditions
                                     and are agreeing to our Privacy Policy, which can be found <a href="https://api.ponjo.club/terms">here</a>.
                                 </label>
@@ -50,7 +53,7 @@
                                 </label>
                             </div>
                             <div class="field">
-                                <input id="file-upload" type="file" name="avatar">
+                                <input id="file-upload" type="file" name="avatar" onchange="extensionCheck(event)">
                             </div>
                             <div class="field padding-top--24">
                                 <div class="field padding-bottom--24">
@@ -71,4 +74,6 @@
     </div>
 </div>
 </body>
+<script type="text/javascript" src="scripts/ClipboardUpload.js"></script>
+<script type="text/javascript" src="scripts/Form.js"></script>
 </html>

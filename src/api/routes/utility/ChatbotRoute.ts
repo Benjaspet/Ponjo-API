@@ -16,6 +16,10 @@ export default class ChatbotRoute {
                             name: botName,
                             response: data.message
                         },
+                        timestamps: {
+                            date: new Date().toLocaleString(),
+                            unix: Math.round(+ new Date() / 1000),
+                        }
                     });
                 });
         } catch (error) {

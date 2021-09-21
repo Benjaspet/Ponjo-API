@@ -16,6 +16,10 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
+        const acceptableExtensions: string[] = ["png", "jpg", "svg"];
+        if (!acceptableExtensions.includes(ext)) {
+
+        }
         const id = APIUtil.generateUniqueId();
         const filePath = `/${id}${ext}`;
         Image.create({filePath: filePath, imageId: id})
@@ -63,7 +67,7 @@ router.get("/:image", (req: Request, res: Response) => {
                     `    <meta property="og:title" content="Ponjo | ${imageId}.png">\n` +
                     '    <meta property="og:description" content="Easily upload and share your images across multiple platforms. Developed by Eerie#6560.">\n' +
                     '    <meta name="twitter:card" content="summary_large_image">\n' +
-                    '    <meta name="theme-color" content="#ad4fe8">\n' +
+                    '    <meta name="theme-color" content="#4295f4">\n' +
                     '</head>\n' +
                     '<body style="height: 100%; text-align: center; margin: 0px; background: #222222;">\n' +
                     `    <img id="imageTag" style="user-select: none; -webkit-user-select: none; cursor: zoom-in;" src=${imagePath} alt="https://miro.medium.com/max/800/1*hFwwQAW45673VGKrMPE2qQ.png" alt="">\n` +

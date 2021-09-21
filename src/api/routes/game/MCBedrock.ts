@@ -25,12 +25,20 @@ export default class MCBedrock {
                             online: response.onlinePlayers || null,
                             max: response.maxPlayers || null,
                             list: response.players || null
+                        },
+                        timestamps: {
+                            date: new Date().toLocaleString(),
+                            unix: Math.round(+ new Date() / 1000),
                         }
                     });
                 }).catch(error => {
                     return res.status(500).json({
                         status: 500,
-                        message: "Query failed. The server might not be online."
+                        message: "Query failed. The server might not be online.",
+                        timestamps: {
+                            date: new Date().toLocaleString(),
+                            unix: Math.round(+ new Date() / 1000),
+                        }
                     });
                 });
         } catch (error) {
