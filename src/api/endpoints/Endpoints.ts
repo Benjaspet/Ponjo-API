@@ -6,6 +6,7 @@ import ChatbotRoute from "../routes/utility/ChatbotRoute";
 import HealthRoute from "../routes/HealthRoute";
 import limiter from "../config/RateLimitConfig";
 import MCBedrock from "../routes/game/MCBedrock";
+import PokerRoute from "../routes/game/PokerRoute";
 
 const router = express.Router();
 router.use(limiter.rateLimiter);
@@ -30,5 +31,6 @@ router.get("/chatbot", ChatbotRoute.sendChatbotMessage);
  */
 
 router.get("/mcbe", MCBedrock.queryBedrockServer);
+router.get("/cards/poker/evalhand", PokerRoute.getPokerHand);
 
 export = router;

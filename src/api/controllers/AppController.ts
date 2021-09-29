@@ -12,7 +12,6 @@ export class AppController {
         app.use("/v1", Endpoints);
         app.use("/uploads", Uploader);
         app.use(express.static(path.join(__dirname, "/../public")));
-        app.use(express.static(path.join(__dirname, "/../uploads")));
         app.set("trust proxy", "8.8.8.8");
         app.set("trust proxy", 1);
         app.use(express.urlencoded({ extended: false }));
@@ -20,11 +19,15 @@ export class AppController {
         app.use(bodyParser.json());
 
         app.get("/", (req: Request, res: Response) => {
-           return res.redirect("https://ponjo.club/api");
+           return res.sendFile(path.join(__dirname + "/../public/index.html"));
+        });
+
+        app.get("/endpoints", (req: Request, res: Response) => {
+            return res.sendFile(path.join(__dirname + "/../public/endpoints.html"));
         });
 
         app.get("/hosting", (req: Request, res: Response) => {
-            return res.sendFile(path.join(__dirname + "/../public/index.html"));
+            return res.sendFile(path.join(__dirname + "/../public/hosting.html"));
         });
 
         app.use((req: Request, res: Response) => {

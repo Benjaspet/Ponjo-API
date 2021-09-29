@@ -1,78 +1,168 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 <head>
-    <title>Ponjo Hosting</title>
+    <title>Ponjo API</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="Ponjo Image Hosting">
-    <meta property="og:site_name" content="app.ponjo.club/hosting">
-    <meta property="og:description" content="Welcome to the official Ponjo Team image hosting website! Here, you can easily upload your images to be hosted by us externally and share them with ease. You will no longer have to worry about finding lost images; they will all remain safe and secure in our databases.">
-    <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Ponjo-Hosting.png">
-    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Ponjo-Hosting.png">
-    <meta name="theme-color" content="#4295f4">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Ponjo-Hosting.png" type="img/png">
+    <meta property="og:title" content="Ponjo API">
+    <meta property="og:site_name" content="api.ponjo.club">
+    <meta property="og:description" content="The official homepage of the Ponjo API, serving all of your developer utility needs.">
+    <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
+    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
+    <meta name="theme-color" content="#ad4fe8">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="icon" href="images/Crescent-Logo.png" type="img/svg">
+    <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 </head>
-<body>
-<div class="login-root">
-    <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
-        <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-            <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-                <h1><a href="https://ponjo.club" rel="dofollow">Ponjo Image Hosting</a></h1>
-            </div>
-            <div class="formbg-outer">
-                <div class="formbg">
-                    <div class="formbg-inner padding-horizontal--48">
-                        <form id="stripe-login" action="/uploads/post" method="post" enctype="multipart/form-data">
-                            <div class="field padding-bottom--24">
-                                <label>
-                                    Welcome to the official Ponjo Team image hosting website! Here, you can easily
-                                    upload your images to be hosted by us externally and share them with ease. You will
-                                    no longer have to worry about finding lost images; they will all remain safe and
-                                    secure in our databases.
-                                </label>
-                                <label>
-                                    NOTE: Only JPEGs, PNGs, and SVGs are accepted.
-                                </label>
-                                <label>
-                                    Before using our service, you are agreeing to abide by our Terms & Conditions
-                                    and are agreeing to our Privacy Policy, which can be found <a href="https://api.ponjo.club/terms">here</a>.
-                                </label>
-                                <label>
-                                    We at the Ponjo Development Team want to create tools and services that the public can use. We feel that people
-                                    nowadays frequently want to share photos and screenshots to their friends quickly and easily
-                                    but struggle to do so. This resource provides a simple solution to this problem.
-                                </label>
-                                <label>
-                                    Thank you very much for using our services. If you have any questions regarding
-                                    this service and/or need general support, or would like to help us out by
-                                    reporting a bug, email the creator and developer of this tool, Ben Petrillo,
-                                    by clicking <a href="mailto:benpetrillo@ponjo.club">here</a> or contact us by
-                                    <a href="https://ponjo.club/discord">joining our Discord server</a>.
-                                </label>
-                            </div>
-                            <div class="field">
-                                <input id="file-upload" type="file" name="avatar" onchange="extensionCheck(event)">
-                            </div>
-                            <div class="field padding-top--24">
-                                <div class="field padding-bottom--24">
-                                    <input type="submit" name="submit" value="Upload image!">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="footer-link padding-top--24">
-                    <span><a href="https://api.ponjo.club/privacy">Privacy Policy</a> • <a href="https://api.ponjo.club/terms">Terms of Service</a></span>
-                    <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
-                        <span><a href="#">© 2021 Ponjo Team, Ben Petrillo. All rights reserved.</a></span>
-                    </div>
+<body class="is-boxed has-animations">
+<div class="body-wrap">
+    <header class="site-header">
+        <div class="container">
+            <div class="site-header-inner">
+                <div class="brand header-brand">
+                    <h1 class="m-0">
+                        <a href="#">
+                            <img class="header-logo-image" src="images/Crescent-Logo.png" alt="" width="60" height="60">
+                        </a>
+                    </h1>
                 </div>
             </div>
         </div>
-    </div>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-inner">
+                    <div class="hero-copy">
+                        <h1 class="hero-title mt-0">Ponjo API</h1>
+                        <p>
+                            A revolutionary API serving all of your developer utility needs. Countless endpoints, quick response times, and easy-to-parse JSON responses. Integrating utility services into your application has never been easier.
+                        </p>
+                        <div class="hero-cta">
+                            <a class="button button-primary" href="https://api.ponjo.club/endpoints">DOCUMENTATION</a>
+                            <a class="button" href="https://ponjo.club/discord">DISCORD SERVER</a>
+                        </div>
+                    </div>
+                    <div class="hero-figure anime-element">
+                        <svg class="placeholder" width="528" height="396" viewBox="0 0 528 396">
+                            <rect width="528" height="396" style="fill:transparent;"/>
+                        </svg>
+                        <div class="hero-figure-box hero-figure-box-01" data-rotation="45deg"></div>
+                        <div class="hero-figure-box hero-figure-box-02" data-rotation="-45deg"></div>
+                        <div class="hero-figure-box hero-figure-box-03" data-rotation="0deg"></div>
+                        <div class="hero-figure-box hero-figure-box-04" data-rotation="-135deg"></div>
+                        <div class="hero-figure-box hero-figure-box-05" data-rotation="0deg"></div>
+                        <div class="hero-figure-box hero-figure-box-06" data-rotation="0deg"></div>
+                        <div class="hero-figure-box hero-figure-box-07" data-rotation="0deg"></div>
+                        <div class="hero-figure-box hero-figure-box-08" data-rotation="-22deg"></div>
+                        <div class="hero-figure-box hero-figure-box-09" data-rotation="-52deg"></div>
+                        <div class="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="features section">
+            <div class="container">
+                <div class="features-inner section-inner has-bottom-divider">
+                    <div class="features-wrap">
+                        <div class="feature text-center is-revealing">
+                            <div class="feature-inner">
+                                <div class="feature-icon">
+                                    <img src="images/Feature-1.svg" alt="">
+                                </div>
+                                <h4 class="feature-title mt-24">Countless Endpoints</h4>
+                                <p class="text-sm mb-0">The Ponjo API has numerous utility endpoints to assist you in creating a flexible, responsive, and productive application.</p>
+                            </div>
+                        </div>
+                        <div class="feature text-center is-revealing">
+                            <div class="feature-inner">
+                                <div class="feature-icon">
+                                    <img src="images/Feature-2.svg" alt="">
+                                </div>
+                                <h4 class="feature-title mt-24">Simple Responses</h4>
+                                <p class="text-sm mb-0">The API uses an easy-to-parse JSON response format to make it extremely simple for you to handle responses, with detailed documentation.</p>
+                            </div>
+                        </div>
+                        <div class="feature text-center is-revealing">
+                            <div class="feature-inner">
+                                <div class="feature-icon">
+                                    <img src="images/Feature-3.svg" alt="">
+                                </div>
+                                <h4 class="feature-title mt-24">Helpful Support</h4>
+                                <p class="text-sm mb-0">Our support team is always available to be contacted <a href="https://ponjo.club/discord">here</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="cta section">
+            <div class="container">
+                <div class="cta-inner section-inner">
+                    <h3 class="section-title mt-0">Are you interested?</h3>
+                    <div class="cta-cta">
+                        <a class="button button-primary button-wide-mobile" href="https://api.ponjo.club/getting-started">START USING THE API!</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="site-footer-inner">
+                <div class="brand footer-brand">
+                    <a href="">
+                        <img src="images/Crescent-Logo.png" alt="" width="40" height="40">
+                    </a>
+                </div>
+                <ul class="footer-links list-reset">
+                    <li>
+                        <a href="https://api.ponjo.club/getting-started">Guide</a>
+                    </li>
+                    <li>
+                        <a href="https://api.ponjo.club/endpoints">Documentation</a>
+                    </li>
+                    <li>
+                        <a href="https://api.ponjo.club/faq">FAQs</a>
+                    </li>
+                    <li>
+                        <a href="https://ponjo.club/discord">Support</a>
+                    </li>
+                </ul>
+                <ul class="footer-social-links list-reset">
+                    <li>
+                        <a href="https://ponjo.club/discord">
+                            <span class="screen-reader-text">Discord</span>
+                            <i class="fab fa-discord" style="color: #0270D7; font-size: 18px"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/Eerie6560">
+                            <span class="screen-reader-text">Twitter</span>
+                            <i class="fab fa-twitter" style="color: #0270D7; font-size: 18px"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://api.ponjo.club/endpoints">
+                            <span class="screen-reader-text">Documentation</span>
+                            <i class="fas fa-bookmark" style="color: #0270D7; font-size: 18px"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:eerie@ponjo.club">
+                            <span class="screen-reader-text">Contact</span>
+                            <i class="fas fa-paper-plane" style="color: #0270D7; font-size: 18px"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer-copyright">&copy; 2021 Ponjo Team. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
 </div>
+<script src="js/Main.js"></script>
 </body>
-<script type="text/javascript" src="scripts/ClipboardUpload.js"></script>
-<script type="text/javascript" src="scripts/Form.js"></script>
 </html>
