@@ -31,7 +31,6 @@ router.get("/chatbot", ChatbotRoute.sendChatbotMessage);
  */
 
 router.get("/mcbe", MCBedrock.queryBedrockServer);
-router.get("/cards/poker/evalhand", DeckRoute.getPokerHand);
 
 /*
  * @description all card endpoints.
@@ -40,5 +39,6 @@ router.get("/cards/poker/evalhand", DeckRoute.getPokerHand);
 router.get("/decks/create", DeckRoute.createDeck);
 router.get("/decks/find", DeckRoute.getDeckById);
 router.get("/decks/shuffle", DeckRoute.shuffleDeckById);
+router.get("/decks/poker/evalhand", DeckRoute.getPokerHand);
 
 export = router;
