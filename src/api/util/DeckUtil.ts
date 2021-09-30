@@ -17,12 +17,14 @@ export default class DeckUtil {
     }
 
     public static shuffleDeck(deck: string[]) {
-        for (let i = 0; i < 52; i++) {
-            const tempCard = deck[i];
-            const randomIndex = Math.floor(Math.random() * 52);
-            deck[i] = deck[randomIndex];
-            deck[randomIndex] = tempCard;
+        let currentIndex = deck.length, randomIndex;
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [deck[currentIndex], deck[randomIndex]] = [
+                deck[randomIndex], deck[currentIndex]];
         }
+        return deck;
     }
 
     public static evaluateHand(deck: string[]) {
