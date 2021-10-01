@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="Ponjo API">
-    <meta property="og:site_name" content="api.ponjo.club">
+    <meta property="og:site_name" content="app.ponjo.club">
     <meta property="og:description" content="The official homepage of the Ponjo API, serving all of your developer utility needs.">
     <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
     <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
     <meta name="theme-color" content="#ad4fe8">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-    <link rel="icon" href="images/Crescent-Logo.png" type="img/svg">
+    <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png" type="img/png">
     <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 </head>
@@ -39,10 +39,10 @@
                     <div class="hero-copy">
                         <h1 class="hero-title mt-0">Ponjo API</h1>
                         <p>
-                            A revolutionary API serving all of your developer utility needs. Countless endpoints, quick response times, and easy-to-parse JSON responses. Integrating utility services into your application has never been easier.
+                            A revolutionary API serving all of your developer utility needs. Countless endpoints, quick response times, and JSON responses. Integrating utility services into your application has never been easier.
                         </p>
                         <div class="hero-cta">
-                            <a class="button button-primary" href="https://api.ponjo.club/endpoints">DOCUMENTATION</a>
+                            <a class="button button-primary" href="https://docs.ponjo.club">DOCUMENTATION</a>
                             <a class="button" href="https://ponjo.club/discord">DISCORD SERVER</a>
                         </div>
                     </div>
@@ -92,19 +92,118 @@
                                     <img src="images/Feature-3.svg" alt="">
                                 </div>
                                 <h4 class="feature-title mt-24">Helpful Support</h4>
-                                <p class="text-sm mb-0">Our support team is always available to be contacted <a href="https://ponjo.club/discord">here</a>.</p>
+                                <p class="text-sm mb-0">Our support team is always available to be contacted <a href="https://ponjo.club/discord">here</a>. From bug reports to suggestions, we're happy to be there for you.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <section class="features section">
+            <div class="container">
+                <div class="features-inner section-inner has-bottom-divider">
+                    <div class="features-wrap">
+                        <div class="feature text-center is-revealing">
+                            <div class="feature-inner">
+                                <p class="mt-0">
+                                    <span class="badge badge-get">GET REQUEST</span><br>
+                                    <code class="crescent-code-bold">/v1/query/mcbe?host={host}&port={port}</code><br>
+                                    <code class="crescent-code">Get the status of a Minecraft: Bedrock Edition server.</code>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="feature text-center is-revealing">
+                            <div class="feature-inner">
+                                <p class="mt-0">
+                                    <span class="badge badge-get">GET REQUEST</span><br>
+                                    <code class="crescent-code-bold">/v1/query/minecraft?host={host}&port={port}</code><br>
+                                    <code class="crescent-code">Get the status of a Minecraft: Java Edition server.</code>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="feature text-center is-revealing">
+                            <p class="mt-0">
+                                <span class="badge badge-get">GET REQUEST</span><br>
+                                <code class="crescent-code-bold">/v1/chatbot?message={message}</code><br>
+                                <code class="crescent-code">Obtain a chatbot response message with powerful AI.</code>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-paragraph text-center cta">
+            <div class="container">
+                <div class="section-inner text-center">
+                    <h4 class="mt-0 mb-16 text-center" style="font-size: 30px;">Deck Endpoint</h4>
+                    <p class="text-sm mt-8">
+                        One of the Ponjo API's most popular endpoints is the deck endpoint. It's a seamless
+                        virtual card deck simulator with the ability to create decks of cards, shuffle them,
+                        and even save them for later. Including built-in methods to evaluate poker hands,
+                        blackjack hands, and more, you'll be able to create functional card games with
+                        our API.
+                    </p>
+                    <p class="mt-0">
+                        <span class="badge badge-get">GET REQUEST</span><br>
+                        <code class="crescent-code-bold">/v1/decks/create</code><br>
+                        <code class="crescent-code">Create a virtual deck of cards.</code>
+                    </p>
+                    <p class="mt-0">
+                        <span class="badge badge-get">GET REQUEST</span><br>
+                        <code class="crescent-code-bold">/v1/decks/find?id={deck-id}</code><br>
+                        <code class="crescent-code">Find a virtual deck by ID.</code>
+                    </p>
+                    <p class="mt-0">
+                        <span class="badge badge-get">GET REQUEST</span><br>
+                        <code class="crescent-code-bold">/v1/decks/shuffle?id={deck-id}</code><br>
+                        <code class="crescent-code">Shuffle a virtual deck by ID.</code>
+                    </p>
+                    <p class="mt-0">
+                        <span class="badge badge-get">GET REQUEST</span><br>
+                        <code class="crescent-code-bold">/v1/decks/poker/evalhand?hand={hand}</code><br>
+                        <code class="crescent-code">Shuffle a virtual deck by ID.</code>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="section-paragraph text-center cta">
+            <div class="container">
+                <div class="section-inner text-center">
+                    <h4 class="mt-0 mb-16 text-center" style="font-size: 30px;">Image Manipulation Endpoint</h4>
+                    <p class="text-sm mt-8">
+                        Easily provide images and add numerous filters, effects, and flairs using our API.
+                        What's more, no API key is required for these powerful endpoints. Create awesome commands
+                        for your Discord bot with our easy-to-use image manipulation endpoints.
+                    </p>
+                    <p class="mt-0">
+                        <span class="badge badge-post">POST REQUEST</span><br>
+                        <code class="crescent-code-bold">/v1/images/trigger?image={image-URL}</code><br>
+                        <code class="crescent-code">Give an image a "triggered" GIF overlay.</code>
+                    </p>
+                    <p class="mt-0">
+                        <span class="badge badge-post">POST REQUEST</span><br>
+                        <code class="crescent-code-bold">/v1/images/gay?image={image-URL}</code><br>
+                        <code class="crescent-code">Make your image a little more gay!</code>
+                    </p>
+                    <p class="mt-0">
+                        <span class="badge badge-post">POST REQUEST</span><br>
+                        <code class="crescent-code-bold">/v1/images/jail?image={image-URL}</code><br>
+                        <code class="crescent-code">Give yourself a nice mugshot.</code>
+                    </p>
+                    <p class="mt-0">
+                        <span class="badge badge-post">POST REQUEST</span><br>
+                        <code class="crescent-code-bold">/v1/images/wanted?image={image-URL}</code><br>
+                        <code class="crescent-code">Make yourself wanted by the police.</code>
+                    </p>
+                </div>
+            </div>
+        </section>
         <section class="cta section">
             <div class="container">
                 <div class="cta-inner section-inner">
-                    <h3 class="section-title mt-0">Are you interested?</h3>
+                    <h3 class="section-title mt-0">Interested?</h3>
                     <div class="cta-cta">
-                        <a class="button button-primary button-wide-mobile" href="https://api.ponjo.club/getting-started">START USING THE API!</a>
+                        <a class="button button-primary button-wide-mobile" href="https://docs.ponjo.club">VIEW THE DOCUMENTATION!</a>
                     </div>
                 </div>
             </div>
@@ -146,13 +245,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://api.ponjo.club/endpoints">
+                        <a href="https://docs.ponjo.club">
                             <span class="screen-reader-text">Documentation</span>
                             <i class="fas fa-bookmark" style="color: #0270D7; font-size: 18px"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="mailto:eerie@ponjo.club">
+                        <a href="mailto:benpetrillo@ponjo.club">
                             <span class="screen-reader-text">Contact</span>
                             <i class="fas fa-paper-plane" style="color: #0270D7; font-size: 18px"></i>
                         </a>

@@ -21,6 +21,15 @@ export default class ChatbotRoute {
                             unix: Math.round(+ new Date() / 1000),
                         }
                     });
+                }).catch(error => {
+                    return res.status(400).json({
+                        status: 400,
+                        message: "The chatbot endpoint is experiencing issues at this time.",
+                        timestamps: {
+                            date: new Date().toLocaleString(),
+                            unix: Math.round(+ new Date() / 1000),
+                        }
+                    });
                 });
         } catch (error) {
             const errorMessage = new Error("An error occurred. Please contact an API developer.");

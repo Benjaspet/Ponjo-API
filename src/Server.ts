@@ -1,10 +1,10 @@
 import express from "express";
-import {AppController} from "./api/controllers/AppController";
+import {Application} from "./api/Application";
 import * as http from "http";
 import LogController from "./api/controllers/LogController";
 
 const app = express();
-new AppController(app);
+new Application(app);
 
 console.clear();
 const server = http.createServer(app);
