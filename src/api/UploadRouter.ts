@@ -1,10 +1,10 @@
 import * as express from "express";
 import {Request, Response} from "express";
 import multer from "multer";
-import UploaderUtil from "../util/UploaderUtil";
-import APIUtil from "../util/APIUtil";
-import Image from "../models/Images";
-import Images from "../models/Images";
+import UploaderUtil from "./util/UploaderUtil";
+import APIUtil from "./util/APIUtil";
+import Image from "./models/Images";
+import Images from "./models/Images";
 import path from "path";
 
 APIUtil.connectToDatabase();
@@ -12,7 +12,7 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname + "/../uploads"));
+        cb(null, path.join(__dirname + "/uploads"));
     },
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);

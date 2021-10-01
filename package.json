@@ -5,10 +5,10 @@
   "description": "The official Crescent API.",
   "license": "MIT",
   "author": "Ben Petrillo",
-  "main": "src/api/Server.ts",
+  "main": "src/Server.ts",
   "scripts": {
-    "start": "ts-node src/api/Server.ts",
-    "start:dev": "nodemon src/api/Server.ts"
+    "start": "ts-node src/Server.ts",
+    "start:dev": "nodemon src/Server.ts"
   },
   "dependencies": {
     "@types/node": "^16.9.3",

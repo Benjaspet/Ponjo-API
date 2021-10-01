@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
-    <title>Deck Endpoint</title>
+    <title>Info Endpoint</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="Ponjo API | Deck Endpoint">
+    <meta property="og:title" content="Ponjo API | Info Endpoint">
     <meta property="og:site_name" content="app.ponjo.club/endpoints">
-    <meta property="og:description" content="Here you can find all routes from the deck endpoint of the Ponjo API.">
+    <meta property="og:description" content="Here you can find all routes from the info endpoint of the Ponjo API.">
     <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
     <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
     <meta name="theme-color" content="#ad4fe8">
@@ -23,27 +23,24 @@
         <section class="section-paragraph text-center cta">
             <div class="container">
                 <div class="section-inner text-center">
-                    <h4 class="mt-0 mb-16 text-center" style="font-size: 30px;">Deck Endpoint</h4>
+                    <h4 class="mt-0 mb-16 text-center" style="font-size: 30px;">Statistic Endpoint</h4>
                     <p class="text-sm mt-8">
+                    <p class="text-sm mt-0">Artificial Intelligence</p>
+                    <p class="text-sm mt-0" style="font-size: 20px;">Information & Statistics</p>
                     <p class="mt-0">
                         <span class="badge badge-get">GET REQUEST</span><br>
-                        <code class="crescent-code-bold">/v1/decks/create</code><br>
-                        <code class="crescent-code">Create a virtual deck of cards.</code>
+                        <code class="crescent-code-bold">/v1/status</code><br>
+                        <code class="crescent-code">Get the status of the API.</code>
                     </p>
                     <p class="mt-0">
                         <span class="badge badge-get">GET REQUEST</span><br>
-                        <code class="crescent-code-bold">/v1/decks/find?id={deck-id}</code><br>
-                        <code class="crescent-code">Find a virtual deck by ID.</code>
+                        <code class="crescent-code-bold">/v1/stats?endpoint={endpoint}</code><br>
+                        <code class="crescent-code">View statistics of a particular endpoint.</code>
                     </p>
                     <p class="mt-0">
                         <span class="badge badge-get">GET REQUEST</span><br>
-                        <code class="crescent-code-bold">/v1/decks/shuffle?id={deck-id}</code><br>
-                        <code class="crescent-code">Shuffle a virtual deck by ID.</code>
-                    </p>
-                    <p class="mt-0">
-                        <span class="badge badge-get">GET REQUEST</span><br>
-                        <code class="crescent-code-bold">/v1/decks/poker/evalhand?hand={hand}</code><br>
-                        <code class="crescent-code">Shuffle a virtual deck by ID.</code>
+                        <code class="crescent-code-bold">/v1/info</code><br>
+                        <code class="crescent-code">View information about the API.</code>
                     </p>
                 </div>
             </div>
