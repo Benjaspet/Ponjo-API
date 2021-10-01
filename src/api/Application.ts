@@ -11,6 +11,7 @@ export class Application {
         app.use("/v1", Endpoints);
         app.use("/uploads", Uploader);
         app.use(express.static(path.join(__dirname, "/public")));
+        app.use(express.static(path.join(__dirname, "/uploads")));
         app.set("trust proxy", "8.8.8.8");
         app.set("trust proxy", 1);
         app.use(express.urlencoded({ extended: false }));

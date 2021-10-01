@@ -70,7 +70,7 @@ router.get("/:image", (req: Request, res: Response) => {
                     '    <meta name="theme-color" content="#4295f4">\n' +
                     '</head>\n' +
                     '<body style="height: 100%; text-align: center; margin: 0px; background: #222222;">\n' +
-                    `    <img id="imageTag" style="user-select: none; -webkit-user-select: none; cursor: zoom-in;" src=${imagePath} alt="https://miro.medium.com/max/800/1*hFwwQAW45673VGKrMPE2qQ.png" alt="">\n` +
+                    `    <img id="imageTag" style="user-select: none; -webkit-user-select: none; cursor: zoom-in;" src=${imagePath} alt="https://ponjo.club" alt="">\n` +
                     '</body>\n' +
                     '</html>');
             }
