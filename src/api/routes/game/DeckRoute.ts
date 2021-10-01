@@ -115,7 +115,7 @@ export default class DeckRoute {
         }
     }
 
-    public static shuffleDeckById(req: Request, res: Response) {
+    public static async shuffleDeckById(req: Request, res: Response) {
         const deckId = req.query.id as string;
         if (!deckId) {
             return res.status(400).json({
@@ -123,7 +123,7 @@ export default class DeckRoute {
                 message: "Invalid parameters provided.",
                 timestamps: {
                     date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
+                    unix: Math.round(+new Date() / 1000),
                 }
             });
         }
@@ -140,10 +140,13 @@ export default class DeckRoute {
                     });
                 }
                 const shuffledDeck = DeckUtil.shuffleDeck(deck.deck);
-                Deck.findOneAndUpdate({deckId: deckId}, {deck: shuffledDeck})
-                    .then(deck => {
-                        return res.status(200).json(deck);
-                    });
+                Deck.findOneAndUpdate({deckId: deckId}, {deck: shuffledDeck});
+                return res.status(200).json({
+                    status: 200,
+                    deckId: deckId,
+                    deck: shuffledDeck,
+                    expire_at: deck.expire_at
+                });
             });
         } catch (error) {
             return res.status(400).json({
@@ -151,7 +154,7 @@ export default class DeckRoute {
                 message: "Could not find a deck by that ID.",
                 timestamps: {
                     date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
+                    unix: Math.round(+new Date() / 1000),
                 }
             });
         }
