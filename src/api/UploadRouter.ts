@@ -17,9 +17,6 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
         const acceptableExtensions: string[] = ["png", "jpg", "svg"];
-        if (!acceptableExtensions.includes(ext)) {
-
-        }
         const id = APIUtil.generateUniqueId();
         const filePath = `/${id}${ext}`;
         Image.create({filePath: filePath, imageId: id})

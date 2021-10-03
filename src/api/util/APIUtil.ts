@@ -26,4 +26,20 @@ export default class APIUtil {
         new Promise(res => setTimeout(res, ms));
     }
 
+    public static getMultipleElementsFromArray(array: string[], amount: number) {
+        return array.slice(0, amount)
+    }
+
+    public static shuffleArray(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]
+            ];
+        }
+        return array;
+    }
+
 }
