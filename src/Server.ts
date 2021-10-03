@@ -9,5 +9,5 @@ new Application(app);
 console.clear();
 const server = http.createServer(app);
 server.listen(process.env.PORT || 3000, () => {
-   LogController.info("CRESCENT-API", "Now running on port 3000.");
+   LogController.info("Now running on port 3000.");
 });

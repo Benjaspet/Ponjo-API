@@ -6,7 +6,7 @@ export default class ChatbotRoute {
     public static async sendChatbotMessage(req: Request, res: Response): Promise<Response> {
         try {
             const message = req.query.message as string;
-            const botName = req.query.name ? req.query.name : "Crescent Bot" as string;
+            const botName = req.query.name ? req.query.name : "Ponjo Bot" as string;
             await fetch(`https://yourmommmaosamaobama.hisroyal123.repl.co/?message=${encodeURIComponent(message)}`)
                 .then(response => response.json())
                 .then(data => {

@@ -10,6 +10,8 @@ import DeckRoute from "./routes/game/DeckRoute";
 import AffirmationRoute from "./routes/utility/AffirmationRoute";
 import ColorRoute from "./routes/utility/ColorRoute";
 import SCPRoute from "./routes/info/SCPRoute";
+import AuthorizationUtil from "./util/AuthorizationUtil";
+import KeyRoute from "./routes/authorization/KeyRoute";
 
 const router = express.Router();
 router.use(limiter.rateLimiter);
@@ -30,5 +32,7 @@ router.get("/decks/create", DeckRoute.createDeck);
 router.get("/decks/find", DeckRoute.getDeckById);
 router.get("/decks/shuffle", DeckRoute.shuffleDeckById);
 router.get("/decks/poker/evalhand", DeckRoute.getPokerHand);
+
+router.post("/auth/keys/create", KeyRoute.createKey);
 
 export = router;

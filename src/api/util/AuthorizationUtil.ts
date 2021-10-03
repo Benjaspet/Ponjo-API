@@ -21,7 +21,7 @@ export default class AuthorizationUtil {
     }
 
     public static async createApiKey(key: string, user: string) {
-        Keys.create({
+        return Keys.create({
             key: key,
             user: user
         }).then(() => {
