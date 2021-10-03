@@ -9,6 +9,7 @@ import MCBedrock from "./routes/game/MCBedrock";
 import DeckRoute from "./routes/game/DeckRoute";
 import AffirmationRoute from "./routes/utility/AffirmationRoute";
 import ColorRoute from "./routes/utility/ColorRoute";
+import SCPRoute from "./routes/info/SCPRoute";
 
 const router = express.Router();
 router.use(limiter.rateLimiter);
@@ -21,6 +22,7 @@ router.get("/health", HealthRoute.fetchApiHealth);
 router.get("/chatbot", ChatbotRoute.sendChatbotMessage);
 router.get("/affirmations", AffirmationRoute.getAffirmation);
 router.get("/color", ColorRoute.hexToImage);
+router.get("/scp", SCPRoute.getScpData);
 
 router.get("/mcbe", MCBedrock.queryBedrockServer);
 
