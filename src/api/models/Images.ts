@@ -7,7 +7,8 @@ const ImageSchema = new Schema(
     },
     {
         timestamps: true,
-    }
+        versionKey: false
+    },
 );
 
 const Image = mongoose.model("uploads", ImageSchema);
