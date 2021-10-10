@@ -42,4 +42,8 @@ export default class APIUtil {
         return array;
     }
 
+    public static replaceAll(str: string, find, replace) {
+        return str.replace(new RegExp(find, "g"), replace);
+    }
+
 }

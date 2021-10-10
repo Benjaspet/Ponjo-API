@@ -4,8 +4,12 @@ const DeckSchema = new Schema(
     {
         deck: Array,
         deckId: String,
-        expire_at: {
-            type: Date, default: Date.now, expires: 86400
+        expireAt: {
+            type: Date,
+            default: Date.now,
+            index: {
+                expires: "48h"
+            }
         }
     },
     {

@@ -1,4 +1,4 @@
-import {v4 as uuidv4, validate as uuidValidate} from "uuid";
+import {v4 as uuidv4} from "uuid";
 import Keys from "../models/Keys";
 
 export default class AuthorizationUtil {
@@ -13,10 +13,14 @@ export default class AuthorizationUtil {
         return uuidv4(options);
     }
 
-    public static async isValidApiKey(uuid: string) {
-        Keys.findOne({uuid: uuid})
-            .then(key => {
-                return key;
+    public static async isValidApiKey(key: string) {
+        return Keys.findOne({key: key})
+            .then(async key => {
+                if (key)  {
+                    return true;
+                } else {
+                    return false;
+                }
             });
     }
 

@@ -1,9 +1,21 @@
 import {Request, Response} from "express";
 import SCPScraper from "../../util/SCPScraper";
+import AuthorizationUtil from "../../util/AuthorizationUtil";
 
 export default class SCPRoute {
 
     public static async getScpData(req: Request, res: Response) {
+        const key = req.headers.authorization as string;
+        if (!req.headers.authorization || !await AuthorizationUtil.isValidApiKey(key)) {
+            return res.status(403).json({
+                status: res.statusCode,
+                message: "Invalid API key provided.",
+                timestamps: {
+                    date: new Date().toLocaleString(),
+                    unix: Math.round(+ new Date() / 1000),
+                }
+            });
+        }
         try {
             const scp = req.query.scp as string;
             if (!scp) {
@@ -33,6 +45,7 @@ export default class SCPRoute {
                     });
                 });
         } catch (error) {
+            console.log(error)
             return res.status(400).json({
                 status: res.statusCode,
                 message: "That SCP could not be found.",
