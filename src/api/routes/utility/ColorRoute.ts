@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import Jimp from "jimp";
+import AuthorizationUtil from "../../util/AuthorizationUtil";
 
 export default class ColorRoute {
 
@@ -7,6 +8,17 @@ export default class ColorRoute {
         try {
             const hex = req.query.hex as string;
             const format = req.query.format as string;
+            const key = req.headers.authorization as string;
+            if (!req.headers.authorization || !await AuthorizationUtil.isValidApiKey(key)) {
+                return res.status(403).json({
+                    status: res.statusCode,
+                    message: "Invalid API key provided.",
+                    timestamps: {
+                        date: new Date().toLocaleString(),
+                        unix: Math.round(+ new Date() / 1000),
+                    }
+                });
+            }
             switch (format) {
                 case "png":
                     new Jimp(200, 200, hex, async (err, image) => {

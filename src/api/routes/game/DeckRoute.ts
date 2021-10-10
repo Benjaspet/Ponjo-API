@@ -128,24 +128,35 @@ export default class DeckRoute {
             });
         }
         try {
-            Deck.findOne({deckId: deckId}, function (error, deck) {
+            Deck.findOne({deckId: deckId}, async function (error, deck) {
                 if (!deck) {
                     return res.status(400).json({
                         status: 400,
                         message: "Could not find a deck by that ID.",
                         timestamps: {
                             date: new Date().toLocaleString(),
-                            unix: Math.round(+ new Date() / 1000),
+                            unix: Math.round(+new Date() / 1000),
                         }
                     });
                 }
                 const shuffledDeck = DeckUtil.shuffleDeck(deck.deck);
-                Deck.findOneAndUpdate({deckId: deckId}, {deck: shuffledDeck});
-                return res.status(200).json({
-                    status: 200,
-                    deckId: deckId,
-                    deck: shuffledDeck,
-                    expire_at: deck.expire_at
+                Deck.findOneAndUpdate({deckId: deckId}, {deck: shuffledDeck}, (error, result) => {
+                    if (error) {
+                        return res.status(400).json({
+                            status: 400,
+                            message: "Could not find a deck by that ID.",
+                            timestamps: {
+                                date: new Date().toLocaleString(),
+                                unix: Math.round(+new Date() / 1000),
+                            }
+                        });
+                    } else {
+                        return res.status(200).json({
+                            status: 200,
+                            deckId: deckId,
+                            deck: shuffledDeck
+                        });
+                    }
                 });
             });
         } catch (error) {

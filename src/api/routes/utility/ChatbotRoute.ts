@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import fetch from "node-fetch";
+import AuthorizationUtil from "../../util/AuthorizationUtil";
 
 export default class ChatbotRoute {
 
@@ -7,6 +8,17 @@ export default class ChatbotRoute {
         try {
             const message = req.query.message as string;
             const botName = req.query.name ? req.query.name : "Ponjo Bot" as string;
+            const key = req.headers.authorization as string;
+            if (!req.headers.authorization || !await AuthorizationUtil.isValidApiKey(key)) {
+                return res.status(403).json({
+                    status: res.statusCode,
+                    message: "Invalid API key provided.",
+                    timestamps: {
+                        date: new Date().toLocaleString(),
+                        unix: Math.round(+ new Date() / 1000),
+                    }
+                });
+            }
             await fetch(`https://yourmommmaosamaobama.hisroyal123.repl.co/?message=${encodeURIComponent(message)}`)
                 .then(response => response.json())
                 .then(data => {

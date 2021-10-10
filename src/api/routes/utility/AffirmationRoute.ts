@@ -1,12 +1,24 @@
 import affirmations from "../../data/Affirmations";
 import {Request, Response} from "express";
 import APIUtil from "../../util/APIUtil";
+import AuthorizationUtil from "../../util/AuthorizationUtil";
 
 export default class AffirmationRoute {
 
     public static async getAffirmation(req: Request, res: Response): Promise<any> {
         try {
             const count = req.query.count as string || req.params.count;
+            const key = req.headers.authorization as string;
+            if (!req.headers.authorization || !await AuthorizationUtil.isValidApiKey(key)) {
+                return res.status(403).json({
+                    status: res.statusCode,
+                    message: "Invalid API key provided.",
+                    timestamps: {
+                        date: new Date().toLocaleString(),
+                        unix: Math.round(+ new Date() / 1000),
+                    }
+                });
+            }
             if (!count) {
                 return res.status(400).json({
                     status: 200,
