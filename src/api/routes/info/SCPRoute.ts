@@ -28,22 +28,22 @@ export default class SCPRoute {
                     }
                 });
             }
-            await SCPScraper.scrapeScp(scp)
-                .then(result => {
-                    return res.status(200).json({
-                        status: 200,
-                        data: {
-                            url: `https://www.scpwiki.com/scp-${scp}`,
-                            scp: result.item,
-                            class: result.class,
-                            procedures: result.procedures
-                        },
-                        timestamps: {
-                            date: new Date().toLocaleString(),
-                            unix: Math.round(+ new Date() / 1000),
-                        }
-                    });
-                });
+            // await SCPScraper.scrapeScp(scp)
+            //     .then(result => {
+            //         return res.status(200).json({
+            //             status: 200,
+            //             data: {
+            //                 url: `https://www.scpwiki.com/scp-${scp}`,
+            //                 scp: result.item,
+            //                 class: result.class,
+            //                 procedures: result.procedures
+            //             },
+            //             timestamps: {
+            //                 date: new Date().toLocaleString(),
+            //                 unix: Math.round(+ new Date() / 1000),
+            //             }
+            //         });
+            //     });
         } catch (error) {
             console.log(error)
             return res.status(400).json({

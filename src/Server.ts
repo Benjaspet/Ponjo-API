@@ -13,4 +13,12 @@ server.listen(process.env.PORT || 3000, () => {
    LogController.info("Now running on port 3000.");
 });
 
-SCPScraper.getScpData("1017").then(r => console.log(r));
+SCPScraper.getScpData("5449")
+    .then(r => {
+       if (!r) {
+          return;
+       } else {
+          console.log(r);
+       }
+    })
+    .catch(error => console.log(error));
