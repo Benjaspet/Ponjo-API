@@ -10,7 +10,6 @@ import DeckRoute from "./routes/game/DeckRoute";
 import AffirmationRoute from "./routes/utility/AffirmationRoute";
 import ColorRoute from "./routes/utility/ColorRoute";
 import SCPRoute from "./routes/info/SCPRoute";
-import AuthorizationUtil from "./util/AuthorizationUtil";
 import KeyRoute from "./routes/authorization/KeyRoute";
 
 const router = express.Router();

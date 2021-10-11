@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import Jimp from "jimp";
 import AuthorizationUtil from "../../util/AuthorizationUtil";
+import colors from "hex-colors-info";
 
 export default class ColorRoute {
 
@@ -47,6 +48,16 @@ export default class ColorRoute {
                             })
                     });
                     break;
+                case "json":
+                    const colorInfo = colors(hex);
+                    return res.status(200).json({
+                        status: 200,
+                        hex: hex,
+                        name: colorInfo.name,
+                        hueHex: colorInfo.hueHex,
+                        hueName: colorInfo.hueName,
+                        match: colorInfo.match
+                    });
                 default:
                     new Jimp(200, 200, hex, async (err, image) => {
                         await image.getBase64Async(Jimp.MIME_PNG)
