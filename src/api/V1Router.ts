@@ -22,8 +22,10 @@ router.get("/gay", GayRoute.gayImage);
 router.get("/health", HealthRoute.fetchApiHealth);
 router.get("/chatbot", ChatbotRoute.sendChatbotMessage);
 router.get("/affirmations", AffirmationRoute.getAffirmation);
-router.get("/color", ColorRoute.hexToImage);
 router.get("/scp", SCPRoute.getScpData);
+
+router.get("/color", ColorRoute.hexToImage);
+router.get("/color/img", ColorRoute.getHexVector);
 
 router.get("/mcbe", MCBedrock.queryBedrockServer);
 
