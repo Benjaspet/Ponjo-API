@@ -24,3 +24,5 @@ const personnel = {
         about: "Enigmatic and genre-savvy. A highly adaptable, clever liar. Former Global Occult Coalition (GOC) operative, specializing in reality benders. Also former file clerk. Undergone anomalous alterations that provide resistance to reality shifts and prevent his face from being photographed. Has a long and checkered history, a flair for the dramatic, and a somewhat hidden streak of self-hatred. Reformed misogynist. Most rumors about him are exaggerated or off-point."
     }
 }
+
+export default personnel;

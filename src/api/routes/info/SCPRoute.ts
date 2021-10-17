@@ -1,22 +1,13 @@
 import {Request, Response} from "express";
 import SCPScraper from "../../util/SCPScraper";
-import AuthorizationUtil from "../../util/AuthorizationUtil";
+import ErrorUtil from "../../util/ErrorUtil";
+import branches from "../../data/foundation/Branches";
+import personnel from "../../data/foundation/Personnel";
 
 export default class SCPRoute {
 
     public static async getScpData(req: Request, res: Response) {
         const item = req.query.item as string;
-        const key = req.headers.authorization as string;
-        if (!req.headers.authorization || !await AuthorizationUtil.isValidApiKey(key)) {
-            return res.status(403).json({
-                status: res.statusCode,
-                message: "Invalid API key provided.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            });
-        }
         try {
             if (!item) {
                 return res.status(500).json({
@@ -51,16 +42,37 @@ export default class SCPRoute {
                     }
                 });
         } catch (error) {
-            console.log(error)
-            return res.status(400).json({
-                status: res.statusCode,
-                message: "An error ocurred.",
+            ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    public static async getFoundationPersonnel(req: Request, res: Response) {
+        try {
+            return res.status(200).json({
+                status: 200,
+                personell: personnel,
                 timestamps: {
                     date: new Date().toLocaleString(),
                     unix: Math.round(+ new Date() / 1000),
                 }
             });
+        } catch (error) {
+            ErrorUtil.sent500Status(req, res);
         }
     }
 
+    public static async getFoundationBranches(req: Request, res: Response) {
+        try {
+            return res.status(200).json({
+                status: 200,
+                branches: branches,
+                timestamps: {
+                    date: new Date().toLocaleString(),
+                    unix: Math.round(+ new Date() / 1000),
+                }
+            });
+        } catch (error) {
+            ErrorUtil.sent500Status(req, res);
+        }
+    }
 }
