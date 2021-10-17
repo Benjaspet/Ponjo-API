@@ -2,23 +2,13 @@ import {Request, Response} from "express";
 import Jimp from "jimp";
 import AuthorizationUtil from "../../util/AuthorizationUtil";
 import colors from "hex-colors-info";
+import ErrorUtil from "../../util/ErrorUtil";
 
 export default class ColorRoute {
 
     public static async hexToImage(req: Request, res: Response) {
         try {
             const hex = req.query.hex as string;
-            const key = req.headers.authorization as string;
-            if (!req.headers.authorization || !await AuthorizationUtil.isValidApiKey(key)) {
-                return res.status(403).json({
-                    status: res.statusCode,
-                    message: "Invalid API key provided.",
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
-                });
-            }
             const colorInfo = colors(hex);
             return res.status(200).json({
                 status: 200,
@@ -30,15 +20,7 @@ export default class ColorRoute {
                 image: "https://app.ponjo.club/v1/color/img?hex=" + hex + "&format=png"
             });
         } catch (error) {
-            const errorMessage = new Error("An error occurred. Please contact an API developer.");
-            return res.status(500).json({
-                status: res.statusCode,
-                message: errorMessage,
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            });
+            return ErrorUtil.sent500Status(req, res);
         }
     }
 

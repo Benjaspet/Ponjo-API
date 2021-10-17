@@ -1,4 +1,5 @@
 import {NextFunction, Request, Response} from "express";
+import ErrorUtil from "../util/ErrorUtil";
 
 export default class HealthRoute {
 
@@ -13,14 +14,7 @@ export default class HealthRoute {
                 }
             });
         } catch (error) {
-            return res.status(500).json({
-                status: 404,
-                message: "An error occurred. Please contact an API developer.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            });
+            return ErrorUtil.sent500Status(req, res);
         }
     }
 }

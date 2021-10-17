@@ -68,3 +68,5 @@ const branches = {
         about: "SCP基金會秘密地和秘密地存在和運作，包含異常以確保正常。"
     },
 }
+
+export default branches;

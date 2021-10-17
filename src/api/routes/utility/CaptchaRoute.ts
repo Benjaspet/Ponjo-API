@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import Captcha from "@haileybot/captcha-generator";
+import ErrorUtil from "../../util/ErrorUtil";
 
 export class CaptchaRoute {
 
@@ -17,17 +18,7 @@ export class CaptchaRoute {
                 }
             });
         } catch (error) {
-            const errorMessage = new Error("An error occurred. Please contact an API developer.");
-            if (res.status(403)) {
-                return res.status(500).json({
-                    status: res.statusCode,
-                    message: errorMessage,
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
-                });
-            }
+            return ErrorUtil.sent500Status(req, res);
         }
     }
 }

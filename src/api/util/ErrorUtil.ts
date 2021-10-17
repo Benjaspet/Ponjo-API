@@ -6,6 +6,28 @@ export default class ErrorUtil {
 
     }
 
+    public static send404Response(req: Request, res: Response) {
+        return res.status(404).json({
+            status: 404,
+            message: "The requested URL was not found on our servers.",
+            timestamps: {
+                date: new Date().toLocaleString(),
+                unix: Math.round(+ new Date() / 1000),
+            }
+        });
+    }
+
+    public static send429Response(req: Request, res: Response) {
+        return res.status(429).json({
+            status: 429,
+            message: "Too many requests. Try again later.",
+            timestamps: {
+                date: new Date().toLocaleString(),
+                unix: Math.round(+ new Date() / 1000)
+            }
+        });
+    }
+
     public static sent500Status(req: Request, res: Response) {
         return res.status(500).json({
             status: 500,

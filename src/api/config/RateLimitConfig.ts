@@ -1,6 +1,6 @@
 import rateLimit from "express-rate-limit";
 import {Request, Response} from "express";
-import config from "./Config";
+import ErrorUtil from "../util/ErrorUtil";
 
 /*
 @description The rate limiter for the /v1 endpoint.
@@ -14,7 +14,7 @@ const limiter = {
         max: 20,
         windowMs: 60 * 3 * 1000,
         handler(req: Request, res: Response): void {
-            res.status(429).json(config.rateLimitResponse);
+            ErrorUtil.send429Response(req, res);
         }
     })
 };

@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import fetch from "node-fetch";
 import AuthorizationUtil from "../../util/AuthorizationUtil";
+import ErrorUtil from "../../util/ErrorUtil";
 
 export default class ChatbotRoute {
 
@@ -44,17 +45,7 @@ export default class ChatbotRoute {
                     });
                 });
         } catch (error) {
-            const errorMessage = new Error("An error occurred. Please contact an API developer.");
-            if (res.status(403)) {
-                return res.status(500).json({
-                    status: res.statusCode,
-                    message: errorMessage,
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
-                });
-            }
+            return ErrorUtil.sent500Status(req, res);
         }
     }
 }

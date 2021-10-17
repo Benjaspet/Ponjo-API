@@ -2,6 +2,7 @@ import {Request, Response} from "express";
 import DeckUtil from "../../util/DeckUtil";
 import Deck from "../../models/Decks";
 import APIUtil from "../../util/APIUtil";
+import ErrorUtil from "../../util/ErrorUtil";
 
 export default class DeckRoute {
 
@@ -24,15 +25,7 @@ export default class DeckRoute {
                }
             });
         } catch (error) {
-            console.log(error)
-            return res.status(500).json({
-                status: 404,
-                message: "An error occurred. Please contact an API developer.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            });
+            return ErrorUtil.sent500Status(req, res);
         }
     }
 
@@ -65,14 +58,7 @@ export default class DeckRoute {
                 });
             });
         } catch (error) {
-            return res.status(400).json({
-                status: 400,
-                message: "An error occurred. Please contact an API developer.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            });
+            return ErrorUtil.sent500Status(req, res);
         }
     }
 
@@ -104,14 +90,7 @@ export default class DeckRoute {
                     return res.status(200).json(deck);
             });
         } catch (error) {
-            return res.status(400).json({
-                status: 400,
-                message: "Could not find a deck by that ID.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            });
+            return ErrorUtil.sent500Status(req, res);
         }
     }
 
@@ -160,14 +139,7 @@ export default class DeckRoute {
                 });
             });
         } catch (error) {
-            return res.status(400).json({
-                status: 400,
-                message: "Could not find a deck by that ID.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+new Date() / 1000),
-                }
-            });
+            return ErrorUtil.sent500Status(req, res);
         }
     }
 }
