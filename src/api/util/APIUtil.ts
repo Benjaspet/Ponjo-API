@@ -46,4 +46,9 @@ export default class APIUtil {
         return str.replace(new RegExp(find, "g"), replace);
     }
 
+    public static setCharAt(str, index, chr) {
+        if (index > str.length-1) return str;
+        return str.substring(0,index) + chr + str.substring(index+1);
+    }
+
 }

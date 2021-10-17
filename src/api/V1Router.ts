@@ -14,6 +14,7 @@ import KeyRoute from "./routes/authorization/KeyRoute";
 import {CaptchaRoute} from "./routes/utility/CaptchaRoute";
 import {NextFunction, Request, Response} from "express";
 import AuthorizationUtil from "./util/AuthorizationUtil";
+import MCJava from "./routes/game/MCJava";
 
 const router = express.Router();
 
@@ -46,7 +47,8 @@ router.get("/scp", SCPRoute.getScpData);
 router.get("/color", ColorRoute.hexToImage);
 router.get("/color/img", ColorRoute.getHexVector);
 
-router.get("/mcbe", MCBedrock.queryBedrockServer);
+router.get("/query/mcbe", MCBedrock.queryBedrockServer);
+router.get("/query/mcjava", MCJava.queryJavaServer);
 
 router.get("/decks/create", DeckRoute.createDeck);
 router.get("/decks/find", DeckRoute.getDeckById);
