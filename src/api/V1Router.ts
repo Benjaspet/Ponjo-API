@@ -11,9 +11,28 @@ import AffirmationRoute from "./routes/utility/AffirmationRoute";
 import ColorRoute from "./routes/utility/ColorRoute";
 import SCPRoute from "./routes/info/SCPRoute";
 import KeyRoute from "./routes/authorization/KeyRoute";
+import {CaptchaRoute} from "./routes/utility/CaptchaRoute";
+import {NextFunction, Request, Response} from "express";
+import AuthorizationUtil from "./util/AuthorizationUtil";
 
 const router = express.Router();
+
 router.use(limiter.rateLimiter);
+
+router.use(async (req: Request, res: Response, next: NextFunction) => {
+    const key = req.headers.authorization as string;
+    if (await AuthorizationUtil.isValidApiKey(key) == false) {
+        return res.status(403).json({
+            status: res.statusCode,
+            message: "Invalid API key provided.",
+            timestamps: {
+                date: new Date().toLocaleString(),
+                unix: Math.round(+new Date() / 1000),
+            }
+        });
+    }
+    next();
+});
 
 router.get("/trigger", TriggerRoute.triggerImage);
 router.get("/jail", JailRoute.jailImage);
@@ -35,5 +54,7 @@ router.get("/decks/shuffle", DeckRoute.shuffleDeckById);
 router.get("/decks/poker/evalhand", DeckRoute.getPokerHand);
 
 router.post("/auth/keys/create", KeyRoute.createKey);
+
+router.get("/captcha", CaptchaRoute.getCaptchaData);
 
 export = router;

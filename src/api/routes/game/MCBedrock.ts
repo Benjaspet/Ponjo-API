@@ -1,14 +1,15 @@
 import {NextFunction, Request, Response} from "express";
 import QueryUtil from "minecraft-server-util";
+import ErrorUtil from "../../util/ErrorUtil";
 
 export default class MCBedrock {
 
     public static queryBedrockServer(req: Request, res: Response, next: NextFunction) {
         const host = req.query.host as string;
-        // @ts-ignore
-        const port = parseInt(req.query.port)
+        const port = req.query.port as string;
+        const parsedPort = parseInt(port);
         try {
-            QueryUtil.queryFull(host, {port: port || 19132, enableSRV: true})
+            QueryUtil.queryFull(host, {port: parsedPort || 19132, enableSRV: true})
                 .then(response => {
                     return res.status(200).json({
                         status: 200,
@@ -31,26 +32,11 @@ export default class MCBedrock {
                             unix: Math.round(+ new Date() / 1000),
                         }
                     });
-                }).catch(error => {
-                    return res.status(500).json({
-                        status: 500,
-                        message: "Query failed. The server might not be online.",
-                        timestamps: {
-                            date: new Date().toLocaleString(),
-                            unix: Math.round(+ new Date() / 1000),
-                        }
-                    });
+                }).catch(() => {
+                    return ErrorUtil.sent504Status(req, res);
                 });
         } catch (error) {
-            console.log(error)
-            return res.status(500).json({
-                status: 404,
-                message: "An error occurred. Please contact an API developer.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            });
+            return ErrorUtil.sent500Status(req, res);
         }
     }
 }
