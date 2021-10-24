@@ -75,4 +75,22 @@ export default class SCPRoute {
             ErrorUtil.sent500Status(req, res);
         }
     }
+
+    public static async getTaskForce(req: Request, res: Response) {
+        try {
+            await SCPScraper.getTaskForceData("all")
+                .then(result => {
+                    return res.status(200).json({
+                        status: 200,
+                        taskForces: result.data,
+                        timestamps: {
+                            date: new Date().toLocaleString(),
+                            unix: Math.round(+ new Date() / 1000),
+                        }
+                    });
+                });
+        } catch (error) {
+            ErrorUtil.sent500Status(req, res);
+        }
+    }
 }

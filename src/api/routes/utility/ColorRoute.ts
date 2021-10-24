@@ -7,8 +7,8 @@ import ErrorUtil from "../../util/ErrorUtil";
 export default class ColorRoute {
 
     public static async hexToImage(req: Request, res: Response) {
+        const hex = req.query.hex as string;
         try {
-            const hex = req.query.hex as string;
             const colorInfo = colors(hex);
             return res.status(200).json({
                 status: 200,

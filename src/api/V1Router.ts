@@ -28,7 +28,7 @@ router.use(async (req: Request, res: Response, next: NextFunction) => {
             message: "Invalid API key provided.",
             timestamps: {
                 date: new Date().toLocaleString(),
-                unix: Math.round(+new Date() / 1000),
+                unix: Math.round(+ new Date() / 1000),
             }
         });
     }
@@ -46,6 +46,7 @@ router.get("/affirmations", AffirmationRoute.getAffirmation);
 router.get("/scp", SCPRoute.getScpData);
 router.get("/scp/personnel", SCPRoute.getFoundationPersonnel);
 router.get("/scp/branches", SCPRoute.getFoundationBranches);
+router.get("/scp/taskforces", SCPRoute.getTaskForce);
 
 router.get("/color", ColorRoute.hexToImage);
 router.get("/color/img", ColorRoute.getHexVector);
