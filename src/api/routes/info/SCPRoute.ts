@@ -1,8 +1,9 @@
 import {Request, Response} from "express";
-import SCPScraper from "../../util/SCPScraper";
+import SCPScraper from "../../util/scp/SCPScraper";
 import ErrorUtil from "../../util/ErrorUtil";
 import branches from "../../data/foundation/Branches";
 import personnel from "../../data/foundation/Personnel";
+import SCPTaskForceUtil from "../../util/scp/SCPTaskForceUtil";
 
 export default class SCPRoute {
 
@@ -78,11 +79,11 @@ export default class SCPRoute {
 
     public static async getTaskForce(req: Request, res: Response) {
         try {
-            await SCPScraper.getTaskForceData("all")
+            await SCPTaskForceUtil.getTaskForceData("all")
                 .then(result => {
                     return res.status(200).json({
                         status: 200,
-                        taskForces: result.data,
+                        data: result.data,
                         timestamps: {
                             date: new Date().toLocaleString(),
                             unix: Math.round(+ new Date() / 1000),

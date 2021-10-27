@@ -15,6 +15,7 @@ import {CaptchaRoute} from "./routes/utility/CaptchaRoute";
 import {NextFunction, Request, Response} from "express";
 import AuthorizationUtil from "./util/AuthorizationUtil";
 import MCJava from "./routes/game/MCJava";
+import AvatarRoute from "./routes/lgbtq/AvatarRoute";
 
 const router = express.Router();
 
@@ -62,5 +63,7 @@ router.get("/decks/poker/evalhand", DeckRoute.getPokerHand);
 router.post("/auth/keys/create", KeyRoute.createKey);
 
 router.get("/captcha", CaptchaRoute.getCaptchaData);
+
+router.post("/pride/avatar", AvatarRoute.sendPrideFlairedAvatar);
 
 export = router;
