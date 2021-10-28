@@ -16,11 +16,7 @@ export default class AuthorizationUtil {
     public static async isValidApiKey(key: string) {
         return Keys.findOne({key: key})
             .then(async key => {
-                if (key)  {
-                    return true;
-                } else {
-                    return false;
-                }
+                return !!key;
             });
     }
 
@@ -41,6 +37,25 @@ export default class AuthorizationUtil {
                     unix: Math.round(+ new Date() / 1000),
                 }
             }
+        });
+    }
+
+    public static async getAllApiKeys(): Promise<object[]> {
+        const keys: object[] = [];
+        return new Promise((resolve, reject) => {
+            Keys.find()
+                .then(async result => {
+                   result.forEach(query => {
+                       keys.push(query)
+                   });
+                    resolve(keys);
+                })
+                .catch(async error => {
+                    reject({
+                        status: 500,
+                        message: "An error occurred."
+                    })
+                });
         });
     }
 }

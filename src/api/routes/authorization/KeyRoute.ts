@@ -30,4 +30,28 @@ export default class KeyRoute {
             return ErrorUtil.sent500Status(req, res);
         }
     }
+
+    public static async getAllKeys(req: Request, res: Response) {
+        await AuthorizationUtil.getAllApiKeys()
+            .then(result => {
+                return res.status(200).json({
+                    status: 200,
+                    keys: result,
+                    timestamps: {
+                        date: new Date().toLocaleString(),
+                        unix: Math.round(+ new Date() / 1000),
+                    }
+                });
+            })
+            .catch(error => {
+                return res.status(500).json({
+                    status: 500,
+                    message: error.message,
+                    timestamps: {
+                        date: new Date().toLocaleString(),
+                        unix: Math.round(+ new Date() / 1000),
+                    }
+                });
+            });
+    }
 }

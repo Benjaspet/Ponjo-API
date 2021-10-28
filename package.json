@@ -15,6 +15,7 @@
     "axios": "^0.22.0",
     "canvacord": "^5.2.3",
     "canvas": "^2.8.0",
+    "chance": "^1.1.8",
     "cheerio": "^1.0.0-rc.10",
     "express": "^4.17.1",
     "express-rate-limit": "^5.3.0",
@@ -44,6 +45,7 @@
     "@types/poker-evaluator": "^0.3.3",
     "@types/redis": "^2.8.32",
     "@types/request": "^2.48.7",
-    "@types/uuid": "^8.3.1"
+    "@types/uuid": "^8.3.1",
+    "@types/chance": "^1.1.3"
   }
 }

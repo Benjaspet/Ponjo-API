@@ -16,6 +16,9 @@ import {NextFunction, Request, Response} from "express";
 import AuthorizationUtil from "./util/AuthorizationUtil";
 import MCJava from "./routes/game/MCJava";
 import AvatarRoute from "./routes/lgbtq/AvatarRoute";
+import RandomMonthRoute from "./routes/random/RandomMonthRoute";
+import RandomUserProfileRoute from "./routes/random/RandomUserProfileRoute";
+import RandomTimezoneRoute from "./routes/random/RandomTimezoneRoute";
 
 const router = express.Router();
 
@@ -60,10 +63,17 @@ router.get("/decks/find", DeckRoute.getDeckById);
 router.get("/decks/shuffle", DeckRoute.shuffleDeckById);
 router.get("/decks/poker/evalhand", DeckRoute.getPokerHand);
 
-router.post("/auth/keys/create", KeyRoute.createKey);
-
 router.get("/captcha", CaptchaRoute.getCaptchaData);
 
 router.post("/pride/avatar", AvatarRoute.sendPrideFlairedAvatar);
+
+router.get("/random/month", RandomMonthRoute.getRandomMonth);
+router.get("/random/userprofile", RandomUserProfileRoute.sendResponse);
+router.get("/random/userprofile/:amount", RandomUserProfileRoute.sendResponse);
+router.get("/random/timezone", RandomTimezoneRoute.getRandomTimezone);
+router.get("/random/timezone/:amount", RandomTimezoneRoute.getRandomTimezone);
+
+router.post("/auth/keys/create", KeyRoute.createKey);
+router.get("/auth/keys/list", KeyRoute.getAllKeys);
 
 export = router;
