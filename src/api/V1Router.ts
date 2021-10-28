@@ -19,6 +19,7 @@ import AvatarRoute from "./routes/lgbtq/AvatarRoute";
 import RandomMonthRoute from "./routes/random/RandomMonthRoute";
 import RandomUserProfileRoute from "./routes/random/RandomUserProfileRoute";
 import RandomTimezoneRoute from "./routes/random/RandomTimezoneRoute";
+import WeatherRoute from "./routes/utility/WeatherRoute";
 
 const router = express.Router();
 
@@ -66,6 +67,9 @@ router.get("/decks/poker/evalhand", DeckRoute.getPokerHand);
 router.get("/captcha", CaptchaRoute.getCaptchaData);
 
 router.post("/pride/avatar", AvatarRoute.sendPrideFlairedAvatar);
+
+router.get("/weather", WeatherRoute.sendResponse);
+router.get("/weather/:location", WeatherRoute.sendResponse);
 
 router.get("/random/month", RandomMonthRoute.getRandomMonth);
 router.get("/random/userprofile", RandomUserProfileRoute.sendResponse);

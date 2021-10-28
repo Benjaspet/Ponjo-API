@@ -39,7 +39,7 @@ export default class AvatarRoute {
             case "transgender":
             case "transmasc":
             case "transfemme":
-                result = await AvatarGenerator.getFlairedAvatar("LGBT");
+                result = await AvatarGenerator.getFlairedAvatar("Transgender");
                 return res.status(200).json({
                     status: 200,
                     timestamps: {

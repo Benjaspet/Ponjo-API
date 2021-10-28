@@ -17,7 +17,11 @@ export default class ColorRoute {
                 hueHex: colorInfo.hueHex,
                 hueName: colorInfo.hueName,
                 match: colorInfo.match,
-                image: "https://app.ponjo.club/v1/color/img?hex=" + hex + "&format=png"
+                image: "https://app.ponjo.club/v1/color/img?hex=" + hex + "&format=png",
+                timestamps: {
+                    date: new Date().toLocaleString(),
+                    unix: Math.round(+ new Date() / 1000),
+                }
             });
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);

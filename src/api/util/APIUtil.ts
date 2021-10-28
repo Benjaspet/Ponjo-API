@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import config from "../config/Config";
+import * as weather from "weather-js";
 
 export default class APIUtil {
 
@@ -50,5 +51,4 @@ export default class APIUtil {
         if (index > str.length-1) return str;
         return str.substring(0,index) + chr + str.substring(index+1);
     }
-
 }
