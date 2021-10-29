@@ -15,7 +15,7 @@ export default class AvatarGenerator {
         @description Gets the appropriate path based on the flair parameter.
         */
 
-        const type = path.join(__dirname, `../public/api/lgbtq/flairs/${flair}.jpg`);
+        const type = path.join(__dirname, `../public/assets/lgbtq/flairs/${flair}.jpg`);
         const param = "https://i.imgur.com/jEasIz6.png";
 
         const canvas = Canvas.createCanvas(500, 500);
