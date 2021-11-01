@@ -4,6 +4,11 @@ import ErrorUtil from "../../util/ErrorUtil";
 
 export default class KeyRoute {
 
+    /*
+     The endpoint listener to create an API key and insert it
+     into the database.
+     */
+
     public static async createKey(req: Request, res: Response) {
         try {
             const user = req.query.user as string;
@@ -30,6 +35,10 @@ export default class KeyRoute {
             return ErrorUtil.sent500Status(req, res);
         }
     }
+
+    /*
+     The endpoint listener to return an array of all API keys.
+     */
 
     public static async getAllKeys(req: Request, res: Response) {
         await AuthorizationUtil.getAllApiKeys()

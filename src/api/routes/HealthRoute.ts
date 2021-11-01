@@ -3,6 +3,10 @@ import ErrorUtil from "../util/ErrorUtil";
 
 export default class HealthRoute {
 
+    /*
+     The endpoint listener to get the current status of the API.
+     */
+
     public static fetchApiHealth(req: Request, res: Response, next: NextFunction) {
         try {
             return res.status(200).json({

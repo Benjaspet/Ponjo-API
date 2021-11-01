@@ -1,10 +1,13 @@
 import {Request, Response} from "express";
 import Jimp from "jimp";
-import AuthorizationUtil from "../../util/AuthorizationUtil";
 import colors from "hex-colors-info";
 import ErrorUtil from "../../util/ErrorUtil";
 
 export default class ColorRoute {
+
+    /*
+     The endpoint listener to retrieve data on a specific hex color.
+     */
 
     public static async hexToImage(req: Request, res: Response) {
         const hex = req.query.hex as string;
@@ -28,20 +31,13 @@ export default class ColorRoute {
         }
     }
 
+    /*
+     The endpoint listener to return a vector of the specified hex color.
+     */
+
     public static async getHexVector(req: Request, res: Response) {
         const hex = req.query.hex as string;
         const format = req.query.format as string;
-        const key = req.headers.authorization as string;
-        if (!req.headers.authorization || !await AuthorizationUtil.isValidApiKey(key)) {
-            return res.status(403).json({
-                status: res.statusCode,
-                message: "Invalid API key provided.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            });
-        }
         switch (format) {
             case "jpeg":
             case "jpg":

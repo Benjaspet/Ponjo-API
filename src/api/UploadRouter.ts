@@ -7,7 +7,6 @@ import Image from "./models/Images";
 import Images from "./models/Images";
 import path from "path";
 
-APIUtil.connectToDatabase();
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -66,7 +65,7 @@ router.get("/:image", (req: Request, res: Response) => {
                     '    <meta name="twitter:card" content="summary_large_image">\n' +
                     '    <meta name="theme-color" content="#4295f4">\n' +
                     '</head>\n' +
-                    '<body style="height: 100%; text-align: center; margin: 0px; background: #222222;">\n' +
+                    '<body style="height: 100%; text-align: center; margin: 0; background: #222222;">\n' +
                     `    <img id="imageTag" style="user-select: none; -webkit-user-select: none; cursor: zoom-in;" src=${imagePath} alt="https://ponjo.club" alt="">\n` +
                     '</body>\n' +
                     '</html>');

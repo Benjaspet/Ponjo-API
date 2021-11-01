@@ -1,5 +1,6 @@
 import request from "request";
 import cheerio from "cheerio";
+import SCPExceptions from "../../data/foundation/SCPExceptions";
 
 export default class SCPScraper {
 
@@ -32,28 +33,45 @@ export default class SCPScraper {
                                 imageSrc: null
                             });
                         } else {
-                            const item = $("#page-title")
+                            let item = $("#page-title")
                                 .first()
                                 .text()
                                 .replace(/\s\s+/g, "");
-                            const objectClass = $('p:contains("Object Class:")')
+                            let objectClass = $('p:contains("Object Class:")')
                                 .first()
                                 .text()
                                 .replace(/█/g, 'X')
-                                .replace("Object Class:", "")
-                                .replace(" ", "");
-                            const procedures = $('p:contains("Special Containment Procedures:")')
+                                .replace("Object Class: ", "");
+                            let procedures = $('p:contains("Special Containment Procedures:")')
                                 .first()
                                 .text()
-                                .replace(/█/g, 'X');
-                            const description = $('p:contains("Description:")')
+                                .replace(/█/g, 'X')
+                                .replace("Special Containment Procedures: ", "");
+                            let description = $('p:contains("Description:")')
                                 .first()
                                 .text()
-                                .replace(/█/g, 'X');
-                            const imageSrc = $('.scp-image-block')
+                                .replace(/█/g, 'X')
+                                .replace("Description: ", "");
+                            let imageSrc = $('.scp-image-block')
                                 .find("img")
                                 .first()
                                 .attr("src");
+                            if (item === "") item = "CLASSIFIED";
+                            if (objectClass === "") objectClass = "Undefined.";
+                            if (procedures === "") procedures = "Undefined.";
+                            if (description === "") description = "Undefined.";
+                            for (let i = 0; i < SCPExceptions.length; i++) {
+                                if (SCPExceptions[i].item === "SCP-" + scp) {
+                                    resolve({
+                                        status: 200,
+                                        item: SCPExceptions[i].item,
+                                        class: SCPExceptions[i].class,
+                                        description: SCPExceptions[i].description,
+                                        procedures: SCPExceptions[i].procedures,
+                                        imageSrc: imageSrc || null
+                                    });
+                                }
+                            }
                             resolve({
                                 status: 200,
                                 item: item,

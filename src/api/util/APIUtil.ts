@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import config from "../config/Config";
-import * as weather from "weather-js";
 
 export default class APIUtil {
 

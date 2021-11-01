@@ -4,6 +4,11 @@ import * as weather from "weather-js";
 
 export default class WeatherRoute {
 
+    /*
+     The endpoint listener to get current weather data as well as
+     predictions by Microsoft.
+     */
+
     public static async sendResponse(req: Request, res: Response) {
         try {
             const location = req.query.location || req.params.location as string;
