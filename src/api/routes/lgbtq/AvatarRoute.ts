@@ -113,11 +113,29 @@ export default class AvatarRoute {
                 default:
                     return ErrorUtil.sent500Status(req, res);
             }
-            res.writeHead(200, {
-                "Content-Type": "image/png",
-                "Content-Length": result.length
-            });
-            res.end(result);
+            switch (format) {
+                case "png":
+                    res.writeHead(200, {
+                        "Content-Type": "image/png",
+                        "Content-Length": result.length
+                    });
+                    res.end(result);
+                    break;
+                case "jpg":
+                case "jpeg":
+                    res.writeHead(200, {
+                        "Content-Type": "image/jpg",
+                        "Content-Length": result.length
+                    });
+                    res.end(result);
+                    break;
+                default:
+                    res.writeHead(200, {
+                        "Content-Type": "image/png",
+                        "Content-Length": result.length
+                    });
+                    res.end(result);
+            }
         }
     }
 }
