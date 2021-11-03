@@ -3,6 +3,7 @@ import * as express from "express";
 import * as path from "path";
 import * as bodyParser from "body-parser";
 import Endpoints from "./V1Router";
+import PremiumEndpoints from "./PremiumRouter";
 import Uploader from "./UploadRouter";
 import ErrorUtil from "./util/ErrorUtil";
 
@@ -10,6 +11,7 @@ export class Application {
 
     constructor(app: Express) {
         app.use("/v1", Endpoints);
+        app.use("/v1", PremiumEndpoints);
         app.use("/uploads", Uploader);
         app.use(express.static(path.join(__dirname, "/public")));
         app.use(express.static(path.join(__dirname, "/uploads")));

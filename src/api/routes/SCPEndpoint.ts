@@ -1,11 +1,11 @@
 import {Request, Response} from "express";
-import SCPScraper from "../../util/scp/SCPScraper";
-import ErrorUtil from "../../util/ErrorUtil";
-import branches from "../../data/foundation/Branches";
-import personnel from "../../data/foundation/Personnel";
-import SCPTaskForceUtil from "../../util/scp/SCPTaskForceUtil";
+import SCPScraper from "../util/scp/SCPScraper";
+import ErrorUtil from "../util/ErrorUtil";
+import branches from "../data/foundation/Branches";
+import personnel from "../data/foundation/Personnel";
+import SCPTaskForceUtil from "../util/scp/SCPTaskForceUtil";
 
-export default class SCPRoute {
+export default class SCPEndpoint {
 
     public static async getScpData(req: Request, res: Response) {
         const item = req.query.item as string;

@@ -1,10 +1,10 @@
 import {Request, Response} from "express";
-import AvatarGenerator from "../../generators/AvatarGenerator";
-import ErrorUtil from "../../util/ErrorUtil";
+import AvatarGenerator from "../generators/AvatarGenerator";
+import ErrorUtil from "../util/ErrorUtil";
 
-export default class AvatarRoute {
+export default class LGBTQEndpoint {
 
-    public static async sendPrideFlairedAvatar(req: Request, res: Response): Promise<Response> {
+    public static async sendFlairedAvatar(req: Request, res: Response): Promise<Response> {
         const flair: string = req.query.flair as string;
         const avatar: string = req.query.avatar as string;
         const format: string = req.query.format as string;
@@ -21,35 +21,35 @@ export default class AvatarRoute {
         let result;
         if (format === "base64") {
             switch (flair.toLowerCase()) {
+                case "aro":
+                case "aromantic":
+                    result = await AvatarGenerator.getFlairedAvatar("Aromantic", avatar, true);
+                    break;
+                case "ace":
+                case "asexual":
+                    result = await AvatarGenerator.getFlairedAvatar("Asexual", avatar, true);
+                    break;
+                case "bi":
+                case "bisexual":
+                    result = await AvatarGenerator.getFlairedAvatar("Bisexual", avatar, true);
+                    break;
+                case "enby":
+                case "nonbinary":
+                    result = await AvatarGenerator.getFlairedAvatar("Nonbinary", avatar, true);
+                    break;
                 case "lgbt":
                 case "lgbtq":
                 case "pride":
                 case "rainbow":
                     result = await AvatarGenerator.getFlairedAvatar("LGBT", avatar,true);
                     break;
-                case "progress":
-                case "progresspride":
-                    result = await AvatarGenerator.getFlairedAvatar("ProgressPride", avatar, true);
-                    break;
-                case "enby":
-                case "nonbinary":
-                    result = await AvatarGenerator.getFlairedAvatar("Nonbinary", avatar, true);
-                    break;
-                case "ace":
-                case "asexual":
-                    result = await AvatarGenerator.getFlairedAvatar("Asexual", avatar, true);
-                    break;
-                case "aro":
-                case "aromantic":
-                    result = await AvatarGenerator.getFlairedAvatar("Aromantic", avatar, true);
-                    break;
-                case "bi":
-                case "bisexual":
-                    result = await AvatarGenerator.getFlairedAvatar("Bisexual", avatar, true);
-                    break;
                 case "pan":
                 case "pansexual":
                     result = await AvatarGenerator.getFlairedAvatar("Pansexual", avatar, true);
+                    break;
+                case "progress":
+                case "progresspride":
+                    result = await AvatarGenerator.getFlairedAvatar("ProgressPride", avatar, true);
                     break;
                 case "trans":
                 case "transgender":

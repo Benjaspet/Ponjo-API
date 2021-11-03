@@ -1,8 +1,8 @@
 import {Request, Response} from "express";
-import AuthorizationUtil from "../../util/AuthorizationUtil";
-import ErrorUtil from "../../util/ErrorUtil";
+import AuthorizationUtil from "../util/AuthorizationUtil";
+import ErrorUtil from "../util/ErrorUtil";
 
-export default class KeyRoute {
+export default class AuthEndpoint {
 
     /*
      The endpoint listener to create an API key and insert it
