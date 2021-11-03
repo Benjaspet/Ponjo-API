@@ -9,14 +9,13 @@ export default class AvatarGenerator {
     @comment first parameter here will be the back image, second will be front.
      */
 
-    public static async getFlairedAvatar(flair: string, base64?: boolean): Promise<string | Buffer> {
+    public static async getFlairedAvatar(flair: string, image: string, base64?: boolean): Promise<string | Buffer> {
 
         /*
         @description Gets the appropriate path based on the flair parameter.
         */
 
         const type = path.join(__dirname, `../public/assets/lgbtq/flairs/${flair}.png`);
-        const param = "https://i.imgur.com/jEasIz6.png";
 
         const canvas = Canvas.createCanvas(500, 500);
         const ctx = canvas.getContext("2d");
@@ -37,7 +36,7 @@ export default class AvatarGenerator {
         ctx.closePath();
         ctx.clip();
 
-        const avatar = await Canvas.loadImage(param);
+        const avatar = await Canvas.loadImage(decodeURI(image));
         ctx.drawImage(avatar, 75, 60, 350, 375);
 
         /*

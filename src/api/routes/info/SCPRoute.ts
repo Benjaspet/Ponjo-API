@@ -51,7 +51,7 @@ export default class SCPRoute {
         try {
             return res.status(200).json({
                 status: 200,
-                personell: personnel,
+                personnel: personnel,
                 timestamps: {
                     date: new Date().toLocaleString(),
                     unix: Math.round(+ new Date() / 1000),
