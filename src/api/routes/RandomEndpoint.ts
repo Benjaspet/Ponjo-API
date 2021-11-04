@@ -1,9 +1,9 @@
 import {Request, Response} from "express";
-import RandomUtil from "../util/RandomUtil";
+import Chance from "chance";
 import affirmations from "../data/Affirmations";
+import RandomUtil from "../util/RandomUtil";
 import APIUtil from "../util/api/APIUtil";
 import ErrorUtil from "../util/ErrorUtil";
-import Chance from "chance";
 
 export default class RandomEndpoint {
 
