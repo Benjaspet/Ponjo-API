@@ -71,4 +71,57 @@ export default class ImageManipulationEndpoint {
             }
         }
     }
+
+    /*
+     Add a "triggered" effect to an image.
+     @method POST
+     @header none
+     @uri /v1/img/trigger?image=<image-url>
+     @param image: <uri-encoded> string
+     @param format: string <base64, png, jpg>
+     */
+
+    public static async sendTriggeredImage(req: Request, res: Response) {
+        const image = req.query.image as string;
+        const format = req.query.format as string;
+        if (!image) return ErrorUtil.sent500Status(req, res);
+        try {
+            const result = await Canvacord.trigger(image);
+            const data = result.toString("base64");
+            const img = Buffer.from(data, "base64");
+            if (!format) {
+                res.writeHead(200, {
+                    "Content-Type": "image/gif",
+                    "Content-Length": img.length
+                });
+                return res.end(img);
+            } else {
+                switch (format) {
+                    case "jpeg":
+                    case "jpg":
+                        res.writeHead(200, {
+                            "Content-Type": "image/jpg",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                    case "png":
+                        res.writeHead(200, {
+                            "Content-Type": "image/png",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                    case "gif":
+                    default:
+                        res.writeHead(200, {
+                            "Content-Type": "image/gif",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                }
+            }
+
+        } catch (error) {
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
 }

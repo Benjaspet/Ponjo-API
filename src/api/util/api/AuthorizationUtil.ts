@@ -1,5 +1,5 @@
 import {v4 as uuidv4} from "uuid";
-import Keys from "../models/Keys";
+import Keys from "../../models/Keys";
 
 export default class AuthorizationUtil {
 

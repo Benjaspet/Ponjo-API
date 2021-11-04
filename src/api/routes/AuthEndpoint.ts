@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import AuthorizationUtil from "../util/AuthorizationUtil";
+import AuthorizationUtil from "../util/api/AuthorizationUtil";
 import ErrorUtil from "../util/ErrorUtil";
 
 export default class AuthEndpoint {

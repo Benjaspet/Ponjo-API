@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import AvatarGenerator from "../generators/AvatarGenerator";
+import AvatarUtil from "../util/api/AvatarUtil";
 import ErrorUtil from "../util/ErrorUtil";
 
 export default class LGBTQEndpoint {
@@ -23,39 +23,39 @@ export default class LGBTQEndpoint {
             switch (flair.toLowerCase()) {
                 case "aro":
                 case "aromantic":
-                    result = await AvatarGenerator.getFlairedAvatar("Aromantic", avatar, true);
+                    result = await AvatarUtil.getFlairedAvatar("Aromantic", avatar, true);
                     break;
                 case "ace":
                 case "asexual":
-                    result = await AvatarGenerator.getFlairedAvatar("Asexual", avatar, true);
+                    result = await AvatarUtil.getFlairedAvatar("Asexual", avatar, true);
                     break;
                 case "bi":
                 case "bisexual":
-                    result = await AvatarGenerator.getFlairedAvatar("Bisexual", avatar, true);
+                    result = await AvatarUtil.getFlairedAvatar("Bisexual", avatar, true);
                     break;
                 case "enby":
                 case "nonbinary":
-                    result = await AvatarGenerator.getFlairedAvatar("Nonbinary", avatar, true);
+                    result = await AvatarUtil.getFlairedAvatar("Nonbinary", avatar, true);
                     break;
                 case "lgbt":
                 case "lgbtq":
                 case "pride":
                 case "rainbow":
-                    result = await AvatarGenerator.getFlairedAvatar("LGBT", avatar,true);
+                    result = await AvatarUtil.getFlairedAvatar("LGBT", avatar,true);
                     break;
                 case "pan":
                 case "pansexual":
-                    result = await AvatarGenerator.getFlairedAvatar("Pansexual", avatar, true);
+                    result = await AvatarUtil.getFlairedAvatar("Pansexual", avatar, true);
                     break;
                 case "progress":
                 case "progresspride":
-                    result = await AvatarGenerator.getFlairedAvatar("ProgressPride", avatar, true);
+                    result = await AvatarUtil.getFlairedAvatar("ProgressPride", avatar, true);
                     break;
                 case "trans":
                 case "transgender":
                 case "transmasc":
                 case "transfemme":
-                    result = await AvatarGenerator.getFlairedAvatar("Transgender", avatar, true);
+                    result = await AvatarUtil.getFlairedAvatar("Transgender", avatar, true);
                     break;
                 default:
                     return ErrorUtil.sent500Status(req, res);
@@ -77,38 +77,38 @@ export default class LGBTQEndpoint {
                 case "lgbt":
                 case "lgbtq":
                 case "rainbow":
-                    result = await AvatarGenerator.getFlairedAvatar("LGBT", avatar);
+                    result = await AvatarUtil.getFlairedAvatar("LGBT", avatar);
                     break;
                 case "pride":
                 case "progress":
                 case "progresspride":
-                    result = await AvatarGenerator.getFlairedAvatar("ProgressPride", avatar);
+                    result = await AvatarUtil.getFlairedAvatar("ProgressPride", avatar);
                     break;
                 case "enby":
                 case "nonbinary":
-                    result = await AvatarGenerator.getFlairedAvatar("Nonbinary", avatar);
+                    result = await AvatarUtil.getFlairedAvatar("Nonbinary", avatar);
                     break;
                 case "ace":
                 case "asexual":
-                    result = await AvatarGenerator.getFlairedAvatar("Asexual", avatar);
+                    result = await AvatarUtil.getFlairedAvatar("Asexual", avatar);
                     break;
                 case "aro":
                 case "aromantic":
-                    result = await AvatarGenerator.getFlairedAvatar("Aromantic", avatar);
+                    result = await AvatarUtil.getFlairedAvatar("Aromantic", avatar);
                     break;
                 case "bi":
                 case "bisexual":
-                    result = await AvatarGenerator.getFlairedAvatar("Bisexual", avatar);
+                    result = await AvatarUtil.getFlairedAvatar("Bisexual", avatar);
                     break;
                 case "pan":
                 case "pansexual":
-                    result = await AvatarGenerator.getFlairedAvatar("Pansexual", avatar);
+                    result = await AvatarUtil.getFlairedAvatar("Pansexual", avatar);
                     break;
                 case "trans":
                 case "transgender":
                 case "transmasc":
                 case "transfemme":
-                    result = await AvatarGenerator.getFlairedAvatar("Transgender", avatar);
+                    result = await AvatarUtil.getFlairedAvatar("Transgender", avatar);
                     break;
                 default:
                     return ErrorUtil.sent500Status(req, res);

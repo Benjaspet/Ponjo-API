@@ -1,7 +1,7 @@
 import * as express from "express";
 import limiter from "./config/RateLimitConfig";
 import {NextFunction, Request, Response} from "express";
-import AuthorizationUtil from "./util/AuthorizationUtil";
+import AuthorizationUtil from "./util/api/AuthorizationUtil";
 import DataEndpoint from "./routes/DataEndpoint";
 import SCPEndpoint from "./routes/SCPEndpoint";
 import AuthEndpoint from "./routes/AuthEndpoint";
@@ -38,6 +38,8 @@ premiumRouter.get("/scp", SCPEndpoint.getScpData);
 premiumRouter.get("/scp/personnel", SCPEndpoint.getFoundationPersonnel);
 premiumRouter.get("/scp/branches", SCPEndpoint.getFoundationBranches);
 premiumRouter.get("/scp/taskforces", SCPEndpoint.getTaskForce);
+
+premiumRouter.get("/covid/world", DataEndpoint.getWorldwideCovidStats);
 
 premiumRouter.post("/auth/keys/create", AuthEndpoint.createKey);
 premiumRouter.get("/auth/keys/list", AuthEndpoint.getAllKeys);

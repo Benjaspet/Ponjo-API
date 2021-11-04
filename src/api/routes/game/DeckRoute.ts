@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import DeckUtil from "../../util/DeckUtil";
 import Deck from "../../models/Decks";
-import APIUtil from "../../util/APIUtil";
+import APIUtil from "../../util/api/APIUtil";
 import ErrorUtil from "../../util/ErrorUtil";
 
 export default class DeckRoute {

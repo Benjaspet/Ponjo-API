@@ -1,7 +1,7 @@
 import path from "path";
 import Canvas from "canvas";
 
-export default class AvatarGenerator {
+export default class AvatarUtil {
 
     /*
     @param image string: img URL

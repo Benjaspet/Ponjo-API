@@ -2,7 +2,7 @@ import * as express from "express";
 import {Request, Response} from "express";
 import multer from "multer";
 import UploaderUtil from "./util/UploaderUtil";
-import APIUtil from "./util/APIUtil";
+import APIUtil from "./util/api/APIUtil";
 import Image from "./models/Images";
 import Images from "./models/Images";
 import path from "path";

@@ -1,7 +1,7 @@
 import express from "express";
 import {Application} from "./api/Application";
 import * as http from "http";
-import APIUtil from "./api/util/APIUtil";
+import APIUtil from "./api/util/api/APIUtil";
 import Logger from "./Logger";
 
 const app = express();

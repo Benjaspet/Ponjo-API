@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import RandomUtil from "../util/RandomUtil";
 import affirmations from "../data/Affirmations";
-import APIUtil from "../util/APIUtil";
+import APIUtil from "../util/api/APIUtil";
 import ErrorUtil from "../util/ErrorUtil";
 import Chance from "chance";
 

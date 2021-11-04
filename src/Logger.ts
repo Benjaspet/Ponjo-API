@@ -1,4 +1,4 @@
-import APIUtil from "./api/util/APIUtil";
+import APIUtil from "./api/util/api/APIUtil";
 
 export default class Logger {
 

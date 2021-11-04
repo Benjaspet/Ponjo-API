@@ -2,6 +2,8 @@ import {NextFunction, Request, Response} from "express";
 import ErrorUtil from "../util/ErrorUtil";
 import * as weather from "weather-js";
 import Captcha from "@haileybot/captcha-generator";
+import CovidDataUtil from "../util/data/CovidDataUtil";
+import ResponseUtil from "../util/api/ResponseUtil";
 
 export default class DataEndpoint {
 
@@ -104,6 +106,20 @@ export default class DataEndpoint {
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);
         }
+    }
+
+    public static async getWorldwideCovidStats(req: Request, res: Response) {
+        await CovidDataUtil.getWorldWideCovidData()
+            .then(result => {
+                return res.status(200).json({
+                    status: res.statusCode,
+                    data: result,
+                    timestamps: ResponseUtil.getTimestamps()
+                });
+            })
+            .catch(error => {
+               return ErrorUtil.sent500Status(req, res);
+            });
     }
 
     /*
