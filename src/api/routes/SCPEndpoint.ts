@@ -7,6 +7,14 @@ import SCPTaskForceUtil from "../util/scp/SCPTaskForceUtil";
 
 export default class SCPEndpoint {
 
+    /*
+     Get data on a specific SCP item.
+     @method GET
+     @header Authentication: token
+     @uri /v1/scp?item=005
+     @param item: string | int
+     */
+
     public static async getScpData(req: Request, res: Response) {
         const item = req.query.item as string;
         try {
