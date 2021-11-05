@@ -45,6 +45,7 @@ export default class DataEndpoint {
 
     /*
      The route to obtain a response from a chatbot.
+     @method GET
      @header Authentication: token
      @uri /v1/chatbot?message=Hello&name=ChatBot
      @param message: string
@@ -86,6 +87,7 @@ export default class DataEndpoint {
 
     /*
      The route to retrieve a random captcha.
+     @method GET
      @header none
      @uri /v1/captcha
      */
@@ -108,6 +110,13 @@ export default class DataEndpoint {
         }
     }
 
+    /*
+     Get worldwide COVID-19 statistics/
+     @method GET
+     @header Authentication: token
+     @uri /v1/covid/world
+     */
+
     public static async getWorldwideCovidStats(req: Request, res: Response) {
         await CovidDataUtil.getWorldWideCovidData()
             .then(result => {
@@ -121,6 +130,15 @@ export default class DataEndpoint {
                return ErrorUtil.sent500Status(req, res);
             });
     }
+
+    /*
+     Get COVID-19 statistics on a particular country.
+     @method GET
+     @header Authentication: token
+     @uri /v1/covid/canada
+     @uri /v1/covid?country=canada
+     @param country: string
+     */
 
     public static async getCovidStatsByCountry(req: Request, res: Response) {
         const country = req.query.country || req.params.country as string;
