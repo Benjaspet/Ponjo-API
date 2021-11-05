@@ -40,6 +40,8 @@ premiumRouter.get("/scp/branches", SCPEndpoint.getFoundationBranches);
 premiumRouter.get("/scp/taskforces", SCPEndpoint.getTaskForce);
 
 premiumRouter.get("/covid/world", DataEndpoint.getWorldwideCovidStats);
+premiumRouter.get("/covid/country", DataEndpoint.getCovidStatsByCountry);
+premiumRouter.get("/covid/:country", DataEndpoint.getCovidStatsByCountry);
 
 premiumRouter.post("/auth/keys/create", AuthEndpoint.createKey);
 premiumRouter.get("/auth/keys/list", AuthEndpoint.getAllKeys);

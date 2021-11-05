@@ -122,6 +122,25 @@ export default class DataEndpoint {
             });
     }
 
+    public static async getCovidStatsByCountry(req: Request, res: Response) {
+        const country = req.query.country || req.params.country as string;
+        if (!country) {
+            return ErrorUtil.send400Status(req, res);
+        } else {
+            await CovidDataUtil.getCovidDataByCountry(<string> country)
+                .then(result => {
+                    return res.status(200).json({
+                        status: res.statusCode,
+                        data: result,
+                        timestamps: ResponseUtil.getTimestamps()
+                    });
+                })
+                .catch(error => {
+                   return ErrorUtil.sent500Status(req, res);
+                });
+        }
+    }
+
     /*
      The route to check the API's status/health.
      @header none
