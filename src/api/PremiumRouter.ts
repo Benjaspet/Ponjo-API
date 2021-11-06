@@ -6,6 +6,8 @@ import DataEndpoint from "./routes/DataEndpoint";
 import SCPEndpoint from "./routes/SCPEndpoint";
 import AuthEndpoint from "./routes/AuthEndpoint";
 import GameQueryEndpoint from "./routes/GameQueryEndpoint";
+import RoboEerieUtil from "./util/RoboEerieUtil";
+import RoboEerieEndpoint from "./routes/RoboEerieEndpoint";
 
 const premiumRouter = express.Router();
 
@@ -26,6 +28,12 @@ premiumRouter.use(async (req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
+premiumRouter.use(async (req: Request, res: Response, next: NextFunction) => {
+    const key = req.headers.authorization as string;
+    await AuthorizationUtil.addApiKeyUse(key, 1);
+    next();
+});
+
 premiumRouter.get("/chatbot", DataEndpoint.sendChatbotMessage);
 premiumRouter.get("/captcha", DataEndpoint.getCaptchaData);
 
@@ -42,6 +50,9 @@ premiumRouter.get("/scp/taskforces", SCPEndpoint.getTaskForce);
 premiumRouter.get("/covid/world", DataEndpoint.getWorldwideCovidStats);
 premiumRouter.get("/covid/country", DataEndpoint.getCovidStatsByCountry);
 premiumRouter.get("/covid/:country", DataEndpoint.getCovidStatsByCountry);
+
+premiumRouter.get("/roboeerie/tags", RoboEerieEndpoint.getTags);
+premiumRouter.get("/roboeerie/tags/:count", RoboEerieEndpoint.getTags);
 
 premiumRouter.post("/auth/keys/create", AuthEndpoint.createKey);
 premiumRouter.get("/auth/keys/list", AuthEndpoint.getAllKeys);

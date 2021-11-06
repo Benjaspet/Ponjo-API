@@ -4,13 +4,7 @@ import Keys from "../../models/Keys";
 export default class AuthorizationUtil {
 
     public static async generateUniqueApiKey() {
-        const options = {
-            random: [
-                0x10, 0x91, 0x56, 0xbe, 0xc4, 0xfb, 0xc1, 0xea,
-                0x71, 0xb4, 0xef, 0xe1, 0x67, 0x1c, 0x58, 0x36,
-            ],
-        }
-        return uuidv4(options);
+        return uuidv4();
     }
 
     public static async isValidApiKey(key: string) {
@@ -23,14 +17,16 @@ export default class AuthorizationUtil {
     public static async createApiKey(key: string, user: string) {
         return Keys.create({
             key: key,
-            user: user
+            user: user,
+            requests: 0
         }).then(() => {
             return {
                 status: 200,
                 message: "New API key created.",
                 data: {
                     key: key,
-                    user: user
+                    user: user,
+                    requests: 0
                 },
                 timestamps: {
                     date: new Date().toLocaleString(),
@@ -54,8 +50,18 @@ export default class AuthorizationUtil {
                     reject({
                         status: 500,
                         message: "An error occurred."
-                    })
+                    });
                 });
         });
+    }
+
+    public static async addApiKeyUse(key: string, amount: number): Promise<void> {
+        Keys.findOne({key: key})
+            .then(async result => {
+                Keys.findOneAndUpdate({key: key}, {requests: result.requests + amount})
+                    .then(async result => {})
+                    .catch(error => {});
+            })
+            .catch(error => {});
     }
 }

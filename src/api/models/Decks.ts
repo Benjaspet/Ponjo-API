@@ -1,4 +1,5 @@
 import mongoose, {Schema} from "mongoose";
+import DatabaseConnection from "../database/DatabaseConnection";
 
 const DeckSchema = new Schema(
     {
@@ -9,5 +10,5 @@ const DeckSchema = new Schema(
     }
 );
 
-const Deck = mongoose.model("decks", DeckSchema);
+const Deck = new DatabaseConnection().ponjoDatabase.model("decks", DeckSchema);
 export default Deck;

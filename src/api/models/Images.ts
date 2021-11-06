@@ -1,4 +1,5 @@
 import mongoose, {Schema} from "mongoose";
+import DatabaseConnection from "../database/DatabaseConnection";
 
 const ImageSchema = new Schema(
     {
@@ -11,5 +12,5 @@ const ImageSchema = new Schema(
     },
 );
 
-const Image = mongoose.model("uploads", ImageSchema);
+const Image = new DatabaseConnection().ponjoDatabase.model("uploads", ImageSchema);
 export default Image;
