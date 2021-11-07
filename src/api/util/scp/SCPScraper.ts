@@ -41,7 +41,11 @@ export default class SCPScraper {
                                 .first()
                                 .text()
                                 .replace(/█/g, 'X')
-                                .replace("Object Class: ", "");
+                                .replace("Object Class: ", "")
+                                || $('.class-text')
+                                    .first()
+                                    .text()
+                                    .replace(/█/g, 'X');
                             let procedures = $('p:contains("Special Containment Procedures:")')
                                 .first()
                                 .text()
