@@ -33,7 +33,7 @@ Created & developed by: Ben Petrillo (Eerie6560)
 
 ### Documentation
 
-Full documentation can be accessed [here](https://docs.ponjo.club).
+Full documentation is available [here](https://docs.ponjo.club).
 
 ### License
 
