@@ -6,6 +6,7 @@ import Endpoints from "./V1Router";
 import PremiumEndpoints from "./PremiumRouter";
 import Uploader from "./UploadRouter";
 import ErrorUtil from "./util/ErrorUtil";
+import AvatarUtil from "./util/api/AvatarUtil";
 
 export class Application {
 
@@ -29,5 +30,8 @@ export class Application {
         app.use((req: Request, res: Response) => {
             return ErrorUtil.send404Response(req, res);
         });
+
+        AvatarUtil.getAnimatedFlairedAvatar("Pansexual", "https://i.stack.imgur.com/NjMy4.png")
+            .then(result => console.log(result))
     }
 }
