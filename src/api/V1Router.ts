@@ -26,14 +26,7 @@ router.get("/decks/shuffle", DeckRoute.shuffleDeckById);
 router.get("/decks/poker/evalhand", DeckRoute.getPokerHand);
 
 router.post("/pride/avatar", LGBTQEndpoint.sendFlairedAvatar);
-
-router.get("/weather", DataEndpoint.sendWeatherResponse);
-router.get("/weather/:location", DataEndpoint.sendWeatherResponse);
-
-router.get("/random/month", RandomEndpoint.getRandomMonth);
-router.get("/random/userprofile", RandomEndpoint.getRandomUserProfile);
-router.get("/random/userprofile/:amount", RandomEndpoint.getRandomUserProfile);
-router.get("/random/timezone", RandomEndpoint.getRandomTimezone);
-router.get("/random/timezone/:amount", RandomEndpoint.getRandomTimezone);
+router.get("/pride/flags", LGBTQEndpoint.sendPrideFlag);
+router.get("/pride/flags/:query", LGBTQEndpoint.sendPrideFlag);
 
 export = router;

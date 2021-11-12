@@ -30,8 +30,5 @@ export class Application {
         app.use((req: Request, res: Response) => {
             return ErrorUtil.send404Response(req, res);
         });
-
-        AvatarUtil.getAnimatedFlairedAvatar("Pansexual", "https://i.stack.imgur.com/NjMy4.png")
-            .then(result => console.log(result))
     }
 }

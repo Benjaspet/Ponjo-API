@@ -6,8 +6,8 @@ import DataEndpoint from "./routes/DataEndpoint";
 import SCPEndpoint from "./routes/SCPEndpoint";
 import AuthEndpoint from "./routes/AuthEndpoint";
 import GameQueryEndpoint from "./routes/GameQueryEndpoint";
-import RoboEerieUtil from "./util/RoboEerieUtil";
 import RoboEerieEndpoint from "./routes/RoboEerieEndpoint";
+import RandomEndpoint from "./routes/RandomEndpoint";
 
 const premiumRouter = express.Router();
 
@@ -53,6 +53,15 @@ premiumRouter.get("/covid/:country", DataEndpoint.getCovidStatsByCountry);
 
 premiumRouter.get("/roboeerie/tags", RoboEerieEndpoint.getTags);
 premiumRouter.get("/roboeerie/tags/:count", RoboEerieEndpoint.getTags);
+
+premiumRouter.get("/weather", DataEndpoint.sendWeatherResponse);
+premiumRouter.get("/weather/:location", DataEndpoint.sendWeatherResponse);
+
+premiumRouter.get("/random/month", RandomEndpoint.getRandomMonth);
+premiumRouter.get("/random/userprofile", RandomEndpoint.getRandomUserProfile);
+premiumRouter.get("/random/userprofile/:amount", RandomEndpoint.getRandomUserProfile);
+premiumRouter.get("/random/timezone", RandomEndpoint.getRandomTimezone);
+premiumRouter.get("/random/timezone/:amount", RandomEndpoint.getRandomTimezone);
 
 premiumRouter.post("/auth/keys/create", AuthEndpoint.createKey);
 premiumRouter.get("/auth/keys/list", AuthEndpoint.getAllKeys);

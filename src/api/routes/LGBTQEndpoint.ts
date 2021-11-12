@@ -1,8 +1,40 @@
 import {Request, Response} from "express";
 import AvatarUtil from "../util/api/AvatarUtil";
 import ErrorUtil from "../util/ErrorUtil";
+import PrideUtil from "../util/api/PrideUtil";
+import ResponseUtil from "../util/api/ResponseUtil";
 
 export default class LGBTQEndpoint {
+
+    public static async sendPrideFlag(req: Request, res: Response) {
+        const query = req.query.query || req.params.query as string;
+        const all: string = req.query.all as string;
+        if (!query) {
+            if (JSON.parse(all) == true) {
+                return res.status(200).json({
+                    status: res.statusCode,
+                    data: await PrideUtil.getFlag("pride", true),
+                    timestamps: ResponseUtil.getTimestamps()
+                });
+            } else {
+                return res.status(200).sendFile(await PrideUtil.getFlag("pride"))
+            }
+        } else {
+            try {
+                if (all) {
+                    return res.status(200).json({
+                        status: res.statusCode,
+                        data: await PrideUtil.getFlag("pride", true),
+                        timestamps: ResponseUtil.getTimestamps()
+                    });
+                } else {
+                    return res.status(200).sendFile(await PrideUtil.getFlag(<string> query));
+                }
+            } catch (error) {
+                return ErrorUtil.sent500Status(req, res);
+            }
+        }
+    }
 
     public static async sendFlairedAvatar(req: Request, res: Response): Promise<Response> {
         const flair: string = req.query.flair as string;
