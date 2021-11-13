@@ -4,6 +4,7 @@ import Deck from "../models/Decks";
 import APIUtil from "../util/api/APIUtil";
 import ErrorUtil from "../util/ErrorUtil";
 import Logger from "../../Logger";
+import ResponseUtil from "../util/api/ResponseUtil";
 
 export default class DeckEndpoint {
 
@@ -51,7 +52,7 @@ export default class DeckEndpoint {
             const deck = DeckUtil.createDeck();
             const deckId = APIUtil.generateUniqueId();
             Deck.create({
-                deckId: APIUtil.generateUniqueId(),
+                deckId: deckId,
                 deck: deck,
                 data: {
                     shuffled: false,
@@ -119,7 +120,13 @@ export default class DeckEndpoint {
                             }
                         });
                     }
-                    return res.status(200).json(deck);
+                    return res.status(200).json({
+                        status: res.statusCode,
+                        deckId: deck.deckId,
+                        deck: deck.deck,
+                        data: deck.data,
+                        timestamps: ResponseUtil.getTimestamps()
+                    });
             });
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);

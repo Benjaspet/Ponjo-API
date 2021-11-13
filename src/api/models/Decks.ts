@@ -10,7 +10,8 @@ const DeckSchema = new Schema(
             remainingCards: Number
         }
     }, {
-        timestamps: true
+        timestamps: true,
+        versionKey: false
     }
 );
 

@@ -70,9 +70,9 @@ premiumRouter.get("/weather/:location", DataEndpoint.sendWeatherResponse);
 
 premiumRouter.get("/random/month", RandomEndpoint.getRandomMonth);
 premiumRouter.get("/random/userprofile", RandomEndpoint.getRandomUserProfile);
-premiumRouter.get("/random/userprofile/:amount", RandomEndpoint.getRandomUserProfile);
+premiumRouter.get("/random/userprofile/:count", RandomEndpoint.getRandomUserProfile);
 premiumRouter.get("/random/timezone", RandomEndpoint.getRandomTimezone);
-premiumRouter.get("/random/timezone/:amount", RandomEndpoint.getRandomTimezone);
+premiumRouter.get("/random/timezone/:count", RandomEndpoint.getRandomTimezone);
 
 premiumRouter.post("/auth/keys/create", AuthEndpoint.createKey);
 premiumRouter.get("/auth/keys/list", AuthEndpoint.getAllKeys);

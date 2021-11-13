@@ -26,6 +26,9 @@ export class Application {
         app.get("/hosting", (req: Request, res: Response) => {
             return res.sendFile(path.join(__dirname + "/public/hosting.html"));
         });
+        app.get("/endpoints", (req: Request, res: Response) => {
+            return res.sendFile(path.join(__dirname + "/public/endpoints.html"));
+        });
         app.use((req: Request, res: Response) => {
             return ErrorUtil.send404Response(req, res);
         });

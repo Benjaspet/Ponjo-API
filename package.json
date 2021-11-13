@@ -23,7 +23,6 @@
     "gamedig": "^3.0.7",
     "hex-colors-info": "^1.0.2",
     "jimp": "^0.16.1",
-    "libgif": "^0.0.3",
     "minecraft-server-util": "^3.6.0",
     "mongoose": "^6.0.12",
     "multer": "^1.4.3",
@@ -50,6 +49,7 @@
     "@types/poker-evaluator": "^0.3.3",
     "@types/redis": "^2.8.32",
     "@types/request": "^2.48.7",
+    "@types/response-time": "^2.3.5",
     "@types/uuid": "^8.3.1"
   }
 }

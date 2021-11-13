@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="Ponjo API">
     <meta property="og:site_name" content="app.ponjo.club">
-    <meta property="og:description" content="The official homepage of the Ponjo API, serving all of your developer utility needs.">
+    <meta property="og:description" content="The official homepage of the Ponjo API, serving all of your developer utility needs. With over 35 endpoints, you'll easily be able to fuse your application with various powerful resources.">
     <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
     <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
     <meta name="theme-color" content="#ad4fe8">
@@ -43,7 +43,7 @@
                         </p>
                         <div class="hero-cta">
                             <a class="button button-primary" href="https://docs.ponjo.club">DOCUMENTATION</a>
-                            <a class="button" href="https://ponjo.club/discord">DISCORD SERVER</a>
+                            <a class="button" href="https://app.ponjo.club/endpoints">ALL ENDPOINTS</a>
                         </div>
                     </div>
                     <div class="hero-figure anime-element">
@@ -98,105 +98,17 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="features section">
-            <div class="container">
-                <div class="features-inner section-inner has-bottom-divider">
-                    <div class="features-wrap">
-                        <div class="feature text-center is-revealing">
-                            <div class="feature-inner">
-                                <p class="mt-0">
-                                    <span class="badge badge-get">GET REQUEST</span><br>
-                                    <code class="crescent-code-bold">/v1/query/mcbe?host={host}&port={port}</code><br>
-                                    <code class="crescent-code">Get the status of a Minecraft: Bedrock Edition server.</code>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="feature text-center is-revealing">
-                            <div class="feature-inner">
-                                <p class="mt-0">
-                                    <span class="badge badge-get">GET REQUEST</span><br>
-                                    <code class="crescent-code-bold">/v1/query/minecraft?host={host}&port={port}</code><br>
-                                    <code class="crescent-code">Get the status of a Minecraft: Java Edition server.</code>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="feature text-center is-revealing">
-                            <p class="mt-0">
-                                <span class="badge badge-get">GET REQUEST</span><br>
-                                <code class="crescent-code-bold">/v1/chatbot?message={message}</code><br>
-                                <code class="crescent-code">Obtain a chatbot response message with powerful AI.</code>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="section-paragraph text-center cta">
-            <div class="container">
-                <div class="section-inner text-center">
-                    <h4 class="mt-0 mb-16 text-center" style="font-size: 30px;">Deck Endpoint</h4>
-                    <p class="text-sm mt-8">
-                        One of the Ponjo API's most popular endpoints is the deck endpoint. It's a seamless
-                        virtual card deck simulator with the ability to create decks of cards, shuffle them,
-                        and even save them for later. Including built-in methods to evaluate poker hands,
-                        blackjack hands, and more, you'll be able to create functional card games with
-                        our API.
-                    </p>
-                    <p class="mt-0">
-                        <span class="badge badge-get">GET REQUEST</span><br>
-                        <code class="crescent-code-bold">/v1/decks/create</code><br>
-                        <code class="crescent-code">Create a virtual deck of cards.</code>
-                    </p>
-                    <p class="mt-0">
-                        <span class="badge badge-get">GET REQUEST</span><br>
-                        <code class="crescent-code-bold">/v1/decks/find?id={deck-id}</code><br>
-                        <code class="crescent-code">Find a virtual deck by ID.</code>
-                    </p>
-                    <p class="mt-0">
-                        <span class="badge badge-get">GET REQUEST</span><br>
-                        <code class="crescent-code-bold">/v1/decks/shuffle?id={deck-id}</code><br>
-                        <code class="crescent-code">Shuffle a virtual deck by ID.</code>
-                    </p>
-                    <p class="mt-0">
-                        <span class="badge badge-get">GET REQUEST</span><br>
-                        <code class="crescent-code-bold">/v1/decks/poker/evalhand?hand={hand}</code><br>
-                        <code class="crescent-code">Shuffle a virtual deck by ID.</code>
+            <section class="section-paragraph text-center cta mb-0">
+                <div class="container section-inner">
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">Ponjo Image Hosting</h4><br>
+                    <p class="text-sm mb-0 text-center">
+                        Ponjo Image Hosting is a free image hosting service provided by the Ponjo Development Team.
+                        Tired of the long upload times when trying to upload your images to popular social media platforms?
+                        Want a way to be able to display these images in a cool, colorful, embedded way? Try out the Ponjo
+                        Team's official image hosting service. You can learn more <a href="https://ponjo.club/hosting">here</a>.
                     </p>
                 </div>
-            </div>
-        </section>
-        <section class="section-paragraph text-center cta">
-            <div class="container">
-                <div class="section-inner text-center">
-                    <h4 class="mt-0 mb-16 text-center" style="font-size: 30px;">Image Manipulation Endpoint</h4>
-                    <p class="text-sm mt-8">
-                        Easily provide images and add numerous filters, effects, and flairs using our API.
-                        What's more, no API key is required for these powerful endpoints. Create awesome commands
-                        for your Discord bot with our easy-to-use image manipulation endpoints.
-                    </p>
-                    <p class="mt-0">
-                        <span class="badge badge-post">POST REQUEST</span><br>
-                        <code class="crescent-code-bold">/v1/images/trigger?image={image-URL}</code><br>
-                        <code class="crescent-code">Give an image a "triggered" GIF overlay.</code>
-                    </p>
-                    <p class="mt-0">
-                        <span class="badge badge-post">POST REQUEST</span><br>
-                        <code class="crescent-code-bold">/v1/images/gay?image={image-URL}</code><br>
-                        <code class="crescent-code">Make your image a little more gay!</code>
-                    </p>
-                    <p class="mt-0">
-                        <span class="badge badge-post">POST REQUEST</span><br>
-                        <code class="crescent-code-bold">/v1/images/jail?image={image-URL}</code><br>
-                        <code class="crescent-code">Give yourself a nice mugshot.</code>
-                    </p>
-                    <p class="mt-0">
-                        <span class="badge badge-post">POST REQUEST</span><br>
-                        <code class="crescent-code-bold">/v1/images/wanted?image={image-URL}</code><br>
-                        <code class="crescent-code">Make yourself wanted by the police.</code>
-                    </p>
-                </div>
-            </div>
+            </section>
         </section>
         <section class="cta section">
             <div class="container">

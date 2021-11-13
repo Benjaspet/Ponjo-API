@@ -17,11 +17,11 @@ export default class RandomEndpoint {
      */
 
     public static async getRandomTimezone(req: Request, res: Response) {
-        const amount = req.query.amount || req.params.amount as string;
+        const amount = req.query.count || req.params.count as string;
         if (amount) {
             return res.status(200).json({
                 status: 200,
-                data: RandomUtil.getRandomTimezone(parseInt(<string>amount)),
+                data: RandomUtil.getRandomTimezone(parseInt(<string>amount) || 1),
                 timestamps: {
                     date: new Date().toLocaleString(),
                     unix: Math.round(+ new Date() / 1000),
@@ -49,11 +49,11 @@ export default class RandomEndpoint {
      */
 
     public static async getRandomUserProfile(req: Request, res: Response) {
-        const amount = req.query.amount || req.params.amount as string;
+        const amount = req.query.count || req.params.count as string;
         if (amount) {
             return res.status(200).json({
                 status: 200,
-                data: RandomUtil.getRandomUserProfile(parseInt(<string>amount)),
+                data: RandomUtil.getRandomUserProfile(parseInt(<string>amount) || 1),
                 timestamps: {
                     date: new Date().toLocaleString(),
                     unix: Math.round(+ new Date() / 1000),

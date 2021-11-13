@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="Ponjo API | Endpoints">
-    <meta property="og:site_name" content="api.ponjo.club/endpoints">
-    <meta property="og:description" content="Here you can find all endpoints & documentation for the Ponjo API.">
+    <meta property="og:site_name" content="app.ponjo.club/endpoints">
+    <meta property="og:description" content="Here you can find all endpoints and request routes for the Ponjo API. With over 35 endpoints, you'll be able to make the most out of your development project.">
     <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
     <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
     <meta name="theme-color" content="#ad4fe8">
@@ -30,36 +30,446 @@
     </header>
     <main>
         <section class="section-paragraph text-center cta mb-0">
-            <div class="container-sm">
+            <div class="container">
                 <p class="text-sm mb-0 text-center">
-                    Welcome to the endpoint page of the Ponjo API! Here, you can find all available endpoints,
-                    how to access them, and view sample responses. With over 50 endpoints, it's almost certain
+                    Welcome to the endpoint page of the Ponjo API! Here, you can view all available endpoints,
+                    and how to access them. With over 35 endpoints, it's almost certain
                     you'll be able to find this API of great use. Responses are easily-parsable in a straightforward
-                    JSON format to allow for seamless implementation into your application.
+                    JSON format to allow for seamless integration into your application or project.
                 </p>
             </div>
             <div class="container section-inner">
                 <p class="text-sm mb-0 text-center">
-                    NOTE: All POST requests that require a URL to an image (for example, all image
-                    manipulation routes) require> the URI components to be properly encoded. Failure
+                    All POST requests that require a URL to an image (for example, all image
+                    manipulation routes) require the URI components to be properly encoded. Failure
                     to do so will result in the request not going through. If you're not familiar with URI
                     encoding, you can learn more <a href="https://en.wikipedia.org/wiki/Percent-encoding">here</a>.
-                    Thanks for supporting us!
                 </p>
             </div>
         </section>
         <section class="section-paragraph text-center cta">
             <div class="container">
                 <div class="section-inner text-center">
-                    <h4 class="mt-0 mb-16 text-center" style="font-size: 30px;">All Endpoints</h4>
-                    <p class="mt-8">
-                        <a class="ponjo-url" href="https://app.ponjo.club/endpoints/deck">Deck Endpoint</a><br>
-                        <a class="ponjo-url" href="https://app.ponjo.club/endpoints/game">Game Endpoint</a><br>
-                        <a class="ponjo-url" href="https://app.ponjo.club/endpoints/image">Image Endpoint</a><br>
-                        <a class="ponjo-url" href="https://app.ponjo.club/endpoints/info">Info Endpoint</a><br>
-                        <a class="ponjo-url" href="https://app.ponjo.club/endpoints/utils">Utility Endpoint</a>
-                    </p>
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">Data/AI Endpoint</h4>
+                    <section class="features section">
+                        <div class="container">
+                            <div class="features-inner section-inner has-bottom-divider">
+                                <div class="features-wrap">
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/chatbot</code><br>
+                                                <code class="crescent-code">Receive a response from an AI chatbot.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/captcha</code><br>
+                                                <code class="crescent-code">Obtain a generated captcha image with its resolution.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-get">GET REQUEST</span><br>
+                                            <code class="crescent-code-bold">/v1/covid/world</code><br>
+                                            <code class="crescent-code">Obtain COVID-19 statistics from around the world.</code>
+                                        </p>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-get">GET REQUEST</span><br>
+                                            <code class="crescent-code-bold">/v1/query/ark</code><br>
+                                            <code class="crescent-code">Obtain COVID-19 statistics from a specific country.</code>
+                                        </p>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-get">GET REQUEST</span><br>
+                                            <code class="crescent-code-bold">/v1/weather</code><br>
+                                            <code class="crescent-code">Get current weather and forecasts for a specific location.</code>
+                                        </p>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-get">GET REQUEST</span><br>
+                                            <code class="crescent-code-bold">/v1/roboeerie/tags</code><br>
+                                            <code class="crescent-code">Get a list of all tags used by the RoboEerie Discord bot.</code>
+                                        </p>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/health</code><br>
+                                                <code class="crescent-code">Perform an API health/response time check.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
+            </div>
+        </section>
+        <section class="section-paragraph text-center cta">
+            <div class="container">
+                <div class="section-inner text-center">
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">Image Manipulation Endpoint</h4>
+                    <section class="features section">
+                        <div class="container">
+                            <div class="features-inner section-inner has-bottom-divider">
+                                <div class="features-wrap">
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-post">POST REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/trigger</code><br>
+                                                <code class="crescent-code">Add a "triggered" effect to any provided image.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-post">POST REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/jail</code><br>
+                                                <code class="crescent-code">Add a "jailed" effect to any provided image.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-post">POST REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/gay</code><br>
+                                                <code class="crescent-code">Make your image just a little more gay.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-post">POST REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/circle</code><br>
+                                                <code class="crescent-code">Circularly crop any provided image.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-post">POST REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/burn</code><br>
+                                                <code class="crescent-code">Some ducks just want to sit and watch the world burn.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-post">POST REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/facepalm</code><br>
+                                                <code class="crescent-code">Give any provided image a facepalm effect, because you're disappointed.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-post">POST REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/pixelate</code><br>
+                                                <code class="crescent-code">Pixelate any provided image, because why not?</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-post">POST REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/rip</code><br>
+                                                <code class="crescent-code">RIP you for deciding to use this endpoint. Hahaha.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <section class="section-paragraph text-center cta">
+            <div class="container">
+                <div class="section-inner text-center">
+                    <h4 class="mt-0 mb-16 text-center" style="font-size: 30px;">Deck Endpoint</h4>
+                    <section class="features section">
+                        <div class="container">
+                            <div class="features-inner section-inner has-bottom-divider">
+                                <div class="features-wrap">
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-post">POST REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/decks/create</code><br>
+                                                <code class="crescent-code">Create a virtual deck of cards within the API.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/decks/find</code><br>
+                                                <code class="crescent-code">Find a virtual deck in the database by its Deck ID.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-get">GET REQUEST</span><br>
+                                            <code class="crescent-code-bold">/v1/decks/evalhand</code><br>
+                                            <code class="crescent-code">Evaluate a poker hand in sizes 3, 5, 6, or 7.</code>
+                                        </p>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-post">PATCH REQUEST</span><br>
+                                            <code class="crescent-code-bold">/v1/decks/draw</code><br>
+                                            <code class="crescent-code">Draw a card from a deck by its Deck ID.</code>
+                                        </p>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-post">PATCH REQUEST</span><br>
+                                            <code class="crescent-code-bold">/v1/decks/shuffle</code><br>
+                                            <code class="crescent-code">Shuffle a virtual deck by its Deck ID.</code>
+                                        </p>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-post">POST REQUEST</span><br>
+                                            <code class="crescent-code-bold">/v1/decks/reset</code><br>
+                                            <code class="crescent-code">Completely reset a deck of cards by its ID.</code>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <section class="section-paragraph text-center cta">
+            <div class="container">
+                <div class="section-inner text-center">
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">Game Query Endpoint</h4>
+                    <section class="features section">
+                        <div class="container">
+                            <div class="features-inner section-inner has-bottom-divider">
+                                <div class="features-wrap">
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/query/mcbe</code><br>
+                                                <code class="crescent-code">Query a Minecraft: Bedrock Edition server with options.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/query/mcjava</code><br>
+                                                <code class="crescent-code">Query a Minecraft: Java Edition server with options.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-get">GET REQUEST</span><br>
+                                            <code class="crescent-code-bold">/v1/query/fivem</code><br>
+                                            <code class="crescent-code">Query a FiveM server with options.</code>
+                                        </p>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-get">GET REQUEST</span><br>
+                                            <code class="crescent-code-bold">/v1/query/ark</code><br>
+                                            <code class="crescent-code">Query an ARK: Survival Evolved server with options.</code>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <section class="section-paragraph text-center cta">
+            <div class="container">
+                <div class="section-inner text-center">
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">LGBTQ Endpoint</h4>
+                    <section class="features section">
+                        <div class="container">
+                            <div class="features-inner section-inner has-bottom-divider">
+                                <div class="features-wrap">
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-post">POST REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/pride/flags</code><br>
+                                                <code class="crescent-code">Retrieve any LGBTQ pride flag, or a list of many.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-post">POST REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/pride/avatar</code><br>
+                                                <code class="crescent-code">Add pride avatar flairs to any provided image.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <section class="section-paragraph text-center cta">
+            <div class="container">
+                <div class="section-inner text-center">
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">SCP Foundation Endpoint</h4>
+                    <section class="features section">
+                        <div class="container">
+                            <div class="features-inner section-inner has-bottom-divider">
+                                <div class="features-wrap">
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/scp</code><br>
+                                                <code class="crescent-code">Retrieve classified data on the provided SCP anolamy.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/scp/personnel</code><br>
+                                                <code class="crescent-code">Retrieve a list of SCP Foundation personnel.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/scp/branches</code><br>
+                                                <code class="crescent-code">Get a list of all SCP Foundation branches.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/scp/taskforces</code><br>
+                                                <code class="crescent-code">Retrieve a list of all SCP Foundation mobile and stationed taskforces.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/scp/sites</code><br>
+                                                <code class="crescent-code">Get a list of all classified SCP Foundation containment sites.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/scp/areas</code><br>
+                                                <code class="crescent-code">Retrieve a list of all classified SCP Foundation areas.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/scp/all</code><br>
+                                                <code class="crescent-code">Retrieve a master list of all SCP Foundation data. Warning: classified!</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <section class="section-paragraph text-center cta">
+            <div class="container">
+                <div class="section-inner text-center">
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">Random Endpoint</h4>
+                    <section class="features section">
+                        <div class="container">
+                            <div class="features-inner section-inner has-bottom-divider">
+                                <div class="features-wrap">
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/random/month</code><br>
+                                                <code class="crescent-code">Obtain a random month of the year.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/random/userprofile</code><br>
+                                                <code class="crescent-code">Obtain a random user profile with options.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/random/timezone</code><br>
+                                                <code class="crescent-code">Obtain a random timezone with options.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <p class="text-sm mb-0 text-center">
+                    Disclaimer: All property implemented by the Ponjo API belongs to their respective owners. The SCP
+                    Foundation endpoint complies with the Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) License.
+                    All SCP content rightfully belongs to its respetive creator(s). The Ponjo API is in no way affiliated
+                    with the SCP Foundation or any of its subsidiaries. By using the Ponjo API, you are agreeing to abide
+                    by its Terms & Conditions.
+                </p>
             </div>
         </section>
     </main>

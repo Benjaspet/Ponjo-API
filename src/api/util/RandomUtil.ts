@@ -35,7 +35,7 @@ export default class RandomUtil {
             });
         }
         if (amount) {
-            for (let i = 0; i <= amount; i++) {
+            for (let i = 1; i <= amount; i++) {
                 profiles.push({
                     age: new Chance().age(),
                     name: new Chance().name(),
