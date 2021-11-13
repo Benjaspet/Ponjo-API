@@ -4,6 +4,8 @@ import ErrorUtil from "../util/ErrorUtil";
 import branches from "../data/foundation/Branches";
 import personnel from "../data/foundation/Personnel";
 import SCPTaskForceUtil from "../util/scp/SCPTaskForceUtil";
+import sites from "../data/foundation/Sites";
+import ResponseUtil from "../util/api/ResponseUtil";
 
 export default class SCPEndpoint {
 
@@ -100,6 +102,18 @@ export default class SCPEndpoint {
                 });
         } catch (error) {
             ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    public static async getSites(req: Request, res: Response) {
+        try {
+            return res.status(200).json({
+                status: res.statusCode,
+                data: sites,
+                timestamps: ResponseUtil.getTimestamps()
+            });
+        } catch (error) {
+            return ErrorUtil.sent500Status(req, res);
         }
     }
 }

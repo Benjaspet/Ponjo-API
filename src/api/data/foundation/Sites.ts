@@ -53,6 +53,31 @@ const sites = {
         name: "Site-43",
         nick: "Research and Containment Site-43",
         description: "Site-43 is situated on the southeastern shore of Lake Huron, one kilometre below sea level in Ipperwash Provincial Park, Ontario, Canada. It comprises containment wings for low- to medium-risk anomalies, research divisions arranged in a pseudoacademic structure, and abatement refineries for esoteric substances. Objects contained at this facility include: SCP-5056, SCP-5109, SCP-5243, SCP-5382, SCP-5494 and SCP-5520."
+    },
+    site45: {
+        name: "Site-45",
+        nick: "Research Site-45",
+        description: "Site-45 is a clandestine armed research facility located off the coast of Western Australia under the Indian Ocean. Here, research and temporary containment of anomalous objects are conducted under guard and away from a civilian populace. Site-45 also serves as a staging point for MTF operations within the Pacific and Indian Oceans."
+    },
+    site54: {
+        name: "Site-54",
+        nick: "Integrated Containment Site-54",
+        description: "Site-54 is a containment facility located in, around, and beneath the city of Leipzig, Germany. Specialising in the containment of those anomalies deemed 'partially uncontainable', the Site's staff are heavily armed, highly trained, and permanently on edge. Featuring an extensive rapid-response vehicle hangar (with transport both normal and anomalous) and wide array of holding cells, Site-54 is generally considered to be the Foundation site both best-prepared for the worst to happen, and the location at which said worst is most likely to occur."
+    },
+    site56: {
+        name: "Site-56",
+        nick: null,
+        description: "Established in the Black Rock Desert of Nevada, May 1972, Site-56 was intended to serve as the base of operations for the enactment of the Kraken Protocol within the American Southwest. Over time, Site-56 took on increasing responsibilities, eventually transitioning into a full-fledged containment and administration site, responsible for select offsite anomalies such as SCP-5994 and SCP-5952. However, recent Overwatch audits suggest its expansion has surpassed its budgetary and logistical limitations, and personnel frequently cite its \"labyrinthine\" structure as a detriment to day-to-day operations."
+    },
+    site62: {
+        name: "Site-62",
+        nick: "Dimensional Site-62",
+        description: "Formerly Provisional Site-62, this facility was initially built around SCP-004. The facility was eventually expanded to house other objects requiring high-security Dimensional Containment, back up critical Foundation data, and provide an external reference point for detecting and reporting reality shifts."
+    },
+    site64: {
+        name: "Site-64",
+        nick: "Storage Site-64",
+        description: "Located approximately 0.5 km below Forest Park, northwest of Portland, Oregon, Site-64 is primarily a low to medium security storage facility, and is mainly used to house minor anomalous items, and Safe/Euclid class objects confiscated from the anomalous art community and anomalous electronics industry based in Portland and Vancouver."
     }
 }
 

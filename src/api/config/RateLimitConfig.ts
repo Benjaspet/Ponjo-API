@@ -11,7 +11,7 @@ TODO: implement longer rate limits if bypassing is attempted.
 
 const limiter = {
     rateLimiter: rateLimit({
-        max: 20,
+        max: 35,
         windowMs: 60 * 3 * 1000,
         handler(req: Request, res: Response): void {
             ErrorUtil.send429Response(req, res);

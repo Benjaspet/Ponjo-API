@@ -46,6 +46,7 @@ premiumRouter.get("/scp", SCPEndpoint.getScpData);
 premiumRouter.get("/scp/personnel", SCPEndpoint.getFoundationPersonnel);
 premiumRouter.get("/scp/branches", SCPEndpoint.getFoundationBranches);
 premiumRouter.get("/scp/taskforces", SCPEndpoint.getTaskForce);
+premiumRouter.get("/scp/sites", SCPEndpoint.getSites);
 
 premiumRouter.get("/covid/world", DataEndpoint.getWorldwideCovidStats);
 premiumRouter.get("/covid/country", DataEndpoint.getCovidStatsByCountry);

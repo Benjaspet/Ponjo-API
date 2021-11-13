@@ -15,7 +15,7 @@ export default class AvatarUtil {
         @description Gets the appropriate path based on the flair parameter.
         */
 
-        const type = path.join(__dirname, `../public/assets/lgbtq/flairs/${flair}.png`);
+        const type = path.join(__dirname, `../../public/assets/lgbtq/flairs/${flair}.png`);
 
         const canvas = Canvas.createCanvas(500, 500);
         const ctx = canvas.getContext("2d");
