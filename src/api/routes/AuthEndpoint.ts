@@ -5,8 +5,10 @@ import ErrorUtil from "../util/ErrorUtil";
 export default class AuthEndpoint {
 
     /*
-     The endpoint listener to create an API key and insert it
-     into the database.
+     Create an API key and insert it into the database.
+     @method POST
+     @header none
+     @uri /v1/auth/keys/create
      */
 
     public static async createKey(req: Request, res: Response) {
@@ -37,7 +39,10 @@ export default class AuthEndpoint {
     }
 
     /*
-     The endpoint listener to return an array of all API keys.
+     Return an array of all API keys.
+     @method GET
+     @header none
+     @uri /v1/auth/keys/list
      */
 
     public static async getAllKeys(req: Request, res: Response) {

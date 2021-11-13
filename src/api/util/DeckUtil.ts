@@ -3,17 +3,15 @@ import * as PokerEvaluator from "poker-evaluator-ts";
 export default class DeckUtil {
 
     public static createDeck(): string[] {
-
-        const suits: string[] = ["h", "c", "d", "s"];
+        const suits: string[] = ["H", "C", "D", "S"];
         const ranks: string[] = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"];
         const deck: string[] = [];
-
         for (let suitCounter: number = 0; suitCounter < 4; suitCounter++) {
             for (let rankCounter: number = 0; rankCounter < 13; rankCounter++) {
                 deck.push(ranks[rankCounter] + suits[suitCounter])
             }
         }
-        return deck;
+        return <string[]> deck;
     }
 
     public static shuffleDeck(deck: string[]) {
@@ -31,4 +29,26 @@ export default class DeckUtil {
         return PokerEvaluator.evalHand(deck);
     }
 
+    public static drawCard(deck: string[], amount: number) {
+        let drawnCards = [];
+        const originalDeckLength = deck.length;
+        const drawn = deck.splice(0, amount);
+        let index = 0;
+        drawn.forEach(card => {
+            index++;
+            drawnCards.push({
+                code: card,
+                image: `https://app.ponjo.club/public/assets/cards/${card}.png`,
+                suit: card.split("")[1],
+                value: card.split("")[0],
+                iteration: index
+            });
+        });
+        return {
+            cardsDrawn: drawnCards,
+            updatedDeck: deck,
+            amountDrawn: amount,
+            remainingCards: originalDeckLength - amount
+        };
+    }
 }

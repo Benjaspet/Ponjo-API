@@ -1,6 +1,6 @@
 import * as express from "express";
 import limiter from "./config/RateLimitConfig";
-import DeckRoute from "./routes/game/DeckRoute";
+import DeckEndpoint from "./routes/DeckEndpoint";
 import ColorEndpoint from "./routes/ColorEndpoint";
 import LGBTQEndpoint from "./routes/LGBTQEndpoint";
 import DataEndpoint from "./routes/DataEndpoint";
@@ -20,13 +20,15 @@ router.get("/affirmations", RandomEndpoint.getRandomAffirmation);
 
 router.get("/color", ColorEndpoint.hexToImage);
 
-router.get("/decks/create", DeckRoute.createDeck);
-router.get("/decks/find", DeckRoute.getDeckById);
-router.get("/decks/shuffle", DeckRoute.shuffleDeckById);
-router.get("/decks/poker/evalhand", DeckRoute.getPokerHand);
+router.get("/decks/create", DeckEndpoint.createDeck);
+router.get("/decks/find", DeckEndpoint.getDeckById);
+router.get("/decks/shuffle", DeckEndpoint.shuffleDeckById);
+router.get("/decks/evalhand", DeckEndpoint.getPokerHand);
+router.get("/decks/draw", DeckEndpoint.drawCards);
+router.get("/decks/reset", DeckEndpoint.resetDeck);
 
 router.post("/pride/avatar", LGBTQEndpoint.sendFlairedAvatar);
 router.get("/pride/flags", LGBTQEndpoint.sendPrideFlag);
-router.get("/pride/flags/:query", LGBTQEndpoint.sendPrideFlag);
+router.get("/pride/flags/:type", LGBTQEndpoint.sendPrideFlag);
 
 export = router;

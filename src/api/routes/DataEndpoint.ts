@@ -4,6 +4,8 @@ import * as weather from "weather-js";
 import Captcha from "@haileybot/captcha-generator";
 import CovidDataUtil from "../util/data/CovidDataUtil";
 import ResponseUtil from "../util/api/ResponseUtil";
+import Logger from "../../Logger";
+import fetch from "node-fetch";
 
 export default class DataEndpoint {
 
@@ -71,6 +73,7 @@ export default class DataEndpoint {
                         }
                     });
                 }).catch(error => {
+                    Logger.error(error);
                     return res.status(400).json({
                         status: 400,
                         message: "The chatbot endpoint is experiencing issues at this time.",
@@ -81,6 +84,7 @@ export default class DataEndpoint {
                     });
                 });
         } catch (error) {
+            Logger.error(error);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -111,7 +115,7 @@ export default class DataEndpoint {
     }
 
     /*
-     Get worldwide COVID-19 statistics/
+     Get worldwide COVID-19 statistics.
      @method GET
      @header Authentication: token
      @uri /v1/covid/world

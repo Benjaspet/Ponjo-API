@@ -1,10 +1,14 @@
-import mongoose, {Schema} from "mongoose";
+import {Schema} from "mongoose";
 import DatabaseConnection from "../database/DatabaseConnection";
 
 const DeckSchema = new Schema(
     {
-        deck: Array,
         deckId: String,
+        deck: Array,
+        data: {
+            shuffled: Boolean,
+            remainingCards: Number
+        }
     }, {
         timestamps: true
     }

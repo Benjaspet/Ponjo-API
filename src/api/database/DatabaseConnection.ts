@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import * as environment from "dotenv";
-import Logger from "../../Logger";
 
 environment.config();
 
