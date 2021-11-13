@@ -5,6 +5,14 @@ import ResponseUtil from "../util/api/ResponseUtil";
 
 export default class RoboEerieEndpoint {
 
+    /*
+     Get a list of all tags from the RoboEerie bot.
+     @method GET
+     @header Authentication: token
+     @uri /v1/roboeerie/tags?count=2
+     @param count: int
+     */
+
     public static async getTags(req: Request, res: Response) {
         const count = req.query.count || req.params.count as string;
         try {

@@ -9,10 +9,11 @@ export default class RandomEndpoint {
 
     /*
      The route to obtain a random timezone.
-     @header none
+     @method GET
+     @header Authentication: token
      @uri /v1/random/timezone?amount=6
      @uri /v1/random/timezone/3
-     @method GET
+     @param amount: int
      */
 
     public static async getRandomTimezone(req: Request, res: Response) {
@@ -40,11 +41,11 @@ export default class RandomEndpoint {
 
     /*
      The route to return a random user profile.
-     @header none
+     @method GET
+     @header Authentication: token
      @uri /v1/random/userprofile?amount=18
      @uri /v1/random/userprofile/5
      @param amount: int
-     @method GET
      */
 
     public static async getRandomUserProfile(req: Request, res: Response) {
@@ -72,7 +73,8 @@ export default class RandomEndpoint {
     
     /*
      The route to obtain a random affirmation.
-     @header none
+     @method GET
+     @header Authentication: token
      @uri /v1/affirmations?count=12
      @uri /v1/affirmations/12
      @param count: int
@@ -121,6 +123,7 @@ export default class RandomEndpoint {
 
     /*
      Returns a random month.
+     @method GET
      @header none
      @uri /v1/random/month/raw
      @uri /v1/random/month?raw=true
@@ -129,7 +132,6 @@ export default class RandomEndpoint {
 
     public static async getRandomMonth(req: Request, res: Response) {
         const raw = req.query.raw || req.params.raw as string|boolean;
-
         try {
             if (raw === "raw" || raw == true) {
                 return res.status(200).json({
