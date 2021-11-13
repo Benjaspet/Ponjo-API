@@ -3,7 +3,7 @@ import cheerio from "cheerio";
 
 export default class SCPTaskForceUtil {
 
-    public static async getTaskForceData(taskforce: string): Promise<any> {
+    public static async getTaskForceData(): Promise<any> {
         return new Promise<any>((resolve, reject) => {
             request("https://www.scpwiki.com/task-forces", (error, response, html) => {
                 if (!error && response.statusCode == 200) {

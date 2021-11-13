@@ -8,6 +8,7 @@ import AuthEndpoint from "./routes/AuthEndpoint";
 import GameQueryEndpoint from "./routes/GameQueryEndpoint";
 import RoboEerieEndpoint from "./routes/RoboEerieEndpoint";
 import RandomEndpoint from "./routes/RandomEndpoint";
+import DeckEndpoint from "./routes/DeckEndpoint";
 
 const premiumRouter = express.Router();
 
@@ -42,11 +43,20 @@ premiumRouter.get("/query/mcjava", GameQueryEndpoint.queryJavaServer);
 premiumRouter.get("/query/fivem", GameQueryEndpoint.queryFivemServer);
 premiumRouter.get("/query/ark", GameQueryEndpoint.queryArkServer);
 
+premiumRouter.get("/decks/create", DeckEndpoint.createDeck);
+premiumRouter.get("/decks/find", DeckEndpoint.getDeckById);
+premiumRouter.get("/decks/shuffle", DeckEndpoint.shuffleDeckById);
+premiumRouter.get("/decks/evalhand", DeckEndpoint.getPokerHand);
+premiumRouter.get("/decks/draw", DeckEndpoint.drawCards);
+premiumRouter.get("/decks/reset", DeckEndpoint.resetDeck);
+
 premiumRouter.get("/scp", SCPEndpoint.getScpData);
 premiumRouter.get("/scp/personnel", SCPEndpoint.getFoundationPersonnel);
 premiumRouter.get("/scp/branches", SCPEndpoint.getFoundationBranches);
-premiumRouter.get("/scp/taskforces", SCPEndpoint.getTaskForce);
-premiumRouter.get("/scp/sites", SCPEndpoint.getSites);
+premiumRouter.get("/scp/taskforces", SCPEndpoint.getFoundationTaskForce);
+premiumRouter.get("/scp/sites", SCPEndpoint.getFoundationSites);
+premiumRouter.get("/scp/areas", SCPEndpoint.getFoundationAreas);
+premiumRouter.get("/scp/all", SCPEndpoint.getAllFoundationData);
 
 premiumRouter.get("/covid/world", DataEndpoint.getWorldwideCovidStats);
 premiumRouter.get("/covid/country", DataEndpoint.getCovidStatsByCountry);

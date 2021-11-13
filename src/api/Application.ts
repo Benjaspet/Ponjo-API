@@ -6,7 +6,6 @@ import Endpoints from "./V1Router";
 import PremiumEndpoints from "./PremiumRouter";
 import Uploader from "./UploadRouter";
 import ErrorUtil from "./util/ErrorUtil";
-import AvatarUtil from "./util/api/AvatarUtil";
 
 export class Application {
 

@@ -34,6 +34,90 @@ const personnel = [
     {
         name: "Dr. Michael Edison",
         about: "Level-3 Researcher, current head of the Foundation's Inter-Site Testing Initiative (ISTI). Dr. Edison has received disciplinary action on multiple occasions due to a repeated pattern of unsanctioned and ill-conceived behavior. These behaviors have resulted in temporary reassignment to the Site-XX Antarctic base. His current assignment at Site 19 is contingent on approval from his assigned therapist."
+    },
+    {
+        name: "Dr. Chelsea \"Photosynthetic\" Elliott",
+        about: "Plant specialist, both anomalous and non-anomalous. Dedicated, friendly, prone to tunnel vision. Often in the field; excessively 'hands-on' in her lab and field research, leading to a number of injuries. Scars cover her hands and arms."
+    },
+    {
+        name: "Dr. Justine 'Jay' Everwood",
+        about: "GoI specialist, very well-read and knowledgeable on the many groups of interests the Foundation faces. Is particularly interested in Dr. Wondertainment and Wilson's Wildlife Solutions. Is generally approachable but is often lost in thought, be they mundane or fantastical."
+    },
+    {
+        name: "Dr. Joe Fynegan",
+        about: "Expert on ARBH Class Event Scenarios, AKA \"Insect Hell\" extinction-level events."
+    },
+    {
+        name: "Dr. Charles Gears (\"COG\")",
+        about: "A man strangely lacking in emotional response (to the point of lacking a startle response) and possessing unusual levels of logic and intellect. Former Euclid-class object specialist before having his area of study expanded. Has been deeply involved with research regarding a truly shocking number of SCP objects both major and minor. A figure of great influence in recent Foundation history."
+    },
+    {
+        name: "Dr. Simon Glass",
+        about: "Head of Psychology. Trusted with performing psychological evaluations of highly ranked Foundation personnel. Very empathetic. Sometimes considered \"soft\" — and that's true, for a Foundation researcher, but he's still well-trusted. In the course of his interviews, he has gained knowledge of more and more terrible secrets, yet still holds on to both his sanity and empathy."
+    },
+    {
+        name: "Dr. Frederick Heiden",
+        about: "Neurology specialist. Anxious, uncertain, empathic, focused on logic. Involved in a number of highly classified projects, despite initially being barred from any non-Safe-classed objects."
+    },
+    {
+        name: "Doctor Hoygull",
+        about: "Sapient seagull. Head of the Foundation's Avian Division, commanding MTF-Eta-4, \"Begone Thoth\"."
+    },
+    {
+        name: "Dr. Everett King:",
+        about: "One of the Foundation's most experienced mathematicians, Doctor King's reputation has nevertheless been overtaken by his testing record involving unusual results. Despite this, he regularly contributes to internal Foundation intellectual periodicals."
+    },
+    {
+        name: "Dr. Mark Kiryu",
+        about: "Senior researcher and director of an anomalous items processing lab. Upon initial recruitment, had a successful career as a therapist (licensed psychologist). Worked extensively with SCP-1457 in his first years with the Foundation but doesn't talk about that, and has spearheaded several projects involving sapient SCP entities. Cheery attitude and a good listener; looks out for his coworkers and interns like a bit of a mother hen sometimes. Has a ceramic seahorse and potted bamboo on his desk."
+    },
+    {
+        name: "Dr. Zyn Kiryu",
+        about: "Highly prolific researcher. Involved in a number of classified Foundation projects. Obsessive, driven, often not eating or sleeping in favor of finishing tasks. Finished her schooling through an accelerated program after joining the Foundation. Initially closed-off and withdrawn, but opened up due to a latent ambitious streak. She often volunteers to handle new Foundation member intake, hoping to give new members a positive introduction to an often deeply horrifying organization. Has a private flair for poetry. Has accidentally inherited the absent Dr. Kondraki's affiliation with anomalous butterflies, including SCP-408 after Kondraki's disappearance."
+    },
+    {
+        name: "Dr. Adam Leeward",
+        about: "Emotionally confused and ethically conflicted humanoid containment specialist from Site-11, living in Site-81. May or may not have made a few mistakes, may or may not have cleaned up a few mistakes. Not without the standard degree of coldness in personality traits, but with a few (sometimes painful) soft spots."
+    },
+    {
+        name: "Dr. Sophia Light",
+        about: "Biologist, surgeon and Site Director with far, far too many secrets. A likeable yet frightening person. Blunt, determined, calculating; good under pressure. Putting effort into remaining friendly and open (and emotionally stable). Bears minor facial scarring, and an old injury in her left hand sometimes impairs its functionality. Somewhat traumatic childhood; caretakers forced her to learn outdoor survival by leaving her stranded in the African wilderness for days on end. Joined the Foundation after a classified anomalous incident that killed eleven people, including her then-fiancee. Currently or formerly romantically linked with Troy Lament."
+    },
+    {
+        name: "Dr. Judith Low",
+        about: "Senior Advisor at the Department of History. Specialises in the religious practices known as Sarkicism, and involved in the containment of SCP-2133, SCP-2191 and SCP-2480."
+    },
+    {
+        name: "Dr. Connor MacWarren",
+        about: "Active researcher focusing on the development of anomalous technologies on top of being one of the board of directors at Site-98 in Philadelphia. Currently oversees his own department specializing in extradimensional anomalies. Humble, sarcastic, irritable, and absolutely loathes having to repeat himself every time anyone mishears his dry jokes. Former member of the Marine Corps. with a highly-prolific GOC agent for a father, now estranged."
+    },
+    {
+        name: "Dr. Everett Mann",
+        about: "Unconventional medical researcher with few scruples and a specialty in unusual forms of surgery. Jokingly referred to as a \"mad scientist\". (He objects to the term \"mad scientist\", claiming that \"mad doctor\" would be more accurate, and further that the difference should be plain to anyone with a proper academic background to speak of.) Willing to do monstrous things in the name of research. Possesses a dramatic moustache. Due to his upbringing, his cultural and popular knowledges are woefully out of date, leading to anachronistic and ridiculous situations."
+    },
+    {
+        name: "Dr. Jaime Marlowe",
+        about: "Average researcher, specializing in space-time, extra-dimensional, visual, spatial, and cognitohazardous anomalies. Previously described as \"painfully, painfully, painfully average\", notable more for minor interpersonal incidents and inappropriate outbursts when under stress. Marlowe's profile has slightly increased due to apparent unexplained connections to unrelated anomalous events which only appear to have increased in frequency."
+    },
+    {
+        name: "Dr. Placeholder McDoctorate",
+        about: "Head of the 'Pataphysics Department. Initially hired by the I.T. department, promoted to Department Head in 1996 for notable performance in the containment of SCP-5241. Promoted to Site Director, then personally requested reassignment to the 'Pataphysics Department. Promoted to Department Head for notable developments in Theoretical 'Pataphysics, then founded the Archetypicals Division. At some point, had his name retroactively abstracted by SCP-INTEGER."
+    },
+    {
+        name: "Dr. Riven Mercer",
+        about: "Veterinary-focused researcher, second-in-command of Kiryu Labs. Handles personnel allocation for incoming anomalous item caches, often goes on outside assignments. Good with animals, owns a grumpy bearded dragon lizard who lives in the lab."
+    },
+    {
+        name: "Dr. Katherine Sinclair",
+        about: "Acting head - and one of only two members - of the Occult Studies and Thaumatology division at Site-87 in Sloth's Pit, Wisconsin. Has been involved in numerous incidents, including the assault on Sloth's Pit by the now defunct Group of Interest Satyr's Reign, and the 2014 Christmas Incident. Has burn scars on her forearms from a botched flame ritual."
+    },
+    {
+        name: "Dr. Johannes Sorts",
+        about: "Memetic specialist and field researcher, with a doctorate in art history. Caucasian, late 30s, unshaven with greying brown hair. Slightly overweight, usually wears a grey cap. Obsessive, cowardly and paranoid in mundane situations, but solid and focused when presented with memetic or information based hazards. Multiple disciplinary reports due to poor choice of action under pressure, including the shooting of a guard while under my influence. Currently under psychiatric evaluation and restricted to safer projects."
+    },
+    {
+        name: "Dr. Thaddeus Xyank",
+        about: "Presently low-level but extremely significant Foundation researcher. Specializes in temporal anomalies. Somewhat arrogant and long-winded, but considered an up-and-coming genius."
     }
 ];
 

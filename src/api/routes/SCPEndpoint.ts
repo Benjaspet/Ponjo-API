@@ -6,6 +6,7 @@ import personnel from "../data/foundation/Personnel";
 import SCPTaskForceUtil from "../util/scp/SCPTaskForceUtil";
 import sites from "../data/foundation/Sites";
 import ResponseUtil from "../util/api/ResponseUtil";
+import SCPFoundationDataUtil from "../util/scp/SCPFoundationDataUtil";
 
 export default class SCPEndpoint {
 
@@ -57,20 +58,12 @@ export default class SCPEndpoint {
         }
     }
 
-    public static async getFoundationPersonnel(req: Request, res: Response) {
-        try {
-            return res.status(200).json({
-                status: 200,
-                personnel: personnel,
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            });
-        } catch (error) {
-            ErrorUtil.sent500Status(req, res);
-        }
-    }
+    /*
+     Get all SCP Foundation branches.
+     @method GET
+     @header Authentication: token
+     @uri /v1/scp/branches
+     */
 
     public static async getFoundationBranches(req: Request, res: Response) {
         try {
@@ -87,9 +80,16 @@ export default class SCPEndpoint {
         }
     }
 
-    public static async getTaskForce(req: Request, res: Response) {
+    /*
+     Get all SCP Foundation task forces.
+     @method GET
+     @header Authentication: token
+     @uri /v1/scp/taskforces
+     */
+
+    public static async getFoundationTaskForce(req: Request, res: Response) {
         try {
-            await SCPTaskForceUtil.getTaskForceData("all")
+            await SCPTaskForceUtil.getTaskForceData()
                 .then(result => {
                     return res.status(200).json({
                         status: 200,
@@ -105,11 +105,80 @@ export default class SCPEndpoint {
         }
     }
 
-    public static async getSites(req: Request, res: Response) {
+    /*
+     Get all SCP Foundation sites & their category data.
+     @method GET
+     @header Authentication: token
+     @uri /v1/scp/sites
+     */
+
+    public static async getFoundationSites(req: Request, res: Response) {
         try {
             return res.status(200).json({
                 status: res.statusCode,
-                data: sites,
+                sites: SCPFoundationDataUtil.getAllSiteData(),
+                categories: SCPFoundationDataUtil.getSiteCategories(),
+                timestamps: ResponseUtil.getTimestamps()
+            });
+        } catch (error) {
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /*
+     Get all SCP Foundation personnel.
+     @method GET
+     @header Authentication: token
+     @uri /v1/scp/personnel
+     */
+
+    public static async getFoundationPersonnel(req: Request, res: Response) {
+        try {
+            return res.status(200).json({
+                status: res.statusCode,
+                personnel: SCPFoundationDataUtil.getScpPersonnel(),
+                timestamps: ResponseUtil.getTimestamps()
+            });
+        } catch (error) {
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /*
+     Get all SCP Foundation areas.
+     @method GET
+     @header Authentication: token
+     @uri /v1/scp/areas
+     */
+
+    public static async getFoundationAreas(req: Request, res: Response) {
+        try {
+            return res.status(200).json({
+                status: res.statusCode,
+                areas: SCPFoundationDataUtil.getAllAreaData(),
+                timestamps: ResponseUtil.getTimestamps()
+            });
+        } catch (error) {
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /*
+     Get all SCP Foundation data.
+     @method GET
+     @header Authentication: token
+     @uri /v1/scp/all
+     */
+
+    public static async getAllFoundationData(req: Request, res: Response) {
+        try {
+            return res.status(200).json({
+                status: res.statusCode,
+                personnel: SCPFoundationDataUtil.getScpPersonnel(),
+                branches: SCPFoundationDataUtil.getAllBranchData(),
+                areas: SCPFoundationDataUtil.getAllAreaData(),
+                sites: SCPFoundationDataUtil.getAllSiteData(),
+                siteCategories: SCPFoundationDataUtil.getSiteCategories(),
                 timestamps: ResponseUtil.getTimestamps()
             });
         } catch (error) {

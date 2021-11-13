@@ -124,4 +124,273 @@ export default class ImageManipulationEndpoint {
             return ErrorUtil.sent500Status(req, res);
         }
     }
+
+    /*
+     Make an image circular.
+     @method POST
+     @header none
+     @uri /v1/img/circle?image=<image-url>&format=png
+     @param image: <uri-encoded> string
+     @param format: string <png, jpg>
+     */
+
+    public static async sendCircularImage(req: Request, res: Response) {
+        const image = req.query.image as string;
+        const format = req.query.format as string;
+        if (!image) return ErrorUtil.sent500Status(req, res);
+        try {
+            const result = await Canvacord.circle(image);
+            const data = result.toString("base64");
+            const img = Buffer.from(data, "base64");
+            if (!format) {
+                res.writeHead(200, {
+                    "Content-Type": "image/png",
+                    "Content-Length": img.length
+                });
+                return res.end(img);
+            } else {
+                switch (format) {
+                    case "jpeg":
+                    case "jpg":
+                        res.writeHead(200, {
+                            "Content-Type": "image/jpg",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                    case "png":
+                        res.writeHead(200, {
+                            "Content-Type": "image/png",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                    case "gif":
+                    default:
+                        res.writeHead(200, {
+                            "Content-Type": "image/png",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                }
+            }
+
+        } catch (error) {
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /*
+     Give an image a burn effect.
+     @method POST
+     @header none
+     @uri /v1/img/burn?image=<image-url>&intensity=2&format=png
+     @param image: <uri-encoded> string
+     @param intensity: int
+     @param format: string <png, jpg>
+     */
+
+    public static async sendBurningImage(req: Request, res: Response) {
+        const image = req.query.image as string;
+        const intensity = req.query.intensity as string;
+        const format = req.query.format as string;
+        if (!image) return ErrorUtil.sent500Status(req, res);
+        try {
+            const result = await Canvacord.burn(image, parseInt(intensity) || 1);
+            const data = result.toString("base64");
+            const img = Buffer.from(data, "base64");
+            if (!format) {
+                res.writeHead(200, {
+                    "Content-Type": "image/png",
+                    "Content-Length": img.length
+                });
+                return res.end(img);
+            } else {
+                switch (format) {
+                    case "jpeg":
+                    case "jpg":
+                        res.writeHead(200, {
+                            "Content-Type": "image/jpg",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                    case "png":
+                        res.writeHead(200, {
+                            "Content-Type": "image/png",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                    case "gif":
+                    default:
+                        res.writeHead(200, {
+                            "Content-Type": "image/png",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                }
+            }
+
+        } catch (error) {
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /*
+     Give an image a facepalm effect.
+     @method POST
+     @header none
+     @uri /v1/img/facepalm?image=<image-url>&format=png
+     @param image: <uri-encoded> string
+     @param format: string <png, jpg>
+     */
+
+    public static async sendFacepalmImage(req: Request, res: Response) {
+        const image = req.query.image as string;
+        const format = req.query.format as string;
+        if (!image) return ErrorUtil.sent500Status(req, res);
+        try {
+            const result = await Canvacord.facepalm(image);
+            const data = result.toString("base64");
+            const img = Buffer.from(data, "base64");
+            if (!format) {
+                res.writeHead(200, {
+                    "Content-Type": "image/png",
+                    "Content-Length": img.length
+                });
+                return res.end(img);
+            } else {
+                switch (format) {
+                    case "jpeg":
+                    case "jpg":
+                        res.writeHead(200, {
+                            "Content-Type": "image/jpg",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                    case "png":
+                        res.writeHead(200, {
+                            "Content-Type": "image/png",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                    case "gif":
+                    default:
+                        res.writeHead(200, {
+                            "Content-Type": "image/png",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                }
+            }
+
+        } catch (error) {
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /*
+     Give an image a pixelated effect.
+     @method POST
+     @header none
+     @uri /v1/img/pixelate?image=<image-url>&pixels=32&format=png
+     @param image: <uri-encoded> string
+     @param pixels: int
+     @param format: string <png, jpg>
+     */
+
+    public static async sendPixelatedImage(req: Request, res: Response) {
+        const image = req.query.image as string;
+        const pixels = req.query.pixels as string;
+        const format = req.query.format as string;
+        if (!image) return ErrorUtil.sent500Status(req, res);
+        try {
+            const result = await Canvacord.pixelate(image, parseInt(pixels) || 32);
+            const data = result.toString("base64");
+            const img = Buffer.from(data, "base64");
+            if (!format) {
+                res.writeHead(200, {
+                    "Content-Type": "image/png",
+                    "Content-Length": img.length
+                });
+                return res.end(img);
+            } else {
+                switch (format) {
+                    case "jpeg":
+                    case "jpg":
+                        res.writeHead(200, {
+                            "Content-Type": "image/jpg",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                    case "png":
+                        res.writeHead(200, {
+                            "Content-Type": "image/png",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                    case "gif":
+                    default:
+                        res.writeHead(200, {
+                            "Content-Type": "image/png",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                }
+            }
+
+        } catch (error) {
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /*
+     Give an image a RIP effect.
+     @method POST
+     @header none
+     @uri /v1/img/rip?image=<image-url>&format=png
+     @param image: <uri-encoded> string
+     @param format: string <png, jpg>
+     */
+
+    public static async sendRipEffect(req: Request, res: Response) {
+        const image = req.query.image as string;
+        const format = req.query.format as string;
+        if (!image) return ErrorUtil.sent500Status(req, res);
+        try {
+            const result = await Canvacord.rip(image);
+            const data = result.toString("base64");
+            const img = Buffer.from(data, "base64");
+            if (!format) {
+                res.writeHead(200, {
+                    "Content-Type": "image/png",
+                    "Content-Length": img.length
+                });
+                return res.end(img);
+            } else {
+                switch (format) {
+                    case "jpeg":
+                    case "jpg":
+                        res.writeHead(200, {
+                            "Content-Type": "image/jpg",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                    case "png":
+                        res.writeHead(200, {
+                            "Content-Type": "image/png",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                    case "gif":
+                    default:
+                        res.writeHead(200, {
+                            "Content-Type": "image/png",
+                            "Content-Length": img.length
+                        });
+                        return res.end(img);
+                }
+            }
+
+        } catch (error) {
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
 }
