@@ -31,7 +31,7 @@ export default class LGBTQEndpoint {
         try {
             switch (type) {
                 case "sexual":
-                    const filtered = orientations[0].filter(type => type.name.toLowerCase().includes(query));
+                    const filtered = orientations[0].filter(type => type.name.toLowerCase().startsWith(query));
                     return res.status(200).json({
                         status: res.statusCode,
                         filterType: type,
@@ -39,7 +39,7 @@ export default class LGBTQEndpoint {
                         timestamps: ResponseUtil.getTimestamps()
                     });
                 case "romantic":
-                    const filtered2 = orientations[1].filter(type => type.name.toLowerCase().includes(query));
+                    const filtered2 = orientations[1].filter(type => type.name.toLowerCase().startsWith(query));
                     return res.status(200).json({
                         status: res.statusCode,
                         filterType: type,
@@ -47,7 +47,7 @@ export default class LGBTQEndpoint {
                         timestamps: ResponseUtil.getTimestamps()
                     });
                 default:
-                    const filtered3 = orientations[0].filter(type => type.name.toLowerCase().includes(query));
+                    const filtered3 = orientations[0].filter(type => type.name.toLowerCase().startsWith(query));
                     return res.status(200).json({
                         status: res.statusCode,
                         filterType: type,
