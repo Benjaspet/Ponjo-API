@@ -3,7 +3,14 @@ import {NextFunction, Request, Response} from "express";
 export default class ErrorUtil {
 
     public static async send400Status(req: Request, res: Response) {
-
+        return res.status(400).json({
+            status: res.statusCode,
+            message: "Invalid syntax provided.",
+            timestamps: {
+                date: new Date().toLocaleString(),
+                unix: Math.round(+ new Date() / 1000),
+            }
+        });
     }
 
     public static send404Response(req: Request, res: Response) {

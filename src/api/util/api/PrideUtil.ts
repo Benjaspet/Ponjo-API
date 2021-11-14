@@ -39,9 +39,15 @@ export default class PrideUtil {
                 case "agender":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Agender.png");
                     break;
+                case "alloromantic":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Alloromantic.png");
+                    break;
                 case "aro":
                 case "aromantic":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Aromantic.png");
+                    break;
+                case "aroace":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/AroAce.png");
                     break;
                 case "ace":
                 case "asexual":
@@ -49,6 +55,9 @@ export default class PrideUtil {
                     break;
                 case "bigender":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Bigender.png");
+                    break;
+                case "biromantic":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Biromantic.png");
                     break;
                 case "bi":
                 case "bisexual":
@@ -86,13 +95,25 @@ export default class PrideUtil {
                 case "lesbian":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Lesbian.png");
                     break;
+                case "lesbiromantic":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Lesbiromantic.png");
+                    break;
+                case "monoromantic":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Monoromantic.png");
+                    break;
                 case "enby":
                 case "nonbinary":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Nonbinary.png");
                     break;
+                case "omniromantic":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Omniromantic.png");
+                    break;
                 case "omni":
                 case "omnisexual":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Omnisexual.png");
+                    break;
+                case "panromantic":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Panromantic.png");
                     break;
                 case "pan":
                 case "pansexual":
@@ -101,6 +122,9 @@ export default class PrideUtil {
                 case "polyamorous":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Polyamorous.png");
                     break;
+                case "polyromantic":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Polyromantic.png");
+                    break;
                 case "polysexual":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Polysexual.png");
                     break;
@@ -108,12 +132,18 @@ export default class PrideUtil {
                 case "progresspride":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/ProgressPride.png");
                     break;
+                case "questioning":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Questioning.png");
+                    break;
                 case "sapphic":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Sapphic.png");
                     break;
                 case "trans":
                 case "transgender":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Transgender.png");
+                    break;
+                case "twospirit":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/TwoSpirit.png");
                     break;
                 case "xenogender":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Xenogender.png");

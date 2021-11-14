@@ -3,6 +3,8 @@ import AvatarUtil from "../util/api/AvatarUtil";
 import ErrorUtil from "../util/ErrorUtil";
 import PrideUtil from "../util/api/PrideUtil";
 import ResponseUtil from "../util/api/ResponseUtil";
+import path from "path";
+import orientations from "../data/lgbtq/Orientations";
 
 export default class LGBTQEndpoint {
 
@@ -23,10 +25,44 @@ export default class LGBTQEndpoint {
         }
     }
 
+    public static async searchForOrientation(req: Request, res: Response) {
+        const type = req.query.type || "sexual" as string;
+        const query = req.query.q as string;
+        try {
+            switch (type) {
+                case "sexual":
+                    const filtered = orientations[0].filter(type => type.name.toLowerCase().includes(query));
+                    return res.status(200).json({
+                        status: res.statusCode,
+                        filterType: type,
+                        data: filtered,
+                        timestamps: ResponseUtil.getTimestamps()
+                    });
+                case "romantic":
+                    const filtered2 = orientations[1].filter(type => type.name.toLowerCase().includes(query));
+                    return res.status(200).json({
+                        status: res.statusCode,
+                        filterType: type,
+                        data: filtered2,
+                        timestamps: ResponseUtil.getTimestamps()
+                    });
+                default:
+                    const filtered3 = orientations[0].filter(type => type.name.toLowerCase().includes(query));
+                    return res.status(200).json({
+                        status: res.statusCode,
+                        filterType: type,
+                        data: filtered3,
+                        timestamps: ResponseUtil.getTimestamps()
+                    });
+            }
+        } catch (error) {
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
     /*
      Add pride flairs to an avatar.
      @method POST
-
      */
 
     public static async sendFlairedAvatar(req: Request, res: Response): Promise<Response> {
@@ -53,9 +89,15 @@ export default class LGBTQEndpoint {
                 case "agender":
                     result = await AvatarUtil.getFlairedAvatar("Agender", avatar, true);
                     break;
+                case "alloromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Alloromantic", avatar, true);
+                    break;
                 case "aro":
                 case "aromantic":
                     result = await AvatarUtil.getFlairedAvatar("Aromantic", avatar, true);
+                    break;
+                case "aroace":
+                    result = await AvatarUtil.getFlairedAvatar("AroAce", avatar, true);
                     break;
                 case "ace":
                 case "asexual":
@@ -63,6 +105,9 @@ export default class LGBTQEndpoint {
                     break;
                 case "bigender":
                     result = await AvatarUtil.getFlairedAvatar("Bigender", avatar, true);
+                    break;
+                case "biromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Biromantic", avatar, true);
                     break;
                 case "bi":
                 case "bisexual":
@@ -108,9 +153,21 @@ export default class LGBTQEndpoint {
                 case "nonbinary":
                     result = await AvatarUtil.getFlairedAvatar("Nonbinary", avatar, true);
                     break;
+                case "lesbiromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Lesbiromantic", avatar, true);
+                    break;
+                case "monoromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Monoromantic", avatar, true);
+                    break;
+                case "omniromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Omniromantic", avatar, true);
+                    break;
                 case "omni":
                 case "omnisexual":
                     result = await AvatarUtil.getFlairedAvatar("Omnisexual", avatar, true);
+                    break;
+                case "panromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Panromantic", avatar, true);
                     break;
                 case "pan":
                 case "pansexual":
@@ -118,6 +175,9 @@ export default class LGBTQEndpoint {
                     break;
                 case "polyamorous":
                     result = await AvatarUtil.getFlairedAvatar("Polyamorous", avatar, true);
+                    break;
+                case "polyromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Polyromantic", avatar, true);
                     break;
                 case "polysexual":
                     result = await AvatarUtil.getFlairedAvatar("Polysexual", avatar, true);
@@ -134,6 +194,9 @@ export default class LGBTQEndpoint {
                 case "transmasc":
                 case "transfemme":
                     result = await AvatarUtil.getFlairedAvatar("Transgender", avatar, true);
+                    break;
+                case "twospirit":
+                    result = await AvatarUtil.getFlairedAvatar("TwoSpirit", avatar, true);
                     break;
                 case "xenogender":
                     result = await AvatarUtil.getFlairedAvatar("Xenogender", avatar, true);
@@ -163,9 +226,15 @@ export default class LGBTQEndpoint {
                 case "agender":
                     result = await AvatarUtil.getFlairedAvatar("Agender", avatar);
                     break;
+                case "alloromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Alloromantic", avatar);
+                    break;
                 case "aro":
                 case "aromantic":
                     result = await AvatarUtil.getFlairedAvatar("Aromantic", avatar);
+                    break;
+                case "aroace":
+                    result = await AvatarUtil.getFlairedAvatar("AroAce", avatar);
                     break;
                 case "ace":
                 case "asexual":
@@ -173,6 +242,9 @@ export default class LGBTQEndpoint {
                     break;
                 case "bigender":
                     result = await AvatarUtil.getFlairedAvatar("Bigender", avatar);
+                    break;
+                case "biromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Biromantic", avatar);
                     break;
                 case "bi":
                 case "bisexual":
@@ -218,9 +290,21 @@ export default class LGBTQEndpoint {
                 case "nonbinary":
                     result = await AvatarUtil.getFlairedAvatar("Nonbinary", avatar);
                     break;
+                case "lesbiromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Lesbiromantic", avatar);
+                    break;
+                case "monoromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Monoromantic", avatar);
+                    break;
+                case "omniromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Omniromantic", avatar);
+                    break;
                 case "omni":
                 case "omnisexual":
                     result = await AvatarUtil.getFlairedAvatar("Omnisexual", avatar);
+                    break;
+                case "panromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Panromantic", avatar);
                     break;
                 case "pan":
                 case "pansexual":
@@ -228,6 +312,9 @@ export default class LGBTQEndpoint {
                     break;
                 case "polyamorous":
                     result = await AvatarUtil.getFlairedAvatar("Polyamorous", avatar);
+                    break;
+                case "polyromantic":
+                    result = await AvatarUtil.getFlairedAvatar("Polyromantic", avatar);
                     break;
                 case "polysexual":
                     result = await AvatarUtil.getFlairedAvatar("Polysexual", avatar);
@@ -244,6 +331,9 @@ export default class LGBTQEndpoint {
                 case "transmasc":
                 case "transfemme":
                     result = await AvatarUtil.getFlairedAvatar("Transgender", avatar);
+                    break;
+                case "twospirit":
+                    result = await AvatarUtil.getFlairedAvatar("TwoSpirit", avatar);
                     break;
                 case "xenogender":
                     result = await AvatarUtil.getFlairedAvatar("Xenogender", avatar);
