@@ -12,7 +12,7 @@ export default class DataEndpoint {
     /*
      The endpoint listener to get current weather data & forecasts.
      @method GET
-     @header none
+     @header Authentication: token
      @uri /v1/weather?location=Atlanta
      @uri /v1/weather/Atlanta
      @param string: location
@@ -92,7 +92,7 @@ export default class DataEndpoint {
     /*
      The route to retrieve a random captcha.
      @method GET
-     @header none
+     @header Authentication: token
      @uri /v1/captcha
      */
 
@@ -165,7 +165,9 @@ export default class DataEndpoint {
 
     /*
      The route to check the API's status/health.
+     @method GET
      @header none
+     @uri /v1/health
      */
 
     public static getApiHealth(req: Request, res: Response, next: NextFunction) {
