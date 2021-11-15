@@ -15,14 +15,7 @@ export default class AuthEndpoint {
         try {
             const user = req.query.user as string;
             if (!user) {
-                return res.status(500).json({
-                    status: res.statusCode,
-                    message: "Invalid syntax.",
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
-                });
+                return ErrorUtil.send400Status(req, res);
             }
             const key = await AuthorizationUtil.generateUniqueApiKey() as string;
             await AuthorizationUtil.createApiKey(key, user)
@@ -39,7 +32,7 @@ export default class AuthEndpoint {
     }
 
     /*
-     Return an array of all API keys.
+     Returns an array of all API keys.
      @method GET
      @header none
      @uri /v1/auth/keys/list
@@ -58,14 +51,7 @@ export default class AuthEndpoint {
                 });
             })
             .catch(error => {
-                return res.status(500).json({
-                    status: 500,
-                    message: error.message,
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
-                });
+                return ErrorUtil.sent500Status(req, res);
             });
     }
 }

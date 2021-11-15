@@ -3,7 +3,6 @@ import AvatarUtil from "../util/api/AvatarUtil";
 import ErrorUtil from "../util/ErrorUtil";
 import PrideUtil from "../util/api/PrideUtil";
 import ResponseUtil from "../util/api/ResponseUtil";
-import path from "path";
 import orientations from "../data/lgbtq/Orientations";
 
 export default class LGBTQEndpoint {
@@ -113,6 +112,9 @@ export default class LGBTQEndpoint {
                 case "bisexual":
                     result = await AvatarUtil.getFlairedAvatar("Bisexual", avatar, true);
                     break;
+                case "ceterosexual":
+                    result = await AvatarUtil.getFlairedAvatar("Ceterosexual", avatar, true);
+                    break;
                 case "demiboy":
                     result = await AvatarUtil.getFlairedAvatar("Demiboy", avatar, true);
                     break;
@@ -139,6 +141,10 @@ export default class LGBTQEndpoint {
                 case "genderqueer":
                     result = await AvatarUtil.getFlairedAvatar("Genderqueer", avatar, true);
                     break;
+                case "heterosexual":
+                case "straight":
+                    result = await AvatarUtil.getFlairedAvatar("Heterosexual", avatar, true);
+                    break;
                 case "intersex":
                     result = await AvatarUtil.getFlairedAvatar("Intersex", avatar, true);
                     break;
@@ -158,6 +164,12 @@ export default class LGBTQEndpoint {
                     break;
                 case "monoromantic":
                     result = await AvatarUtil.getFlairedAvatar("Monoromantic", avatar, true);
+                    break;
+                case "multisexual":
+                    result = await AvatarUtil.getFlairedAvatar("Multisexual", avatar, true);
+                    break;
+                case "neptunic":
+                    result = await AvatarUtil.getFlairedAvatar("Neptunic", avatar, true);
                     break;
                 case "omniromantic":
                     result = await AvatarUtil.getFlairedAvatar("Omniromantic", avatar, true);

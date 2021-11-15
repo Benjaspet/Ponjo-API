@@ -1,4 +1,4 @@
-import mongoose, {Schema} from "mongoose";
+import {Schema} from "mongoose";
 import DatabaseConnection from "../database/DatabaseConnection";
 
 const ImageSchema = new Schema(

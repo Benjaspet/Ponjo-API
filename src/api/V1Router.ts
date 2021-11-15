@@ -16,6 +16,7 @@ router.get("/affirmations", RandomEndpoint.getRandomAffirmation);
 
 router.get("/color", ColorEndpoint.hexToImage);
 router.get("/prime", UtilityEndpoint.checkIfNumberIsPrime);
+router.get("/prime/:number", UtilityEndpoint.checkIfNumberIsPrime);
 
 router.post("/trigger", ImageManipulationEndpoint.sendTriggeredImage);
 router.post("/jail", ImageManipulationEndpoint.sendJailedImage);

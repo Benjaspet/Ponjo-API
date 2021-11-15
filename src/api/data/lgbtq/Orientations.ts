@@ -6,7 +6,7 @@ const orientations = [
                 "aspec", "ace-spec", "ace spectrum"
             ],
             definition: "A shortened version of asexual/aromantic spectrum; an umbrella term for the aromantic spectrum and the asexual spectrum.",
-            flag: "https://pronouns-page.s3-eu-west-1.amazonaws.com/images/01EX5FA37QHQCEEBBC0W889ZEH-big.png"
+            flag: "https://app.ponjo.club/v1/pride/flags/aroace"
         },
         {
             name: "Abrosexual",
@@ -36,7 +36,7 @@ const orientations = [
             name: "Ceterosexual",
             aliases: [],
             definition: "Sexual attraction towards non-binary people.",
-            flag: "https://en.pronouns.page/flags/Ceterosexual.png"
+            flag: "https://app.ponjo.club/v1/pride/flags/ceterosexual"
         },
         {
             name: "Demisexual",
@@ -74,13 +74,13 @@ const orientations = [
             name: "Multisexual",
             aliases: [],
             definition: "An umbrella term referring to people sexual attracted towards more than one gender.",
-            flag: "https://pronouns-page.s3-eu-west-1.amazonaws.com/images/01FBG1SP286W7XRW3AK8M49W7V-big.png"
+            flag: "https://app.ponjo.club/v1/pride/flags/multisexual"
         },
         {
             name: "Neptunic",
             aliases: [],
             definition: "Sexual attraction towards exclusively women and non-binary people.",
-            flag: "https://pronouns-page.s3-eu-west-1.amazonaws.com/images/01EX5Q2RCWAWWNYFD0V72BT75V-big.png"
+            flag: "https://app.ponjo.club/v1/pride/flags/neptunic"
         },
         {
             name: "Omnisexual",

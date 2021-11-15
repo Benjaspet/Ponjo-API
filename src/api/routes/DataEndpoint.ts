@@ -10,13 +10,12 @@ import fetch from "node-fetch";
 export default class DataEndpoint {
 
     /*
-     The endpoint listener to get current weather data as well as
-     predictions by Microsoft.
+     The endpoint listener to get current weather data & forecasts.
+     @method GET
      @header none
      @uri /v1/weather?location=Atlanta
      @uri /v1/weather/Atlanta
      @param string: location
-     @query string: location
      */
 
     public static async sendWeatherResponse(req: Request, res: Response) {
@@ -46,18 +45,19 @@ export default class DataEndpoint {
     }
 
     /*
-     The route to obtain a response from a chatbot.
+     Obtain a response from a chatbot.
      @method GET
      @header Authentication: token
      @uri /v1/chatbot?message=Hello&name=ChatBot
      @param message: string
-     @param name: string
+     @param name?: string
      */
 
     public static async sendChatbotMessage(req: Request, res: Response): Promise<Response> {
         try {
             const message = req.query.message as string;
-            const botName = req.query.name ? req.query.name : "Ponjo Bot" as string;
+            if (!message) return ErrorUtil.send400Status(req, res);
+            const botName = req.query.name ? req.query.name : "Chatbot" as string;
             await fetch(`https://yourmommmaosamaobama.hisroyal123.repl.co/?message=${encodeURIComponent(message)}`)
                 .then(response => response.json())
                 .then(data => {

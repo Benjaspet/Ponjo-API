@@ -2,32 +2,50 @@ import path from "path";
 
 export default class PrideUtil {
 
+    /*
+     Get the file path of the specified pride flag.
+     */
+
     public static async getFlag(type: string, displayAll?: boolean) {
         let filePath;
         if (displayAll) {
             return {
                 abrosexual: "https://app.ponjo.club/v1/pride/flags?type=abrosexual",
                 agender: "https://app.ponjo.club/v1/pride/flags?type=agender",
+                alloromantic: "https://app.ponjo.club/v1/pride/flags?type=alloromantic",
                 aromantic: "https://app.ponjo.club/v1/pride/flags?type=aromantic",
                 asexual: "https://app.ponjo.club/v1/pride/flags?type=asexual",
                 bigender: "https://app.ponjo.club/v1/pride/flags?type=bigender",
+                biromantic: "https://app.ponjo.club/v1/pride/flags?type=biromantic",
                 bisexual: "https://app.ponjo.club/v1/pride/flags?type=bisexual",
+                ceterosexual: "https://app.ponjo.club/v1/pride/flags?type=ceterosexual",
                 demiboy: "https://app.ponjo.club/v1/pride/flags?type=demiboy",
                 demigirl: "https://app.ponjo.club/v1/pride/flags?type=demogirl",
+                demiromantic: "https://app.ponjo.club/v1/pride/flags?type=demiromantic",
+                demisexual: "https://app.ponjo.club/v1/pride/flags?type=demisexual",
                 gay: "https://app.ponjo.club/v1/pride/flags?type=abrosexual",
                 genderfluid: "https://app.ponjo.club/v1/pride/flags?type=genderfluid",
                 genderflux: "https://app.ponjo.club/v1/pride/flags?type=genderflux",
                 genderqueer: "https://app.ponjo.club/v1/pride/flags?type=genderqueer",
+                heterosexual: "https://app.ponjo.club/v1/pride/flags?type=heterosexual",
                 intersex: "https://app.ponjo.club/v1/pride/flags?type=intersex",
                 lesbian: "https://app.ponjo.club/v1/pride/flags?type=lesbian",
+                lesbiromantic: "https://app.ponjo.club/v1/pride/flags?type=lesbiromantic",
+                monoromantic: "https://app.ponjo.club/v1/pride/flags?type=monoromantic",
+                multisexual: "https://app.ponjo.club/v1/pride/flags?type=multisexual",
+                neptunic: "https://app.ponjo.club/v1/pride/flags?type=neptunic",
                 nonbinary: "https://app.ponjo.club/v1/pride/flags?type=nonbinary",
+                omniromantic: "https://app.ponjo.club/v1/pride/flags?type=omniromantic",
                 omnisexual: "https://app.ponjo.club/v1/pride/flags?type=omnisexual",
+                panromantic: "https://app.ponjo.club/v1/pride/flags?type=panromantic",
                 pansexual: "https://app.ponjo.club/v1/pride/flags?type=pansexual",
                 polyamorous: "https://app.ponjo.club/v1/pride/flags?type=polyamorous",
                 polysexual: "https://app.ponjo.club/v1/pride/flags?type=polysexual",
                 pride: "https://app.ponjo.club/v1/pride/flags?type=pride",
+                questioning: "https://app.ponjo.club/v1/pride/flags?type=questioning",
                 sapphic: "https://app.ponjo.club/v1/pride/flags?type=sapphic",
                 transgender: "https://app.ponjo.club/v1/pride/flags?type=transgender",
+                twospirit: "https://app.ponjo.club/v1/pride/flags?type=twospirit",
                 xenogender: "https://app.ponjo.club/v1/pride/flags?type=xenogender"
             }
         } else {
@@ -63,6 +81,9 @@ export default class PrideUtil {
                 case "bisexual":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Bisexual.png");
                     break;
+                case "ceterosexual":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Ceterosexual.png");
+                    break;
                 case "demiboy":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Demiboy.png");
                     break;
@@ -89,6 +110,10 @@ export default class PrideUtil {
                 case "genderqueer":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Genderqueer.png");
                     break;
+                case "heterosexual":
+                case "straight":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Heterosexual.png");
+                    break;
                 case "intersex":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Intersex.png");
                     break;
@@ -100,6 +125,12 @@ export default class PrideUtil {
                     break;
                 case "monoromantic":
                     filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Monoromantic.png");
+                    break;
+                case "multisexual":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Multisexual.png");
+                    break;
+                case "neptunic":
+                    filePath = path.join(__dirname, "../../public/assets/lgbtq/flags/Neptunic.png");
                     break;
                 case "enby":
                 case "nonbinary":
