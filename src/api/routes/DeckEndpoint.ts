@@ -21,7 +21,7 @@ export default class DeckEndpoint {
         const cards = hand.replace(/\s/g, "").split(",");
         try {
             const result = DeckUtil.evaluateHand(<string[]> cards);
-            return res.status(200).json({
+            return <Response> res.status(200).json({
                status: res.statusCode,
                hand: {
                    name: result.handName,
@@ -188,6 +188,13 @@ export default class DeckEndpoint {
                 } else if (!count) {
                     return ErrorUtil.send400Status(req, res);
                 } else {
+                    if (deck.deck.length < parseInt(count)) {
+                        return res.status(500).json({
+                            status: res.statusCode,
+                            message: "There are not that many cards left in the deck.",
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    }
                     const drawn = DeckUtil.drawCard(deck.deck, parseInt(count));
                     Deck.findOneAndUpdate({deckId: deckId}, {deck: drawn.updatedDeck, data: {shuffled: deck.data.shuffled, remainingCards: drawn.remainingCards}}, async function (error, deck) {
                         if (!deck) {
