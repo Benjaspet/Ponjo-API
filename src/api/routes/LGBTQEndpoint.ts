@@ -2,8 +2,8 @@ import {Request, Response} from "express";
 import AvatarUtil from "../util/api/AvatarUtil";
 import ErrorUtil from "../util/ErrorUtil";
 import PrideUtil from "../util/api/PrideUtil";
-import ResponseUtil from "../util/api/ResponseUtil";
 import orientations from "../data/lgbtq/Orientations";
+import APIUtil from "../util/api/APIUtil";
 
 export default class LGBTQEndpoint {
 
@@ -13,7 +13,7 @@ export default class LGBTQEndpoint {
             return res.status(200).json({
                 status: res.statusCode,
                 data: await PrideUtil.getFlag("pride", true),
-                timestamps: ResponseUtil.getTimestamps()
+                timestamps: APIUtil.getTimestamps()
             });
         } else {
             try {
@@ -35,7 +35,7 @@ export default class LGBTQEndpoint {
                         status: res.statusCode,
                         filterType: type,
                         data: filtered,
-                        timestamps: ResponseUtil.getTimestamps()
+                        timestamps: APIUtil.getTimestamps()
                     });
                 case "romantic":
                     const filtered2 = orientations[1].filter(type => type.name.toLowerCase().startsWith(query));
@@ -43,7 +43,7 @@ export default class LGBTQEndpoint {
                         status: res.statusCode,
                         filterType: type,
                         data: filtered2,
-                        timestamps: ResponseUtil.getTimestamps()
+                        timestamps: APIUtil.getTimestamps()
                     });
                 default:
                     const filtered3 = orientations[0].filter(type => type.name.toLowerCase().startsWith(query));
@@ -51,7 +51,7 @@ export default class LGBTQEndpoint {
                         status: res.statusCode,
                         filterType: type,
                         data: filtered3,
-                        timestamps: ResponseUtil.getTimestamps()
+                        timestamps: APIUtil.getTimestamps()
                     });
             }
         } catch (error) {
@@ -68,16 +68,7 @@ export default class LGBTQEndpoint {
         const flair: string = req.query.flair as string;
         const avatar: string = req.query.avatar as string;
         const format: string = req.query.format as string;
-        if (!flair || !avatar) {
-            return res.status(500).json({
-                status: res.statusCode,
-                message: "Invalid syntax.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            });
-        }
+        if (!flair || !avatar) return ErrorUtil.send400Status(req, res);
         let result;
         if (format === "base64") {
             switch (flair.toLowerCase()) {
@@ -219,10 +210,7 @@ export default class LGBTQEndpoint {
             }
             return res.status(200).json({
                 status: 200,
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                },
+                timestamps: APIUtil.getTimestamps(),
                 image: {
                     flair: flair,
                     input: avatar,

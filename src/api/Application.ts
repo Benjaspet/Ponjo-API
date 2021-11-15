@@ -2,17 +2,15 @@ import {Express, Request, Response} from "express";
 import * as express from "express";
 import * as path from "path";
 import * as bodyParser from "body-parser";
-import Endpoints from "./V1Router";
-import PremiumEndpoints from "./PremiumRouter";
-import Uploader from "./UploadRouter";
+import Router from "./Router";
 import ErrorUtil from "./util/ErrorUtil";
 
 export class Application {
 
     constructor(app: Express) {
-        app.use("/v1", Endpoints);
-        app.use("/v1", PremiumEndpoints);
-        app.use("/uploads", Uploader);
+        app.use("/v1", Router.v1);
+        app.use("/v1", Router.premium);
+        app.use("/uploads", Router.hosting);
         app.use(express.static(path.join(__dirname, "/public")));
         app.use(express.static(path.join(__dirname, "/uploads")));
         app.set("trust proxy", "8.8.8.8");

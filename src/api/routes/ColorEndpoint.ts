@@ -2,12 +2,12 @@ import {Request, Response} from "express";
 import Jimp from "jimp";
 import colors from "hex-colors-info";
 import ErrorUtil from "../util/ErrorUtil";
-import ResponseUtil from "../util/api/ResponseUtil";
+import APIUtil from "../util/api/APIUtil";
 
 export default class ColorEndpoint {
 
     /*
-     Rretrieve data on a specific hex color.
+     Retrieve data on a specific hex color.
      @method GET
      @header none
      @uri /v1/color?hex=#F8B112&format=json
@@ -31,7 +31,7 @@ export default class ColorEndpoint {
                         hueName: colorInfo.hueName,
                         match: colorInfo.match,
                         image: "https://app.ponjo.club/v1/color?hex=" + hex + "&format=png",
-                        timestamps: ResponseUtil.getTimestamps()
+                        timestamps: APIUtil.getTimestamps()
                     });
                 } catch (error) {
                     return ErrorUtil.sent500Status(req, res);

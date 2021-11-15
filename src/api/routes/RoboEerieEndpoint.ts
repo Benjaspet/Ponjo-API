@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import ErrorUtil from "../util/ErrorUtil";
 import RoboEerieUtil from "../util/RoboEerieUtil";
-import ResponseUtil from "../util/api/ResponseUtil";
+import APIUtil from "../util/api/APIUtil";
 
 export default class RoboEerieEndpoint {
 
@@ -22,7 +22,7 @@ export default class RoboEerieEndpoint {
                         res.status(200).send({
                             status: res.statusCode,
                             data: result,
-                            timestamps: ResponseUtil.getTimestamps()
+                            timestamps: APIUtil.getTimestamps()
                         });
                     });
             } else {
@@ -31,7 +31,7 @@ export default class RoboEerieEndpoint {
                         res.status(200).send({
                             status: res.statusCode,
                             data: result,
-                            timestamps: ResponseUtil.getTimestamps()
+                            timestamps: APIUtil.getTimestamps()
                         });
                     });
             }

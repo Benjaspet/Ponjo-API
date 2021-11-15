@@ -4,7 +4,6 @@ import Deck from "../models/Decks";
 import APIUtil from "../util/api/APIUtil";
 import ErrorUtil from "../util/ErrorUtil";
 import Logger from "../../Logger";
-import ResponseUtil from "../util/api/ResponseUtil";
 
 export default class DeckEndpoint {
 
@@ -18,21 +17,19 @@ export default class DeckEndpoint {
 
     public static getPokerHand(req: Request, res: Response) {
         const hand = req.query.hand as string;
+        if (!hand) return ErrorUtil.send400Status(req, res);
         const cards = hand.replace(/\s/g, "").split(",");
         try {
             const result = DeckUtil.evaluateHand(<string[]> cards);
             return res.status(200).json({
-               status: 200,
+               status: res.statusCode,
                hand: {
                    name: result.handName,
                    type: result.handType,
                    rank: result.handRank,
                    value: result.value
                },
-               timestamps: {
-                   date: new Date().toLocaleString(),
-                   unix: Math.round(+ new Date() / 1000),
-               }
+               timestamps: APIUtil.getTimestamps()
             });
         } catch (error) {
             Logger.error(error);
@@ -42,7 +39,7 @@ export default class DeckEndpoint {
 
     /*
      Create a virtual deck of cards.
-     @method GET || POST
+     @method POST
      @header Authentication: token
      @uri /v1/decks/create
      */
@@ -67,10 +64,7 @@ export default class DeckEndpoint {
                         shuffled: false,
                         remainingCards: deck.length
                     },
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
+                    timestamps: APIUtil.getTimestamps()
                 });
             }).catch(() => {
                 return res.status(400).json({
@@ -91,42 +85,31 @@ export default class DeckEndpoint {
      Get a deck of cards by ID.
      @method GET
      @header Authentication: token
-     @uri /v1/decks/get?id=b9e1-4a5-68738
+     @uri /v1/decks/find?id=b9e1-4a5-68738
      @param id: string
      */
 
     public static getDeckById(req: Request, res: Response) {
         const deckId = req.query.id as string;
-        if (!deckId) {
-            return res.status(400).json({
-                status: 400,
-                message: "Invalid parameters provided.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            });
-        }
+        if (!deckId) return ErrorUtil.send400Status(req, res);
         try {
             Deck.findOne({deckId: deckId})
                 .then(deck => {
                     if (!deck) {
                         return res.status(400).json({
-                            status: 400,
+                            status: res.statusCode,
                             message: "Could not find a deck by that ID.",
-                            timestamps: {
-                                date: new Date().toLocaleString(),
-                                unix: Math.round(+ new Date() / 1000),
-                            }
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    } else {
+                        return res.status(200).json({
+                            status: res.statusCode,
+                            deckId: deck.deckId,
+                            deck: deck.deck,
+                            data: deck.data,
+                            timestamps: APIUtil.getTimestamps()
                         });
                     }
-                    return res.status(200).json({
-                        status: res.statusCode,
-                        deckId: deck.deckId,
-                        deck: deck.deck,
-                        data: deck.data,
-                        timestamps: ResponseUtil.getTimestamps()
-                    });
             });
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);
@@ -135,7 +118,7 @@ export default class DeckEndpoint {
 
     /*
      Shuffle a deck by ID.
-     @method GET
+     @method PATCH
      @header Authentication: token
      @uri /v1/decks/shuffle?id=b9e1-4a5-68738
      @param id: string
@@ -143,55 +126,38 @@ export default class DeckEndpoint {
 
     public static async shuffleDeckById(req: Request, res: Response) {
         const deckId = req.query.id as string;
-        if (!deckId) {
-            return res.status(400).json({
-                status: 400,
-                message: "Invalid parameters provided.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+new Date() / 1000),
-                }
-            });
-        }
+        if (!deckId) return ErrorUtil.send400Status(req, res);
         try {
             Deck.findOne({deckId: deckId}, async function (error, deck) {
                 if (!deck) {
                     return res.status(400).json({
-                        status: 400,
+                        status: res.statusCode,
                         message: "Could not find a deck by that ID.",
-                        timestamps: {
-                            date: new Date().toLocaleString(),
-                            unix: Math.round(+new Date() / 1000),
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                } else {
+                    const shuffledDeck = DeckUtil.shuffleDeck(deck.deck);
+                    Deck.findOneAndUpdate({deckId: deckId}, {deck: shuffledDeck, data: {shuffled: true, remainingCards: shuffledDeck.length}}, (error, result) => {
+                        if (error) {
+                            return res.status(400).json({
+                                status: res.statusCode,
+                                message: "Could not find a deck by that ID.",
+                                timestamps: APIUtil.getTimestamps()
+                            });
+                        } else {
+                            return res.status(200).json({
+                                status: 200,
+                                deckId: deckId,
+                                deck: shuffledDeck,
+                                details: {
+                                    shuffled: result.shuffled,
+                                    remainingCards: result.remainingCards
+                                },
+                                timestamps: APIUtil.getTimestamps()
+                            });
                         }
                     });
                 }
-                const shuffledDeck = DeckUtil.shuffleDeck(deck.deck);
-                Deck.findOneAndUpdate({deckId: deckId}, {deck: shuffledDeck, data: {shuffled: true, remainingCards: shuffledDeck.length}}, (error, result) => {
-                    if (error) {
-                        return res.status(400).json({
-                            status: 400,
-                            message: "Could not find a deck by that ID.",
-                            timestamps: {
-                                date: new Date().toLocaleString(),
-                                unix: Math.round(+new Date() / 1000),
-                            }
-                        });
-                    } else {
-                        return res.status(200).json({
-                            status: 200,
-                            deckId: deckId,
-                            deck: shuffledDeck,
-                            data: {
-                                shuffled: result.shuffled,
-                                remainingCards: result.remainingCards
-                            },
-                            timestamps: {
-                                date: new Date().toLocaleString(),
-                                unix: Math.round(+ new Date() / 1000),
-                            }
-                        });
-                    }
-                });
             });
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);
@@ -210,56 +176,42 @@ export default class DeckEndpoint {
     public static async drawCards(req: Request, res: Response) {
         const deckId = req.query.id as string;
         const count = req.query.count as string;
+        if (!deckId) return ErrorUtil.send400Status(req, res);
         try {
             Deck.findOne({deckId: deckId}, async function (error, deck) {
                 if (!deck) {
                     return res.status(400).json({
-                        status: 400,
+                        status: res.statusCode,
                         message: "Invalid deck ID.",
-                        timestamps: {
-                            date: new Date().toLocaleString(),
-                            unix: Math.round(+ new Date() / 1000),
-                        }
+                        timestamps: APIUtil.getTimestamps()
                     });
                 } else if (!count) {
-                    return res.status(400).json({
-                        status: 400,
-                        message: "Invalid parameters provided.",
-                        timestamps: {
-                            date: new Date().toLocaleString(),
-                            unix: Math.round(+ new Date() / 1000),
+                    return ErrorUtil.send400Status(req, res);
+                } else {
+                    const drawn = DeckUtil.drawCard(deck.deck, parseInt(count));
+                    Deck.findOneAndUpdate({deckId: deckId}, {deck: drawn.updatedDeck, data: {shuffled: deck.data.shuffled, remainingCards: drawn.remainingCards}}, async function (error, deck) {
+                        if (!deck) {
+                            return res.status(400).json({
+                                status: res.statusCode,
+                                message: "Could not find a deck by that ID.",
+                                timestamps: APIUtil.getTimestamps()
+                            });
+                        } else {
+                            return res.status(200).json({
+                                status: res.statusCode,
+                                deckId: deckId,
+                                deck: drawn.updatedDeck,
+                                details: {
+                                    shuffled: deck.shuffled,
+                                    remainingCards: drawn.remainingCards,
+                                    drawnCards: drawn.cardsDrawn,
+                                    amountDrawn: drawn.amountDrawn
+                                },
+                                timestamps: APIUtil.getTimestamps()
+                            });
                         }
                     });
                 }
-                const drawn = DeckUtil.drawCard(deck.deck, parseInt(count));
-                Deck.findOneAndUpdate({deckId: deckId}, {deck: drawn.updatedDeck, data: {shuffled: deck.data.shuffled, remainingCards: drawn.remainingCards}}, async function (error, deck) {
-                    if (!deck) {
-                        return res.status(400).json({
-                            status: 400,
-                            message: "Could not find a deck by that ID.",
-                            timestamps: {
-                                date: new Date().toLocaleString(),
-                                unix: Math.round(+ new Date() / 1000),
-                            }
-                        });
-                    } else {
-                        return res.status(200).json({
-                            status: res.statusCode,
-                            deckId: deckId,
-                            deck: drawn.updatedDeck,
-                            details: {
-                                shuffled: deck.shuffled,
-                                remainingCards: drawn.remainingCards,
-                                drawnCards: drawn.cardsDrawn,
-                                amountDrawn: drawn.amountDrawn
-                            },
-                            timestamps: {
-                                date: new Date().toLocaleString(),
-                                unix: Math.round(+ new Date() / 1000),
-                            }
-                        });
-                    }
-                });
             });
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);
@@ -276,26 +228,14 @@ export default class DeckEndpoint {
 
     public static async resetDeck(req: Request, res: Response) {
         const deckId = req.query.id as string;
-        if (!deckId) {
-            return res.status(400).json({
-                status: 400,
-                message: "Invalid parameters provided.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            });
-        }
+        if (!deckId) return ErrorUtil.send400Status(req, res);
         try {
             Deck.findOneAndUpdate({deckId: deckId}, {deck: DeckUtil.createDeck(), data: {shuffled: false, remainingCards: 52}}, async function (error, deck) {
                 if (!deck) {
                     return res.status(400).json({
-                        status: 400,
+                        status: res.statusCode,
                         message: "Could not find a deck by that ID.",
-                        timestamps: {
-                            date: new Date().toLocaleString(),
-                            unix: Math.round(+ new Date() / 1000),
-                        }
+                        timestamps: APIUtil.getTimestamps()
                     });
                 } else {
                     return res.status(200).json({
@@ -306,10 +246,7 @@ export default class DeckEndpoint {
                             shuffled: deck.data.shuffled,
                             remainingCards: deck.data.remainingCards
                         },
-                        timestamps: {
-                            date: new Date().toLocaleString(),
-                            unix: Math.round(+ new Date() / 1000),
-                        }
+                        timestamps: APIUtil.getTimestamps()
                     });
                 }
             });

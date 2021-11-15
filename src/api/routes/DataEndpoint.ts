@@ -1,16 +1,16 @@
-import {NextFunction, Request, Response} from "express";
+import {Request, Response} from "express";
 import ErrorUtil from "../util/ErrorUtil";
 import * as weather from "weather-js";
 import Captcha from "@haileybot/captcha-generator";
 import CovidDataUtil from "../util/data/CovidDataUtil";
-import ResponseUtil from "../util/api/ResponseUtil";
 import Logger from "../../Logger";
 import fetch from "node-fetch";
+import APIUtil from "../util/api/APIUtil";
 
 export default class DataEndpoint {
 
     /*
-     The endpoint listener to get current weather data & forecasts.
+     Get current weather data & forecasts.
      @method GET
      @header Authentication: token
      @uri /v1/weather?location=Atlanta
@@ -19,26 +19,20 @@ export default class DataEndpoint {
      */
 
     public static async sendWeatherResponse(req: Request, res: Response) {
+        const location = req.query.location || req.params.location as string;
         try {
-            const location = req.query.location || req.params.location as string;
-            if (!location) {
-                return ErrorUtil.sent500Status(req, res);
-            } else {
-                weather.find({search: location, degreeType: "F"}, (error, result) => {
-                    if (error) {
-                        return ErrorUtil.sent500Status(req, res);
-                    } else {
-                        return res.status(200).json({
-                            status: 200,
-                            data: result,
-                            timestamps: {
-                                date: new Date().toLocaleString(),
-                                unix: Math.round(+ new Date() / 1000),
-                            }
-                        });
-                    }
-                });
-            }
+            if (!location) return ErrorUtil.sent500Status(req, res);
+            weather.find({search: location, degreeType: "F"}, (error, result) => {
+                if (error) {
+                    return ErrorUtil.sent500Status(req, res);
+                } else {
+                    return res.status(200).json({
+                        status: res.statusCode,
+                        data: result,
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                }
+            });
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);
         }
@@ -48,7 +42,7 @@ export default class DataEndpoint {
      Obtain a response from a chatbot.
      @method GET
      @header Authentication: token
-     @uri /v1/chatbot?message=Hello&name=ChatBot
+     @uri /v1/chatbot?message=hello&name=ChatBot
      @param message: string
      @param name?: string
      */
@@ -67,20 +61,14 @@ export default class DataEndpoint {
                             name: botName,
                             response: data.message
                         },
-                        timestamps: {
-                            date: new Date().toLocaleString(),
-                            unix: Math.round(+ new Date() / 1000),
-                        }
+                        timestamps: APIUtil.getTimestamps()
                     });
                 }).catch(error => {
                     Logger.error(error);
                     return res.status(400).json({
-                        status: 400,
+                        status: res.statusCode,
                         message: "The chatbot endpoint is experiencing issues at this time.",
-                        timestamps: {
-                            date: new Date().toLocaleString(),
-                            unix: Math.round(+ new Date() / 1000),
-                        }
+                        timestamps: APIUtil.getTimestamps()
                     });
                 });
         } catch (error) {
@@ -100,14 +88,12 @@ export default class DataEndpoint {
         try {
             const captcha = new Captcha();
             return res.status(200).json({
-                data: {
+                status: res.statusCode,
+                captcha: {
                     value: captcha.value,
                     imgData: captcha.dataURL
                 },
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
+                timestamps: APIUtil.getTimestamps()
             });
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);
@@ -126,12 +112,13 @@ export default class DataEndpoint {
             .then(result => {
                 return res.status(200).json({
                     status: res.statusCode,
-                    data: result,
-                    timestamps: ResponseUtil.getTimestamps()
+                    stats: result,
+                    timestamps: APIUtil.getTimestamps()
                 });
             })
             .catch(error => {
-               return ErrorUtil.sent500Status(req, res);
+                Logger.error(error.message);
+                return ErrorUtil.sent500Status(req, res);
             });
     }
 
@@ -146,21 +133,19 @@ export default class DataEndpoint {
 
     public static async getCovidStatsByCountry(req: Request, res: Response) {
         const country = req.query.country || req.params.country as string;
-        if (!country) {
-            return ErrorUtil.send400Status(req, res);
-        } else {
-            await CovidDataUtil.getCovidDataByCountry(<string> country)
-                .then(result => {
-                    return res.status(200).json({
-                        status: res.statusCode,
-                        data: result,
-                        timestamps: ResponseUtil.getTimestamps()
-                    });
-                })
-                .catch(error => {
-                   return ErrorUtil.sent500Status(req, res);
+        if (!country) return ErrorUtil.send400Status(req, res);
+        await CovidDataUtil.getCovidDataByCountry(<string> country)
+            .then(result => {
+                return res.status(200).json({
+                    status: res.statusCode,
+                    data: result,
+                    timestamps: APIUtil.getTimestamps()
                 });
-        }
+            })
+            .catch(error => {
+                Logger.error(error.message);
+                return ErrorUtil.sent500Status(req, res);
+            });
     }
 
     /*
@@ -170,17 +155,15 @@ export default class DataEndpoint {
      @uri /v1/health
      */
 
-    public static getApiHealth(req: Request, res: Response, next: NextFunction) {
+    public static getApiHealth(req: Request, res: Response) {
         try {
             return res.status(200).json({
                 status: res.statusCode,
                 message: "API health check succeeded.",
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
+                timestamps: APIUtil.getTimestamps()
             });
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }

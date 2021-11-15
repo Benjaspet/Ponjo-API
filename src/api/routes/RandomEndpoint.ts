@@ -22,19 +22,13 @@ export default class RandomEndpoint {
             return res.status(200).json({
                 status: 200,
                 data: RandomUtil.getRandomTimezone(parseInt(<string>amount) || 1),
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
+                timestamps: APIUtil.getTimestamps()
             });
         } else {
             return res.status(200).json({
                 status: 200,
                 data: RandomUtil.getRandomTimezone(1),
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000)
-                }
+                timestamps: APIUtil.getTimestamps()
             });
         }
     }
@@ -54,19 +48,13 @@ export default class RandomEndpoint {
             return res.status(200).json({
                 status: 200,
                 data: RandomUtil.getRandomUserProfile(parseInt(<string>amount) || 1),
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
+                timestamps: APIUtil.getTimestamps()
             });
         } else {
             return res.status(200).json({
                 status: 200,
                 data: RandomUtil.getRandomUserProfile(1),
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
+                timestamps: APIUtil.getTimestamps()
             });
         }
     }
@@ -87,20 +75,14 @@ export default class RandomEndpoint {
                 return res.status(400).json({
                     status: 200,
                     affirmation: affirmations[Math.floor(Math.random() * affirmations.length + 1)],
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
+                    timestamps: APIUtil.getTimestamps()
                 });
             } else {
                 if (parseInt(count) > 100) {
                     return res.status(500).json({
                         status: res.statusCode,
                         message: "Count too high; must be from 1-100.",
-                        timestamps: {
-                            date: new Date().toLocaleString(),
-                            unix: Math.round(+ new Date() / 1000),
-                        }
+                        timestamps: APIUtil.getTimestamps()
                     });
                 }
                 if (count) {
@@ -109,10 +91,7 @@ export default class RandomEndpoint {
                     return res.status(400).json({
                         status: 200,
                         affirmations: items,
-                        timestamps: {
-                            date: new Date().toLocaleString(),
-                            unix: Math.round(+ new Date() / 1000),
-                        }
+                        timestamps: APIUtil.getTimestamps()
                     });
                 }
             }
@@ -137,19 +116,13 @@ export default class RandomEndpoint {
                 return res.status(200).json({
                     status: 200,
                     data: new Chance().month({raw: true}),
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
+                    timestamps: APIUtil.getTimestamps()
                 });
             } else {
                 return res.status(200).json({
                     status: 200,
                     data: new Chance().month({raw: false}),
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
+                    timestamps: APIUtil.getTimestamps()
                 });
             }
         } catch (error) {

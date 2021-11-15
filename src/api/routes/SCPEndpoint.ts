@@ -5,8 +5,8 @@ import branches from "../data/foundation/Branches";
 import personnel from "../data/foundation/Personnel";
 import SCPTaskForceUtil from "../util/scp/SCPTaskForceUtil";
 import sites from "../data/foundation/Sites";
-import ResponseUtil from "../util/api/ResponseUtil";
 import SCPFoundationDataUtil from "../util/scp/SCPFoundationDataUtil";
+import APIUtil from "../util/api/APIUtil";
 
 export default class SCPEndpoint {
 
@@ -25,10 +25,7 @@ export default class SCPEndpoint {
                 return res.status(500).json({
                     status: res.statusCode,
                     message: "Invalid syntax.",
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
+                    timestamps: APIUtil.getTimestamps()
                 });
             }
             SCPScraper.getScpData(item)
@@ -37,19 +34,13 @@ export default class SCPEndpoint {
                         return res.status(400).json({
                             status: res.statusCode,
                             message: "That SCP could not be found.",
-                            timestamps: {
-                                date: new Date().toLocaleString(),
-                                unix: Math.round(+ new Date() / 1000),
-                            }
+                            timestamps: APIUtil.getTimestamps()
                         });
                     } else {
                         return res.status(400).json({
                             status: res.statusCode,
                             data: result,
-                            timestamps: {
-                                date: new Date().toLocaleString(),
-                                unix: Math.round(+ new Date() / 1000),
-                            }
+                            timestamps: APIUtil.getTimestamps()
                         });
                     }
                 });
@@ -70,10 +61,7 @@ export default class SCPEndpoint {
             return res.status(200).json({
                 status: 200,
                 branches: branches,
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
+                timestamps: APIUtil.getTimestamps()
             });
         } catch (error) {
             ErrorUtil.sent500Status(req, res);
@@ -92,12 +80,9 @@ export default class SCPEndpoint {
             await SCPTaskForceUtil.getTaskForceData()
                 .then(result => {
                     return res.status(200).json({
-                        status: 200,
+                        status: res.statusCode,
                         data: result.data,
-                        timestamps: {
-                            date: new Date().toLocaleString(),
-                            unix: Math.round(+ new Date() / 1000),
-                        }
+                        timestamps: APIUtil.getTimestamps()
                     });
                 });
         } catch (error) {
@@ -118,7 +103,7 @@ export default class SCPEndpoint {
                 status: res.statusCode,
                 sites: SCPFoundationDataUtil.getAllSiteData(),
                 categories: SCPFoundationDataUtil.getSiteCategories(),
-                timestamps: ResponseUtil.getTimestamps()
+                timestamps: APIUtil.getTimestamps()
             });
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);
@@ -137,7 +122,7 @@ export default class SCPEndpoint {
             return res.status(200).json({
                 status: res.statusCode,
                 personnel: SCPFoundationDataUtil.getScpPersonnel(),
-                timestamps: ResponseUtil.getTimestamps()
+                timestamps: APIUtil.getTimestamps()
             });
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);
@@ -156,7 +141,7 @@ export default class SCPEndpoint {
             return res.status(200).json({
                 status: res.statusCode,
                 areas: SCPFoundationDataUtil.getAllAreaData(),
-                timestamps: ResponseUtil.getTimestamps()
+                timestamps: APIUtil.getTimestamps()
             });
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);
@@ -179,7 +164,7 @@ export default class SCPEndpoint {
                 areas: SCPFoundationDataUtil.getAllAreaData(),
                 sites: SCPFoundationDataUtil.getAllSiteData(),
                 siteCategories: SCPFoundationDataUtil.getSiteCategories(),
-                timestamps: ResponseUtil.getTimestamps()
+                timestamps: APIUtil.getTimestamps()
             });
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);

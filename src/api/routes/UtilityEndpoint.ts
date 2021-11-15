@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import MathUtil from "../util/MathUtil";
-import ResponseUtil from "../util/api/ResponseUtil";
 import ErrorUtil from "../util/ErrorUtil";
+import APIUtil from "../util/api/APIUtil";
 
 export default class UtilityEndpoint {
 
@@ -23,7 +23,7 @@ export default class UtilityEndpoint {
                     number: parseInt(number),
                     isPrime: MathUtil.isPrime(parseInt(number))
                 },
-                timestamps: ResponseUtil.getTimestamps()
+                timestamps: APIUtil.getTimestamps()
             });
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);

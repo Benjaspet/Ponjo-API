@@ -4,6 +4,13 @@ export default class APIUtil {
         return new Date().toLocaleTimeString();
     }
 
+    public static getTimestamps(): object {
+        return {
+            date: new Date().toLocaleString(),
+            unix: Math.round(+ new Date() / 1000)
+        }
+    }
+
     public static generateUniqueId(): string {
         return "yxxx-4xx-xxxxxx".replace(/[xy]/g, function(c) {
             const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);

@@ -1,6 +1,8 @@
 import {Request, Response} from "express";
 import AuthorizationUtil from "../util/api/AuthorizationUtil";
 import ErrorUtil from "../util/ErrorUtil";
+import Logger from "../../Logger";
+import APIUtil from "../util/api/APIUtil";
 
 export default class AuthEndpoint {
 
@@ -23,10 +25,11 @@ export default class AuthEndpoint {
                     return res.status(200).json({
                         status: 200,
                         data: result.data,
-                        timestamps: result.timestamps
+                        timestamps: APIUtil.getTimestamps()
                     });
                 });
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -44,13 +47,11 @@ export default class AuthEndpoint {
                 return res.status(200).json({
                     status: 200,
                     keys: result,
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
+                    timestamps: APIUtil.getTimestamps()
                 });
             })
             .catch(error => {
+                Logger.error(error.message);
                 return ErrorUtil.sent500Status(req, res);
             });
     }
