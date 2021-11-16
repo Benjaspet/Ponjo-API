@@ -25,8 +25,6 @@
 - The API uses an easy-to-parse JSON response format to make it extremely simple for you to handle responses, with detailed documentation.
 - Our support team is always available to be contacted [here](https://ponjo.club/discord).
 
-### Base Endpoints
-
 ### Credits
 
 Created & developed by: Ben Petrillo (Eerie6560)
