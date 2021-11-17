@@ -14,9 +14,10 @@ export default class GameQueryEndpoint {
      @uri /v1/query/mcjava?host=lunar.gg&port=25565
      @param host: string
      @param port?: int
+     @return Promise<Express.Response>
      */
 
-    public static async queryJavaServer(req: Request, res: Response) {
+    public static async queryJavaServer(req: Request, res: Response): Promise<Response> {
         const host = req.query.host as string;
         const port = req.query.port as string;
         if (!host) return ErrorUtil.send400Status(req, res);
@@ -64,9 +65,10 @@ export default class GameQueryEndpoint {
      @uri /v1/query/mcbe?host=vasar.land&port=19132
      @param host: string
      @param port?: int
+     @return Promise<Express.Response>
      */
 
-    public static queryBedrockServer(req: Request, res: Response) {
+    public static async queryBedrockServer(req: Request, res: Response): Promise<Response> {
         const host = req.query.host as string;
         const port = req.query.port as string;
         if (!host) return ErrorUtil.send400Status(req, res);
@@ -108,9 +110,10 @@ export default class GameQueryEndpoint {
      @uri /v1/query/fivem?host=127.0.0.1&port=30210
      @param host: string
      @param port: int
+     @return Promise<Express.Response>
      */
 
-    public static async queryFivemServer(req: Request, res: Response) {
+    public static async queryFivemServer(req: Request, res: Response): Promise<Response> {
         const host: string = req.query.host as string;
         const port: string = req.query.port as string;
         if (!host || !port) return ErrorUtil.send400Status(req, res);
@@ -152,9 +155,10 @@ export default class GameQueryEndpoint {
      @uri /v1/query/fivem?host=127.0.0.1&port=30210
      @param host: string
      @param port: int
+     @return Promise<Express.Response>
      */
 
-    public static async queryArkServer(req: Request, res: Response) {
+    public static async queryArkServer(req: Request, res: Response): Promise<Response> {
         const host: string = req.query.host as string;
         const port: string = req.query.port as string;
         if (!host || !port) return ErrorUtil.send400Status(req, res);

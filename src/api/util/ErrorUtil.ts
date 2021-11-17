@@ -57,7 +57,7 @@ export default class ErrorUtil {
         });
     }
 
-    public static sent500Status(req: Request, res: Response) {
+    public static sent500Status(req: Request, res: Response): Response {
         return res.status(500).json({
             status: res.statusCode,
             message: "An error occurred. Please contact an API developer.",

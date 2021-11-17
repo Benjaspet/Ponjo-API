@@ -3,7 +3,13 @@ import {compareHashes} from "jimp";
 
 export default class RandomUtil {
 
-    public static getRandomMonth(raw: boolean) {
+    /*
+     Get a random month of the year.
+     @param raw: boolean
+     @return object | string
+     */
+
+    public static getRandomMonth(raw: boolean): object|string {
         if (raw) {
             return new Chance().month({raw: true});
         } else {
@@ -11,7 +17,13 @@ export default class RandomUtil {
         }
     }
 
-    public static getRandomParagraph(sentences?: number) {
+    /*
+     Get a random paragraph of text.
+     @param sentences?: number
+     @return string
+     */
+
+    public static getRandomParagraph(sentences?: number): string {
         if (sentences) {
             return new Chance().paragraph({sentences: sentences})
         } else {
@@ -86,7 +98,13 @@ export default class RandomUtil {
         return profiles;
     }
 
-    public static getRandomTimezone(amount: number) {
+    /*
+     Get a random number of timezones.
+     @param amount: number
+     @return object
+     */
+
+    public static getRandomTimezone(amount: number): object {
         let timezones: object[] = [];
         for (let i = 0; i < amount; i++) {
             timezones.push({
