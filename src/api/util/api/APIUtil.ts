@@ -1,5 +1,10 @@
 export default class APIUtil {
 
+    /*
+     Get the current timestamp as a Locale Time String.
+     @return string
+     */
+
     public static getTimestamp(): string {
         return new Date().toLocaleTimeString();
     }
@@ -11,6 +16,11 @@ export default class APIUtil {
         }
     }
 
+    /*
+     Generate a unique ID.
+     @return string
+     */
+
     public static generateUniqueId(): string {
         return "yxxx-4xx-xxxxxx".replace(/[xy]/g, function(c) {
             const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -18,11 +28,24 @@ export default class APIUtil {
         });
     }
 
+    /*
+     Init a promise-based delay.
+     @param ms: number
+     @return Promise<any>
+     */
+
     public static async sleep(ms): Promise<any> {
         new Promise(res => setTimeout(res, ms));
     }
 
-    public static getMultipleElementsFromArray(array: string[], amount: number) {
+    /*
+     Obtain multiple elements from the provided array.
+     @param array: string[]
+     @param amount: number
+     @return string[]
+     */
+
+    public static getMultipleElementsFromArray(array: string[], amount: number): string[] {
         return array.slice(0, amount)
     }
 

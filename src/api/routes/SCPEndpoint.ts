@@ -1,10 +1,8 @@
 import {Request, Response} from "express";
+import branches from "../data/foundation/Branches";
 import SCPScraper from "../util/scp/SCPScraper";
 import ErrorUtil from "../util/ErrorUtil";
-import branches from "../data/foundation/Branches";
-import personnel from "../data/foundation/Personnel";
 import SCPTaskForceUtil from "../util/scp/SCPTaskForceUtil";
-import sites from "../data/foundation/Sites";
 import SCPFoundationDataUtil from "../util/scp/SCPFoundationDataUtil";
 import APIUtil from "../util/api/APIUtil";
 
@@ -16,9 +14,10 @@ export default class SCPEndpoint {
      @header Authentication: token
      @uri /v1/scp?item=005
      @param item: string | int
+     @return Promise<Express.Response>
      */
 
-    public static async getScpData(req: Request, res: Response) {
+    public static async getScpData(req: Request, res: Response): Promise<Response> {
         const item = req.query.item as string;
         try {
             if (!item) {
@@ -54,9 +53,10 @@ export default class SCPEndpoint {
      @method GET
      @header Authentication: token
      @uri /v1/scp/branches
+     @return Promise<Express.Response>
      */
 
-    public static async getFoundationBranches(req: Request, res: Response) {
+    public static async getFoundationBranches(req: Request, res: Response): Promise<Response> {
         try {
             return res.status(200).json({
                 status: 200,
@@ -73,9 +73,10 @@ export default class SCPEndpoint {
      @method GET
      @header Authentication: token
      @uri /v1/scp/taskforces
+     @return Promise<any>
      */
 
-    public static async getFoundationTaskForce(req: Request, res: Response) {
+    public static async getFoundationTaskForce(req: Request, res: Response): Promise<any> {
         try {
             await SCPTaskForceUtil.getTaskForceData()
                 .then(result => {
@@ -95,9 +96,10 @@ export default class SCPEndpoint {
      @method GET
      @header Authentication: token
      @uri /v1/scp/sites
+     @return Promise<Express.Response>
      */
 
-    public static async getFoundationSites(req: Request, res: Response) {
+    public static async getFoundationSites(req: Request, res: Response): Promise<Response> {
         try {
             return res.status(200).json({
                 status: res.statusCode,

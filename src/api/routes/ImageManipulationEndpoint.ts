@@ -10,9 +10,10 @@ export default class ImageManipulationEndpoint {
      @header none
      @uri /v1/img/gay?image=<image-url>
      @param image: <uri-encoded> string
+     @return Promise<Express.Response|void>
      */
 
-    public static async sendGayImage(req: Request, res: Response) {
+    public static async sendGayImage(req: Request, res: Response): Promise<Response|void> {
         const image = req.query.image as string;
         if (!image) return ErrorUtil.sent500Status(req, res);
         try {
@@ -44,9 +45,10 @@ export default class ImageManipulationEndpoint {
      @header none
      @uri /v1/img/jail?image=<image-url>
      @param image: <uri-encoded> string
+     @return Promise<Express.Response|void>
      */
 
-    public static async sendJailedImage(req: Request, res: Response) {
+    public static async sendJailedImage(req: Request, res: Response): Promise<Response|void> {
         const image = req.query.image as string;
         if (!image) return ErrorUtil.sent500Status(req, res);
         try {

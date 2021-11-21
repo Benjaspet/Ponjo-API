@@ -21,7 +21,6 @@ import AuthorizationUtil from "../util/api/AuthorizationUtil";
 import ErrorUtil from "../util/ErrorUtil";
 import Logger from "../../Logger";
 import APIUtil from "../util/api/APIUtil";
-import * as Mongoose from "mongoose";
 
 export default class AuthEndpoint {
 

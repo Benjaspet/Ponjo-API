@@ -1,5 +1,7 @@
 import {v4 as uuidv4} from "uuid";
 import Keys from "../../models/Keys";
+import APIUtil from "./APIUtil";
+import {NextFunction, Request, Response} from "express";
 
 export default class AuthorizationUtil {
 
@@ -63,5 +65,18 @@ export default class AuthorizationUtil {
                     .catch(error => {});
             })
             .catch(error => {});
+    }
+
+    public static async checkKeyValidity(req: Request, res: Response, next: NextFunction) {
+        const key = req.headers.authorization as string;
+        if (await AuthorizationUtil.isValidApiKey(key) == false) {
+            return res.status(403).json({
+                status: res.statusCode,
+                message: "Invalid API key provided.",
+                timestamps: APIUtil.getTimestamps()
+            });
+        }
+        await AuthorizationUtil.addApiKeyUse(key, 1);
+        next();
     }
 }

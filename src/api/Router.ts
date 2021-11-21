@@ -26,17 +26,13 @@ import ImageManipulationEndpoint from "./routes/ImageManipulationEndpoint";
 import UtilityEndpoint from "./routes/UtilityEndpoint";
 import {NextFunction, Request, Response} from "express";
 import AuthorizationUtil from "./util/api/AuthorizationUtil";
-import APIUtil from "./util/api/APIUtil";
 import GameQueryEndpoint from "./routes/GameQueryEndpoint";
 import DeckEndpoint from "./routes/DeckEndpoint";
 import SCPEndpoint from "./routes/SCPEndpoint";
 import RoboEerieEndpoint from "./routes/RoboEerieEndpoint";
 import AuthEndpoint from "./routes/AuthEndpoint";
 import multer from "multer";
-import path from "path";
-import Image from "./models/Images";
-import UploaderUtil from "./util/UploaderUtil";
-import Images from "./models/Images";
+import HostingUtil from "./util/HostingUtil";
 
 const router = express.Router();
 const premiumRouter = express.Router();
@@ -46,16 +42,7 @@ router.use(limiter.rateLimiter);
 premiumRouter.use(limiter.rateLimiter);
 
 premiumRouter.use(async (req: Request, res: Response, next: NextFunction) => {
-    const key = req.headers.authorization as string;
-    if (await AuthorizationUtil.isValidApiKey(key) == false) {
-        return res.status(403).json({
-            status: res.statusCode,
-            message: "Invalid API key provided.",
-            timestamps: APIUtil.getTimestamps()
-        });
-    }
-    await AuthorizationUtil.addApiKeyUse(key, 1);
-    next();
+    await AuthorizationUtil.checkKeyValidity(req, res, next);
 });
 
 router.get("/health", DataEndpoint.getApiHealth);
@@ -121,59 +108,18 @@ premiumRouter.get("/random/timezone/:count", RandomEndpoint.getRandomTimezone);
 premiumRouter.post("/auth/keys/create", AuthEndpoint.createKey);
 premiumRouter.get("/auth/keys/list", AuthEndpoint.getAllKeys);
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, path.join(__dirname + "/uploads"));
-    },
-    filename: (req, file, cb) => {
-        const ext = path.extname(file.originalname);
-        const id = APIUtil.generateUniqueId();
-        const filePath = `/${id}${ext}`;
-        Image.create({filePath: filePath, imageId: id})
-            .then(() => {
-                cb(null, filePath);
-                UploaderUtil.imageData[0] = filePath;
-                UploaderUtil.imageData[1] = id;
-            });
-    }
-});
+const storage = multer.diskStorage(HostingUtil.getDiskStorageOptions());
 
-const upload = multer({storage});
-
-uploadRouter.post("/post", upload.array("avatar"), (req: Request, res: Response) => {
-    return res.status(200).json({
-        status: 200,
-        data: {
-            filePath: UploaderUtil.imageData[0],
-            imageId: UploaderUtil.imageData[1]
-        }
-    });
+uploadRouter.post("/post", multer({storage}).array("avatar"), (req: Request, res: Response) => {
+    return HostingUtil.sendImagePostResponse(req, res);
 });
 
 uploadRouter.get("/list", (req: Request, res: Response) => {
-    Image.find()
-        .then(images => {
-            return res.status(200).json({images});
-        });
+    return HostingUtil.sendArrayOfAllImages(req, res).then(() => {});
 });
 
-uploadRouter.get("/:image", (req: Request, res: Response) => {
-    Images.find().then(images => {
-        if (UploaderUtil.imageExists(req.params.image, images)) {
-            const imagePath = UploaderUtil.getImageData(req.params.image, images).filePath;
-            const imageId = UploaderUtil.getImageData(req.params.image, images).imageId;
-            UploaderUtil.htmlData[0] = "../" + imagePath;
-            UploaderUtil.htmlData[1] = imageId;
-            res.set("Content-Type", "text/html")
-            return UploaderUtil.sendEmbeddedResponse(imagePath, imageId, req, res);
-        } else {
-            return res.status(404).json({
-                status: res.statusCode,
-                message: "An image with that ID does not exist.",
-                timestamps: APIUtil.getTimestamps()
-            });
-        }
-    });
+uploadRouter.get("/:image", async (req: Request, res: Response) => {
+    await HostingUtil.getImage(req, res);
 });
 
 export = {
