@@ -39,7 +39,12 @@
                     <div class="hero-copy">
                         <h1 class="hero-title mt-0">Ponjo API</h1>
                         <p>
-                            A revolutionary API serving all of your developer utility needs. Countless endpoints, quick response times, and JSON responses. Integrating utility services into your application has never been easier.
+                            A revolutionary API serving all of your developer utility needs. Countless endpoints, quick
+                            response times, and JSON responses. Integrating utility services into your application has
+                            never been easier.
+                        </p>
+                        <p>
+                            <strong><%= requests.total %></strong> total requests and counting.
                         </p>
                         <div class="hero-cta">
                             <a class="button button-primary" href="https://docs.ponjo.club">DOCUMENTATION</a>
@@ -73,7 +78,7 @@
                                 <div class="feature-icon">
                                     <img src="images/Feature-1.svg" alt="">
                                 </div>
-                                <h4 class="feature-title mt-24">Countless Endpoints</h4>
+                                <h4 class="feature-title mt-24">Over 40 Endpoints</h4>
                                 <p class="text-sm mb-0">The Ponjo API has numerous utility endpoints to assist you in creating a flexible, responsive, and productive application.</p>
                             </div>
                         </div>
@@ -98,6 +103,19 @@
                     </div>
                 </div>
             </div>
+            <section class="section-paragraph text-center cta mb-0">
+                <div class="container section-inner">
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">Statistics</h4><br>
+                    <p class="text-sm mb-0 text-center">
+                        <strong><%= requests.total %></strong> ─ total requests. <br>
+                        <strong><%= requests.gets %></strong> ─ GET requests. <br>
+                        <strong><%= requests.posts %></strong> ─ POST requests. <br>
+                        <strong><%= keys.length %></strong> ─ API keys generated. <br>
+                        <strong>46</strong> ─ total endpoints. <br>
+                        <strong><%= new Date("August 24, 2021 18:30:00").toLocaleString() %></strong> ─ first API deployment.
+                    </p>
+                </div>
+            </section>
             <section class="section-paragraph text-center cta mb-0">
                 <div class="container section-inner">
                     <h4 class="mt-0 text-center" style="font-size: 30px;">Ponjo Image Hosting</h4><br>

@@ -17,7 +17,6 @@
  */
 
 import Chance from "chance";
-import {compareHashes} from "jimp";
 
 export default class RandomUtil {
 
@@ -48,6 +47,12 @@ export default class RandomUtil {
             return new Chance().paragraph();
         }
     }
+
+    /*
+     Get a random user profile.
+     @param amount?: number
+     @return object[]
+     */
 
     public static getRandomUserProfile(amount?: number): object[] {
         let profiles: object[] = [];

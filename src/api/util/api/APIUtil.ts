@@ -16,6 +16,8 @@
  * credit is given to the original author(s).
  */
 
+import Requests from "../../models/Requests";
+
 export default class APIUtil {
 
     /*
@@ -65,6 +67,28 @@ export default class APIUtil {
 
     public static getMultipleElementsFromArray(array: string[], amount: number): string[] {
         return array.slice(0, amount)
+    }
+
+    /*
+     Get the total amount of API requests.
+     @return Promise<object>
+     */
+
+    public static async getTotalApiRequests(): Promise<object> {
+        try {
+            const requests = await Requests.findOne({});
+            return {
+                total: requests.total,
+                gets: requests.gets,
+                posts: requests.posts
+            };
+        } catch (error) {
+            return {
+                total: 0,
+                gets: 0,
+                posts: 0
+            };
+        }
     }
 
     public static shuffleArray(array) {
