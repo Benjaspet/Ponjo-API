@@ -16,20 +16,22 @@
  * credit is given to the original author(s).
  */
 
-import {Schema} from "mongoose";
-import DatabaseConnection from "../database/DatabaseConnection";
+import {AwesomeQR} from "awesome-qr";
 
-const KeySchema = new Schema(
-    {
-        key: String,
-        user: String,
-        requests: Number
-    },
-    {
-        timestamps: true,
-        versionKey: false
+export default class QRCodeUtil {
+
+    public static async generateQRCode(text: string, size: number, backgroundImage?: string) {
+        if (!backgroundImage) {
+            return await new AwesomeQR({
+                text: text,
+                size: size
+            }).draw();
+        } else {
+            return await new AwesomeQR({
+                text: text,
+                size: size,
+                backgroundImage: backgroundImage
+            }).draw();
+        }
     }
-);
-
-const Key = new DatabaseConnection().ponjoDatabase.model("keys", KeySchema);
-export default Key;
+}

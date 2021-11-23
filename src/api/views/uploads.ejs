@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <title>Ponjo API | Endpoints</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Ponjo API | Endpoints">
+    <meta property="og:site_name" content="app.ponjo.club/endpoints">
+    <meta property="og:description" content="Here you can find all endpoints and request routes for the Ponjo API. With over 35 endpoints, you'll be able to make the most out of your development project.">
+    <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
+    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
+    <meta name="theme-color" content="#ad4fe8">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="icon" href="images/Crescent-Logo.png" type="img/svg">
+    <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+</head>
+<body class="is-boxed has-animations">
+<div class="body-wrap">
+    <h2 class="site-header text-center">Ponjo Image Hosting</h2>
+    <main>
+        <section class="section-paragraph text-center cta mb-0">
+            <div class="container">
+                <p class="text-sm mb-0 text-center">
+                    Here you can view some images that were recently uploaded to our hosting service. Easily upload
+                    any image to our hosting services and share it with your friends on a variety of supported
+                    platforms, like Discord, WhatsApp, and Twitter, for free. We provide custom embed formatting,
+                    allowing users to customize their embed preview when displaying their images. You can view some
+                    recently uploaded images at the bottom portion of this page.
+                </p>
+            </div>
+            <section class="section-paragraph text-center cta mb-0">
+                <div class="container section-inner">
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">Hosting <%= images.length %> Images, And Counting</h4><br>
+                    <p class="text-sm mb-0 text-center">
+                        We are dedicated to providing a secure, simple, and functional interface to give users the ability
+                        to easily share their content to their friends, family, and peers, without any hassle. With
+                        Ponjo Hosting, you'll be able to share your images with style. We provide unique
+                        customization options, including but not limited to custom embed coloring, custom embed
+                        descriptions, and per-image custom IDs.
+                    </p>
+                    <p class="text-sm mt-16 mb-64 text-center">
+                        <a class="ponjo-url" href="https://app.ponjo.club/hosting">Start uploading now!</a>
+                    </p>
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">Functional API</h4><br>
+                    <p class="text-sm mb-0 text-center">
+                        With a premium API key, you'll be able to easily integrate our image hosting service
+                        within your own project. With thorough API documentation and easy-to-handle JSON-based
+                        responses, our API permits developers to explore the true capacities of our service. For more
+                        information on obtaining an API key and to view documentation,
+                        <a class="ponjo-url" href="https://docs.ponjo.club">click here</a>.
+                    </p>
+                </div>
+            </section>
+        </section>
+        <section class="features section">
+            <div class="container">
+                <div class="features-inner section-inner has-bottom-divider">
+                    <div class="features-wrap">
+                        <% const list = images.slice(Math.max(images.length - 6, 1)); %>
+                        <% list.forEach(image => { %>
+                            <div class="feature text-center is-revealing">
+                                <div class="feature-inner">
+                                    <div class="feature-icon">
+                                        <img src="images/Feature-2.svg" alt="">
+                                    </div>
+                                    <h4 class="feature-title mt-24"><%= image.imageId %></h4>
+                                    <p class="text-sm mb-0">
+                                        UUID: <%= image.imageId %> <br>
+                                        Raw: <a class="ponjo-url" href="https://app.ponjo.club/uploads<%= image.filePath %>"><%= image.filePath %></a> <br>
+                                        Embed: <a class="ponjo-url" href="https://app.ponjo.club/uploads/<%= image.imageId %>"><%= image.imageId %></a> <br>
+                                        Uploaded: <%= image.createdAt.toLocaleDateString() %>
+                                    </p>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="site-footer-inner">
+                <div class="brand footer-brand">
+                    <a href="">
+                        <img src="images/Crescent-Logo.png" alt="" width="40" height="40">
+                    </a>
+                </div>
+                <ul class="footer-links list-reset">
+                    <li>
+                        <a href="https://crescentmoon.app/getting-started">Guide</a>
+                    </li>
+                    <li>
+                        <a href="https://crescentmoon.app/endpoints">Documentation</a>
+                    </li>
+                    <li>
+                        <a href="https://crescentmoon.app/faq">FAQs</a>
+                    </li>
+                    <li>
+                        <a href="https://ponjo.club/discord">Support</a>
+                    </li>
+                </ul>
+                <ul class="footer-social-links list-reset">
+                    <li>
+                        <a href="https://ponjo.club/discord">
+                            <span class="screen-reader-text">Discord</span>
+                            <i class="fab fa-discord" style="color: #0270D7; font-size: 18px"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/PonjoDev">
+                            <span class="screen-reader-text">Twitter</span>
+                            <i class="fab fa-twitter" style="color: #0270D7; font-size: 18px"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://crescentmoon.app/endpoints">
+                            <span class="screen-reader-text">Documentation</span>
+                            <i class="fas fa-bookmark" style="color: #0270D7; font-size: 18px"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:eerie@ponjo.club">
+                            <span class="screen-reader-text">Contact</span>
+                            <i class="fas fa-paper-plane" style="color: #0270D7; font-size: 18px"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer-copyright">&copy; 2021 Ponjo Studios. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+</div>
+<script src="js/Main.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Ben Petrillo. All rights reserved.
+ * Copyright © 2021 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *

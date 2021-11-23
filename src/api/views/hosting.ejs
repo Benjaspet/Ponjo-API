@@ -1,0 +1,126 @@
+<html lang="en">
+<head>
+    <title>Ponjo Hosting</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Ponjo Image Hosting">
+    <meta property="og:site_name" content="app.ponjo.club/hosting">
+    <meta property="og:description" content="Welcome to the official Ponjo Team image hosting website! Here, you can easily upload your images to be hosted by us externally and share them with ease. You will no longer have to worry about finding lost images; they will all remain safe and secure in our databases.">
+    <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Ponjo-Hosting.png">
+    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Ponjo-Hosting.png">
+    <meta property="author" content="Ponjo Studios">
+    <meta name="theme-color" content="#4295f4">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Ponjo-Hosting.png" type="img/png">
+</head>
+<body>
+<div class="login-root">
+    <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+        <div class="loginbackground box-background--white padding-top--64">
+            <div class="loginbackground-gridContainer padding-top--64">
+                <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
+                    <div class="box-root" style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
+                    </div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
+                    <div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
+                    <div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
+                    <div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
+                    <div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
+                    <div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
+                    <div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+                </div>
+                <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
+                    <div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+            <div class="box-root padding-top--24 padding-bottom--24 flex-flex flex-justifyContent--center">
+                <h1><a href="https://ponjo.club" rel="dofollow">Ponjo Image Hosting</a></h1>
+            </div>
+            <div class="formbg-outer">
+                <div class="formbg">
+                    <div class="formbg-inner padding-horizontal--48">
+                        <form id="stripe-login" action="/uploads/post" method="post" enctype="multipart/form-data">
+                            <div class="field padding-bottom--24">
+                                <center>
+                                    <h5 style="padding-bottom: 8px;">Premium Quality</h5>
+                                </center>
+                                <center>
+                                    <label>
+                                        A free, easy-to-use image hosting service developed by Ponjo Studios. Support
+                                        for a variety of applications such as Discord, WhatsApp, Twitter, and more.
+                                        Easily store your images without a hassle.
+                                    </label>
+                                </center>
+                                <center>
+                                    <h5 style="padding-bottom: 8px;">Security & Uptime</h5>
+                                </center>
+                                <center>
+                                    <label>
+                                        All images are stored securely within our databases. Developed with availability
+                                        as a top priority, we provide reliable hosting, so you can upload as many images
+                                        as you want, when you want. We are always working on new ways to improve our
+                                        hosting service to provide the best user experience possible. If you've found a
+                                        bug or would like to suggest a new feature, don't hesitate to do so on our
+                                        <a href="https://ponjo.club/discord">Discord server</a>.
+                                    </label>
+                                </center>
+                                <center>
+                                    <h5 style="padding-bottom: 8px;">Quality Support</h5>
+                                </center>
+                                <center>
+                                    <label>
+                                        All images are stored securely within our databases. Developed with availability
+                                        as a top priority, we provide reliable hosting, so you can upload as many images
+                                        as you want, when you want. We're always there for you, willing to attend to any
+                                        issues you may have.
+                                    </label>
+                                </center>
+                                <center>
+                                    <h5 style="padding-bottom: 8px;">Privacy & Terms</h5>
+                                </center>
+                                <center>
+                                    <label>
+                                        Before using our service, you agree to abide by our Terms & consent to our
+                                        Privacy Policy, which can be found <a href="https://api.ponjo.club/terms">here</a>.
+                                    </label>
+                                </center>
+                            </div>
+                            <div class="field">
+                                <input id="file-upload" type="file" name="avatar" onchange="extensionCheck(event)">
+                            </div>
+                            <div class="field padding-top--24">
+                                <div class="field padding-bottom--24">
+                                    <input type="submit" name="submit" value="Upload image!">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer-link padding-top--24">
+                    <span><a href="https://app.ponjo.club/privacy">Privacy Policy</a> • <a href="https://app.ponjo.club/terms">Terms of Service</a></span>
+                    <div class="listing padding-top--12 padding-bottom--12 flex-flex center-center">
+                        <span><a href="#">© 2021 Ponjo Team, Ben Petrillo. All rights reserved.</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="scripts/ClipboardUpload.js"></script>
+<script type="text/javascript" src="scripts/Form.js"></script>
+</html>

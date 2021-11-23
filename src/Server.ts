@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Ben Petrillo. All rights reserved.
+ * Copyright © 2021 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -25,7 +25,7 @@ import Config from "./api/config/Config";
 const app = express();
 new Application(app);
 
-console.clear();
+Logger.clear();
 const server = http.createServer(app);
 server.listen(Config.get("PORT") || 3000, () => {
    Logger.info("Connected to Ponjo database.");

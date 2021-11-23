@@ -1,3 +1,21 @@
+/*
+ * Copyright © 2021 Ben Petrillo. All rights reserved.
+ *
+ * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+ * OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * All portions of this software are available for public use, provided that
+ * credit is given to the original author(s).
+ */
+
 import {Request, Response} from "express";
 import Jimp from "jimp";
 import colors from "hex-colors-info";
@@ -13,9 +31,10 @@ export default class ColorEndpoint {
      @uri /v1/color?hex=#F8B112&format=json
      @param hex: string
      @param format: string <json, png, jpg>
+     @return Promise<Express.Reponse>
      */
 
-    public static async hexToImage(req: Request, res: Response) {
+    public static async hexToImage(req: Request, res: Response): Promise<Response> {
         const hex = req.query.hex as string;
         const format = req.query.format as string;
         if (!hex) return ErrorUtil.send400Status(req, res);

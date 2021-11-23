@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Ben Petrillo. All rights reserved.
+ * Copyright © 2021 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -33,6 +33,9 @@ import RoboEerieEndpoint from "./routes/RoboEerieEndpoint";
 import AuthEndpoint from "./routes/AuthEndpoint";
 import multer from "multer";
 import HostingUtil from "./util/HostingUtil";
+import URLShortener from "./models/URLShortener";
+import URLShortenerEndpoint from "./routes/URLShortenerEndpoint";
+import QRCodeUtil from "./util/api/QRCodeUtil";
 
 const router = express.Router();
 const premiumRouter = express.Router();
@@ -66,8 +69,14 @@ router.get("/pride/flags", LGBTQEndpoint.sendPrideFlag);
 router.get("/pride/flags/:type", LGBTQEndpoint.sendPrideFlag);
 router.get("/pride/orientations", LGBTQEndpoint.searchForOrientation);
 
+router.post("/urlshortener/create", URLShortenerEndpoint.createShortenedURL);
+router.get("/urlshortener/all", URLShortenerEndpoint.getAllShortURLs);
+
+premiumRouter.get("/qr", DataEndpoint.generateQRCode);
+
 premiumRouter.get("/chatbot", DataEndpoint.sendChatbotMessage);
 premiumRouter.get("/captcha", DataEndpoint.getCaptchaData);
+premiumRouter.get("/meme", DataEndpoint.getRandomMeme);
 
 premiumRouter.get("/query/mcbe", GameQueryEndpoint.queryBedrockServer);
 premiumRouter.get("/query/mcjava", GameQueryEndpoint.queryJavaServer);

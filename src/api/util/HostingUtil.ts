@@ -1,3 +1,21 @@
+/*
+ * Copyright © 2021 Ben Petrillo. All rights reserved.
+ *
+ * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+ * OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * All portions of this software are available for public use, provided that
+ * credit is given to the original author(s).
+ */
+
 import {Request, Response} from "express";
 import Image from "../models/Images";
 import APIUtil from "./api/APIUtil";
@@ -44,7 +62,7 @@ export default class HostingUtil {
     public static getDiskStorageOptions(): object {
         return {
             destination: (req, file, cb) => {
-                cb(null, path.join(__dirname + "/uploads"));
+                cb(null, path.join(__dirname + "/../uploads"));
             },
             filename: (req, file, cb) => {
                 const ext = path.extname(file.originalname);
@@ -80,20 +98,6 @@ export default class HostingUtil {
     }
 
     public static sendEmbeddedResponse(imagePath: string, imageId: string, req: Request, res: Response) {
-        return res.status(200).send('<html lang="en">\n' +
-            '<head>\n' +
-            '    <style id="stndz-style"></style>\n' +
-            '    <title>Ponjo Hosting</title>\n' +
-            '    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Ponjo-Hosting.png">\n' +
-            `    <meta name="twitter:image" content=${imagePath}>\n` +
-            `    <meta property="og:title" content="Ponjo | ${imageId}.png">\n` +
-            '    <meta property="og:description" content="Developed by Eerie#6560.">\n' +
-            '    <meta name="twitter:card" content="summary_large_image">\n' +
-            '    <meta name="theme-color" content="#4295f4">\n' +
-            '</head>\n' +
-            '<body style="height: 100%; text-align: center; margin: 0; background: #222222;">\n' +
-            `    <img id="imageTag" style="user-select: none; -webkit-user-select: none; cursor: zoom-in;" src=${imagePath} alt="https://ponjo.club" alt="">\n` +
-            '</body>\n' +
-            '</html>');
+        return res.render("image", {imagePath: imagePath, imageId: imageId});
     }
 }

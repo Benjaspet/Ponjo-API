@@ -4,7 +4,7 @@
     color: #1a1f36;
     box-sizing: border-box;
     word-wrap: break-word;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Ubuntu, sans-serif;
 }
 
 body {
@@ -216,6 +216,16 @@ a.ssolink {
     margin: 0 10px;
 }
 
+.loginbackground-gridContainer {
+    display: -ms-grid;
+    display: grid;
+    grid-template-columns: [start] 1fr [left-gutter] repeat(16,86.6px) [left-gutter] 1fr [end];
+    grid-template-rows: [top] 1fr [top-gutter] repeat(8,64px) [bottom-gutter] 1fr [bottom];
+    justify-content: center;
+    margin: 0 -2%;
+    transform: rotate(-12deg) skew(-12deg);
+}
+
 .animationRightLeft {
     animation: animationRightLeft 2s ease-in-out infinite;
 }
@@ -230,6 +240,20 @@ a.ssolink {
 
 .tans4s {
     animation: animationLeftRight 4s ease-in-out infinite;
+}
+
+.flex-flex {
+    display: flex;
+}
+.align-center {
+    align-items: center;
+}
+.center-center {
+    align-items: center;
+    justify-content: center;
+}
+.box-root {
+    box-sizing: border-box;
 }
 
 @keyframes animationLeftRight {
@@ -288,4 +312,41 @@ input[type="file"] {
     rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
     color: #fff;
     font-weight: 600;
+}
+
+.animationRightLeft {
+    animation: animationRightLeft 2s ease-in-out infinite;
+}
+.animationLeftRight {
+    animation: animationLeftRight 2s ease-in-out infinite;
+}
+.tans3s {
+    animation: animationLeftRight 3s ease-in-out infinite;
+}
+.tans4s {
+    animation: animationLeftRight 4s ease-in-out infinite;
+}
+
+@keyframes animationLeftRight {
+    0% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(1000px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+@keyframes animationRightLeft {
+    0% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(-1000px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
 }

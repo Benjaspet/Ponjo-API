@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Ben Petrillo. All rights reserved.
+ * Copyright © 2021 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -39,6 +39,7 @@ export default class DeckUtil {
 
     /*
      Shuffle a virtual deck of cards.
+     @param deck: string[]
      @return string[]
      */
 
@@ -55,6 +56,7 @@ export default class DeckUtil {
 
     /*
      Evaluate a poker hand.
+     @param deck: string[]
      @return object
      */
 
@@ -64,6 +66,8 @@ export default class DeckUtil {
 
     /*
      Draw a card from a virtual deck.
+     @param deck: string[]
+     @param amount: number
      @return object
      */
 

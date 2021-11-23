@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Ben Petrillo. All rights reserved.
+ * Copyright © 2021 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -30,5 +30,9 @@ export default class Logger {
 
     public static error(message: string = "Unknown."): void {
         console.log(`[${APIUtil.getTimestamp()}] [PONJO-API] ${message}`);
+    }
+
+    public static clear(): void {
+        console.clear();
     }
 }
