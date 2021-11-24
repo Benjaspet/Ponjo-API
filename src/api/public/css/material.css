@@ -1,7 +1,18 @@
 .ponjo-url {
     text-decoration: none;
+    color: steelblue;
 }
 
 .ponjo-url:hover {
     color: steelblue;
+    text-decoration: underline;
+}
+
+.ponjo-code {
+    font-size: 17px;
+}
+
+.ponjo-code-bold {
+    font-size: 17px;
+    font-weight: bold;
 }

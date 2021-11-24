@@ -53,6 +53,7 @@ export default class DataEndpoint {
                     });
                 });
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -77,12 +78,14 @@ export default class DataEndpoint {
                 } else {
                     return res.status(200).json({
                         status: res.statusCode,
+                        message: res.statusMessage,
                         data: result,
                         timestamps: APIUtil.getTimestamps()
                     });
                 }
             });
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -121,6 +124,7 @@ export default class DataEndpoint {
                 return res.end(code);
             }
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -145,6 +149,7 @@ export default class DataEndpoint {
                 .then(data => {
                     return res.status(200).json({
                         status: res.statusCode,
+                        message: res.statusMessage,
                         chatbot: {
                             name: botName,
                             response: data.message
@@ -153,14 +158,14 @@ export default class DataEndpoint {
                     });
                 }).catch(error => {
                     Logger.error(error);
-                    return res.status(400).json({
+                    return res.status(500).json({
                         status: res.statusCode,
                         message: "The chatbot endpoint is experiencing issues at this time.",
                         timestamps: APIUtil.getTimestamps()
                     });
                 });
         } catch (error) {
-            Logger.error(error);
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -178,6 +183,7 @@ export default class DataEndpoint {
             const captcha = new Captcha();
             return res.status(200).json({
                 status: res.statusCode,
+                message: res.statusMessage,
                 captcha: {
                     value: captcha.value,
                     imgData: captcha.dataURL
@@ -185,6 +191,7 @@ export default class DataEndpoint {
                 timestamps: APIUtil.getTimestamps()
             });
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -202,6 +209,7 @@ export default class DataEndpoint {
             .then(result => {
                 return res.status(200).json({
                     status: res.statusCode,
+                    message: res.statusMessage,
                     stats: result,
                     timestamps: APIUtil.getTimestamps()
                 });
@@ -229,6 +237,7 @@ export default class DataEndpoint {
             .then(result => {
                 return res.status(200).json({
                     status: res.statusCode,
+                    message: res.statusMessage,
                     data: result,
                     timestamps: APIUtil.getTimestamps()
                 });

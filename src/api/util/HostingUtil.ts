@@ -49,13 +49,9 @@ export default class HostingUtil {
     }
 
     public static async sendImagePostResponse(req: Request, res: Response) {
-        return res.status(200).json({
-            status: res.statusCode,
-            data: {
-                filePath: HostingUtil.imageData[0],
-                imageId: HostingUtil.imageData[1]
-            },
-            timestamps: APIUtil.getTimestamps()
+        return res.render("uploadedImage", {
+            filePath: HostingUtil.imageData[0],
+            imageId: HostingUtil.imageData[1]
         });
     }
 

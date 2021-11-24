@@ -11,34 +11,31 @@
     <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
     <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
     <meta name="theme-color" content="#ad4fe8">
-    <link rel="stylesheet" href="src/api/public/css/base.css">
+    <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-    <link rel="icon" href="images/Crescent-Logo.png" type="img/svg">
+    <link rel="icon" href="/images/Crescent-Logo.png" type="img/svg">
     <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 </head>
 <body class="is-boxed has-animations">
 <div class="body-wrap">
-    <h2 class="site-header text-center">RoboEerie</h2>
+    <h2 class="site-header text-center">Awesome!</h2>
     <main>
         <section class="section-paragraph text-center cta mb-0">
             <div class="container">
                 <p class="text-sm mb-0 text-center">
-                    Here you can view some images that were recently uploaded to our hosting service. Easily upload
-                    any image to our hosting services and share it with your friends on a variety of supported
-                    platforms, like Discord, WhatsApp, and Twitter, for free. We provide custom embed formatting,
-                    allowing users to customize their embed preview when displaying their images. You can view some
-                    recently uploaded images at the bottom portion of this page.
+                    Your image was uploaded successfully.
                 </p>
             </div>
             <section class="section-paragraph text-center cta mb-0">
                 <div class="container section-inner">
-                    <h4 class="mt-0 text-center" style="font-size: 30px;">Features</h4><br>
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">View it below:</h4><br>
                     <p class="text-sm mb-0 text-center">
-                        <strong>Tag system:</strong> with over <%= tags.length %>
-                    </p>
-                    <p class="text-sm mt-16 mb-64 text-center">
-                        <a class="ponjo-url" href="https://app.ponjo.club/hosting">Start uploading now!</a>
+                        UUID: <%= imageId %> <br>
+                        Raw: <a class="ponjo-url" href="https://app.ponjo.club/uploads<%= filePath %>"><%= filePath %></a> <br>
+                        Embed: <a class="ponjo-url" href="https://app.ponjo.club/uploads/<%= imageId %>"><%= imageId %></a> <br>
+                        Uploaded: <%= new Date().toLocaleDateString(); %> <br><br>
+                        Want to upload another image? <a class="ponjo-url" href="https://app.ponjo.club/hosting">Click here</a>.
                     </p>
                 </div>
             </section>
@@ -49,7 +46,7 @@
             <div class="site-footer-inner">
                 <div class="brand footer-brand">
                     <a href="">
-                        <img src="images/Crescent-Logo.png" alt="" width="40" height="40">
+                        <img src="/images/Crescent-Logo.png" alt="" width="40" height="40">
                     </a>
                 </div>
                 <ul class="footer-links list-reset">

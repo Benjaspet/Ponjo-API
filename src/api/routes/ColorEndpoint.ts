@@ -21,6 +21,7 @@ import Jimp from "jimp";
 import colors from "hex-colors-info";
 import ErrorUtil from "../util/ErrorUtil";
 import APIUtil from "../util/api/APIUtil";
+import Logger from "../../Logger";
 
 export default class ColorEndpoint {
 
@@ -44,6 +45,7 @@ export default class ColorEndpoint {
                     const colorInfo = colors(hex);
                     return res.status(200).json({
                         status: 200,
+                        message: res.statusMessage,
                         hex: hex,
                         name: colorInfo.name,
                         hueHex: colorInfo.hueHex,
@@ -53,6 +55,7 @@ export default class ColorEndpoint {
                         timestamps: APIUtil.getTimestamps()
                     });
                 } catch (error) {
+                    Logger.error(error.message);
                     return ErrorUtil.sent500Status(req, res);
                 }
             case "jpeg":

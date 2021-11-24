@@ -31,15 +31,16 @@ export default class DeckEndpoint {
      @header Authentication: token
      @uri /v1/decks/evalhand?hand=Ah,As,2c,5d,9h
      @param hand: string
+     @return Express.Response|any
      */
 
-    public static getPokerHand(req: Request, res: Response) {
+    public static getPokerHand(req: Request, res: Response): Response|any {
         const hand = req.query.hand as string;
         if (!hand) return ErrorUtil.send400Status(req, res);
         const cards = hand.replace(/\s/g, "").split(",");
         try {
             const result = DeckUtil.evaluateHand(<string[]> cards);
-            return <Response> res.status(200).json({
+            return res.status(200).json({
                status: res.statusCode,
                hand: {
                    name: result.handName,
@@ -60,9 +61,10 @@ export default class DeckEndpoint {
      @method POST
      @header Authentication: token
      @uri /v1/decks/create
+     @return Express.Response|any
      */
 
-    public static createDeck(req: Request, res: Response) {
+    public static createDeck(req: Request, res: Response): Response|any {
         try {
             const deck = DeckUtil.createDeck();
             const deckId = APIUtil.generateUniqueId();
@@ -76,6 +78,7 @@ export default class DeckEndpoint {
             }).then(() => {
                 return res.status(200).json({
                     status: res.statusCode,
+                    message: res.statusMessage,
                     deckId: deckId,
                     deck: deck,
                     data: {
@@ -87,14 +90,12 @@ export default class DeckEndpoint {
             }).catch(() => {
                 return res.status(400).json({
                     status: res.statusCode,
-                    message: "Could not create a deck.",
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
+                    message: res.statusMessage,
+                    timestamps: APIUtil.getTimestamps()
                 });
             });
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -105,9 +106,10 @@ export default class DeckEndpoint {
      @header Authentication: token
      @uri /v1/decks/find?id=b9e1-4a5-68738
      @param id: string
+     @return Express.Response|any
      */
 
-    public static getDeckById(req: Request, res: Response) {
+    public static getDeckById(req: Request, res: Response): Response|any {
         const deckId = req.query.id as string;
         if (!deckId) return ErrorUtil.send400Status(req, res);
         try {
@@ -122,6 +124,7 @@ export default class DeckEndpoint {
                     } else {
                         return res.status(200).json({
                             status: res.statusCode,
+                            message: res.statusMessage,
                             deckId: deck.deckId,
                             deck: deck.deck,
                             data: deck.data,
@@ -130,6 +133,7 @@ export default class DeckEndpoint {
                     }
             });
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -140,9 +144,10 @@ export default class DeckEndpoint {
      @header Authentication: token
      @uri /v1/decks/shuffle?id=b9e1-4a5-68738
      @param id: string
+     @return Promise<Express.Response>
      */
 
-    public static async shuffleDeckById(req: Request, res: Response) {
+    public static async shuffleDeckById(req: Request, res: Response): Promise<Response> {
         const deckId = req.query.id as string;
         if (!deckId) return ErrorUtil.send400Status(req, res);
         try {
@@ -165,6 +170,7 @@ export default class DeckEndpoint {
                         } else {
                             return res.status(200).json({
                                 status: 200,
+                                message: res.statusMessage,
                                 deckId: deckId,
                                 deck: shuffledDeck,
                                 details: {
@@ -178,6 +184,7 @@ export default class DeckEndpoint {
                 }
             });
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -189,9 +196,10 @@ export default class DeckEndpoint {
      @uri /v1/decks/draw?id=b9e1-4a5-68738&count=4
      @param id: string
      @param count: int
+     @return Promise<Express.Response>
      */
 
-    public static async drawCards(req: Request, res: Response) {
+    public static async drawCards(req: Request, res: Response): Promise<Response> {
         const deckId = req.query.id as string;
         const count = req.query.count as string;
         if (!deckId) return ErrorUtil.send400Status(req, res);
@@ -239,6 +247,7 @@ export default class DeckEndpoint {
                 }
             });
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -249,9 +258,10 @@ export default class DeckEndpoint {
      @header Authentication: token
      @uri /v1/decks/reset?id=b9e1-4a5-68738
      @param id: string
+     @return Promise<Express.Response>
      */
 
-    public static async resetDeck(req: Request, res: Response) {
+    public static async resetDeck(req: Request, res: Response): Promise<Response> {
         const deckId = req.query.id as string;
         if (!deckId) return ErrorUtil.send400Status(req, res);
         try {
@@ -265,6 +275,7 @@ export default class DeckEndpoint {
                 } else {
                     return res.status(200).json({
                         status: res.statusCode,
+                        message: res.statusMessage,
                         deckId: deckId,
                         deck: DeckUtil.createDeck(),
                         data: {
@@ -276,6 +287,7 @@ export default class DeckEndpoint {
                 }
             });
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }

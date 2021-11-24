@@ -43,6 +43,7 @@ export default class AuthEndpoint {
                 .then(result => {
                     return res.status(200).json({
                         status: 200,
+                        message: res.statusMessage,
                         data: result.data,
                         timestamps: APIUtil.getTimestamps()
                     });
@@ -66,6 +67,7 @@ export default class AuthEndpoint {
             .then(result => {
                 return res.status(200).json({
                     status: 200,
+                    message: res.statusMessage,
                     keys: result,
                     timestamps: APIUtil.getTimestamps()
                 });
