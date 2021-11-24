@@ -13,7 +13,7 @@
     <meta name="theme-color" content="#ad4fe8">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-    <link rel="icon" href="/images/Logo.png" type="img/svg">
+    <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png" type="img/png">
     <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 </head>
@@ -32,9 +32,9 @@
                     <h4 class="mt-0 text-center" style="font-size: 30px;">View it below:</h4><br>
                     <p class="text-sm mb-0 text-center">
                         UUID: <%= imageId %> <br>
-                        Raw: <a class="ponjo-url" href="https://app.ponjo.club/uploads<%= filePath %>"><%= filePath %></a> <br>
+                        Raw: <a class="ponjo-url" href="https://app.ponjo.club<%= filePath %>"><%= filePath %></a> <br>
                         Embed: <a class="ponjo-url" href="https://app.ponjo.club/uploads/<%= imageId %>"><%= imageId %></a> <br>
-                        Uploaded: <%= new Date().toLocaleDateString(); %> <br><br>
+                        <%= date %> <br><br>
                         Want to upload another image? <a class="ponjo-url" href="https://app.ponjo.club/hosting">Click here</a>.
                     </p>
                 </div>

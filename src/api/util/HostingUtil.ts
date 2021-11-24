@@ -77,9 +77,12 @@ export default class HostingUtil {
      */
 
     public static async sendImagePostResponse(req: Request, res: Response): Promise<any> {
+        const query = await Image.findOne({imageId: HostingUtil.imageData[1]});
+        const date = query.createdAt;
         return res.render("uploadedImage", {
             filePath: HostingUtil.imageData[0],
-            imageId: HostingUtil.imageData[1]
+            imageId: HostingUtil.imageData[1],
+            date: date
         });
     }
 
