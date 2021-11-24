@@ -45,6 +45,7 @@ export default class GameQueryEndpoint {
                 .then(async response => {
                     return res.status(200).json({
                         status: res.statusCode,
+                        message: res.statusMessage,
                         host: response.host || null,
                         port: response.port || null,
                         srvRecord: response.srvRecord || null,
@@ -72,6 +73,7 @@ export default class GameQueryEndpoint {
                     return ErrorUtil.sent504Status(req, res);
                 });
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -96,6 +98,7 @@ export default class GameQueryEndpoint {
                 .then(response => {
                     return res.status(200).json({
                         status: res.statusCode,
+                        message: res.statusMessage,
                         host: response.host || null,
                         port: response.port || null,
                         srvRecord: response.srvRecord || null,
@@ -118,6 +121,7 @@ export default class GameQueryEndpoint {
                     return ErrorUtil.sent504Status(req, res);
             });
         } catch (error) {
+            Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -143,6 +147,7 @@ export default class GameQueryEndpoint {
         }).then(response => {
             return res.status(200).json({
                 status: res.statusCode,
+                message: res.statusMessage,
                 data: {
                     name: response.name,
                     map: response.map,
@@ -188,6 +193,7 @@ export default class GameQueryEndpoint {
         }).then(response => {
             return res.status(200).json({
                 status: res.statusCode,
+                message: res.statusMessage,
                 data: response,
                 timestamps: APIUtil.getTimestamps()
             });

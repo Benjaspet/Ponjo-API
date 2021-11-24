@@ -19,6 +19,8 @@
 import {Request, Response} from "express";
 import {Canvacord} from "canvacord";
 import ErrorUtil from "../util/ErrorUtil";
+import APIUtil from "../util/api/APIUtil";
+import Logger from "../../Logger";
 
 export default class ImageManipulationEndpoint {
 
@@ -48,10 +50,7 @@ export default class ImageManipulationEndpoint {
                 return res.status(403).json({
                     status: 403,
                     message: "An error occurred. Is your image URL valid?",
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
+                    timestamps: APIUtil.getTimestamps()
                 });
             }
         }
@@ -83,10 +82,7 @@ export default class ImageManipulationEndpoint {
                 return res.status(403).json({
                     status: 403,
                     message: "An error occurred. Is your image URL valid?",
-                    timestamps: {
-                        date: new Date().toLocaleString(),
-                        unix: Math.round(+ new Date() / 1000),
-                    }
+                    timestamps: APIUtil.getTimestamps()
                 });
             }
         }
@@ -99,9 +95,10 @@ export default class ImageManipulationEndpoint {
      @uri /v1/img/trigger?image=<image-url>
      @param image: <uri-encoded> string
      @param format: string <base64, png, jpg>
+     @return Promise<Express.Response|void>
      */
 
-    public static async sendTriggeredImage(req: Request, res: Response) {
+    public static async sendTriggeredImage(req: Request, res: Response): Promise<Response|void> {
         const image = req.query.image as string;
         const format = req.query.format as string;
         if (!image) return ErrorUtil.sent500Status(req, res);
@@ -141,6 +138,7 @@ export default class ImageManipulationEndpoint {
             }
 
         } catch (error) {
+            Logger.error(error);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -152,9 +150,10 @@ export default class ImageManipulationEndpoint {
      @uri /v1/img/circle?image=<image-url>&format=png
      @param image: <uri-encoded> string
      @param format: string <png, jpg>
+     @return Promise<Express.Response|void>
      */
 
-    public static async sendCircularImage(req: Request, res: Response) {
+    public static async sendCircularImage(req: Request, res: Response): Promise<Response|void> {
         const image = req.query.image as string;
         const format = req.query.format as string;
         if (!image) return ErrorUtil.sent500Status(req, res);
@@ -192,7 +191,6 @@ export default class ImageManipulationEndpoint {
                         return res.end(img);
                 }
             }
-
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);
         }
@@ -206,9 +204,10 @@ export default class ImageManipulationEndpoint {
      @param image: <uri-encoded> string
      @param intensity: int
      @param format: string <png, jpg>
+     @return Promise<Express.Reponse|void>
      */
 
-    public static async sendBurningImage(req: Request, res: Response) {
+    public static async sendBurningImage(req: Request, res: Response): Promise<Response|void> {
         const image = req.query.image as string;
         const intensity = req.query.intensity as string;
         const format = req.query.format as string;
@@ -247,7 +246,6 @@ export default class ImageManipulationEndpoint {
                         return res.end(img);
                 }
             }
-
         } catch (error) {
             return ErrorUtil.sent500Status(req, res);
         }
