@@ -21,6 +21,13 @@ import APIUtil from "./APIUtil";
 
 export default class MemeUtil {
 
+    /*
+     Fetch a random collection of memes from Reddit.
+     @param limit: number
+     @param shuffled: boolean
+     @return Promise<any>
+     */
+
     public static async fetchRedditMeme(limit: number, shuffled: boolean): Promise<any> {
         return new Promise(async (resolve, reject) => {
             await axios({

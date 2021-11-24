@@ -23,11 +23,10 @@ export default class ErrorUtil {
 
     /*
      Send a 400 HTTP status code.
-     @desc malformed request or invalid syntax.
      @return Express.Response
      */
 
-    public static async send400Status(req: Request, res: Response) {
+    public static send400Status(req: Request, res: Response): Response {
         return res.status(400).json({
             status: res.statusCode,
             message: "Invalid syntax provided.",
@@ -37,11 +36,10 @@ export default class ErrorUtil {
 
     /*
      Send a 404 HTTP status code.
-     @desc resource could not be found on server.
      @return Express.Response
      */
 
-    public static send404Response(req: Request, res: Response) {
+    public static send404Response(req: Request, res: Response): Response {
         return res.status(404).json({
             status: res.statusCode,
             message: "The requested URL was not found on our servers.",
@@ -49,13 +47,23 @@ export default class ErrorUtil {
         });
     }
 
-    public static send429Response(req: Request, res: Response) {
+    /*
+     Send a 429 HTTP status code.
+     @return Express.Response
+     */
+
+    public static send429Response(req: Request, res: Response): Response {
         return res.status(429).json({
             status: res.statusCode,
             message: "Too many requests. Try again later.",
             timestamps: APIUtil.getTimestamps()
         });
     }
+
+    /*
+     Send a 500 HTTP status code.
+     @return Express.Response
+     */
 
     public static sent500Status(req: Request, res: Response): Response {
         return res.status(500).json({
@@ -65,7 +73,12 @@ export default class ErrorUtil {
         });
     }
 
-    public static sent504Status(req: Request, res: Response) {
+    /*
+     Send a 504 HTTP status code.
+     @return Express.Response
+     */
+
+    public static sent504Status(req: Request, res: Response): Response {
         return res.status(504).json({
             status: res.statusCode,
             message: "Query timed out.",

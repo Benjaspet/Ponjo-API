@@ -57,7 +57,7 @@ export default class DeckUtil {
     /*
      Evaluate a poker hand.
      @param deck: string[]
-     @return object
+     @return object|any
      */
 
     public static evaluateHand(deck: string[]): object|any {
@@ -68,7 +68,7 @@ export default class DeckUtil {
      Draw a card from a virtual deck.
      @param deck: string[]
      @param amount: number
-     @return object
+     @return object|any
      */
 
     public static drawCard(deck: string[], amount: number): object|any {

@@ -38,6 +38,7 @@ export default class UtilityEndpoint {
             if (!number) return ErrorUtil.send400Status(req, res);
             return res.status(200).json({
                 status: res.statusCode,
+                message: res.statusMessage,
                 data: {
                     number: parseInt(number),
                     isPrime: MathUtil.isPrime(parseInt(number))

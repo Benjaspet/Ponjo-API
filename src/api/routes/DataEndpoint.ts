@@ -20,7 +20,7 @@ import {Request, Response} from "express";
 import ErrorUtil from "../util/ErrorUtil";
 import * as weather from "weather-js";
 import Captcha from "@haileybot/captcha-generator";
-import CovidDataUtil from "../util/data/CovidDataUtil";
+import CovidDataUtil from "../util/api/CovidDataUtil";
 import Logger from "../../Logger";
 import fetch from "node-fetch";
 import APIUtil from "../util/api/APIUtil";

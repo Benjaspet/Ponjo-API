@@ -38,7 +38,7 @@ export default class AuthEndpoint {
             if (!user) {
                 return ErrorUtil.send400Status(req, res);
             }
-            const key = await AuthorizationUtil.generateUniqueApiKey() as string;
+            const key = AuthorizationUtil.generateUniqueApiKey() as string;
             await AuthorizationUtil.createApiKey(key, user)
                 .then(result => {
                     return res.status(200).json({

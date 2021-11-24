@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
-    <title>Image uploaded!</title>
+    <title>Whoopsie!</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="Image uploaded!">
+    <meta property="og:title" content="Whoopsie! | 404">
     <meta property="og:site_name" content="Ponjo Studios">
-    <meta property="og:description" content="You uploaded your image successfully.">
+    <meta property="og:description" content="Page not found.">
     <meta property="og:image:url" content="https://app.ponjo.club/images/Logo.png">
     <meta property="og:image:secure_url" content="https://app.ponjo.club/images/Logo.png">
     <meta name="theme-color" content="#ad4fe8">
@@ -19,26 +19,19 @@
 </head>
 <body class="is-boxed has-animations">
 <div class="body-wrap">
-    <h2 class="site-header text-center">Awesome!</h2>
+    <h2 class="site-header text-center">Whoopsie!</h2>
     <main>
         <section class="section-paragraph text-center cta mb-0">
-            <div class="container">
+            <div class="container section-inner">
                 <p class="text-sm mb-0 text-center">
-                    Your image was uploaded successfully.
+                    The requested resource was not found on our servers.
+                </p>
+                <p class="text-sm mb-0 mt-16 text-center">
+                    <a class="ponjo-url" href="https://app.ponjo.club">Go back</a> <br>
+                    <a class="ponjo-url" href="https://app.ponjo.club/hosting">Ponjo Image Hosting</a> <br>
+                    <a class="ponjo-url" href="https://docs.ponjo.club">Documentation</a>
                 </p>
             </div>
-            <section class="section-paragraph text-center cta mb-0">
-                <div class="container section-inner">
-                    <h4 class="mt-0 text-center" style="font-size: 30px;">View it below:</h4><br>
-                    <p class="text-sm mb-0 text-center">
-                        UUID: <%= imageId %> <br>
-                        Raw: <a class="ponjo-url" href="https://app.ponjo.club/uploads<%= filePath %>"><%= filePath %></a> <br>
-                        Embed: <a class="ponjo-url" href="https://app.ponjo.club/uploads/<%= imageId %>"><%= imageId %></a> <br>
-                        Uploaded: <%= new Date().toLocaleDateString(); %> <br><br>
-                        Want to upload another image? <a class="ponjo-url" href="https://app.ponjo.club/hosting">Click here</a>.
-                    </p>
-                </div>
-            </section>
         </section>
     </main>
     <footer class="site-footer">

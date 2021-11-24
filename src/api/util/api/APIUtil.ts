@@ -29,6 +29,11 @@ export default class APIUtil {
         return new Date().toLocaleTimeString();
     }
 
+    /*
+     Get the current request timestamps.
+     @return object
+     */
+
     public static getTimestamps(): object {
         return {
             date: new Date().toLocaleString(),
@@ -91,7 +96,13 @@ export default class APIUtil {
         }
     }
 
-    public static shuffleArray(array) {
+    /*
+     Shuffle the provided array.
+     @param array: any[]
+     @return any[]
+     */
+
+    public static shuffleArray(array: any[]): any[] {
         let currentIndex = array.length, randomIndex;
         while (currentIndex != 0) {
             randomIndex = Math.floor(Math.random() * currentIndex);
@@ -103,12 +114,15 @@ export default class APIUtil {
         return array;
     }
 
-    public static replaceAll(str: string, find, replace) {
-        return str.replace(new RegExp(find, "g"), replace);
-    }
+    /*
+     Replace all characters in a string.
+     @param str: string
+     @param find: string
+     @param replace: string
+     @return string
+     */
 
-    public static setCharAt(str, index, chr) {
-        if (index > str.length-1) return str;
-        return str.substring(0,index) + chr + str.substring(index+1);
+    public static replaceAll(str: string, find: string, replace: string): string {
+        return str.replace(new RegExp(find, "g"), replace);
     }
 }

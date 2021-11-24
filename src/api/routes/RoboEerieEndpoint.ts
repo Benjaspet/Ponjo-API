@@ -28,10 +28,11 @@ export default class RoboEerieEndpoint {
      @method GET
      @header Authentication: token
      @uri /v1/roboeerie/tags?count=2
-     @param count: int
+     @param count?: int
+     @return Promise<Express.Reponse>
      */
 
-    public static async getTags(req: Request, res: Response) {
+    public static async getTags(req: Request, res: Response): Promise<Response> {
         const count = req.query.count || req.params.count as string;
         try {
             if (count) {
@@ -39,6 +40,7 @@ export default class RoboEerieEndpoint {
                     .then(result => {
                         res.status(200).send({
                             status: res.statusCode,
+                            message: res.statusMessage,
                             data: result,
                             timestamps: APIUtil.getTimestamps()
                         });
@@ -48,6 +50,7 @@ export default class RoboEerieEndpoint {
                     .then(result => {
                         res.status(200).send({
                             status: res.statusCode,
+                            message: res.statusMessage,
                             data: result,
                             timestamps: APIUtil.getTimestamps()
                         });

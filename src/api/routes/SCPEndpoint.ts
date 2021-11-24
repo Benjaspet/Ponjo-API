@@ -41,7 +41,7 @@ export default class SCPEndpoint {
             if (!item) {
                 return res.status(500).json({
                     status: res.statusCode,
-                    message: "Invalid syntax.",
+                    message: res.statusMessage,
                     timestamps: APIUtil.getTimestamps()
                 });
             }
@@ -54,8 +54,9 @@ export default class SCPEndpoint {
                             timestamps: APIUtil.getTimestamps()
                         });
                     } else {
-                        return res.status(400).json({
+                        return res.status(200).json({
                             status: res.statusCode,
+                            message: res.statusMessage,
                             data: result,
                             timestamps: APIUtil.getTimestamps()
                         });
@@ -78,6 +79,7 @@ export default class SCPEndpoint {
         try {
             return res.status(200).json({
                 status: 200,
+                message: res.statusMessage,
                 branches: branches,
                 timestamps: APIUtil.getTimestamps()
             });
@@ -100,6 +102,7 @@ export default class SCPEndpoint {
                 .then(result => {
                     return res.status(200).json({
                         status: res.statusCode,
+                        message: res.statusMessage,
                         data: result.data,
                         timestamps: APIUtil.getTimestamps()
                     });
@@ -135,12 +138,14 @@ export default class SCPEndpoint {
      @method GET
      @header Authentication: token
      @uri /v1/scp/personnel
+     @return Promise<Express.Response>
      */
 
-    public static async getFoundationPersonnel(req: Request, res: Response) {
+    public static async getFoundationPersonnel(req: Request, res: Response): Promise<Response> {
         try {
             return res.status(200).json({
                 status: res.statusCode,
+                message: res.statusMessage,
                 personnel: SCPFoundationDataUtil.getScpPersonnel(),
                 timestamps: APIUtil.getTimestamps()
             });
@@ -154,12 +159,14 @@ export default class SCPEndpoint {
      @method GET
      @header Authentication: token
      @uri /v1/scp/areas
+     @return Promise<Express.Response>
      */
 
-    public static async getFoundationAreas(req: Request, res: Response) {
+    public static async getFoundationAreas(req: Request, res: Response): Promise<Response> {
         try {
             return res.status(200).json({
                 status: res.statusCode,
+                message: res.statusMessage,
                 areas: SCPFoundationDataUtil.getAllAreaData(),
                 timestamps: APIUtil.getTimestamps()
             });
@@ -173,12 +180,14 @@ export default class SCPEndpoint {
      @method GET
      @header Authentication: token
      @uri /v1/scp/all
+     @return Promise<Express.Response>
      */
 
-    public static async getAllFoundationData(req: Request, res: Response) {
+    public static async getAllFoundationData(req: Request, res: Response): Promise<Response> {
         try {
             return res.status(200).json({
                 status: res.statusCode,
+                message: res.statusMessage,
                 personnel: SCPFoundationDataUtil.getScpPersonnel(),
                 branches: SCPFoundationDataUtil.getAllBranchData(),
                 areas: SCPFoundationDataUtil.getAllAreaData(),

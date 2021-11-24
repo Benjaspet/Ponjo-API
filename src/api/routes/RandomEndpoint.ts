@@ -31,14 +31,16 @@ export default class RandomEndpoint {
      @header Authentication: token
      @uri /v1/random/timezone?amount=6
      @uri /v1/random/timezone/3
-     @param amount: int
+     @param amount?: int
+     @return Promise<Express.Reponse>
      */
 
-    public static async getRandomTimezone(req: Request, res: Response) {
+    public static async getRandomTimezone(req: Request, res: Response): Promise<Response> {
         const amount = req.query.count || req.params.count as string;
         if (amount) {
             return res.status(200).json({
                 status: 200,
+                message: res.statusMessage,
                 data: RandomUtil.getRandomTimezone(parseInt(<string>amount) || 1),
                 timestamps: APIUtil.getTimestamps()
             });
@@ -57,20 +59,23 @@ export default class RandomEndpoint {
      @header Authentication: token
      @uri /v1/random/userprofile?amount=18
      @uri /v1/random/userprofile/5
-     @param amount: int
+     @param amount?: int
+     @return Promise<Express.Reponse>
      */
 
-    public static async getRandomUserProfile(req: Request, res: Response) {
+    public static async getRandomUserProfile(req: Request, res: Response): Promise<Response> {
         const amount = req.query.count || req.params.count as string;
         if (amount) {
             return res.status(200).json({
                 status: 200,
+                message: res.statusMessage,
                 data: RandomUtil.getRandomUserProfile(parseInt(<string>amount) || 1),
                 timestamps: APIUtil.getTimestamps()
             });
         } else {
             return res.status(200).json({
                 status: 200,
+                message: res.statusMessage,
                 data: RandomUtil.getRandomUserProfile(1),
                 timestamps: APIUtil.getTimestamps()
             });
@@ -84,14 +89,16 @@ export default class RandomEndpoint {
      @uri /v1/affirmations?count=12
      @uri /v1/affirmations/12
      @param count: int
+     @return Promise<Express.Reponse>
      */
 
-    public static async getRandomAffirmation(req: Request, res: Response): Promise<any> {
+    public static async getRandomAffirmation(req: Request, res: Response): Promise<Response> {
         try {
             const count = req.query.count as string || req.params.count;
             if (!count) {
                 return res.status(400).json({
                     status: 200,
+                    message: res.statusMessage,
                     affirmation: affirmations[Math.floor(Math.random() * affirmations.length + 1)],
                     timestamps: APIUtil.getTimestamps()
                 });
@@ -108,6 +115,7 @@ export default class RandomEndpoint {
                     const items = APIUtil.getMultipleElementsFromArray(shuffled, parseInt(count));
                     return res.status(400).json({
                         status: 200,
+                        message: res.statusMessage,
                         affirmations: items,
                         timestamps: APIUtil.getTimestamps()
                     });
@@ -125,20 +133,23 @@ export default class RandomEndpoint {
      @uri /v1/random/month/raw
      @uri /v1/random/month?raw=true
      @param raw: boolean
+     @return Promise<Express.Reponse>
      */
 
-    public static async getRandomMonth(req: Request, res: Response) {
+    public static async getRandomMonth(req: Request, res: Response): Promise<Response> {
         const raw = req.query.raw || req.params.raw as string|boolean;
         try {
             if (raw === "raw" || raw == true) {
                 return res.status(200).json({
                     status: 200,
+                    message: res.statusMessage,
                     data: new Chance().month({raw: true}),
                     timestamps: APIUtil.getTimestamps()
                 });
             } else {
                 return res.status(200).json({
                     status: 200,
+                    message: res.statusMessage,
                     data: new Chance().month({raw: false}),
                     timestamps: APIUtil.getTimestamps()
                 });

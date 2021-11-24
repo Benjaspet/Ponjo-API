@@ -25,21 +25,46 @@ import branches from "../../data/foundation/Branches";
 
 export default class SCPFoundationDataUtil {
 
+    /*
+     Get a collection of all SCP Foundation personnel.
+     @return object[]
+     */
+
     public static getScpPersonnel(): object[] {
         return personnel;
     }
+
+    /*
+     Get a collection of all SCP Foundation site data.
+     @return object[]
+     */
 
     public static getAllSiteData(): object[] {
         return sites;
     }
 
+    /*
+     Get a collection of all SCP Foundation area data.
+     @return object[]
+     */
+
     public static getAllAreaData(): object[] {
         return areas;
     }
 
+    /*
+     Get a list of all SCP Foundation branch data.
+     @return object
+     */
+
     public static getAllBranchData(): object {
         return branches;
     }
+
+    /*
+     Fetch a random SCP Foundation site category.
+     @return Promise<any>
+     */
 
     public static async getSiteCategories(): Promise<any> {
         return new Promise<any>((resolve, reject) => {

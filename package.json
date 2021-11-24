@@ -1,6 +1,6 @@
 {
   "name": "ponjo-api",
-  "version": "0.6.2",
+  "version": "1.0.0",
   "private": true,
   "description": "The official Ponjo API.",
   "license": "MIT",

@@ -23,38 +23,59 @@ import {NextFunction, Request, Response} from "express";
 
 export default class AuthorizationUtil {
 
-    public static async generateUniqueApiKey() {
+    /*
+     Generate a unique API key.
+     @return string
+     */
+
+    public static generateUniqueApiKey(): string {
         return uuidv4();
     }
 
-    public static async isValidApiKey(key: string) {
+    /*
+     Determine if an API key is valid.
+     @return Promise<boolean>
+     */
+
+    public static async isValidApiKey(key: string): Promise<boolean> {
         return Keys.findOne({key: key})
             .then(async key => {
                 return !!key;
             });
     }
 
-    public static async createApiKey(key: string, user: string) {
-        return Keys.create({
-            key: key,
-            user: user,
-            requests: 0
-        }).then(() => {
-            return {
-                status: 200,
-                message: "New API key created.",
-                data: {
-                    key: key,
-                    user: user,
-                    requests: 0
-                },
-                timestamps: {
-                    date: new Date().toLocaleString(),
-                    unix: Math.round(+ new Date() / 1000),
-                }
-            }
+    /*
+     Create an API key.
+     @param key: string
+     @param user: string
+     @return Promise<any>
+     */
+
+    public static async createApiKey(key: string, user: string): Promise<any> {
+        return new Promise(async(resolve, reject) => {
+            await Keys.create({
+                key: key,
+                user: user,
+                requests: 0
+            }).then(() => {
+                resolve({
+                    status: 200,
+                    message: "New API key created.",
+                    data: {
+                        key: key,
+                        user: user,
+                        requests: 0
+                    },
+                    timestamps: APIUtil.getTimestamps()
+                });
+            }).catch(error => reject(error));
         });
     }
+
+    /*
+     Get a collection of all API keys.
+     @return Promise<object[]>
+     */
 
     public static async getAllApiKeys(): Promise<object[]> {
         const keys: object[] = [];
@@ -69,23 +90,35 @@ export default class AuthorizationUtil {
                 .catch(async error => {
                     reject({
                         status: 500,
-                        message: "An error occurred."
+                        message: error.message
                     });
                 });
         });
     }
 
+    /*
+     Add a use to the specified API key.
+     @param key: string
+     @param amount: number
+     @return Promise<void>
+     */
+
     public static async addApiKeyUse(key: string, amount: number): Promise<void> {
         Keys.findOne({key: key})
             .then(async result => {
                 Keys.findOneAndUpdate({key: key}, {requests: result.requests + amount})
-                    .then(async result => {})
-                    .catch(error => {});
+                    .then(async () => {})
+                    .catch(() => {});
             })
-            .catch(error => {});
+            .catch(() => {});
     }
 
-    public static async checkKeyValidity(req: Request, res: Response, next: NextFunction) {
+    /*
+     The middleware to check API key validity.
+     @return Promise<Response|void>
+     */
+
+    public static async checkKeyValidity(req: Request, res: Response, next: NextFunction): Promise<Response|void> {
         const key = req.headers.authorization as string;
         if (await AuthorizationUtil.isValidApiKey(key) == false) {
             return res.status(403).json({

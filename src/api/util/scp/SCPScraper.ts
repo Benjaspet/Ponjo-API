@@ -19,8 +19,15 @@
 import request from "request";
 import cheerio from "cheerio";
 import SCPExceptions from "../../data/foundation/SCPExceptions";
+import Logger from "../../../Logger";
 
 export default class SCPScraper {
+
+    /*
+     Get data on any SCP anomaly.
+     @param scp: string
+     @return Promise<any>
+     */
 
     public static async getScpData(scp: string): Promise<any> {
         return new Promise<any>((resolve, reject) => {
@@ -106,13 +113,12 @@ export default class SCPScraper {
                     }
                 } else {
                     reject({
-                        status: 400,
                         message: "An SCP by that item number was not found."
                     });
                 }
             });
         }).catch(error => {
-            console.log(error);
+            Logger.error(error);
         });
     }
 }

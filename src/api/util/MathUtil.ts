@@ -21,7 +21,7 @@ export default class MathUtil {
     /*
      Determines whether a number is prime or not.
      @param number: number
-     @return bool
+     @return boolean
      */
 
     public static isPrime(number: number): boolean {

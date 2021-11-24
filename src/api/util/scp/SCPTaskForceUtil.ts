@@ -18,8 +18,14 @@
 
 import request from "request";
 import cheerio from "cheerio";
+import Logger from "../../../Logger";
 
 export default class SCPTaskForceUtil {
+
+    /*
+     Get all SCP Foundation task force data.
+     @return Promise<any>
+     */
 
     public static async getTaskForceData(): Promise<any> {
         return new Promise<any>((resolve, reject) => {
@@ -63,13 +69,12 @@ export default class SCPTaskForceUtil {
                     });
                 } else {
                     reject({
-                        status: 400,
                         message: "An SCP by that item number was not found."
                     });
                 }
             });
         }).catch(error => {
-            console.log(error);
+            Logger.error(error);
         });
     }
 }

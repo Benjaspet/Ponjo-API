@@ -29,6 +29,7 @@ import Logger from "../Logger";
 import APIUtil from "./util/api/APIUtil";
 import Keys from "./models/Keys";
 import RoboEerieUtil from "./util/RoboEerieUtil";
+import AuthorizationUtil from "./util/api/AuthorizationUtil";
 
 export class Application {
 
@@ -70,7 +71,6 @@ export class Application {
 
         app.get("/", async (req: Request, res: Response) => {return res.render("index", {requests: await APIUtil.getTotalApiRequests(), keys: await Keys.find()})});
         app.get("/hosting", (req: Request, res: Response) => {return res.render("hosting")});
-        app.get("/roboeerie", async (req: Request, res: Response) => {return res.render("roboeerie", {tags: await RoboEerieUtil.fetchTags()})});
         app.get("/image-hosting", this.imageHostingMiddleware);
         app.get("/endpoints", (req: Request, res: Response) => {return res.render("endpoints")});
         app.get("/short/:shortURL", URLShortenerEndpoint.getShortenedURL);
@@ -88,7 +88,7 @@ export class Application {
          Only run if all above methods fail or cannot be found.
          */
 
-        app.use((req: Request, res: Response) => {return ErrorUtil.send404Response(req, res);});
+        app.use((req: Request, res: Response) => {return res.render("404")});
     }
 
     private async requestMiddleware(req: Request, res: Response, next: NextFunction) {
@@ -110,8 +110,8 @@ export class Application {
         }
     }
 
-    private async imageHostingMiddleware(req: Request, res: Response, next: NextFunction) {
+    private async imageHostingMiddleware(req: Request, res: Response, next: NextFunction): Promise<Response|void> {
         const images = await Images.find();
-        return res.render("uploads", {images: images});
+        return res.render("image-hosting", {images: images});
     }
 }

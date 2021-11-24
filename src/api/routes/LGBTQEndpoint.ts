@@ -17,19 +17,30 @@
  */
 
 import {Request, Response} from "express";
+import orientations from "../data/lgbtq/Orientations";
 import AvatarUtil from "../util/api/AvatarUtil";
 import ErrorUtil from "../util/ErrorUtil";
 import PrideUtil from "../util/api/PrideUtil";
-import orientations from "../data/lgbtq/Orientations";
 import APIUtil from "../util/api/APIUtil";
 
 export default class LGBTQEndpoint {
 
-    public static async sendPrideFlag(req: Request, res: Response) {
+    /*
+     Send a pride flag image.
+     @method GET
+     @header none
+     @uri /v1/pride/flags?type=asexual
+     @uri /v1/pride/flags/asexual
+     @param type: string
+     @return Promise<Express.Reponse|void>
+     */
+
+    public static async sendPrideFlag(req: Request, res: Response): Promise<Response|void> {
         const query = req.query.type || req.params.type as string;
         if (!query) {
             return res.status(200).json({
                 status: res.statusCode,
+                message: res.statusMessage,
                 data: await PrideUtil.getFlag("pride", true),
                 timestamps: APIUtil.getTimestamps()
             });
@@ -42,7 +53,17 @@ export default class LGBTQEndpoint {
         }
     }
 
-    public static async searchForOrientation(req: Request, res: Response) {
+    /*
+     Search for a sexual or romantic orientation.
+     @method GET
+     @header none
+     @uri /v1/pride/orientations?type=sexual&q=asexual
+     @param type: string
+     @param q: string
+     @return Promise<Express.Response>
+     */
+
+    public static async searchForOrientation(req: Request, res: Response): Promise<Response> {
         const type = req.query.type || "sexual" as string;
         const query = req.query.q as string;
         try {
@@ -80,6 +101,12 @@ export default class LGBTQEndpoint {
     /*
      Add pride flairs to an avatar.
      @method POST
+     @header none
+     @uri /pride/avatar?flair=abrosexual&avatar=<url-encoded>&format=png
+     @param flair: string
+     @param avatar: <uri-encoded> string
+     @param format?: string
+     @return Promise<Express.Response>
      */
 
     public static async sendFlairedAvatar(req: Request, res: Response): Promise<Response> {

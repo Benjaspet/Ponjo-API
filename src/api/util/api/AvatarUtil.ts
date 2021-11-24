@@ -22,15 +22,17 @@ import Canvas from "canvas";
 export default class AvatarUtil {
 
     /*
-    @param image string: img URL
-    @param flair string: img path
-    @comment first parameter here will be the back image, second will be front.
+    Create a pride-flaired avatar.
+    The first parameter here will be the back image, second will be front.
+    @param image: string
+    @param flair: string
+    @return Promise<string|Buffer>
      */
 
-    public static async getFlairedAvatar(flair: string, image: string, base64?: boolean): Promise<string | Buffer> {
+    public static async getFlairedAvatar(flair: string, image: string, base64?: boolean): Promise<string|Buffer> {
 
         /*
-        @description Gets the appropriate path based on the flair parameter.
+        Gets the appropriate path based on the flair parameter.
         */
 
         const type = path.join(__dirname, `../../public/assets/lgbtq/flairs/${flair}.png`);

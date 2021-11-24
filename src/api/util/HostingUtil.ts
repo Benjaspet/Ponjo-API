@@ -27,17 +27,38 @@ export default class HostingUtil {
     public static imageData: string[] = [];
     public static htmlData: string[] = [];
 
-    public static imageExists(id, array) {
+    /*
+     Determine if an image exists.
+     @param id: string
+     @param array: any[]
+     @return boolean
+     */
+
+    public static imageExists(id: string, array: any[]): boolean {
         return array.some(function(el) {
             return el.imageId === id;
         });
     }
 
-    public static getImageData(id, array) {
+    /*
+     Get data on a specific image.
+     @param id: string
+     @param array: any[]
+     @return object|any
+     */
+
+    public static getImageData(id: string, array: any[]): object|any {
         return array.find(e => e.imageId === id);
     }
 
-    public static async sendArrayOfAllImages(req: Request, res: Response) {
+    /*
+     Send an array of all images.
+     @param req: Request
+     @param res: Response
+     @return Promise<any>
+     */
+
+    public static async sendArrayOfAllImages(req: Request, res: Response): Promise<any> {
         Image.find()
             .then(images => {
                 return res.status(200).json({
@@ -48,12 +69,24 @@ export default class HostingUtil {
             });
     }
 
-    public static async sendImagePostResponse(req: Request, res: Response) {
+    /*
+     Render the EJS response after an image has been uploaded.
+     @param req: Request
+     @param res: Response
+     @return Promise<any>
+     */
+
+    public static async sendImagePostResponse(req: Request, res: Response): Promise<any> {
         return res.render("uploadedImage", {
             filePath: HostingUtil.imageData[0],
             imageId: HostingUtil.imageData[1]
         });
     }
+
+    /*
+     Get the storage options.
+     @return object
+     */
 
     public static getDiskStorageOptions(): object {
         return {
@@ -74,7 +107,14 @@ export default class HostingUtil {
         }
     }
 
-    public static async getImage(req: Request, res: Response) {
+    /*
+     Get an image by ID.
+     @param req: Request
+     @param res: Response
+     @return Promise<any>
+     */
+
+    public static async getImage(req: Request, res: Response): Promise<any> {
         Images.find().then(images => {
             if (HostingUtil.imageExists(req.params.image, images)) {
                 const imagePath = HostingUtil.getImageData(req.params.image, images).filePath;
@@ -93,7 +133,16 @@ export default class HostingUtil {
         });
     }
 
-    public static sendEmbeddedResponse(imagePath: string, imageId: string, req: Request, res: Response) {
+    /*
+     Send an embedded response of an image.
+     @param imagePath: string
+     @param imageId: string
+     @param req: Request
+     @param res: Response
+     @return any
+     */
+
+    public static sendEmbeddedResponse(imagePath: string, imageId: string, req: Request, res: Response): any {
         return res.render("image", {imagePath: imagePath, imageId: imageId});
     }
 }

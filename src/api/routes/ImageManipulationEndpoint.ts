@@ -192,6 +192,7 @@ export default class ImageManipulationEndpoint {
                 }
             }
         } catch (error) {
+            Logger.error(error);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -247,6 +248,7 @@ export default class ImageManipulationEndpoint {
                 }
             }
         } catch (error) {
+            Logger.error(error);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -258,9 +260,10 @@ export default class ImageManipulationEndpoint {
      @uri /v1/img/facepalm?image=<image-url>&format=png
      @param image: <uri-encoded> string
      @param format: string <png, jpg>
+     @return Promise<Express.Response|void>
      */
 
-    public static async sendFacepalmImage(req: Request, res: Response) {
+    public static async sendFacepalmImage(req: Request, res: Response): Promise<Response|void> {
         const image = req.query.image as string;
         const format = req.query.format as string;
         if (!image) return ErrorUtil.sent500Status(req, res);
@@ -298,8 +301,8 @@ export default class ImageManipulationEndpoint {
                         return res.end(img);
                 }
             }
-
         } catch (error) {
+            Logger.error(error);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -312,9 +315,10 @@ export default class ImageManipulationEndpoint {
      @param image: <uri-encoded> string
      @param pixels: int
      @param format: string <png, jpg>
+     @return Promise<Express.Response|void>
      */
 
-    public static async sendPixelatedImage(req: Request, res: Response) {
+    public static async sendPixelatedImage(req: Request, res: Response): Promise<Response|void> {
         const image = req.query.image as string;
         const pixels = req.query.pixels as string;
         const format = req.query.format as string;
@@ -353,8 +357,8 @@ export default class ImageManipulationEndpoint {
                         return res.end(img);
                 }
             }
-
         } catch (error) {
+            Logger.error(error);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -366,9 +370,10 @@ export default class ImageManipulationEndpoint {
      @uri /v1/img/rip?image=<image-url>&format=png
      @param image: <uri-encoded> string
      @param format: string <png, jpg>
+     @return Promise<Express.Response|void>
      */
 
-    public static async sendRipEffect(req: Request, res: Response) {
+    public static async sendRipEffect(req: Request, res: Response): Promise<Response|void> {
         const image = req.query.image as string;
         const format = req.query.format as string;
         if (!image) return ErrorUtil.sent500Status(req, res);
@@ -406,8 +411,8 @@ export default class ImageManipulationEndpoint {
                         return res.end(img);
                 }
             }
-
         } catch (error) {
+            Logger.error(error);
             return ErrorUtil.sent500Status(req, res);
         }
     }
