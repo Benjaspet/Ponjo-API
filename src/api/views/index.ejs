@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="Ponjo API">
-    <meta property="og:site_name" content="app.ponjo.club">
-    <meta property="og:description" content="The official homepage of the Ponjo API, serving all of your developer utility needs. With over 35 endpoints, you'll easily be able to fuse your application with various powerful resources.">
-    <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
-    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
+    <meta property="og:site_name" content="Ponjo Studios">
+    <meta property="og:description" content="The official homepage of the Ponjo API, serving all of your developer utility needs. With over 55 endpoints, you'll easily be able to fuse your application with various powerful resources.">
+    <meta property="og:image:url" content="https://app.ponjo.club/images/Logo.png">
+    <meta property="og:image:secure_url" content="https://app.ponjo.club/images/Logo.png">
     <meta name="theme-color" content="#ad4fe8">
-    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-    <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png" type="img/png">
+    <link rel="icon" href="https://app.ponjo.club/images/Logo.png" type="img/png">
     <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 </head>
@@ -25,7 +25,7 @@
                 <div class="brand header-brand">
                     <h1 class="m-0">
                         <a href="#">
-                            <img class="header-logo-image" src="images/Crescent-Logo.png" alt="" width="60" height="60">
+                            <img class="header-logo-image" src="/images/Logo.png" alt="" width="60" height="60">
                         </a>
                     </h1>
                 </div>
@@ -44,7 +44,7 @@
                             never been easier.
                         </p>
                         <p>
-                            <strong><%= requests.total %></strong> total requests and counting.
+                            <strong><%= cleanFormat(requests.total) %></strong> total requests and counting.
                         </p>
                         <div class="hero-cta">
                             <a class="button button-primary" href="https://docs.ponjo.club">DOCUMENTATION</a>
@@ -78,8 +78,12 @@
                                 <div class="feature-icon">
                                     <img src="images/Feature-1.svg" alt="">
                                 </div>
-                                <h4 class="feature-title mt-24">Over 40 Endpoints</h4>
-                                <p class="text-sm mb-0">The Ponjo API has numerous utility endpoints to assist you in creating a flexible, responsive, and productive application.</p>
+                                <h4 class="feature-title mt-24">Uptime, prioritized.</h4>
+                                <p class="text-sm mb-0">
+                                    The Ponjo API is guarded with a state-of-the-art penetration protection system.
+                                    This allows us to operate with such a high uptime, penetrating attacks with
+                                    ease to ensure a positive user experience.
+                                </p>
                             </div>
                         </div>
                         <div class="feature text-center is-revealing">
@@ -87,8 +91,12 @@
                                 <div class="feature-icon">
                                     <img src="images/Feature-2.svg" alt="">
                                 </div>
-                                <h4 class="feature-title mt-24">Simple Responses</h4>
-                                <p class="text-sm mb-0">The API uses an easy-to-parse JSON response format to make it extremely simple for you to handle responses, with detailed documentation.</p>
+                                <h4 class="feature-title mt-24">Simplicity.</h4>
+                                <p class="text-sm mb-0">
+                                    The API uses an easy-to-parse JSON response format to make it extremely simple for
+                                    developers to handle responses, with detailed documentation and sample responses.
+                                    No need to stress!
+                                </p>
                             </div>
                         </div>
                         <div class="feature text-center is-revealing">
@@ -96,8 +104,13 @@
                                 <div class="feature-icon">
                                     <img src="images/Feature-3.svg" alt="">
                                 </div>
-                                <h4 class="feature-title mt-24">Helpful Support</h4>
-                                <p class="text-sm mb-0">Our support team is always available to be contacted <a href="https://ponjo.club/discord">here</a>. From bug reports to suggestions, we're happy to be there for you.</p>
+                                <h4 class="feature-title mt-24">Quality support.</h4>
+                                <p class="text-sm mb-0">
+                                    Our support team is always available to be contacted
+                                    <a class="ponjo-url" href="https://ponjo.club/discord">here</a>. Our services
+                                    are accompanied by a hardworking support team to attend to any issues you may have,
+                                    from bug reports to general support.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -107,23 +120,59 @@
                 <div class="container section-inner">
                     <h4 class="mt-0 text-center" style="font-size: 30px;">Statistics</h4><br>
                     <p class="text-sm mb-0 text-center">
-                        <strong><%= requests.total %></strong> ─ total requests. <br>
-                        <strong><%= requests.gets %></strong> ─ GET requests. <br>
-                        <strong><%= requests.posts %></strong> ─ POST requests. <br>
-                        <strong><%= keys.length %></strong> ─ API keys generated. <br>
-                        <strong>46</strong> ─ total endpoints. <br>
+                        <% function cleanFormat(str) {
+                            return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        } %>
+                        <strong><%= cleanFormat(requests.total) %></strong> ─ total requests. <br>
+                        <strong><%= cleanFormat(requests.gets) %></strong> ─ GET requests. <br>
+                        <strong><%= cleanFormat(requests.posts) %></strong> ─ POST requests. <br>
+                        <strong><%= cleanFormat(keys.length) %></strong> ─ API keys generated. <br>
+                        <strong>57</strong> ─ total endpoints. <br>
                         <strong><%= new Date("August 24, 2021 18:30:00").toLocaleString() %></strong> ─ first API deployment.
                     </p>
                 </div>
             </section>
             <section class="section-paragraph text-center cta mb-0">
                 <div class="container section-inner">
-                    <h4 class="mt-0 text-center" style="font-size: 30px;">Ponjo Image Hosting</h4><br>
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">Meet the Developer</h4><br>
                     <p class="text-sm mb-0 text-center">
-                        Ponjo Image Hosting is a free image hosting service provided by the Ponjo Development Team.
-                        Tired of the long upload times when trying to upload your images to popular social media platforms?
-                        Want a way to be able to display these images in a cool, colorful, embedded way? Try out the Ponjo
-                        Team's official image hosting service. You can learn more <a href="https://ponjo.club/hosting">here</a>.
+                        Hey there! Thank you for your interest in my work. My name is
+                        <a class="ponjo-url" href="https://benpetrillo.dev">Ben Petrillo</a>,
+                        and I'm the sole frontend & backend developer of the Ponjo API and its affiliated services.
+                        I'm currently a senior in high school with plans to double-major in
+                        <a class="ponjo-url" href="https://en.wikipedia.org/wiki/Computer_science">Computer Science</a>
+                        and <a class="ponjo-url" href="https://en.wikipedia.org/wiki/Mathematics">Mathematics</a> in
+                        college. If you're interested in viewing some of my other projects, check out
+                        <a class="ponjo-url" href="https://github.com/Eerie6560">my GitHub</a>.
+                    </p>
+                    <p class="text-sm mb-0 mt-16 text-center">
+                        My goal as a developer has always been threefold: to learn new things, to have fun while doing it,
+                        and, most importantly, giving back to the community I'm apart of. I want to create applications
+                        and projects that not only benefit me, but the people around me as well. I hope you're able to
+                        learn something new and create something unique and innovating from my work!
+                    </p>
+                </div>
+                <div class="container section-inner">
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">Ponjo Image Hosting</h4><br>
+                    <p class="text-sm mb-0 mt-0 text-center">
+                        Ponjo Image Hosting is a free image hosting service provided by Ponjo Studios.
+                        A free, easy-to-use image hosting service developed by Ponjo Studios. It supports a variety of
+                        applications such as Discord, WhatsApp, Twitter, and more. Easily store your images without a
+                        hassle.
+                    </p>
+                    <p class="text-sm mb-0 mt-16 text-center">
+                        All images are stored securely within our databases. Developed with availability and security as
+                        top priorities, we provide reliable hosting, so you can upload as many images as you want, when
+                        you want. We are always working on new ways to improve our hosting service to provide the best
+                        user experience possible. You can learn more <a class="ponjo-url" href="https://ponjo.club/hosting">here</a>.
+                    </p>
+                </div>
+                <div class="container section-inner">
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">Ponjo URL Shortener</h4><br>
+                    <p class="text-sm mb-0 mt-0 text-center">
+                        Easily shorten your URLs with our URL shortener endpoint of our API. Tired of having to
+                        paste long, obnoxious links in direct messages? Not a problem! Our URL shortening service will
+                        allow you to simplify your URL links with ease directly from our API.
                     </p>
                 </div>
             </section>
@@ -131,7 +180,7 @@
         <section class="cta section">
             <div class="container">
                 <div class="cta-inner section-inner">
-                    <h3 class="section-title mt-0">Interested?</h3>
+                    <h3 class="section-title mt-0">Getting started?</h3>
                     <div class="cta-cta">
                         <a class="button button-primary button-wide-mobile" href="https://docs.ponjo.club">VIEW THE DOCUMENTATION!</a>
                     </div>
@@ -144,18 +193,18 @@
             <div class="site-footer-inner">
                 <div class="brand footer-brand">
                     <a href="">
-                        <img src="images/Crescent-Logo.png" alt="" width="40" height="40">
+                        <img src="/images/Logo.png" alt="" width="40" height="40">
                     </a>
                 </div>
                 <ul class="footer-links list-reset">
                     <li>
-                        <a href="https://api.ponjo.club/getting-started">Guide</a>
+                        <a href="https://docs.ponjo.club/ponjo-api/guide">Guide</a>
                     </li>
                     <li>
-                        <a href="https://api.ponjo.club/endpoints">Documentation</a>
+                        <a href="https://docs.ponjo.club">Documentation</a>
                     </li>
                     <li>
-                        <a href="https://api.ponjo.club/faq">FAQs</a>
+                        <a href="https://app.ponjo.club/endpoints">Endpoints</a>
                     </li>
                     <li>
                         <a href="https://ponjo.club/discord">Support</a>
@@ -187,7 +236,9 @@
                         </a>
                     </li>
                 </ul>
-                <div class="footer-copyright">&copy; 2021 Ponjo Team. All rights reserved.</div>
+                <div class="footer-copyright">
+                    &copy; 2021 Ponjo Studios. All rights reserved.
+                </div>
             </div>
         </div>
     </footer>

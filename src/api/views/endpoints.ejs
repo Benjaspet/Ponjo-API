@@ -6,49 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="Ponjo API | Endpoints">
-    <meta property="og:site_name" content="app.ponjo.club/endpoints">
-    <meta property="og:description" content="Here you can find all endpoints and request routes for the Ponjo API. With over 35 endpoints, you'll be able to make the most out of your development project.">
-    <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
-    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/Crescent-Logo.png">
+    <meta property="og:site_name" content="Ponjo Studios">
+    <meta property="og:description" content="Here you can find all endpoints and request routes for the Ponjo API. With over 55 endpoints, you'll be able to make the most out of your development project.">
+    <meta property="og:image:url" content="https://app.ponjo.club/images/Logo.png">
+    <meta property="og:image:secure_url" content="https://app.ponjo.club/images/Logo.png">
     <meta name="theme-color" content="#ad4fe8">
-    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
     <link rel="icon" href="images/Crescent-Logo.png" type="img/svg">
     <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 </head>
-<body class="is-boxed has-animations">
+<body class="has-animations">
 <div class="body-wrap">
-    <header class="site-header">
-        <div class="container">
-            <h2 class="site-header text-center">Endpoints</h2>
-            <div class="site-header-inner">
-                <div class="brand header-brand">
-                </div>
-            </div>
-        </div>
-    </header>
+    <h2 class="site-header text-center">Endpoints</h2>
     <main>
-        <section class="section-paragraph text-center cta mb-0">
-            <div class="container">
-                <p class="text-sm mb-0 text-center">
+        <section class="mb-0">
+            <div class="container section-paragraph">
+                <p class="text-sm mb-0 text-center field">
                     Welcome to the endpoint page of the Ponjo API! Here, you can view all available endpoints,
-                    and how to access them. With over 35 endpoints, it's almost certain
+                    and how to access them. With over 55 endpoints, it's almost certain
                     you'll be able to find this API of great use. Responses are easily-parsable in a straightforward
                     JSON format to allow for seamless integration into your application or project.
                 </p>
-            </div>
-            <div class="container section-inner">
-                <p class="text-sm mb-0 text-center">
+                <p class="text-sm mb-0 mt-16 text-center">
                     All POST requests that require a URL to an image (for example, all image
                     manipulation routes) require the URI components to be properly encoded. Failure
-                    to do so will result in the request not going through. If you're not familiar with URI
-                    encoding, you can learn more <a href="https://en.wikipedia.org/wiki/Percent-encoding">here</a>.
+                    to do so will result in the request not going through.
                 </p>
             </div>
-            <h3 class="container-sm section-inner text-center">
-                <a href="https://docs.ponjo.club">View the doumentation!</a>
-            </h3>
         </section>
         <section class="section-paragraph text-center cta">
             <div class="container">
@@ -62,8 +48,8 @@
                                         <div class="feature-inner">
                                             <p class="mt-0">
                                                 <span class="badge badge-get">GET REQUEST</span><br>
-                                                <code class="crescent-code-bold">/v1/chatbot</code><br>
-                                                <code class="crescent-code">Receive a response from an AI chatbot.</code>
+                                                <code class="ponjo-code-bold">/v1/chatbot</code><br>
+                                                <code class="ponjo-code">Receive a response from an AI chatbot.</code>
                                             </p>
                                         </div>
                                     </div>
@@ -71,45 +57,8 @@
                                         <div class="feature-inner">
                                             <p class="mt-0">
                                                 <span class="badge badge-get">GET REQUEST</span><br>
-                                                <code class="crescent-code-bold">/v1/captcha</code><br>
-                                                <code class="crescent-code">Obtain a generated captcha image with its resolution.</code>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="feature text-center is-revealing">
-                                        <p class="mt-0">
-                                            <span class="badge badge-get">GET REQUEST</span><br>
-                                            <code class="crescent-code-bold">/v1/covid/world</code><br>
-                                            <code class="crescent-code">Obtain COVID-19 statistics from around the world.</code>
-                                        </p>
-                                    </div>
-                                    <div class="feature text-center is-revealing">
-                                        <p class="mt-0">
-                                            <span class="badge badge-get">GET REQUEST</span><br>
-                                            <code class="crescent-code-bold">/v1/query/ark</code><br>
-                                            <code class="crescent-code">Obtain COVID-19 statistics from a specific country.</code>
-                                        </p>
-                                    </div>
-                                    <div class="feature text-center is-revealing">
-                                        <p class="mt-0">
-                                            <span class="badge badge-get">GET REQUEST</span><br>
-                                            <code class="crescent-code-bold">/v1/weather</code><br>
-                                            <code class="crescent-code">Get current weather and forecasts for a specific location.</code>
-                                        </p>
-                                    </div>
-                                    <div class="feature text-center is-revealing">
-                                        <p class="mt-0">
-                                            <span class="badge badge-get">GET REQUEST</span><br>
-                                            <code class="crescent-code-bold">/v1/roboeerie/tags</code><br>
-                                            <code class="crescent-code">Get a list of all tags used by the RoboEerie Discord bot.</code>
-                                        </p>
-                                    </div>
-                                    <div class="feature text-center is-revealing">
-                                        <div class="feature-inner">
-                                            <p class="mt-0">
-                                                <span class="badge badge-get">GET REQUEST</span><br>
-                                                <code class="crescent-code-bold">/v1/health</code><br>
-                                                <code class="crescent-code">Perform an API health/response time check.</code>
+                                                <code class="ponjo-code-bold">/v1/captcha</code><br>
+                                                <code class="ponjo-code">Obtain a generated captcha image with its resolution.</code>
                                             </p>
                                         </div>
                                     </div>
@@ -117,8 +66,63 @@
                                         <div class="feature-inner">
                                             <p class="mt-0">
                                                 <span class="badge badge-get">GET REQUEST</span><br>
-                                                <code class="crescent-code-bold">/v1/prime</code><br>
-                                                <code class="crescent-code">Determine whether a number is prime or not.</code>
+                                                <code class="ponjo-code-bold">/v1/meme</code><br>
+                                                <code class="ponjo-code">Retrieve a random meme with data & stats.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="ponjo-code-bold">/v1/qr</code><br>
+                                                <code class="ponjo-code">Generate a custom QR code with options.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-get">GET REQUEST</span><br>
+                                            <code class="ponjo-code-bold">/v1/covid/world</code><br>
+                                            <code class="ponjo-code">Obtain COVID-19 statistics from around the world.</code>
+                                        </p>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-get">GET REQUEST</span><br>
+                                            <code class="ponjo-code-bold">/v1/query/ark</code><br>
+                                            <code class="ponjo-code">Obtain COVID-19 statistics from a specific country.</code>
+                                        </p>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-get">GET REQUEST</span><br>
+                                            <code class="ponjo-code-bold">/v1/weather</code><br>
+                                            <code class="ponjo-code">Get current weather and forecasts for a specific location.</code>
+                                        </p>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <p class="mt-0">
+                                            <span class="badge badge-get">GET REQUEST</span><br>
+                                            <code class="ponjo-code-bold">/v1/roboeerie/tags</code><br>
+                                            <code class="ponjo-code">Get a list of all tags used by the RoboEerie Discord bot.</code>
+                                        </p>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="ponjo-code-bold">/v1/health</code><br>
+                                                <code class="ponjo-code">Perform an API health/response time check.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="ponjo-code-bold">/v1/prime</code><br>
+                                                <code class="ponjo-code">Determine whether a number is prime or not.</code>
                                             </p>
                                         </div>
                                     </div>
@@ -369,6 +373,39 @@
         <section class="section-paragraph text-center cta">
             <div class="container">
                 <div class="section-inner text-center">
+                    <h4 class="mt-0 text-center" style="font-size: 30px;">URL Shortener Endpoint</h4>
+                    <section class="features section">
+                        <div class="container">
+                            <div class="features-inner section-inner has-bottom-divider">
+                                <div class="features-wrap">
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-post">POST REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/urlshortener/create</code><br>
+                                                <code class="crescent-code">Create a shortened URL with options.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="feature text-center is-revealing">
+                                        <div class="feature-inner">
+                                            <p class="mt-0">
+                                                <span class="badge badge-get">GET REQUEST</span><br>
+                                                <code class="crescent-code-bold">/v1/urlshortener/all</code><br>
+                                                <code class="crescent-code">Obtain a collection of all shortened URLs.</code>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <section class="section-paragraph text-center cta">
+            <div class="container">
+                <div class="section-inner text-center">
                     <h4 class="mt-0 text-center" style="font-size: 30px;">SCP Foundation Endpoint</h4>
                     <section class="features section">
                         <div class="container">
@@ -499,18 +536,18 @@
             <div class="site-footer-inner">
                 <div class="brand footer-brand">
                     <a href="">
-                        <img src="images/Crescent-Logo.png" alt="" width="40" height="40">
+                        <img src="/images/Logo.png" alt="" width="40" height="40">
                     </a>
                 </div>
                 <ul class="footer-links list-reset">
                     <li>
-                        <a href="https://crescentmoon.app/getting-started">Guide</a>
+                        <a href="https://docs.ponjo.club/ponjo-api/guide">Guide</a>
                     </li>
                     <li>
-                        <a href="https://crescentmoon.app/endpoints">Documentation</a>
+                        <a href="https://docs.ponjo.club">Documentation</a>
                     </li>
                     <li>
-                        <a href="https://crescentmoon.app/faq">FAQs</a>
+                        <a href="https://app.ponjo.club/endpoints">Endpoints</a>
                     </li>
                     <li>
                         <a href="https://ponjo.club/discord">Support</a>
@@ -524,25 +561,27 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://twitter.com/PonjoDev">
+                        <a href="https://twitter.com/Eerie6560">
                             <span class="screen-reader-text">Twitter</span>
                             <i class="fab fa-twitter" style="color: #0270D7; font-size: 18px"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://crescentmoon.app/endpoints">
+                        <a href="https://docs.ponjo.club">
                             <span class="screen-reader-text">Documentation</span>
                             <i class="fas fa-bookmark" style="color: #0270D7; font-size: 18px"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="mailto:eerie@ponjo.club">
+                        <a href="mailto:benpetrillo@ponjo.club">
                             <span class="screen-reader-text">Contact</span>
                             <i class="fas fa-paper-plane" style="color: #0270D7; font-size: 18px"></i>
                         </a>
                     </li>
                 </ul>
-                <div class="footer-copyright">&copy; 2021 Ponjo Development. All rights reserved.</div>
+                <div class="footer-copyright">
+                    &copy; 2021 Ponjo Studios. All rights reserved.
+                </div>
             </div>
         </div>
     </footer>
