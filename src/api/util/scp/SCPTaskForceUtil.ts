@@ -22,9 +22,9 @@ import Logger from "../../../Logger";
 
 export default class SCPTaskForceUtil {
 
-    /*
-     Get all SCP Foundation task force data.
-     @return Promise<any>
+    /**
+     * Gets all SCP Foundation Task Force data.
+     * @return Promise
      */
 
     public static async getTaskForceData(): Promise<any> {
@@ -56,11 +56,10 @@ export default class SCPTaskForceUtil {
                         const joined = resolved.join("");
                         const fixed = joined.slice(0, -1);
                         dictionary.push({
-                            [fixed]: {
-                                name: taskForces[i],
-                                description: descriptions[i],
-                                logo: images[i]
-                            }
+                            name: taskForces[i],
+                            alt: fixed,
+                            description: descriptions[i],
+                            logo: images[i]
                         });
                     }
                     dictionary.pop();
@@ -69,7 +68,7 @@ export default class SCPTaskForceUtil {
                     });
                 } else {
                     reject({
-                        message: "An SCP by that item number was not found."
+                        message: "Unable to fetch Foundation Task Forces."
                     });
                 }
             });

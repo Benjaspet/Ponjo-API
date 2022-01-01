@@ -21,9 +21,11 @@ import APIUtil from "./api/APIUtil";
 
 export default class ErrorUtil {
 
-    /*
-     Send a 400 HTTP status code.
-     @return Express.Response
+    /**
+     * Send a 400 HTTP status code.
+     * @param req Express.Request
+     * @param res Express.Response
+     * @return Express.Response
      */
 
     public static send400Status(req: Request, res: Response): Response {
@@ -34,9 +36,11 @@ export default class ErrorUtil {
         });
     }
 
-    /*
-     Send a 404 HTTP status code.
-     @return Express.Response
+    /**
+     * Send a 404 HTTP status code.
+     * @param req Express.Request
+     * @param res Express.Response
+     * @return Express.Response
      */
 
     public static send404Response(req: Request, res: Response): Response {
@@ -47,9 +51,11 @@ export default class ErrorUtil {
         });
     }
 
-    /*
-     Send a 429 HTTP status code.
-     @return Express.Response
+    /**
+     * Send a 429 HTTP status code.
+     * @param req Express.Request
+     * @param res Express.Response
+     * @return Express.Response
      */
 
     public static send429Response(req: Request, res: Response): Response {
@@ -60,9 +66,11 @@ export default class ErrorUtil {
         });
     }
 
-    /*
-     Send a 500 HTTP status code.
-     @return Express.Response
+    /**
+     * Send a 500 HTTP status code.
+     * @param req Express.Request
+     * @param res Express.Response
+     * @return Express.Response
      */
 
     public static sent500Status(req: Request, res: Response): Response {
@@ -73,9 +81,11 @@ export default class ErrorUtil {
         });
     }
 
-    /*
-     Send a 504 HTTP status code.
-     @return Express.Response
+    /**
+     * Send a 500 HTTP status code.
+     * @param req Express.Request
+     * @param res Express.Response
+     * @return Express.Response
      */
 
     public static sent504Status(req: Request, res: Response): Response {

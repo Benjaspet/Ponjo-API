@@ -20,10 +20,10 @@ import Tags from "../models/roboeerie/TagSchema";
 
 export default class RoboEerieUtil {
 
-    /*
-     Fetch a collection of RoboEerie tags.
-     @param count?: number
-     @return Promise<any>
+    /**
+     * Fetch a collection of RoboEerie tags.
+     * @param ?count number
+     * @return Promise<any>
      */
 
     public static async fetchTags(count?: number): Promise<any> {

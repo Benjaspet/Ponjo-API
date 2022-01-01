@@ -24,13 +24,13 @@ import Logger from "../../Logger";
 
 export default class ImageManipulationEndpoint {
 
-    /*
-     Add rainbow effects to an image.
-     @method POST
-     @header none
-     @uri /v1/img/gay?image=<image-url>
-     @param image: <uri-encoded> string
-     @return Promise<Express.Response|void>
+    /**
+     * Add rainbow effects to an image.
+     * @method POST
+     * @header none
+     * @uri /v1/img/gay?image=<image-url>
+     * @param image: <uri-encoded> string
+     * @return Promise<Express.Response|void>
      */
 
     public static async sendGayImage(req: Request, res: Response): Promise<Response|void> {
@@ -56,13 +56,13 @@ export default class ImageManipulationEndpoint {
         }
     }
 
-    /*
-     Add a jail effect to an image.
-     @method POST
-     @header none
-     @uri /v1/img/jail?image=<image-url>
-     @param image: <uri-encoded> string
-     @return Promise<Express.Response|void>
+    /**
+     * Add a jail effect to an image.
+     * @method POST
+     * @header none
+     * @uri /v1/img/jail?image=<image-url>
+     * @param image: <uri-encoded> string
+     * @return Promise<Express.Response|void>
      */
 
     public static async sendJailedImage(req: Request, res: Response): Promise<Response|void> {
@@ -88,14 +88,14 @@ export default class ImageManipulationEndpoint {
         }
     }
 
-    /*
-     Add a "triggered" effect to an image.
-     @method POST
-     @header none
-     @uri /v1/img/trigger?image=<image-url>
-     @param image: <uri-encoded> string
-     @param format: string <base64, png, jpg>
-     @return Promise<Express.Response|void>
+    /**
+     * Add a "triggered" effect to an image.
+     * @method POST
+     * @header none
+     * @uri /v1/img/trigger?image=<image-url>
+     * @param image: <uri-encoded> string
+     * @param format: string <base64, png, jpg>
+     * @return Promise<Express.Response|void>
      */
 
     public static async sendTriggeredImage(req: Request, res: Response): Promise<Response|void> {
@@ -143,14 +143,14 @@ export default class ImageManipulationEndpoint {
         }
     }
 
-    /*
-     Make an image circular.
-     @method POST
-     @header none
-     @uri /v1/img/circle?image=<image-url>&format=png
-     @param image: <uri-encoded> string
-     @param format: string <png, jpg>
-     @return Promise<Express.Response|void>
+    /**
+     * Make an image circular.
+     * @method POST
+     * @header none
+     * @uri /v1/img/circle?image=<image-url>&format=png
+     * @param image: <uri-encoded> string
+     * @param format: string <png, jpg>
+     * @return Promise<Express.Response|void>
      */
 
     public static async sendCircularImage(req: Request, res: Response): Promise<Response|void> {
@@ -197,15 +197,15 @@ export default class ImageManipulationEndpoint {
         }
     }
 
-    /*
-     Give an image a burn effect.
-     @method POST
-     @header none
-     @uri /v1/img/burn?image=<image-url>&intensity=2&format=png
-     @param image: <uri-encoded> string
-     @param intensity: int
-     @param format: string <png, jpg>
-     @return Promise<Express.Reponse|void>
+    /**
+     * Give an image a burn effect.
+     * @method POST
+     * @header none
+     * @uri /v1/img/burn?image=<image-url>&intensity=2&format=png
+     * @param image: <uri-encoded> string
+     * @param intensity: int
+     * @param format: string <png, jpg>
+     * @return Promise<Express.Reponse|void>
      */
 
     public static async sendBurningImage(req: Request, res: Response): Promise<Response|void> {
@@ -253,14 +253,14 @@ export default class ImageManipulationEndpoint {
         }
     }
 
-    /*
-     Give an image a facepalm effect.
-     @method POST
-     @header none
-     @uri /v1/img/facepalm?image=<image-url>&format=png
-     @param image: <uri-encoded> string
-     @param format: string <png, jpg>
-     @return Promise<Express.Response|void>
+    /**
+     * Give an image a facepalm effect.
+     * @method POST
+     * @header none
+     * @uri /v1/img/facepalm?image=<image-url>&format=png
+     * @param image: <uri-encoded> string
+     * @param format: string <png, jpg>
+     * @return Promise<Express.Response|void>
      */
 
     public static async sendFacepalmImage(req: Request, res: Response): Promise<Response|void> {
@@ -307,15 +307,15 @@ export default class ImageManipulationEndpoint {
         }
     }
 
-    /*
-     Give an image a pixelated effect.
-     @method POST
-     @header none
-     @uri /v1/img/pixelate?image=<image-url>&pixels=32&format=png
-     @param image: <uri-encoded> string
-     @param pixels: int
-     @param format: string <png, jpg>
-     @return Promise<Express.Response|void>
+    /**
+     * Give an image a pixelated effect.
+     * @method POST
+     * @header none
+     * @uri /v1/img/pixelate?image=<image-url>&pixels=32&format=png
+     * @param image: <uri-encoded> string
+     * @param pixels: int
+     * @param format: string <png, jpg>
+     * @return Promise<Express.Response|void>
      */
 
     public static async sendPixelatedImage(req: Request, res: Response): Promise<Response|void> {
@@ -363,14 +363,14 @@ export default class ImageManipulationEndpoint {
         }
     }
 
-    /*
-     Give an image a RIP effect.
-     @method POST
-     @header none
-     @uri /v1/img/rip?image=<image-url>&format=png
-     @param image: <uri-encoded> string
-     @param format: string <png, jpg>
-     @return Promise<Express.Response|void>
+    /**
+     * Give an image a RIP effect.
+     * @method POST
+     * @header none
+     * @uri /v1/img/rip?image=<image-url>&format=png
+     * @param image: <uri-encoded> string
+     * @param format: string <png, jpg>
+     * @return Promise<Express.Response|void>
      */
 
     public static async sendRipEffect(req: Request, res: Response): Promise<Response|void> {

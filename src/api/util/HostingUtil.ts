@@ -27,11 +27,11 @@ export default class HostingUtil {
     public static imageData: string[] = [];
     public static htmlData: string[] = [];
 
-    /*
-     Determine if an image exists.
-     @param id: string
-     @param array: any[]
-     @return boolean
+    /**
+     * Determine if an image exists.
+     * @param id string
+     * @param array any[]
+     * @return boolean
      */
 
     public static imageExists(id: string, array: any[]): boolean {
@@ -40,22 +40,22 @@ export default class HostingUtil {
         });
     }
 
-    /*
-     Get data on a specific image.
-     @param id: string
-     @param array: any[]
-     @return object|any
+    /**
+     * Get data on a specific image.
+     * @param id string
+     * @param array any[]
+     * @return object|any
      */
 
     public static getImageData(id: string, array: any[]): object|any {
         return array.find(e => e.imageId === id);
     }
 
-    /*
-     Send an array of all images.
-     @param req: Request
-     @param res: Response
-     @return Promise<any>
+    /**
+     * Send an array of all images.
+     * @param req Express.Request
+     * @param res Express.Response
+     * @return Promise<any>
      */
 
     public static async sendArrayOfAllImages(req: Request, res: Response): Promise<any> {
@@ -69,11 +69,11 @@ export default class HostingUtil {
             });
     }
 
-    /*
-     Render the EJS response after an image has been uploaded.
-     @param req: Request
-     @param res: Response
-     @return Promise<any>
+    /**
+     * Render the EJS response after an image has been uploaded.
+     * @param req Express.Request
+     * @param res Express.Response
+     * @return Promise<any>
      */
 
     public static async sendImagePostResponse(req: Request, res: Response): Promise<any> {
@@ -86,9 +86,9 @@ export default class HostingUtil {
         });
     }
 
-    /*
-     Get the storage options.
-     @return object
+    /**
+     * Get the disk storage options.
+     * @return object
      */
 
     public static getDiskStorageOptions(): object {
@@ -110,11 +110,11 @@ export default class HostingUtil {
         }
     }
 
-    /*
-     Get an image by ID.
-     @param req: Request
-     @param res: Response
-     @return Promise<any>
+    /**
+     * Get an image by ID.
+     * @param req Express.Request
+     * @param res Express.Response
+     * @return Promise<any>
      */
 
     public static async getImage(req: Request, res: Response): Promise<any> {
@@ -136,13 +136,13 @@ export default class HostingUtil {
         });
     }
 
-    /*
-     Send an embedded response of an image.
-     @param imagePath: string
-     @param imageId: string
-     @param req: Request
-     @param res: Response
-     @return any
+    /**
+     * Send an embedded response of an image.
+     * @param imagePath string
+     * @param imageId string
+     * @param req Express.Request
+     * @param res Express.Response
+     * @return any
      */
 
     public static sendEmbeddedResponse(imagePath: string, imageId: string, req: Request, res: Response): any {

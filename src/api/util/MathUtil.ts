@@ -18,10 +18,10 @@
 
 export default class MathUtil {
 
-    /*
-     Determines whether a number is prime or not.
-     @param number: number
-     @return boolean
+    /**
+     * Determine whether a number is prime or not.
+     * @param number
+     * @return boolean
      */
 
     public static isPrime(number: number): boolean {

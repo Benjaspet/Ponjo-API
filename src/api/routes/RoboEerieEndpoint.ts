@@ -23,13 +23,13 @@ import APIUtil from "../util/api/APIUtil";
 
 export default class RoboEerieEndpoint {
 
-    /*
-     Get a list of all tags from the RoboEerie bot.
-     @method GET
-     @header Authentication: token
-     @uri /v1/roboeerie/tags?count=2
-     @param count?: int
-     @return Promise<Express.Reponse>
+    /**
+     * Get a list of all tags from the RoboEerie bot.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/roboeerie/tags?count=2
+     * @param count?: int
+     * @return Promise<Express.Reponse>
      */
 
     public static async getTags(req: Request, res: Response): Promise<Response> {

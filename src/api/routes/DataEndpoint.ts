@@ -29,19 +29,29 @@ import QRCodeUtil from "../util/api/QRCodeUtil";
 
 export default class DataEndpoint {
 
-    /*
-     Obtain a random set of memes from Reddit.
-     @method GET
-     @header Authentication: token
-     @uri /v1/meme?count=5
-     @param count?: number
-     @return Promise<any>
+    /**
+     * Obtain a random set of memes from Reddit.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/meme?count=5
+     * @param count?: number
+     * @return Promise<any>
      */
 
     public static async getRandomMeme(req: Request, res: Response): Promise<any> {
         const amount: string = req.query.count as string;
         try {
-            if (!amount) return ErrorUtil.send400Status(req, res);
+            if (!amount) {
+                MemeUtil.fetchRedditMeme(1, false)
+                    .then(async result => {
+                        return res.status(200).json({
+                            status: res.statusCode,
+                            message: res.statusMessage,
+                            memes: result.data,
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                });
+            }
             if (parseInt(amount) > 100) return ErrorUtil.send400Status(req, res);
             MemeUtil.fetchRedditMeme(parseInt(amount), false)
                 .then(async result => {
@@ -58,14 +68,14 @@ export default class DataEndpoint {
         }
     }
 
-    /*
-     Get current weather data & forecasts.
-     @method GET
-     @header Authentication: token
-     @uri /v1/weather?location=Atlanta
-     @uri /v1/weather/Atlanta
-     @param location: string
-     @return Promise<Express.Reponse>
+    /**
+     * Get current weather data & forecasts.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/weather?location=Atlanta
+     * @uri /v1/weather/Atlanta
+     * @param location: string
+     * @return Promise<Express.Reponse>
      */
 
     public static async sendWeatherResponse(req: Request, res: Response): Promise<Response> {
@@ -90,15 +100,15 @@ export default class DataEndpoint {
         }
     }
 
-    /*
-     Generate a custom QR code.
-     @method GET
-     @header Authentication: token
-     @uri /v1/qr?text=hello%20there&size=500
-     @param text: string
-     @param size: number
-     @param background?: string
-     @return Promise<any>
+    /**
+     * Generate a custom QR code.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/qr?text=hello%20there&size=500
+     * @param text: string
+     * @param size: number
+     * @param background?: string
+     * @return Promise<any>
      */
 
     public static async generateQRCode(req: Request, res: Response): Promise<any> {
@@ -129,14 +139,14 @@ export default class DataEndpoint {
         }
     }
 
-    /*
-     Obtain a response from a chatbot.
-     @method GET
-     @header Authentication: token
-     @uri /v1/chatbot?message=hello&name=ChatBot
-     @param message: string
-     @param name?: string
-     @return Promise<Express.Reponse>
+    /**
+     * Obtain a response from a chatbot.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/chatbot?message=hello&name=ChatBot
+     * @param message: string
+     * @param name?: string
+     * @return Promise<Express.Reponse>
      */
 
     public static async sendChatbotMessage(req: Request, res: Response): Promise<Response> {
@@ -170,12 +180,12 @@ export default class DataEndpoint {
         }
     }
 
-    /*
-     The route to retrieve a random captcha.
-     @method GET
-     @header Authentication: token
-     @uri /v1/captcha
-     @return Promise<Express.Reponse>
+    /**
+     * The route to retrieve a random captcha.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/captcha
+     * @return Promise<Express.Reponse>
      */
 
     public static async getCaptchaData(req: Request, res: Response): Promise<Response> {
@@ -196,12 +206,12 @@ export default class DataEndpoint {
         }
     }
 
-    /*
-     Get worldwide COVID-19 statistics.
-     @method GET
-     @header Authentication: token
-     @uri /v1/covid/world
-     @return Promise<Response|any>
+    /**
+     * Get worldwide COVID-19 statistics.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/covid/world
+     * @return Promise<Response|any>
      */
 
     public static async getWorldwideCovidStats(req: Request, res: Response): Promise<Response|any> {
@@ -220,14 +230,14 @@ export default class DataEndpoint {
             });
     }
 
-    /*
-     Get COVID-19 statistics on a particular country.
-     @method GET
-     @header Authentication: token
-     @uri /v1/covid/canada
-     @uri /v1/covid?country=canada
-     @param country: string
-     @return Promise<Express.Reponse>
+    /**
+     * Get COVID-19 statistics on a particular country.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/covid/canada
+     * @uri /v1/covid?country=canada
+     * @param country: string
+     * @return Promise<Express.Reponse>
      */
 
     public static async getCovidStatsByCountry(req: Request, res: Response): Promise<Response> {
@@ -248,12 +258,12 @@ export default class DataEndpoint {
             });
     }
 
-    /*
-     The route to check the API's status/health.
-     @method GET
-     @header none
-     @uri /v1/health
-     @return Express.Response
+    /**
+     * The route to check the API's status/health.
+     * @method GET
+     * @header none
+     * @uri /v1/health
+     * @return Express.Response
      */
 
     public static getApiHealth(req: Request, res: Response): Response {

@@ -23,13 +23,13 @@ import APIUtil from "../util/api/APIUtil";
 
 export default class UtilityEndpoint {
 
-    /*
-     Check if a number is prime or not.
-     @method GET
-     @header none
-     @uri /v1/prime
-     @param number: int
-     @return Promise<Express.Response>
+    /**
+     * Check if a number is prime or not.
+     * @method GET
+     * @header none
+     * @uri /v1/prime
+     * @param number: int
+     * @return Promise<Express.Response>
      */
 
     public static async checkIfNumberIsPrime(req: Request, res: Response): Promise<Response> {

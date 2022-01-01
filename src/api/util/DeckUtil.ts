@@ -20,9 +20,9 @@ import * as PokerEvaluator from "poker-evaluator-ts";
 
 export default class DeckUtil {
 
-    /*
-     Create a virtual deck of cards.
-     @return string[]
+    /**
+     * Create a virtual deck of cards.
+     * @return string[]
      */
 
     public static createDeck(): string[] {
@@ -37,10 +37,10 @@ export default class DeckUtil {
         return deck as string[];
     }
 
-    /*
-     Shuffle a virtual deck of cards.
-     @param deck: string[]
-     @return string[]
+    /**
+     * Shuffle a virtual deck of cards.
+     * @param deck  string[]
+     * @return string[]
      */
 
     public static shuffleDeck(deck: string[]): string[] {
@@ -54,21 +54,21 @@ export default class DeckUtil {
         return deck as string[];
     }
 
-    /*
-     Evaluate a poker hand.
-     @param deck: string[]
-     @return object|any
+    /**
+     * Evaluate a poker hand.
+     * @param hand string[]
+     * @return object|any
      */
 
-    public static evaluateHand(deck: string[]): object|any {
-        return PokerEvaluator.evalHand(deck) as object;
+    public static evaluateHand(hand: string[]): object|any {
+        return PokerEvaluator.evalHand(hand) as object;
     }
 
-    /*
-     Draw a card from a virtual deck.
-     @param deck: string[]
-     @param amount: number
-     @return object|any
+    /**
+     * Draw a card from a virtual deck.
+     * @param deck string[]
+     * @param amount number
+     * @return object|any
      */
 
     public static drawCard(deck: string[], amount: number): object|any {

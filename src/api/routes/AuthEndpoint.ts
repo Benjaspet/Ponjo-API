@@ -24,12 +24,12 @@ import APIUtil from "../util/api/APIUtil";
 
 export default class AuthEndpoint {
 
-    /*
-     Create an API key and insert it into the database.
-     @method POST
-     @header none
-     @uri /v1/auth/keys/create
-     @return Promise<e.Response>
+    /**
+     * Create an API key and insert it into the database.
+     * @method POST
+     * @header none
+     * @uri /v1/auth/keys/create
+     * @return Promise<e.Response>
      */
 
     public static async createKey(req: Request, res: Response): Promise<Response> {
@@ -54,12 +54,12 @@ export default class AuthEndpoint {
         }
     }
 
-    /*
-     Returns an array of all API keys.
-     @method GET
-     @header none
-     @uri /v1/auth/keys/list
-     @return Promise<any>
+    /**
+     * Returns an array of all API keys.
+     * @method GET
+     * @header none
+     * @uri /v1/auth/keys/list
+     * @return Promise<any>
      */
 
     public static async getAllKeys(req: Request, res: Response): Promise<any> {

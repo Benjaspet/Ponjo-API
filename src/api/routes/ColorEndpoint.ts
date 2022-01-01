@@ -25,14 +25,14 @@ import Logger from "../../Logger";
 
 export default class ColorEndpoint {
 
-    /*
-     Retrieve data on a specific hex color.
-     @method GET
-     @header none
-     @uri /v1/color?hex=#F8B112&format=json
-     @param hex: string
-     @param format: string <json, png, jpg>
-     @return Promise<Express.Reponse>
+    /**
+     * Retrieve data on a specific hex color.
+     * @method GET
+     * @header none
+     * @uri /v1/color?hex=#F8B112&format=json
+     * @param hex: string
+     * @param format: string <json, png, jpg>
+     * @return Promise<Express.Reponse>
      */
 
     public static async hexToImage(req: Request, res: Response): Promise<Response> {

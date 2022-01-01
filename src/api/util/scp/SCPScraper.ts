@@ -23,10 +23,10 @@ import Logger from "../../../Logger";
 
 export default class SCPScraper {
 
-    /*
-     Get data on any SCP anomaly.
-     @param scp: string
-     @return Promise<any>
+    /**
+     * Get data on any SCP anomaly.
+     * @param scp string
+     * @return Promise<any>
      */
 
     public static async getScpData(scp: string): Promise<any> {

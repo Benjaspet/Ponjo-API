@@ -25,14 +25,14 @@ import APIUtil from "../util/api/APIUtil";
 
 export default class LGBTQEndpoint {
 
-    /*
-     Send a pride flag image.
-     @method GET
-     @header none
-     @uri /v1/pride/flags?type=asexual
-     @uri /v1/pride/flags/asexual
-     @param type: string
-     @return Promise<Express.Reponse|void>
+    /**
+     * Send a pride flag image.
+     * @method GET
+     * @header none
+     * @uri /v1/pride/flags?type=asexual
+     * @uri /v1/pride/flags/asexual
+     * @param type: string
+     * @return Promise<Express.Reponse|void>
      */
 
     public static async sendPrideFlag(req: Request, res: Response): Promise<Response|void> {
@@ -53,14 +53,14 @@ export default class LGBTQEndpoint {
         }
     }
 
-    /*
-     Search for a sexual or romantic orientation.
-     @method GET
-     @header none
-     @uri /v1/pride/orientations?type=sexual&q=asexual
-     @param type: string
-     @param q: string
-     @return Promise<Express.Response>
+    /**
+     * Search for a sexual or romantic orientation.
+     * @method GET
+     * @header none
+     * @uri /v1/pride/orientations?type=sexual&q=asexual
+     * @param type: string
+     * @param q: string
+     * @return Promise<Express.Response>
      */
 
     public static async searchForOrientation(req: Request, res: Response): Promise<Response> {
@@ -98,15 +98,15 @@ export default class LGBTQEndpoint {
         }
     }
 
-    /*
-     Add pride flairs to an avatar.
-     @method POST
-     @header none
-     @uri /pride/avatar?flair=abrosexual&avatar=<url-encoded>&format=png
-     @param flair: string
-     @param avatar: <uri-encoded> string
-     @param format?: string
-     @return Promise<Express.Response>
+    /**
+     * Add pride flairs to an avatar.
+     * @method POST
+     * @header none
+     * @uri /pride/avatar?flair=abrosexual&avatar=<url-encoded>&format=png
+     * @param flair: string
+     * @param avatar: <uri-encoded> string
+     * @param format?: string
+     * @return Promise<Express.Response>
      */
 
     public static async sendFlairedAvatar(req: Request, res: Response): Promise<Response> {

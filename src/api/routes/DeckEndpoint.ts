@@ -25,13 +25,13 @@ import Logger from "../../Logger";
 
 export default class DeckEndpoint {
 
-    /*
-     Evaluate a specific poker hand. Hands must have 3, 5, 6, or 7 cards.
-     @method GET
-     @header Authentication: token
-     @uri /v1/decks/evalhand?hand=Ah,As,2c,5d,9h
-     @param hand: string
-     @return Express.Response|any
+    /**
+     *  Evaluate a specific poker hand. Hands must have 3, 5, 6, or 7 cards.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/decks/evalhand?hand=Ah,As,2c,5d,9h
+     * @param hand: string
+     * @return Express.Response|any
      */
 
     public static getPokerHand(req: Request, res: Response): Response|any {
@@ -56,12 +56,12 @@ export default class DeckEndpoint {
         }
     }
 
-    /*
-     Create a virtual deck of cards.
-     @method POST
-     @header Authentication: token
-     @uri /v1/decks/create
-     @return Express.Response|any
+    /**
+     * Create a virtual deck of cards.
+     * @method POST
+     * @header Authentication: token
+     * @uri /v1/decks/create
+     * @return Express.Response|any
      */
 
     public static createDeck(req: Request, res: Response): Response|any {
@@ -100,13 +100,13 @@ export default class DeckEndpoint {
         }
     }
 
-    /*
-     Get a deck of cards by ID.
-     @method GET
-     @header Authentication: token
-     @uri /v1/decks/find?id=b9e1-4a5-68738
-     @param id: string
-     @return Express.Response|any
+    /**
+     * Get a deck of cards by ID.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/decks/find?id=b9e1-4a5-68738
+     * @param id: string
+     * @return Express.Response|any
      */
 
     public static getDeckById(req: Request, res: Response): Response|any {
@@ -138,13 +138,13 @@ export default class DeckEndpoint {
         }
     }
 
-    /*
-     Shuffle a deck by ID.
-     @method PATCH
-     @header Authentication: token
-     @uri /v1/decks/shuffle?id=b9e1-4a5-68738
-     @param id: string
-     @return Promise<Express.Response>
+    /**
+     * Shuffle a deck by ID.
+     * @method PATCH
+     * @header Authentication: token
+     * @uri /v1/decks/shuffle?id=b9e1-4a5-68738
+     * @param id: string
+     * @return Promise<Express.Response>
      */
 
     public static async shuffleDeckById(req: Request, res: Response): Promise<Response> {
@@ -189,14 +189,14 @@ export default class DeckEndpoint {
         }
     }
 
-    /*
-     Draw a specified number of cards from a deck.
-     @method PATCH
-     @header Authentication: token
-     @uri /v1/decks/draw?id=b9e1-4a5-68738&count=4
-     @param id: string
-     @param count: int
-     @return Promise<Express.Response>
+    /**
+     * Draw a specified number of cards from a deck.
+     * @method PATCH
+     * @header Authentication: token
+     * @uri /v1/decks/draw?id=b9e1-4a5-68738&count=4
+     * @param id: string
+     * @param count: int
+     * @return Promise<Express.Response>
      */
 
     public static async drawCards(req: Request, res: Response): Promise<Response> {
@@ -252,13 +252,13 @@ export default class DeckEndpoint {
         }
     }
 
-    /*
-     Reset a deck to its original state.
-     @method POST
-     @header Authentication: token
-     @uri /v1/decks/reset?id=b9e1-4a5-68738
-     @param id: string
-     @return Promise<Express.Response>
+    /**
+     * Reset a deck to its original state.
+     * @method POST
+     * @header Authentication: token
+     * @uri /v1/decks/reset?id=b9e1-4a5-68738
+     * @param id: string
+     * @return Promise<Express.Response>
      */
 
     public static async resetDeck(req: Request, res: Response): Promise<Response> {

@@ -25,14 +25,14 @@ import ErrorUtil from "../util/ErrorUtil";
 
 export default class RandomEndpoint {
 
-    /*
-     The route to obtain a random timezone.
-     @method GET
-     @header Authentication: token
-     @uri /v1/random/timezone?amount=6
-     @uri /v1/random/timezone/3
-     @param amount?: int
-     @return Promise<Express.Reponse>
+    /**
+     * The route to obtain a random timezone.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/random/timezone?amount=6
+     * @uri /v1/random/timezone/3
+     * @param amount?: int
+     * @return Promise<Express.Reponse>
      */
 
     public static async getRandomTimezone(req: Request, res: Response): Promise<Response> {
@@ -53,14 +53,14 @@ export default class RandomEndpoint {
         }
     }
 
-    /*
-     The route to return a random user profile.
-     @method GET
-     @header Authentication: token
-     @uri /v1/random/userprofile?amount=18
-     @uri /v1/random/userprofile/5
-     @param amount?: int
-     @return Promise<Express.Reponse>
+    /**
+     * The route to return a random user profile.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/random/userprofile?amount=18
+     * @uri /v1/random/userprofile/5
+     * @param amount?: int
+     * @return Promise<Express.Reponse>
      */
 
     public static async getRandomUserProfile(req: Request, res: Response): Promise<Response> {
@@ -81,15 +81,15 @@ export default class RandomEndpoint {
             });
         }
     }
-    
-    /*
-     The route to obtain a random affirmation.
-     @method GET
-     @header Authentication: token
-     @uri /v1/affirmations?count=12
-     @uri /v1/affirmations/12
-     @param count: int
-     @return Promise<Express.Reponse>
+
+    /**
+     * The route to obtain a random affirmation.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/affirmations?count=12
+     * @uri /v1/affirmations/12
+     * @param count: int
+     * @return Promise<Express.Reponse>
      */
 
     public static async getRandomAffirmation(req: Request, res: Response): Promise<Response> {
@@ -126,14 +126,14 @@ export default class RandomEndpoint {
         }
     }
 
-    /*
-     Returns a random month.
-     @method GET
-     @header none
-     @uri /v1/random/month/raw
-     @uri /v1/random/month?raw=true
-     @param raw: boolean
-     @return Promise<Express.Reponse>
+    /**
+     * Returns a random month.
+     * @method GET
+     * @header none
+     * @uri /v1/random/month/raw
+     * @uri /v1/random/month?raw=true
+     * @param raw: boolean
+     * @return Promise<Express.Reponse>
      */
 
     public static async getRandomMonth(req: Request, res: Response): Promise<Response> {

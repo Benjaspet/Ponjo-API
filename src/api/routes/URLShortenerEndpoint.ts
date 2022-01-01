@@ -23,13 +23,13 @@ import APIUtil from "../util/api/APIUtil";
 
 export default class URLShortenerEndpoint {
 
-    /*
-     Create a shortened URL.
-     @method POST
-     @header Authentication: token
-     @uri /v1/urlshortener/create
-     @param url: <uri-encoded> string
-     @return Promise<Express.Reponse>
+    /**
+     * Create a shortened URL.
+     * @method POST
+     * @header Authentication: token
+     * @uri /v1/urlshortener/create
+     * @param url: <uri-encoded> string
+     * @return Promise<Express.Reponse>
      */
 
     public static async createShortenedURL(req: Request, res: Response): Promise<Response> {
@@ -48,12 +48,13 @@ export default class URLShortenerEndpoint {
         }
     }
 
-    /*
-     Redirect a user to the specified short URL.
-     @method GET
-     @header none
-     @uri /short/78d5Adv2Aq
-     @return Promise<Express.Reponse|void>
+    /**
+     *
+     * Redirect a user to the specified short URL.
+     * @method GET
+     * @header none
+     * @uri /short/78d5Adv2Aq
+     * @return Promise<Express.Reponse|void>
      */
 
     public static async getShortenedURL(req: Request, res: Response): Promise<Response|void> {
@@ -70,12 +71,12 @@ export default class URLShortenerEndpoint {
         }
     }
 
-    /*
-     Fetch a list of all shortened URLs.
-     @method GET
-     @header none
-     @uri /v1/urlshortener/all
-     @return Promise<Express.Response>
+    /**
+     * Fetch a list of all shortened URLs.
+     * @method GET
+     * @header none
+     * @uri /v1/urlshortener/all
+     * @return Promise<Express.Response>
      */
 
     public static async getAllShortURLs(req: Request, res: Response): Promise<Response> {

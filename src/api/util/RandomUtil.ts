@@ -20,10 +20,10 @@ import Chance from "chance";
 
 export default class RandomUtil {
 
-    /*
-     Get a random month of the year.
-     @param raw: boolean
-     @return object | string
+    /**
+     * Get a random month of the year.
+     * @param raw boolean
+     * @return object|string
      */
 
     public static getRandomMonth(raw: boolean): object|string {
@@ -34,10 +34,10 @@ export default class RandomUtil {
         }
     }
 
-    /*
-     Get a random paragraph of text.
-     @param sentences?: number
-     @return string
+    /**
+     * Get a random paragraph of text.
+     * @param ?sentences number
+     * @return string
      */
 
     public static getRandomParagraph(sentences?: number): string {
@@ -48,10 +48,10 @@ export default class RandomUtil {
         }
     }
 
-    /*
-     Get a random user profile.
-     @param amount?: number
-     @return object[]
+    /**
+     * Get a random user profile.
+     * @param ?amount number
+     * @return object[]
      */
 
     public static getRandomUserProfile(amount?: number): object[] {
@@ -121,10 +121,10 @@ export default class RandomUtil {
         return profiles;
     }
 
-    /*
-     Get a random number of timezones.
-     @param amount: number
-     @return object
+    /**
+     * Get a random number of timezones.
+     * @param amount number
+     * @return object
      */
 
     public static getRandomTimezone(amount: number): object {

@@ -25,14 +25,14 @@ import Logger from "../../Logger";
 
 export default class GameQueryEndpoint {
 
-    /*
-     Returns a query of a Minecraft: Java Edition server.
-     @method GET
-     @header Authorization: token
-     @uri /v1/query/mcjava?host=lunar.gg&port=25565
-     @param host: string
-     @param port?: int
-     @return Promise<Express.Response>
+    /**
+     * Returns a query of a Minecraft: Java Edition server.
+     * @method GET
+     * @header Authorization: token
+     * @uri /v1/query/mcjava?host=lunar.gg&port=25565
+     * @param host: string
+     * @param port?: int
+     * @return Promise<Express.Response>
      */
 
     public static async queryJavaServer(req: Request, res: Response): Promise<Response> {
@@ -78,14 +78,14 @@ export default class GameQueryEndpoint {
         }
     }
 
-    /*
-     Returns a query of a Minecraft: Bedrock Edition server.
-     @method GET
-     @header Authorization: token
-     @uri /v1/query/mcbe?host=vasar.land&port=19132
-     @param host: string
-     @param port?: int
-     @return Promise<Express.Response>
+    /**
+     * Returns a query of a Minecraft: Bedrock Edition server.
+     * @method GET
+     * @header Authorization: token
+     * @uri /v1/query/mcbe?host=vasar.land&port=19132
+     * @param host: string
+     * @param port?: int
+     * @return Promise<Express.Response>
      */
 
     public static async queryBedrockServer(req: Request, res: Response): Promise<Response> {
@@ -126,13 +126,13 @@ export default class GameQueryEndpoint {
         }
     }
 
-    /*
-     Query a Fivem server.
-     @header Authorization: token
-     @uri /v1/query/fivem?host=127.0.0.1&port=30210
-     @param host: string
-     @param port: int
-     @return Promise<Express.Response>
+    /**
+     * Query a Fivem server.
+     * @header Authorization: token
+     * @uri /v1/query/fivem?host=127.0.0.1&port=30210
+     * @param host: string
+     * @param port: int
+     * @return Promise<Express.Response>
      */
 
     public static async queryFivemServer(req: Request, res: Response): Promise<Response> {
@@ -171,14 +171,14 @@ export default class GameQueryEndpoint {
         });
     }
 
-    /*
-     Query an ARK: Survival Evolved server.
-     @method GET
-     @header Authorization: token
-     @uri /v1/query/fivem?host=127.0.0.1&port=30210
-     @param host: string
-     @param port: int
-     @return Promise<Express.Response>
+    /**
+     * Query an ARK: Survival Evolved server.
+     * @method GET
+     * @header Authorization: token
+     * @uri /v1/query/fivem?host=127.0.0.1&port=30210
+     * @param host: string
+     * @param port: int
+     * @return Promise<Express.Response>
      */
 
     public static async queryArkServer(req: Request, res: Response): Promise<Response> {
