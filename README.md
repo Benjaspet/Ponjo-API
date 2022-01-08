@@ -31,7 +31,7 @@ Created & developed by: Ben Petrillo (Eerie6560)
 
 ### Documentation
 
-Full documentation is available [here](https://docs.ponjo.club).
+You can view the API's full documentation [here](https://docs.ponjo.club).
 
 ### License
 
