@@ -16,6 +16,7 @@
  * credit is given to the original author(s).
  */
 
+import {NextFunction, Request, Response} from "express";
 import * as express from "express";
 import limiter from "./config/RateLimitConfig";
 import ColorEndpoint from "./routes/ColorEndpoint";
@@ -24,7 +25,6 @@ import DataEndpoint from "./routes/DataEndpoint";
 import RandomEndpoint from "./routes/RandomEndpoint";
 import ImageManipulationEndpoint from "./routes/ImageManipulationEndpoint";
 import UtilityEndpoint from "./routes/UtilityEndpoint";
-import {NextFunction, Request, Response} from "express";
 import AuthorizationUtil from "./util/api/AuthorizationUtil";
 import GameQueryEndpoint from "./routes/GameQueryEndpoint";
 import DeckEndpoint from "./routes/DeckEndpoint";
@@ -75,11 +75,6 @@ premiumRouter.get("/qr", DataEndpoint.generateQRCode);
 
 premiumRouter.get("/elixir/nowplaying", ElixirEndpoint.getNowPlayingTrackInGuild);
 premiumRouter.get("/elixir/queue", ElixirEndpoint.getGuildMusicQueue);
-premiumRouter.put("/elixir/pause", ElixirEndpoint.pausePlayer);
-premiumRouter.put("/elixir/resume", ElixirEndpoint.resumePlayer);
-premiumRouter.put("/elixir/skip", ElixirEndpoint.skipPlayer);
-premiumRouter.put("/elixir/play", ElixirEndpoint.playTrackInGuild);
-premiumRouter.put("/elixir/shuffle", ElixirEndpoint.shufflePlayer);
 
 premiumRouter.get("/chatbot", DataEndpoint.sendChatbotMessage);
 premiumRouter.get("/captcha", DataEndpoint.getCaptchaData);
