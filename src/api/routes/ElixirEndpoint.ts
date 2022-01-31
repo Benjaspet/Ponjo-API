@@ -175,6 +175,45 @@ export default class ElixirEndpoint {
     }
 
     /**
+     * Shuffle the music queue in a guild.
+     * @method POST
+     * @header Authentication: token
+     * @uri /v1/elixir/shuffle?guild=9837624923642894376
+     * @param guild: string
+     * @return Promise<Express.Response|any>
+     */
+
+    public static async shufflePlayer(req: Request, res: Response): Promise<any> {
+        const guild: string = req.query.guild as string;
+        const host: string = Config.get("ELIXIR-API-HOST");
+        const port: string = Config.get("ELIXIR-API-PORT");
+        if (!guild) {
+            return ErrorUtil.send400Status(req, res);
+        }
+        try {
+            await fetch(`http://${host}:${port}/player?guildId=${guild}&action=shuffle`)
+                .then(response => response.text())
+                .then(data => {
+                    if (data.statusCode === 404) {
+                        return res.status(404).json({
+                            status: 404,
+                            message: "There is no queue in that guild.",
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    }
+                    return res.status(200).json({
+                        status: 200,
+                        message: "Successfully shuffled the music queue.",
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                });
+        } catch (error) {
+            console.log(error);
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /**
      * Skip to the next track in a guild's queue.
      * @method POST
      * @header Authentication: token
