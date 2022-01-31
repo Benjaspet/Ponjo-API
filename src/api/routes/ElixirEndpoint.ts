@@ -45,8 +45,8 @@ export default class ElixirEndpoint {
                 .then(response => response.json())
                 .then(data => {
                     if (data.statusCode === 404) {
-                        return res.status(404).json({
-                            status: 404,
+                        return res.status(204).json({
+                            status: 204,
                             message: "No song is currently playing.",
                             timestamps: APIUtil.getTimestamps()
                         });
@@ -117,8 +117,8 @@ export default class ElixirEndpoint {
                 .then(response => response.text())
                 .then(data => {
                     if (data.statusCode === 404) {
-                        return res.status(404).json({
-                            status: 404,
+                        return res.status(204).json({
+                            status: 204,
                             message: "There is no queue in that guild.",
                             timestamps: APIUtil.getTimestamps()
                         });
@@ -156,8 +156,8 @@ export default class ElixirEndpoint {
                 .then(response => response.text())
                 .then(data => {
                     if (data.statusCode === 404) {
-                        return res.status(404).json({
-                            status: 404,
+                        return res.status(204).json({
+                            status: 204,
                             message: "There is no queue in that guild.",
                             timestamps: APIUtil.getTimestamps()
                         });
@@ -195,8 +195,8 @@ export default class ElixirEndpoint {
                 .then(response => response.text())
                 .then(data => {
                     if (data.statusCode === 404) {
-                        return res.status(404).json({
-                            status: 404,
+                        return res.status(204).json({
+                            status: 204,
                             message: "There is no queue in that guild.",
                             timestamps: APIUtil.getTimestamps()
                         });
@@ -234,8 +234,8 @@ export default class ElixirEndpoint {
                 .then(response => response.text())
                 .then(data => {
                     if (data.statusCode === 404) {
-                        return res.status(404).json({
-                            status: 404,
+                        return res.status(204).json({
+                            status: 204,
                             message: "No song is currently playing.",
                             timestamps: APIUtil.getTimestamps()
                         });
