@@ -125,4 +125,14 @@ export default class APIUtil {
     public static replaceAll(str: string, find: string, replace: string): string {
         return str.replace(new RegExp(find, "g"), replace);
     }
+
+    /**
+     * Base64 encode a string (URI safe).
+     * @param str
+     * @return string
+     */
+
+    public static base64Encode(str: string): string {
+        return Buffer.from(str).toString("base64url");
+    }
 }

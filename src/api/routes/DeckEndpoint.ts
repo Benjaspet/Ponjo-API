@@ -26,7 +26,7 @@ import Logger from "../../Logger";
 export default class DeckEndpoint {
 
     /**
-     *  Evaluate a specific poker hand. Hands must have 3, 5, 6, or 7 cards.
+     * Evaluate a specific poker hand. Hands must have 3, 5, 6, or 7 cards.
      * @method GET
      * @header Authentication: token
      * @uri /v1/decks/evalhand?hand=Ah,As,2c,5d,9h

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Ben Petrillo. All rights reserved.
+ * Copyright © 2022 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -33,9 +33,8 @@ import RoboEerieEndpoint from "./routes/RoboEerieEndpoint";
 import AuthEndpoint from "./routes/AuthEndpoint";
 import multer from "multer";
 import HostingUtil from "./util/HostingUtil";
-import URLShortener from "./models/URLShortener";
 import URLShortenerEndpoint from "./routes/URLShortenerEndpoint";
-import QRCodeUtil from "./util/api/QRCodeUtil";
+import ElixirEndpoint from "./routes/ElixirEndpoint";
 
 const router = express.Router();
 const premiumRouter = express.Router();
@@ -73,6 +72,13 @@ router.post("/urlshortener/create", URLShortenerEndpoint.createShortenedURL);
 router.get("/urlshortener/all", URLShortenerEndpoint.getAllShortURLs);
 
 premiumRouter.get("/qr", DataEndpoint.generateQRCode);
+
+premiumRouter.get("/elixir/nowplaying", ElixirEndpoint.getNowPlayingTrackInGuild);
+premiumRouter.get("/elixir/queue", ElixirEndpoint.getGuildMusicQueue);
+premiumRouter.post("/elixir/pause", ElixirEndpoint.pausePlayer);
+premiumRouter.post("/elixir/resume", ElixirEndpoint.resumePlayer);
+premiumRouter.post("/elixir/skip", ElixirEndpoint.skipPlayer);
+premiumRouter.post("/elixir/play", ElixirEndpoint.playTrackInGuild);
 
 premiumRouter.get("/chatbot", DataEndpoint.sendChatbotMessage);
 premiumRouter.get("/captcha", DataEndpoint.getCaptchaData);

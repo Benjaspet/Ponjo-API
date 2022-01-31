@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Ben Petrillo. All rights reserved.
+ * Copyright © 2022 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -21,15 +21,11 @@ import * as express from "express";
 import * as path from "path";
 import * as bodyParser from "body-parser";
 import Router from "./Router";
-import ErrorUtil from "./util/ErrorUtil";
 import URLShortenerEndpoint from "./routes/URLShortenerEndpoint";
 import Images from "./models/Images";
 import Requests from "./models/Requests";
-import Logger from "../Logger";
 import APIUtil from "./util/api/APIUtil";
 import Keys from "./models/Keys";
-import RoboEerieUtil from "./util/RoboEerieUtil";
-import AuthorizationUtil from "./util/api/AuthorizationUtil";
 
 export class Application {
 
@@ -39,8 +35,8 @@ export class Application {
 
     private init(app: Express) {
 
-        /*
-         Setting up the view engine and our public static directories.
+        /**
+         * Setting up the view engine and our public static directories.
          */
 
         app.use(express.static(path.join(__dirname, "/public")));
@@ -48,16 +44,16 @@ export class Application {
         app.set("view engine", "ejs");
         app.set("views", __dirname + "/views");
 
-        /*
-         Handling the NGINX reverse proxy to accept all requests originating
-         from the Google DNS.
+        /**
+         * Handling the NGINX reverse proxy to accept all requests originating
+         * from the Google DNS.
          */
 
         app.set("trust proxy", "8.8.8.8");
         app.set("trust proxy", 1);
 
-        /*
-         URL encoding and other configuration settings.
+        /**
+         * URL encoding and other configuration settings.
          */
 
         app.use(express.urlencoded({extended: false}));
@@ -66,7 +62,7 @@ export class Application {
         app.use(this.requestMiddleware);
 
         /*
-         Setting our base endpoints and their callbacks.
+         * Setting our base endpoints and their callbacks.
          */
 
         app.get("/", async (req: Request, res: Response) => {return res.render("index", {requests: await APIUtil.getTotalApiRequests(), keys: await Keys.find()})});
@@ -76,7 +72,7 @@ export class Application {
         app.get("/short/:shortURL", URLShortenerEndpoint.getShortenedURL);
 
         /*
-         Initialize the routers.
+         * Initialize the routers.
          */
 
         app.use("/v1", Router.v1);
@@ -84,8 +80,8 @@ export class Application {
         app.use("/uploads", Router.hosting);
 
         /*
-         FINAL: DEFAULT HTTP ERROR CALLBACKS BELOW.
-         Only run if all above methods fail or cannot be found.
+         * FINAL: DEFAULT HTTP ERROR CALLBACKS BELOW.
+         * Only run if all above methods fail or cannot be found.
          */
 
         app.use((req: Request, res: Response) => {return res.render("404")});

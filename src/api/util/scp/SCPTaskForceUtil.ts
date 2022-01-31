@@ -24,7 +24,7 @@ export default class SCPTaskForceUtil {
 
     /**
      * Gets all SCP Foundation Task Force data.
-     * @return Promise
+     * @return Promise<any>
      */
 
     public static async getTaskForceData(): Promise<any> {
@@ -56,10 +56,11 @@ export default class SCPTaskForceUtil {
                         const joined = resolved.join("");
                         const fixed = joined.slice(0, -1);
                         dictionary.push({
-                            name: taskForces[i],
-                            alt: fixed,
-                            description: descriptions[i],
-                            logo: images[i]
+                            [fixed]: {
+                                name: taskForces[i],
+                                description: descriptions[i],
+                                logo: images[i]
+                            }
                         });
                     }
                     dictionary.pop();
