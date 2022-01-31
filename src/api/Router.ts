@@ -75,11 +75,11 @@ premiumRouter.get("/qr", DataEndpoint.generateQRCode);
 
 premiumRouter.get("/elixir/nowplaying", ElixirEndpoint.getNowPlayingTrackInGuild);
 premiumRouter.get("/elixir/queue", ElixirEndpoint.getGuildMusicQueue);
-premiumRouter.post("/elixir/pause", ElixirEndpoint.pausePlayer);
-premiumRouter.post("/elixir/resume", ElixirEndpoint.resumePlayer);
-premiumRouter.post("/elixir/skip", ElixirEndpoint.skipPlayer);
-premiumRouter.post("/elixir/play", ElixirEndpoint.playTrackInGuild);
-premiumRouter.post("/elixir/shuffle", ElixirEndpoint.shufflePlayer);
+premiumRouter.put("/elixir/pause", ElixirEndpoint.pausePlayer);
+premiumRouter.put("/elixir/resume", ElixirEndpoint.resumePlayer);
+premiumRouter.put("/elixir/skip", ElixirEndpoint.skipPlayer);
+premiumRouter.put("/elixir/play", ElixirEndpoint.playTrackInGuild);
+premiumRouter.put("/elixir/shuffle", ElixirEndpoint.shufflePlayer);
 
 premiumRouter.get("/chatbot", DataEndpoint.sendChatbotMessage);
 premiumRouter.get("/captcha", DataEndpoint.getCaptchaData);

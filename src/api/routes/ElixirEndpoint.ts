@@ -20,7 +20,7 @@ import {Request, Response} from "express";
 import Config from "../config/Config";
 import APIUtil from "../util/api/APIUtil";
 import ErrorUtil from "../util/ErrorUtil";
-import fetch from "node-fetch";
+import axios from "axios";
 
 export default class ElixirEndpoint {
 
@@ -41,28 +41,31 @@ export default class ElixirEndpoint {
             return ErrorUtil.send400Status(req, res);
         }
         try {
-            let status: number;
-            await fetch(`http://${host}:${port}/player?guildId=${guild}&action=nowplaying`)
-                .then(response => {
-                    response.json();
-                    status = response.status;
-                }).then(data => {
-                    if (status === 404) {
-                        return res.status(410).json({
-                            status: 410,
-                            message: "No song is currently playing.",
-                            timestamps: APIUtil.getTimestamps()
-                        });
-                    } else if (status === 200) {
+            await axios.get(`http://${host}:${port}/player?guildId=${guild}&action=nowplaying`)
+                .then(data => {
+                    if (data.status === 200) {
                         return res.status(200).json({
                             status: 200,
                             nowplaying: data,
                             timestamps: APIUtil.getTimestamps()
                         });
                     }
+                }).catch(error => {
+                    if (error.response && error.response.status === 301) {
+                        return res.status(200).json({
+                            status: 200,
+                            nowplaying: error.response.data,
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    } else if (error.response.data.status === 404) {
+                        return res.status(410).json({
+                            status: 410,
+                            message: "No song is currently playing.",
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    }
                 });
         } catch (error) {
-            console.log(error);
             return ErrorUtil.sent500Status(req, res);
         }
     }
@@ -85,22 +88,21 @@ export default class ElixirEndpoint {
             return ErrorUtil.send400Status(req, res);
         }
         try {
-            let status: number;
-            await fetch(`http://${host}:${port}/queue?guildId=${guild}&action=queue`)
-                .then(response => {
-                    response.text();
-                    status = response.status;
-                }).then(data => {
-                    if (status === 404) {
+            await axios.get(`http://${host}:${port}/queue?guildId=${guild}&action=queue`)
+                .then(data => {
+                    //console.log(data);
+                    if (data.status === 200) {
+                        return res.status(200).json({
+                            status: 200,
+                            queue: JSON.parse(Buffer.from(data.data, "base64url").toString()),
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    }
+                }).catch(error => {
+                    if (error.response.data.status === 404) {
                         return res.status(410).json({
                             status: 410,
                             message: "No songs are in the queue.",
-                            timestamps: APIUtil.getTimestamps()
-                        });
-                    } else if (status === 200) {
-                        return res.status(200).json({
-                            status: 200,
-                            queue: JSON.parse(Buffer.from(data, "base64url").toString()),
                             timestamps: APIUtil.getTimestamps()
                         });
                     }
@@ -128,22 +130,20 @@ export default class ElixirEndpoint {
             return ErrorUtil.send400Status(req, res);
         }
         try {
-            let status: number;
-            await fetch(`http://${host}:${port}/player?guildId=${guild}&action=pause`)
-                .then(response => {
-                    response.text();
-                    status = response.status;
-                }).then(() => {
-                    if (status === 404) {
-                        return res.status(410).json({
-                            status: 410,
-                            message: "There is no queue in that guild.",
-                            timestamps: APIUtil.getTimestamps()
-                        });
-                    } else if (status === 200) {
+            await axios.get(`http://${host}:${port}/player?guildId=${guild}&action=pause`)
+                .then(data => {
+                    if (data.status === 200) {
                         return res.status(200).json({
                             status: 200,
                             message: "Successfully paused the player.",
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    }
+                }).catch(error => {
+                    if (error.response === 404) {
+                        return res.status(410).json({
+                            status: 410,
+                            message: "There is no queue in that guild.",
                             timestamps: APIUtil.getTimestamps()
                         });
                     }
@@ -171,22 +171,20 @@ export default class ElixirEndpoint {
             return ErrorUtil.send400Status(req, res);
         }
         try {
-            let status: number;
-            await fetch(`http://${host}:${port}/player?guildId=${guild}&action=resume`)
-                .then(response => {
-                    response.text();
-                    status = response.status;
-                }).then(() => {
-                    if (status === 404) {
-                        return res.status(410).json({
-                            status: 410,
-                            message: "There is no queue in that guild.",
-                            timestamps: APIUtil.getTimestamps()
-                        });
-                    } else if (status === 200) {
+            await axios.get(`http://${host}:${port}/player?guildId=${guild}&action=resume`)
+                .then(data => {
+                    if (data.status === 200) {
                         return res.status(200).json({
                             status: 200,
                             message: "Successfully resumed the player.",
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    }
+                }).catch(error => {
+                    if (error.response === 404) {
+                        return res.status(410).json({
+                            status: 410,
+                            message: "There is no queue in that guild.",
                             timestamps: APIUtil.getTimestamps()
                         });
                     }
@@ -214,22 +212,21 @@ export default class ElixirEndpoint {
             return ErrorUtil.send400Status(req, res);
         }
         try {
-            let status: number;
-            await fetch(`http://${host}:${port}/player?guildId=${guild}&action=shuffle`)
-                .then(response => {
-                    response.text();
-                    status = response.status;
-                }).then(() => {
-                    if (status === 404) {
+            await axios.get(`http://${host}:${port}/queue?guildId=${guild}&action=shuffle`)
+                .then(data => {
+                    if (data.status === 200) {
+                        return res.status(200).json({
+                            status: 200,
+                            message: "Successfully shuffled the queue.",
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    }
+                }).catch(error => {
+                    console.log(error);
+                    if (error.response.status === 404) {
                         return res.status(410).json({
                             status: 410,
                             message: "There is no queue in that guild.",
-                            timestamps: APIUtil.getTimestamps()
-                        });
-                    } else if (status === 200) {
-                        return res.status(200).json({
-                            status: 200,
-                            message: "Successfully shuffled the music queue.",
                             timestamps: APIUtil.getTimestamps()
                         });
                     }
@@ -257,22 +254,20 @@ export default class ElixirEndpoint {
             return ErrorUtil.send400Status(req, res);
         }
         try {
-            let status: number;
-            await fetch(`http://${host}:${port}/player?guildId=${guild}&action=skip`)
-                .then(response => {
-                    response.text();
-                    status = response.status;
-                }).then(data => {
-                    if (status === 404) {
-                        return res.status(410).json({
-                            status: 410,
-                            message: "No song is currently playing.",
-                            timestamps: APIUtil.getTimestamps()
-                        });
-                    } else if (status === 200) {
+            await axios.get(`http://${host}:${port}/player?guildId=${guild}&action=skip`)
+                .then(data => {
+                    if (data.status === 200) {
                         return res.status(200).json({
                             status: 200,
                             message: "Successfully skipped to the next track.",
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    }
+                }).catch(error => {
+                    if (error.response.status === 404) {
+                        return res.status(410).json({
+                            status: 410,
+                            message: "No song is currently playing.",
                             timestamps: APIUtil.getTimestamps()
                         });
                     }
@@ -302,22 +297,19 @@ export default class ElixirEndpoint {
             return ErrorUtil.send400Status(req, res);
         }
         try {
-            let status: number;
-            await fetch(`http://${host}:${port}/player?guildId=${guild}&action=play&query=${APIUtil.base64Encode(decodeURIComponent(searchQuery))}`)
-                .then(response => {
-                    response.text();
-                    status = response.status;
-                }).then(() => {
-                    if (status === 404) {
-                        return res.status(410).json({
-                            status: 410,
-                            message: "No song is currently playing.",
-                            timestamps: APIUtil.getTimestamps()
-                        });
-                    } else if (status === 200) {
+            await axios.get(`http://${host}:${port}/player?guildId=${guild}&action=play&query=${APIUtil.base64Encode(decodeURIComponent(searchQuery))}`)
+                .then(data => {
+                    console.log(data);
+                    return res.status(200).json({
+                        status: 200,
+                        message: "Succeeded.",
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                }).catch(error => {
+                    if (error.response.status === 301 || error.response.status === 404) {
                         return res.status(200).json({
                             status: 200,
-                            message: "Successfully added the track to the queue.",
+                            data: JSON.parse(Buffer.from(error.response.data, "base64").toString()),
                             timestamps: APIUtil.getTimestamps()
                         });
                     }
