@@ -84,7 +84,7 @@ export class Application {
          * Only run if all above methods fail or cannot be found.
          */
 
-        app.use((req: Request, res: Response) => {return res.render("404")});
+        app.use((req: Request, res: Response) => {return res.status(404).render("404")});
     }
 
     private async requestMiddleware(req: Request, res: Response, next: NextFunction) {
