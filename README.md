@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-    Countless endpoints, quick response times, and easy-to-parse JSON responses. Integrating utility services into your application has never been easier.
+    Countless endpoints, quick response times, and easily parsable JSON responses. Integrating utility services into your application has never been easier.
 </p>
 
 - The Ponjo API has numerous utility endpoints to assist you in creating a flexible, responsive, and productive application.
@@ -31,7 +31,7 @@ Created & developed by: Ben Petrillo (Eerie6560)
 
 ### Documentation
 
-Full documentation is available [here](https://docs.ponjo.club).
+You can view the API's full documentation [here](https://docs.ponjo.club).
 
 ### License
 
