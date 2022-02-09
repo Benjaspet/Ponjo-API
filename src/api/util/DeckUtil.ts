@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Ben Petrillo. All rights reserved.
+ * Copyright © 2022 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -39,7 +39,7 @@ export default class DeckUtil {
 
     /**
      * Shuffle a virtual deck of cards.
-     * @param deck  string[]
+     * @param deck
      * @return string[]
      */
 
@@ -56,18 +56,18 @@ export default class DeckUtil {
 
     /**
      * Evaluate a poker hand.
-     * @param hand string[]
+     * @param deck
      * @return object|any
      */
 
-    public static evaluateHand(hand: string[]): object|any {
-        return PokerEvaluator.evalHand(hand) as object;
+    public static evaluateHand(deck: string[]): object|any {
+        return PokerEvaluator.evalHand(deck) as object;
     }
 
     /**
      * Draw a card from a virtual deck.
-     * @param deck string[]
-     * @param amount number
+     * @param deck
+     * @param amount
      * @return object|any
      */
 

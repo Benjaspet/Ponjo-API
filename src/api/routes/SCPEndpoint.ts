@@ -36,7 +36,7 @@ export default class SCPEndpoint {
      */
 
     public static async getScpData(req: Request, res: Response): Promise<Response> {
-        const item = req.query.item as string;
+        const item: string = req.query.item as string;
         try {
             if (!item) {
                 return res.status(500).json({
@@ -45,7 +45,7 @@ export default class SCPEndpoint {
                     timestamps: APIUtil.getTimestamps()
                 });
             }
-            SCPScraper.getScpData(item)
+            await SCPScraper.getScpData(item)
                 .then(result => {
                     if (!result) {
                         return res.status(400).json({

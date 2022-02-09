@@ -173,9 +173,9 @@ export default class DeckEndpoint {
                                 message: res.statusMessage,
                                 deckId: deckId,
                                 deck: shuffledDeck,
-                                details: {
-                                    shuffled: result.shuffled,
-                                    remainingCards: result.remainingCards
+                                data: {
+                                    shuffled: true,
+                                    remainingCards: deck.deck.length
                                 },
                                 timestamps: APIUtil.getTimestamps()
                             });
@@ -234,7 +234,7 @@ export default class DeckEndpoint {
                                 status: res.statusCode,
                                 deckId: deckId,
                                 deck: drawn.updatedDeck,
-                                details: {
+                                data: {
                                     shuffled: deck.shuffled,
                                     remainingCards: drawn.remainingCards,
                                     drawnCards: drawn.cardsDrawn,
@@ -279,7 +279,7 @@ export default class DeckEndpoint {
                         deckId: deckId,
                         deck: DeckUtil.createDeck(),
                         data: {
-                            shuffled: deck.data.shuffled,
+                            shuffled: false,
                             remainingCards: deck.data.remainingCards
                         },
                         timestamps: APIUtil.getTimestamps()

@@ -33,7 +33,7 @@ export default class UtilityEndpoint {
      */
 
     public static async checkIfNumberIsPrime(req: Request, res: Response): Promise<Response> {
-        const number = req.query.number ? req.query.number : req.params.number as any;
+        const number: string = req.query.number ? req.query.number : req.params.number as any;
         try {
             if (!number) return ErrorUtil.send400Status(req, res);
             return res.status(200).json({

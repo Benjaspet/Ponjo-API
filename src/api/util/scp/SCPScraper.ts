@@ -25,7 +25,7 @@ export default class SCPScraper {
 
     /**
      * Get data on any SCP anomaly.
-     * @param scp string
+     * @param scp: string
      * @return Promise<any>
      */
 
@@ -89,6 +89,12 @@ export default class SCPScraper {
                             if (objectClass === "") objectClass = "Undefined.";
                             if (procedures === "") procedures = "Undefined.";
                             if (description === "") description = "Undefined.";
+                            if (item.length == 0 && objectClass.length == 0 && procedures.length == 0 && description.length == 0) {
+                                reject({
+                                    message: "An SCP by that item number was not found."
+                                });
+                                return;
+                            }
                             for (let i = 0; i < SCPExceptions.length; i++) {
                                 if (SCPExceptions[i].item === "SCP-" + scp) {
                                     resolve({
@@ -115,6 +121,7 @@ export default class SCPScraper {
                     reject({
                         message: "An SCP by that item number was not found."
                     });
+                    return;
                 }
             });
         }).catch(error => {
