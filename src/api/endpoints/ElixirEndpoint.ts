@@ -46,7 +46,7 @@ export default class ElixirEndpoint {
                     if (data.status === 200) {
                         return res.status(200).json({
                             status: 200,
-                            nowplaying: data.data,
+                            nowplaying: JSON.parse(APIUtil.base64Decode(data.data)),
                             timestamps: APIUtil.getTimestamps()
                         });
                     }
@@ -108,6 +108,45 @@ export default class ElixirEndpoint {
                             timestamps: APIUtil.getTimestamps()
                         });
                     }
+                });
+        } catch (error) {
+            console.log(error);
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /**
+     * Skip to the next track in a guild's queue.
+     * @method POST
+     * @header Authentication: token
+     * @uri /v1/elixir/skip?guild=9837624923642894376
+     * @return Promise<Express.Response|any>
+     */
+
+    public static async skipToNextTrack(req: Request, res: Response): Promise<any> {
+        const guild: string = req.query.guild as string;
+        const host: string = Config.get("ELIXIR-API-HOST");
+        const port: string = Config.get("ELIXIR-API-PORT");
+        if (!guild) {
+            return ErrorUtil.send400Status(req, res);
+        }
+        try {
+            await axios.get(`http://${host}:${port}/player?guildId=${guild}&action=skip`)
+                .then(data => {
+                    if (data.status === 200) {
+                        return res.status(200).json({
+                            status: 200,
+                            message: "Successfully skipped to the next track.",
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    }
+                }).catch(error => {
+                    console.log(error);
+                    return res.status(410).json({
+                        status: 410,
+                        message: "Unable to skip to the next track.",
+                        timestamps: APIUtil.getTimestamps()
+                    });
                 });
         } catch (error) {
             console.log(error);

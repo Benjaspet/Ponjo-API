@@ -135,4 +135,14 @@ export default class APIUtil {
     public static base64Encode(str: string): string {
         return Buffer.from(str).toString("base64url");
     }
+
+    /**
+     * Base64 decode a string (URI safe).
+     * @param str
+     * @return string
+     */
+
+    public static base64Decode(str: string): string {
+        return Buffer.from(str, "base64url").toString("ascii");
+    }
 }

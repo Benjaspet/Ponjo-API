@@ -21,7 +21,7 @@ import * as express from "express";
 import * as path from "path";
 import * as bodyParser from "body-parser";
 import Router from "./Router";
-import URLShortenerEndpoint from "./routes/URLShortenerEndpoint";
+import URLShortenerEndpoint from "./endpoints/URLShortenerEndpoint";
 import Images from "./models/Images";
 import Requests from "./models/Requests";
 import APIUtil from "./util/api/APIUtil";

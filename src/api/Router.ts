@@ -19,22 +19,22 @@
 import {NextFunction, Request, Response} from "express";
 import * as express from "express";
 import limiter from "./config/RateLimitConfig";
-import ColorEndpoint from "./routes/ColorEndpoint";
-import LGBTQEndpoint from "./routes/LGBTQEndpoint";
-import DataEndpoint from "./routes/DataEndpoint";
-import RandomEndpoint from "./routes/RandomEndpoint";
-import ImageManipulationEndpoint from "./routes/ImageManipulationEndpoint";
-import UtilityEndpoint from "./routes/UtilityEndpoint";
+import ColorEndpoint from "./endpoints/ColorEndpoint";
+import LGBTQEndpoint from "./endpoints/LGBTQEndpoint";
+import DataEndpoint from "./endpoints/DataEndpoint";
+import RandomEndpoint from "./endpoints/RandomEndpoint";
+import ImageManipulationEndpoint from "./endpoints/ImageManipulationEndpoint";
+import UtilityEndpoint from "./endpoints/UtilityEndpoint";
 import AuthorizationUtil from "./util/api/AuthorizationUtil";
-import GameQueryEndpoint from "./routes/GameQueryEndpoint";
-import DeckEndpoint from "./routes/DeckEndpoint";
-import SCPEndpoint from "./routes/SCPEndpoint";
-import RoboEerieEndpoint from "./routes/RoboEerieEndpoint";
-import AuthEndpoint from "./routes/AuthEndpoint";
+import GameQueryEndpoint from "./endpoints/GameQueryEndpoint";
+import DeckEndpoint from "./endpoints/DeckEndpoint";
+import SCPEndpoint from "./endpoints/SCPEndpoint";
+import RoboEerieEndpoint from "./endpoints/RoboEerieEndpoint";
+import AuthEndpoint from "./endpoints/AuthEndpoint";
 import multer from "multer";
 import HostingUtil from "./util/HostingUtil";
-import URLShortenerEndpoint from "./routes/URLShortenerEndpoint";
-import ElixirEndpoint from "./routes/ElixirEndpoint";
+import URLShortenerEndpoint from "./endpoints/URLShortenerEndpoint";
+import ElixirEndpoint from "./endpoints/ElixirEndpoint";
 
 const router = express.Router();
 const premiumRouter = express.Router();
@@ -75,6 +75,7 @@ premiumRouter.get("/qr", DataEndpoint.generateQRCode);
 
 premiumRouter.get("/elixir/nowplaying", ElixirEndpoint.getNowPlayingTrackInGuild);
 premiumRouter.get("/elixir/queue", ElixirEndpoint.getGuildMusicQueue);
+premiumRouter.post("/elixir/skip", ElixirEndpoint.skipToNextTrack);
 
 premiumRouter.get("/chatbot", DataEndpoint.sendChatbotMessage);
 premiumRouter.get("/captcha", DataEndpoint.getCaptchaData);
