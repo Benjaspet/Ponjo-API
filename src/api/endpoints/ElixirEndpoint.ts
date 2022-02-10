@@ -217,8 +217,7 @@ export default class ElixirEndpoint {
                         return res.status(200).json({
                             status: 200,
                             message: "Successfully skipped to the next track.",
-                            timestamps: APIUtil.getTimestamps(),
-                            isFucked: true
+                            timestamps: APIUtil.getTimestamps()
                         });
                     }
                 }).catch(error => {
