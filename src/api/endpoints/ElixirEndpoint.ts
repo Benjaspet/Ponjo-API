@@ -116,6 +116,86 @@ export default class ElixirEndpoint {
     }
 
     /**
+     * Pause the currently playing track in a guild queue.
+     * @method POST
+     * @header Authentication: token
+     * @uri /v1/elixir/pause?guild=9837624923642894376
+     * @param guild: string
+     * @return Promise<Express.Response|any>
+     */
+
+    public static async pausePlayer(req: Request, res: Response): Promise<any> {
+        const guild: string = req.query.guild as string;
+        const host: string = Config.get("ELIXIR-API-HOST");
+        const port: string = Config.get("ELIXIR-API-PORT");
+        if (!guild) {
+            return ErrorUtil.send400Status(req, res);
+        }
+        try {
+            await axios.get(`http://${host}:${port}/player?guildId=${guild}&action=pause`)
+                .then(data => {
+                    if (data.status === 200) {
+                        return res.status(200).json({
+                            status: 200,
+                            message: "Successfully paused the player.",
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    }
+                }).catch(error => {
+                    console.log(error);
+                    return res.status(410).json({
+                        status: 410,
+                        message: "Unable to skip to the next track.",
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                });
+        } catch (error) {
+            console.log(error);
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /**
+     * Resume the currently paused track in a guild.
+     * @method POST
+     * @header Authentication: token
+     * @uri /v1/elixir/resume?guild=9837624923642894376
+     * @param guild: string
+     * @return Promise<Express.Response|any>
+     */
+
+    public static async resumePlayer(req: Request, res: Response): Promise<any> {
+        const guild: string = req.query.guild as string;
+        const host: string = Config.get("ELIXIR-API-HOST");
+        const port: string = Config.get("ELIXIR-API-PORT");
+        if (!guild) {
+            return ErrorUtil.send400Status(req, res);
+        }
+        try {
+            await axios.get(`http://${host}:${port}/player?guildId=${guild}&action=resume`)
+                .then(data => {
+                    if (data.status === 200) {
+                        return res.status(200).json({
+                            status: 200,
+                            message: "Successfully resumed the player.",
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    }
+                }).catch(error => {
+                    console.log(error);
+                    return res.status(410).json({
+                        status: 410,
+                        message: "Unable to skip to the next track.",
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                });
+        } catch (error) {
+            console.log(error);
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /**
      * Skip to the next track in a guild's queue.
      * @method POST
      * @header Authentication: token
@@ -137,7 +217,8 @@ export default class ElixirEndpoint {
                         return res.status(200).json({
                             status: 200,
                             message: "Successfully skipped to the next track.",
-                            timestamps: APIUtil.getTimestamps()
+                            timestamps: APIUtil.getTimestamps(),
+                            isFucked: true
                         });
                     }
                 }).catch(error => {
@@ -145,6 +226,90 @@ export default class ElixirEndpoint {
                     return res.status(410).json({
                         status: 410,
                         message: "Unable to skip to the next track.",
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                });
+        } catch (error) {
+            console.log(error);
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /**
+     * Shuffle the music queue in a guild.
+     * @method POST
+     * @header Authentication: token
+     * @uri /v1/elixir/shuffle?guild=9837624923642894376
+     * @param guild: string
+     * @return Promise<Express.Response|any>
+     */
+
+    public static async shufflePlayer(req: Request, res: Response): Promise<any> {
+        const guild: string = req.query.guild as string;
+        const host: string = Config.get("ELIXIR-API-HOST");
+        const port: string = Config.get("ELIXIR-API-PORT");
+        if (!guild) {
+            return ErrorUtil.send400Status(req, res);
+        }
+        try {
+            await axios.get(`http://${host}:${port}/queue?guildId=${guild}&action=shuffle`)
+                .then(data => {
+                    if (data.status === 200) {
+                        return res.status(200).json({
+                            status: 200,
+                            message: "Successfully shuffled the queue.",
+                            timestamps: APIUtil.getTimestamps()
+                        });
+                    }
+                }).catch(error => {
+                    return res.status(410).json({
+                        status: 410,
+                        message: "There is no queue in that guild.",
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                });
+        } catch (error) {
+            console.log(error);
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /**
+     * Play a music track in a guild.
+     * @method POST
+     * @header Authentication: token
+     * @uri /v1/elixir/play?guild=9837624923642894376&query=aHR0cHM6Ly93d3cueW9
+     * @param guild: string
+     * @param query: base64 string
+     * @return Promise<Express.Response|any>
+     */
+
+    public static async playTrackInGuild(req: Request, res: Response): Promise<any> {
+        const guild: string = req.query.guild as string;
+        let searchQuery: string = req.query.query as string;
+        const host: string = Config.get("ELIXIR-API-HOST");
+        const port: string = Config.get("ELIXIR-API-PORT");
+        if (!guild || !searchQuery) {
+            return ErrorUtil.send400Status(req, res);
+        }
+        try {
+            if (Buffer.from(searchQuery, "base64").toString("base64") !== searchQuery) {
+                searchQuery = APIUtil.base64Encode(decodeURIComponent(searchQuery));
+            } else {
+                searchQuery = decodeURIComponent(searchQuery);
+            }
+            await axios.get(`http://${host}:${port}/player?guildId=${guild}&action=play&query=${searchQuery}`)
+                .then(data => {
+                    return res.status(200).json({
+                        status: 200,
+                        data: JSON.parse(APIUtil.base64Decode(data.data)),
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                }).catch(error => {
+                    console.log(error);
+                    return res.status(200).json({
+                        status: 200,
+                        data: JSON.parse(Buffer.from(error.response.data, "base64").toString()),
                         timestamps: APIUtil.getTimestamps()
                     });
                 });
