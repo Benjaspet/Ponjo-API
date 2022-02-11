@@ -20,7 +20,7 @@ import express from "express";
 import {Application} from "./api/Application";
 import * as http from "http";
 import Logger from "./Logger";
-import Config from "./api/config/Config";
+import Config from "./Config";
 
 const app = express();
 new Application(app);

@@ -17,7 +17,7 @@
  */
 
 import {Request, Response} from "express";
-import Config from "../config/Config";
+import Config from "../../Config";
 import APIUtil from "../util/api/APIUtil";
 import ErrorUtil from "../util/ErrorUtil";
 import axios from "axios";
@@ -302,6 +302,44 @@ export default class ElixirEndpoint {
                     return res.status(200).json({
                         status: 200,
                         data: JSON.parse(APIUtil.base64Decode(data.data)),
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                }).catch(error => {
+                    console.log(error);
+                    return res.status(200).json({
+                        status: 200,
+                        data: JSON.parse(Buffer.from(error.response.data, "base64").toString()),
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                });
+        } catch (error) {
+            console.log(error);
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /**
+     * Fetch a playlist by ID.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/elixir/playlist/fetch?id=eeries-playlist
+     * @param id: string
+     * @return Promise<Express.Response|any>
+     */
+
+    public static async fetchPlaylist(req: Request, res: Response): Promise<any> {
+        const id: string = req.query.id as string;
+        const host: string = Config.get("ELIXIR-API-HOST");
+        const port: string = Config.get("ELIXIR-API-PORT");
+        try {
+            if (!id) {
+                return ErrorUtil.send400Status(req, res);
+            }
+            await axios.get(`http://${host}:${port}/playlist?playlistId=${id}&action=fetch`)
+                .then(response => {
+                    return res.status(200).json({
+                        status: 200,
+                        data: JSON.parse(APIUtil.base64Decode(response.data)),
                         timestamps: APIUtil.getTimestamps()
                     });
                 }).catch(error => {

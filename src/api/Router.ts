@@ -18,6 +18,7 @@
 
 import {NextFunction, Request, Response} from "express";
 import * as express from "express";
+import multer from "multer";
 import limiter from "./config/RateLimitConfig";
 import ColorEndpoint from "./endpoints/ColorEndpoint";
 import LGBTQEndpoint from "./endpoints/LGBTQEndpoint";
@@ -31,7 +32,6 @@ import DeckEndpoint from "./endpoints/DeckEndpoint";
 import SCPEndpoint from "./endpoints/SCPEndpoint";
 import RoboEerieEndpoint from "./endpoints/RoboEerieEndpoint";
 import AuthEndpoint from "./endpoints/AuthEndpoint";
-import multer from "multer";
 import HostingUtil from "./util/HostingUtil";
 import URLShortenerEndpoint from "./endpoints/URLShortenerEndpoint";
 import ElixirEndpoint from "./endpoints/ElixirEndpoint";
@@ -80,6 +80,7 @@ premiumRouter.post("/elixir/pause", ElixirEndpoint.pausePlayer);
 premiumRouter.post("/elixir/resume", ElixirEndpoint.resumePlayer);
 premiumRouter.post("/elixir/shuffle", ElixirEndpoint.shufflePlayer);
 premiumRouter.post("/elixir/play", ElixirEndpoint.playTrackInGuild);
+premiumRouter.get("/elixir/playlist/fetch", ElixirEndpoint.fetchPlaylist);
 
 premiumRouter.get("/chatbot", DataEndpoint.sendChatbotMessage);
 premiumRouter.get("/captcha", DataEndpoint.getCaptchaData);

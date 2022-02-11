@@ -17,9 +17,7 @@
  */
 
 import mongoose from "mongoose";
-import * as environment from "dotenv";
-
-environment.config();
+import Config from "../../Config";
 
 export default class DatabaseConnection {
 
@@ -27,7 +25,7 @@ export default class DatabaseConnection {
     public roboEerieDatabase;
 
     constructor() {
-        this.ponjoDatabase = mongoose.createConnection(process.env["PONJOAPI-URI"], {
+        this.ponjoDatabase = mongoose.createConnection(Config.get("PONJOAPI-URI"), {
             // @ts-ignore
             useNewUrlParser: true,
             useUnifiedTopology: true

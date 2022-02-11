@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Ben Petrillo. All rights reserved.
+ * Copyright 2022 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -16,13 +16,19 @@
  * credit is given to the original author(s).
  */
 
-import dotenv from "dotenv";
+import * as environment from "dotenv";
 
-dotenv.config();
+environment.config();
 
 export default class Config {
 
-    public static get(key: string): string|undefined {
+    /**
+     * Get a value from the config.
+     * @param key
+     * @return string
+     */
+
+    public static get(key: string): string {
         return process.env[key];
     }
 }
