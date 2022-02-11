@@ -43,13 +43,11 @@ export default class ElixirEndpoint {
         try {
             await axios.get(`http://${host}:${port}/player?guildId=${guild}&action=nowplaying`)
                 .then(data => {
-                    if (data.status === 200) {
-                        return res.status(200).json({
-                            status: 200,
-                            nowplaying: JSON.parse(APIUtil.base64Decode(data.data)),
-                            timestamps: APIUtil.getTimestamps()
-                        });
-                    }
+                    return res.status(200).json({
+                        status: 200,
+                        nowplaying: JSON.parse(APIUtil.base64Decode(data.data)),
+                        timestamps: APIUtil.getTimestamps()
+                    });
                 }).catch(error => {
                     console.log(error);
                     if (error.response && error.response.status === 301) {
@@ -92,7 +90,6 @@ export default class ElixirEndpoint {
         try {
             await axios.get(`http://${host}:${port}/queue?guildId=${guild}&action=queue`)
                 .then(data => {
-                    //console.log(data);
                     if (data.status === 200) {
                         return res.status(200).json({
                             status: 200,
@@ -260,7 +257,7 @@ export default class ElixirEndpoint {
                             timestamps: APIUtil.getTimestamps()
                         });
                     }
-                }).catch(error => {
+                }).catch(() => {
                     return res.status(410).json({
                         status: 410,
                         message: "There is no queue in that guild.",
@@ -306,9 +303,9 @@ export default class ElixirEndpoint {
                     });
                 }).catch(error => {
                     console.log(error);
-                    return res.status(200).json({
-                        status: 200,
-                        data: JSON.parse(Buffer.from(error.response.data, "base64").toString()),
+                    return res.status(410).json({
+                        status: 410,
+                        message: "The bot may not be in a voice channel.",
                         timestamps: APIUtil.getTimestamps()
                     });
                 });
@@ -344,9 +341,45 @@ export default class ElixirEndpoint {
                     });
                 }).catch(error => {
                     console.log(error);
+                    return ErrorUtil.sent500Status(req, res);
+                });
+        } catch (error) {
+            console.log(error);
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /**
+     * Queue a playlist by ID.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/elixir/playlist/queue?id=eeries-playlist&guild=9837624923642894376&channel=6428943769837624923
+     * @param id: string
+     * @return Promise<Express.Response|any>
+     */
+
+    public static async queuePlaylist(req: Request, res: Response): Promise<any> {
+        const id: string = req.query.id as string;
+        const guild: string = req.query.guild as string;
+        const channel: string = req.query.channel as string;
+        const host: string = Config.get("ELIXIR-API-HOST");
+        const port: string = Config.get("ELIXIR-API-PORT");
+        try {
+            if (!id || !guild || !channel) {
+                return ErrorUtil.send400Status(req, res);
+            }
+            await axios.get(`http://${host}:${port}/playlist?guildId=${guild}&action=queue&playlistId=${id}&channelId=${channel}`)
+                .then(() => {
                     return res.status(200).json({
                         status: 200,
-                        data: JSON.parse(Buffer.from(error.response.data, "base64").toString()),
+                        messages: "Successfully queued the custom playlist.",
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                }).catch(error => {
+                    console.log(error);
+                    return res.status(410).json({
+                        status: 410,
+                        message: "The bot may not be in a voice channel.",
                         timestamps: APIUtil.getTimestamps()
                     });
                 });

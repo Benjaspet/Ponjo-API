@@ -145,4 +145,14 @@ export default class APIUtil {
     public static base64Decode(str: string): string {
         return Buffer.from(str, "base64url").toString("ascii");
     }
+
+    /**
+     * Convert hex to hexadecimal.
+     * @param hex
+     * @return string
+     */
+
+    public static hexToHexadecimal(hex: string): string {
+        return parseInt(hex, 16).toString(16);
+    }
 }

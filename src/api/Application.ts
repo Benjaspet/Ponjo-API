@@ -26,6 +26,7 @@ import Images from "./models/Images";
 import Requests from "./models/Requests";
 import APIUtil from "./util/api/APIUtil";
 import Keys from "./models/Keys";
+import WebhookUtil from "./util/api/WebhookUtil";
 
 export class Application {
 
@@ -60,6 +61,15 @@ export class Application {
         app.use(bodyParser.urlencoded({extended: true}));
         app.use(bodyParser.json());
         app.use(this.requestMiddleware);
+
+        app.use((req: Request, res: Response, next: NextFunction) => {
+            if (req.url.includes("/v1")) {
+                if (res.statusCode === 200) {
+                    WebhookUtil.sendBaseLogWebhook(req, res).then(() => {});
+                }
+            }
+            next();
+        });
 
         /*
          * Setting our base endpoints and their callbacks.
