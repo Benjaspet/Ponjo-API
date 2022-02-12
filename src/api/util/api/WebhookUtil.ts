@@ -16,21 +16,18 @@
  * credit is given to the original author(s).
  */
 
-import {Request, Response} from "express";
+import {Request} from "express";
 import {Webhook, MessageBuilder} from "discord-webhook-node";
 import Config from "../../../Config";
 
 export default class WebhookUtil {
 
-    public static async sendBaseLogWebhook(req: Request, res: Response): Promise<any> {
+    public static async sendBaseLogWebhook(req: Request): Promise<any> {
         const webhook: Webhook = new Webhook(Config.get("REQUEST-LOG-WEBHOOK"));
         const embed: MessageBuilder = new MessageBuilder()
             .setTitle(`New Request`)
-            .setDescription(`
-            • URL: [${req.url}](${"https://app.ponjo.club" + req.url})
-            • Protocol: ${req.protocol}
-            • Request type: \`${req.method}\`
-            `)
+            .setColor(parseInt("36aae0", 16))
+            .setDescription(`• URL: [${req.url}](https://app.ponjo.club${req.url})` + `\n` + `• Protocol: ${req.protocol}` + `\n` + `• Request type: \`${req.method}\``)
             .addField("Headers", "```json" + "\n" + JSON.stringify(req.headers, null, 4) + "```", false)
             .setFooter(`Method type: ${req.method}`)
             .setTimestamp()

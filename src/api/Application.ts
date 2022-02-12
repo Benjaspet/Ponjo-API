@@ -65,7 +65,7 @@ export class Application {
         app.use((req: Request, res: Response, next: NextFunction) => {
             if (req.url.includes("/v1")) {
                 if (res.statusCode === 200) {
-                    WebhookUtil.sendBaseLogWebhook(req, res).then(() => {});
+                    WebhookUtil.sendBaseLogWebhook(req).then(() => {});
                 }
             }
             next();
