@@ -21,7 +21,6 @@ import {Application} from "./api/Application";
 import * as http from "http";
 import Logger from "./Logger";
 import Config from "./Config";
-import PCPartPickerUtil from "./api/util/api/PCPartPickerUtil";
 
 const app = express();
 new Application(app);
