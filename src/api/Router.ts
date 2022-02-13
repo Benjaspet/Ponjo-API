@@ -25,7 +25,6 @@ import LGBTQEndpoint from "./endpoints/LGBTQEndpoint";
 import DataEndpoint from "./endpoints/DataEndpoint";
 import RandomEndpoint from "./endpoints/RandomEndpoint";
 import ImageManipulationEndpoint from "./endpoints/ImageManipulationEndpoint";
-import UtilityEndpoint from "./endpoints/UtilityEndpoint";
 import AuthorizationUtil from "./util/api/AuthorizationUtil";
 import GameQueryEndpoint from "./endpoints/GameQueryEndpoint";
 import DeckEndpoint from "./endpoints/DeckEndpoint";
@@ -51,8 +50,6 @@ router.get("/health", DataEndpoint.getApiHealth);
 router.get("/affirmations", RandomEndpoint.getRandomAffirmation);
 
 router.get("/color", ColorEndpoint.hexToImage);
-router.get("/prime", UtilityEndpoint.checkIfNumberIsPrime);
-router.get("/prime/:number", UtilityEndpoint.checkIfNumberIsPrime);
 
 router.post("/trigger", ImageManipulationEndpoint.sendTriggeredImage);
 router.post("/jail", ImageManipulationEndpoint.sendJailedImage);
