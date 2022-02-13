@@ -26,6 +26,7 @@ import fetch from "node-fetch";
 import APIUtil from "../util/api/APIUtil";
 import MemeUtil from "../util/api/MemeUtil";
 import QRCodeUtil from "../util/api/QRCodeUtil";
+import PCPartPickerUtil from "../util/api/PCPartPickerUtil";
 
 export default class DataEndpoint {
 
@@ -273,6 +274,31 @@ export default class DataEndpoint {
                 message: "API health check succeeded.",
                 timestamps: APIUtil.getTimestamps()
             });
+        } catch (error) {
+            Logger.error(error.message);
+            return ErrorUtil.sent500Status(req, res);
+        }
+    }
+
+    /**
+     * Fetch parts in a PCPartPicker list.
+     * @method GET
+     * @header none
+     * @uri /v1/pcpartpicker/list?id=49RVnt
+     * @return Express.Response
+     */
+
+    public static async getPCParts(req: Request, res: Response): Promise<Response> {
+        const list: string = req.query.list as string;
+        try {
+            await PCPartPickerUtil.fetchPCParts(list)
+                .then(async result => {
+                    return res.status(200).json({
+                        status: res.statusCode,
+                        data: result,
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                });
         } catch (error) {
             Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);

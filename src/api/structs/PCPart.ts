@@ -16,20 +16,9 @@
  * credit is given to the original author(s).
  */
 
-import express from "express";
-import {Application} from "./api/Application";
-import * as http from "http";
-import Logger from "./Logger";
-import Config from "./Config";
-import PCPartPickerUtil from "./api/util/api/PCPartPickerUtil";
-
-const app = express();
-new Application(app);
-
-Logger.clear();
-const server = http.createServer(app);
-server.listen(Config.get("PORT") || 3000, () => {
-   Logger.info("Connected to Ponjo database.");
-   Logger.info("Connected to RoboEerie database.");
-   Logger.info("Now running on port 3000.");
-});
+export interface PCPart {
+    type: string,
+    image: string,
+    name: string,
+    price: string
+}

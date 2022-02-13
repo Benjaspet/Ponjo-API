@@ -86,6 +86,7 @@ premiumRouter.post("/elixir/playlist/queue", ElixirEndpoint.queuePlaylist);
 premiumRouter.get("/chatbot", DataEndpoint.sendChatbotMessage);
 premiumRouter.get("/captcha", DataEndpoint.getCaptchaData);
 premiumRouter.get("/meme", DataEndpoint.getRandomMeme);
+premiumRouter.get("/pcpartpicker", DataEndpoint.getPCParts);
 
 premiumRouter.get("/query/mcbe", GameQueryEndpoint.queryBedrockServer);
 premiumRouter.get("/query/mcjava", GameQueryEndpoint.queryJavaServer);
