@@ -18,7 +18,7 @@
 
 import * as id from "shortid";
 import {Schema} from "mongoose";
-import DatabaseConnection from "../database/DatabaseConnection";
+import DatabaseConnection from "../DatabaseConnection";
 
 const URLShortenerSchema = new Schema(
     {

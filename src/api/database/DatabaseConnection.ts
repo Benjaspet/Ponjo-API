@@ -18,6 +18,7 @@
 
 import mongoose from "mongoose";
 import Config from "../../Config";
+import Logger from "../../Logger";
 
 export default class DatabaseConnection {
 
@@ -31,5 +32,6 @@ export default class DatabaseConnection {
             useUnifiedTopology: true
         });
         this.roboEerieDatabase = this.ponjoDatabase.useDb("RoboEerie");
+        Logger.info("Connected to all databases.");
     }
 }

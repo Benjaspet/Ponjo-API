@@ -16,10 +16,9 @@
  * credit is given to the original author(s).
  */
 
-import {NextFunction, Request, Response} from "express";
+import {NextFunction, Request, Response, Router} from "express";
 import * as express from "express";
 import multer from "multer";
-import limiter from "./config/RateLimitConfig";
 import ColorEndpoint from "./endpoints/ColorEndpoint";
 import LGBTQEndpoint from "./endpoints/LGBTQEndpoint";
 import DataEndpoint from "./endpoints/DataEndpoint";
@@ -34,13 +33,14 @@ import AuthEndpoint from "./endpoints/AuthEndpoint";
 import HostingUtil from "./util/HostingUtil";
 import URLShortenerEndpoint from "./endpoints/URLShortenerEndpoint";
 import ElixirEndpoint from "./endpoints/ElixirEndpoint";
+import {Application} from "./Application";
 
-const router = express.Router();
-const premiumRouter = express.Router();
-const uploadRouter = express.Router();
+const router: Router = express.Router();
+const premiumRouter: Router = express.Router();
+const uploadRouter: Router = express.Router();
 
-router.use(limiter.rateLimiter);
-premiumRouter.use(limiter.rateLimiter);
+router.use(Application.getRateLimiter);
+premiumRouter.use(Application.getRateLimiter);
 
 premiumRouter.use(async (req: Request, res: Response, next: NextFunction) => {
     await AuthorizationUtil.checkKeyValidity(req, res, next);

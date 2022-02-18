@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Ben Petrillo. All rights reserved.
+ * Copyright 2022 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -16,18 +16,10 @@
  * credit is given to the original author(s).
  */
 
-export default class MathUtil {
+import Config from "./Config";
 
-    /**
-     * Determine whether a number is prime or not.
-     * @param number
-     * @return boolean
-     */
+export default class Constants {
 
-    public static isPrime(number: number): boolean {
-        for (let i = 2; i < number; i++) {
-            if (number % i === 0) return false;
-        }
-        return number > 1;
-    }
+    public static API_URI = Config.get("PONJOAPI-URI");
+    public static API_PORT = Config.get("PORT");
 }

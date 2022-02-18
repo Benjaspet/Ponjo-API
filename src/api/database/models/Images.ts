@@ -17,7 +17,7 @@
  */
 
 import {Schema} from "mongoose";
-import DatabaseConnection from "../database/DatabaseConnection";
+import DatabaseConnection from "../DatabaseConnection";
 
 const ImageSchema = new Schema(
     {

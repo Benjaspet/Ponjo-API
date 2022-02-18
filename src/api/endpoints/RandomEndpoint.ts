@@ -133,7 +133,7 @@ export default class RandomEndpoint {
      * @uri /v1/random/month/raw
      * @uri /v1/random/month?raw=true
      * @param raw: boolean
-     * @return Promise<Express.Reponse>
+     * @return Promise<Express.Response>
      */
 
     public static async getRandomMonth(req: Request, res: Response): Promise<Response> {

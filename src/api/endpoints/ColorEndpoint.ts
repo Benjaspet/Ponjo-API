@@ -32,7 +32,7 @@ export default class ColorEndpoint {
      * @uri /v1/color?hex=#F8B112&format=json
      * @param hex: string
      * @param format: string <json, png, jpg>
-     * @return Promise<Express.Reponse>
+     * @return Promise<Express.Response>
      */
 
     public static async hexToImage(req: Request, res: Response): Promise<Response> {

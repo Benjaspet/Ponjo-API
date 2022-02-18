@@ -17,21 +17,19 @@
  */
 
 import {Schema} from "mongoose";
-import DatabaseConnection from "../database/DatabaseConnection";
+import DatabaseConnection from "../DatabaseConnection";
 
-const DeckSchema = new Schema(
+const RequestSchema = new Schema(
     {
-        deckId: String,
-        deck: Array,
-        data: {
-            shuffled: Boolean,
-            remainingCards: Number
-        }
-    }, {
-        timestamps: true,
+        total: Number,
+        gets: Number,
+        posts: Number
+    },
+    {
+        timestamps: false,
         versionKey: false
     }
 );
 
-const Deck = new DatabaseConnection().ponjoDatabase.model("decks", DeckSchema);
-export default Deck;
+const TotalRequests = new DatabaseConnection().ponjoDatabase.model("requests", RequestSchema);
+export default TotalRequests;

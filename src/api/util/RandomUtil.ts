@@ -21,20 +21,6 @@ import Chance from "chance";
 export default class RandomUtil {
 
     /**
-     * Get a random month of the year.
-     * @param raw boolean
-     * @return object|string
-     */
-
-    public static getRandomMonth(raw: boolean): object|string {
-        if (raw) {
-            return new Chance().month({raw: true});
-        } else {
-            return new Chance().month();
-        }
-    }
-
-    /**
      * Get a random paragraph of text.
      * @param ?sentences number
      * @return string
@@ -127,7 +113,7 @@ export default class RandomUtil {
      * @return object
      */
 
-    public static getRandomTimezone(amount: number): object {
+    public static getRandomTimezone(amount: number): object[] {
         let timezones: object[] = [];
         for (let i = 0; i < amount; i++) {
             timezones.push({

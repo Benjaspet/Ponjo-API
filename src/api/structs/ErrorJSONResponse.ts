@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Ben Petrillo. All rights reserved.
+ * Copyright 2022 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -16,20 +16,13 @@
  * credit is given to the original author(s).
  */
 
-import {Schema} from "mongoose";
-import DatabaseConnection from "../database/DatabaseConnection";
+export interface ErrorJSONResponse {
+    status: number,
+    message: string,
+    timestamps: object
+}
 
-const KeySchema = new Schema(
-    {
-        key: String,
-        user: String,
-        requests: Number
-    },
-    {
-        timestamps: true,
-        versionKey: false
-    }
-);
-
-const Key = new DatabaseConnection().ponjoDatabase.model("keys", KeySchema);
-export default Key;
+export interface APITimestamps {
+    date: string,
+    unix: bigint
+}

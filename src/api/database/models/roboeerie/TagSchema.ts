@@ -17,7 +17,7 @@
  */
 
 import mongoose from "mongoose";
-import DatabaseConnection from "../../database/DatabaseConnection";
+import DatabaseConnection from "../../DatabaseConnection";
 
 const TagSchema = new mongoose.Schema(
     {

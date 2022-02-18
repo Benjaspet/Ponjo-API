@@ -16,7 +16,7 @@
  * credit is given to the original author(s).
  */
 
-import Requests from "../../models/Requests";
+import Requests from "../../database/models/Requests";
 
 export default class APIUtil {
 

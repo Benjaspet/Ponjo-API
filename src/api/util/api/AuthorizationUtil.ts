@@ -16,42 +16,40 @@
  * credit is given to the original author(s).
  */
 
-import {v4 as uuidv4} from "uuid";
-import Keys from "../../models/Keys";
-import APIUtil from "./APIUtil";
 import {NextFunction, Request, Response} from "express";
+import * as uuid from "uuid";
+import Keys from "../../database/models/Keys";
+import APIUtil from "./APIUtil";
 
 export default class AuthorizationUtil {
 
-    /*
-     Generate a unique API key.
-     @return string
+    /**
+     * Generate a unique API key.
+     * @return string
      */
 
     public static generateUniqueApiKey(): string {
-        return uuidv4();
+        return uuid.v4();
     }
 
-    /*
-     Determine if an API key is valid.
-     @return Promise<boolean>
+    /**
+     * Determine if an API key is valid.
+     * @param key The API key.
+     * @return boolean
      */
 
-    public static async isValidApiKey(key: string): Promise<boolean> {
-        return Keys.findOne({key: key})
-            .then(async key => {
-                return !!key;
-            });
+    public static isValidApiKey(key: string): boolean {
+        return uuid.validate(key);
     }
 
-    /*
-     Create an API key.
-     @param key: string
-     @param user: string
-     @return Promise<any>
+    /**
+     * Create an API key.
+     * @param key The key to create.
+     * @param user The name of the user to which the key belongs.
+     * @return Promise<any>
      */
 
-    public static async createApiKey(key: string, user: string): Promise<any> {
+    public static async createApiKey(key: string, user: string): Promise<object> {
         return new Promise(async(resolve, reject) => {
             await Keys.create({
                 key: key,
@@ -80,54 +78,49 @@ export default class AuthorizationUtil {
     public static async getAllApiKeys(): Promise<object[]> {
         const keys: object[] = [];
         return new Promise((resolve, reject) => {
-            Keys.find()
-                .then(async result => {
-                   result.forEach(query => {
-                       keys.push(query)
-                   });
-                    resolve(keys);
-                })
-                .catch(async error => {
-                    reject({
-                        status: 500,
-                        message: error.message
-                    });
+            Keys.find().then(async result => {
+                result.forEach(query => keys.push(query));
+                resolve(keys);
+            }).catch(async error => {
+                reject({
+                    status: 500,
+                    message: error.message
                 });
+            });
         });
     }
 
-    /*
-     Add a use to the specified API key.
-     @param key: string
-     @param amount: number
-     @return Promise<void>
+    /**
+     * Add a use to the specified API key.
+     * @param key string
+     * @return Promise<void>
      */
 
-    public static async addApiKeyUse(key: string, amount: number): Promise<void> {
-        Keys.findOne({key: key})
-            .then(async result => {
-                Keys.findOneAndUpdate({key: key}, {requests: result.requests + amount})
-                    .then(async () => {})
-                    .catch(() => {});
-            })
-            .catch(() => {});
+    public static async addApiKeyUse(key: string): Promise<void> {
+        try {
+            const data = await Keys.findOne({key: key});
+            data.request++;
+            data.save();
+        } catch ({}) {}
     }
 
-    /*
-     The middleware to check API key validity.
-     @return Promise<Response|void>
+    /**
+     * The middleware to check API key validity.
+     * @param req Express.Request
+     * @param res Express.Response
+     * @param next Express.NextFunction
      */
 
     public static async checkKeyValidity(req: Request, res: Response, next: NextFunction): Promise<Response|void> {
-        const key = req.headers.authorization as string;
-        if (await AuthorizationUtil.isValidApiKey(key) == false) {
+        const key: string = req.headers.authorization as string;
+        if (AuthorizationUtil.isValidApiKey(key) == false) {
             return res.status(403).json({
                 status: res.statusCode,
                 message: "Invalid API key provided.",
                 timestamps: APIUtil.getTimestamps()
             });
         }
-        await AuthorizationUtil.addApiKeyUse(key, 1);
+        await AuthorizationUtil.addApiKeyUse(key);
         next();
     }
 }

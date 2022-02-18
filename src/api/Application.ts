@@ -21,12 +21,13 @@ import * as express from "express";
 import * as path from "path";
 import * as bodyParser from "body-parser";
 import Router from "./Router";
+import rateLimit from "express-rate-limit";
 import URLShortenerEndpoint from "./endpoints/URLShortenerEndpoint";
-import Images from "./models/Images";
-import Requests from "./models/Requests";
 import APIUtil from "./util/api/APIUtil";
-import Keys from "./models/Keys";
+import Keys from "./database/models/Keys";
 import WebhookUtil from "./util/api/WebhookUtil";
+import Middleware from "./Middleware";
+import ErrorUtil from "./util/ErrorUtil";
 
 export class Application {
 
@@ -34,7 +35,7 @@ export class Application {
         this.init(app);
     }
 
-    private init(app: Express) {
+    private init(app: Express): void {
 
         /**
          * Setting up the view engine and our public static directories.
@@ -60,13 +61,11 @@ export class Application {
         app.use(express.urlencoded({extended: false}));
         app.use(bodyParser.urlencoded({extended: true}));
         app.use(bodyParser.json());
-        app.use(this.requestMiddleware);
+        app.use(Middleware.requestMiddleware);
 
         app.use((req: Request, res: Response, next: NextFunction) => {
-            if (req.url.includes("/v1")) {
-                if (res.statusCode === 200) {
-                    WebhookUtil.sendBaseLogWebhook(req).then(() => {});
-                }
+            if (req.url.includes("/v1") && res.statusCode === 200) {
+                WebhookUtil.sendBaseLogWebhook(req).then(() => {});
             }
             next();
         });
@@ -77,7 +76,7 @@ export class Application {
 
         app.get("/", async (req: Request, res: Response) => {return res.render("index", {requests: await APIUtil.getTotalApiRequests(), keys: await Keys.find()})});
         app.get("/hosting", (req: Request, res: Response) => {return res.render("hosting")});
-        app.get("/image-hosting", this.imageHostingMiddleware);
+        app.get("/image-hosting", Middleware.imageHostingMiddleware);
         app.get("/endpoints", (req: Request, res: Response) => {return res.render("endpoints")});
         app.get("/short/:shortURL", URLShortenerEndpoint.getShortenedURL);
 
@@ -94,30 +93,25 @@ export class Application {
          * Only run if all above methods fail or cannot be found.
          */
 
-        app.use((req: Request, res: Response) => {return res.status(404).render("404")});
+        app.use((req: Request, res: Response) => {
+            return res.status(404).render("404")
+        });
     }
 
-    private async requestMiddleware(req: Request, res: Response, next: NextFunction) {
-        switch (req.originalUrl) {
-            case "/": case "/hosting": case "/endpoints": case "/uploads": case "/image-hosting":
-                next(); break;
-            default:
-                const current = await Requests.findOne();
-                if (!current) {
-                    await Requests.create({total: 0, gets: 0, posts: 0});
-                    next();
-                } else {
-                    current.total++;
-                    if (req.method == "GET") current.gets++;
-                    else if (req.method == "POST") current.posts++;
-                    current.save();
-                    next();
+    /**
+     * Get the API rate limiter.
+     * @return object
+     */
+
+    public static getRateLimiter(): object {
+        return {
+            rateLimiter: rateLimit({
+                max: 50,
+                windowMs: 60 * 3 * 1000,
+                handler(req: Request, res: Response): void {
+                    ErrorUtil.send429Response(req, res);
                 }
+            })
         }
-    }
-
-    private async imageHostingMiddleware(req: Request, res: Response, next: NextFunction): Promise<Response|void> {
-        const images = await Images.find();
-        return res.render("image-hosting", {images: images});
     }
 }

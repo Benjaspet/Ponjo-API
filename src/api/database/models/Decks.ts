@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Ben Petrillo. All rights reserved.
+ * Copyright © 2021 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -16,18 +16,22 @@
  * credit is given to the original author(s).
  */
 
-import {Express} from "express";
-import {Application} from "./api/Application";
-import * as http from "http";
-import express from "express";
-import Logger from "./Logger";
-import Constants from "./Constants";
+import {Schema} from "mongoose";
+import DatabaseConnection from "../DatabaseConnection";
 
-const app: Express = express();
-new Application(app);
+const DeckSchema = new Schema(
+    {
+        deckId: String,
+        deck: Array,
+        data: {
+            shuffled: Boolean,
+            remainingCards: Number
+        }
+    }, {
+        timestamps: true,
+        versionKey: false
+    }
+);
 
-Logger.clear();
-const server = http.createServer(app);
-server.listen(Constants.API_PORT || 3000, () => {
-   Logger.info("Now running on port 3000.");
-});
+const Deck = new DatabaseConnection().ponjoDatabase.model("decks", DeckSchema);
+export default Deck;

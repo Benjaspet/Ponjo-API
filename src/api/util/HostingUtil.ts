@@ -17,11 +17,12 @@
  */
 
 import {Request, Response} from "express";
-import Image from "../models/Images";
+import Image from "../database/models/Images";
 import APIUtil from "./api/APIUtil";
 import path from "path";
-import Images from "../models/Images";
+import Images from "../database/models/Images";
 import PonjoUpload from "../objects/PonjoUpload";
+import {DiskStorageOptions} from "multer";
 
 export default class HostingUtil {
 
@@ -89,13 +90,13 @@ export default class HostingUtil {
 
     /**
      * Get the disk storage options.
-     * @return object
+     * @return DiskStorageOptions
      */
 
-    public static getDiskStorageOptions(): object {
+    public static getDiskStorageOptions(): DiskStorageOptions {
         return {
             destination: (req, file, cb) => {
-                cb(null, path.join(__dirname + "/../uploads"));
+                cb(null, path.join(__dirname + "/../../images"));
             },
             filename: (req, file, cb) => {
                 const ext = path.extname(file.originalname);

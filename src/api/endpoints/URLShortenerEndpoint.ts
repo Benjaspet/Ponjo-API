@@ -17,7 +17,7 @@
  */
 
 import {Request, Response} from "express";
-import ShortURL from "../models/URLShortener";
+import ShortURL from "../database/models/URLShortener";
 import ErrorUtil from "../util/ErrorUtil";
 import APIUtil from "../util/api/APIUtil";
 

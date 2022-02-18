@@ -17,19 +17,19 @@
  */
 
 import {Schema} from "mongoose";
-import DatabaseConnection from "../database/DatabaseConnection";
+import DatabaseConnection from "../DatabaseConnection";
 
-const RequestSchema = new Schema(
+const KeySchema = new Schema(
     {
-        total: Number,
-        gets: Number,
-        posts: Number
+        key: String,
+        user: String,
+        requests: Number
     },
     {
-        timestamps: false,
+        timestamps: true,
         versionKey: false
     }
 );
 
-const TotalRequests = new DatabaseConnection().ponjoDatabase.model("requests", RequestSchema);
-export default TotalRequests;
+const Key = new DatabaseConnection().ponjoDatabase.model("keys", KeySchema);
+export default Key;
