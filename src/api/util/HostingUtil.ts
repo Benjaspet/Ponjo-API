@@ -21,6 +21,7 @@ import Image from "../models/Images";
 import APIUtil from "./api/APIUtil";
 import path from "path";
 import Images from "../models/Images";
+import PonjoUpload from "../objects/PonjoUpload";
 
 export default class HostingUtil {
 
@@ -99,12 +100,12 @@ export default class HostingUtil {
             filename: (req, file, cb) => {
                 const ext = path.extname(file.originalname);
                 const id = APIUtil.generateUniqueId();
-                const filePath = `/${id}${ext}`;
-                Image.create({filePath: filePath, imageId: id})
+                const upload: PonjoUpload = new PonjoUpload(id, `/${id}${ext}`);
+                Image.create({filePath: upload.filePath, imageId: upload.id})
                     .then(() => {
-                        cb(null, filePath);
-                        HostingUtil.imageData[0] = filePath;
-                        HostingUtil.imageData[1] = id;
+                        cb(null, upload.filePath);
+                        // HostingUtil.imageData[0] = filePath;
+                        // HostingUtil.imageData[1] = id;
                     });
             }
         }

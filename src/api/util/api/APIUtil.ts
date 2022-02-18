@@ -143,7 +143,7 @@ export default class APIUtil {
      */
 
     public static base64Decode(str: string): string {
-        return Buffer.from(str, "base64url").toString("ascii");
+        return Buffer.from(str, "base64url").toString("utf-8");
     }
 
     /**
