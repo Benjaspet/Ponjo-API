@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Ben Petrillo. All rights reserved.
+ * Copyright © 2022 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -20,13 +20,30 @@ import APIUtil from "./api/util/api/APIUtil";
 
 export default class Logger {
 
+    /**
+     * Log an info message to the console.
+     * @param message The message to log.
+     * @return void
+     */
+
     public static info(message: string = "None specified."): void {
         console.log(`[${APIUtil.getTimestamp()}] [PONJO-API] ${message}`);
     }
 
+    /**
+     * Log an error message to the console.
+     * @param message The message to log.
+     * @return void
+     */
+
     public static error(message: string = "Unknown."): void {
         console.log(`[${APIUtil.getTimestamp()}] [PONJO-API] ${message}`);
     }
+
+    /**
+     * Clear the console.
+     * @return void
+     */
 
     public static clear(): void {
         console.clear();

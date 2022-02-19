@@ -19,11 +19,20 @@
 import {Schema} from "mongoose";
 import DatabaseConnection from "../DatabaseConnection";
 
-const KeySchema = new Schema(
+const KeySchema: Schema = new Schema(
     {
-        key: String,
-        user: String,
-        requests: Number
+        key: {
+            type: String,
+            required: true
+        },
+        user: {
+            type: String,
+            required: true
+        },
+        requests: {
+            type: Number,
+            required: true
+        }
     },
     {
         timestamps: true,

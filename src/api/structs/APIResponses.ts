@@ -16,12 +16,6 @@
  * credit is given to the original author(s).
  */
 
-export interface ErrorJSONResponse {
-    status: number,
-    message: string,
-    timestamps: object
-}
-
 export interface APITimestamps {
     date: string,
     unix: bigint

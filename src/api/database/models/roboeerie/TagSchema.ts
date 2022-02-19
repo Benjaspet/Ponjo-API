@@ -16,16 +16,31 @@
  * credit is given to the original author(s).
  */
 
-import mongoose from "mongoose";
+import {Schema} from "mongoose";
 import DatabaseConnection from "../../DatabaseConnection";
 
-const TagSchema = new mongoose.Schema(
+const TagSchema: Schema = new Schema(
     {
-        id: String,
-        tag: String,
-        content: String,
-        author: String,
-        guild: String
+        id: {
+            type: String,
+            required: true
+        },
+        tag: {
+            type: String,
+            required: true
+        },
+        content: {
+            type: String,
+            required: true
+        },
+        author: {
+            type: String,
+            required: true
+        },
+        guild: {
+            type: String,
+            required: true
+        }
     }, {
         timestamps: true,
         versionKey: false

@@ -19,11 +19,23 @@
 import {Schema} from "mongoose";
 import DatabaseConnection from "../DatabaseConnection";
 
-const RequestSchema = new Schema(
+const RequestSchema: Schema = new Schema(
     {
-        total: Number,
-        gets: Number,
-        posts: Number
+        total: {
+            type: Number,
+            required: true,
+            default: 0
+        },
+        gets: {
+            type: Number,
+            required: true,
+            default: 0
+        },
+        posts: {
+            type: Number,
+            required: true,
+            default: 0
+        }
     },
     {
         timestamps: false,

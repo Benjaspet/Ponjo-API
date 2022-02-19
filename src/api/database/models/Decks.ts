@@ -19,13 +19,27 @@
 import {Schema} from "mongoose";
 import DatabaseConnection from "../DatabaseConnection";
 
-const DeckSchema = new Schema(
+const DeckSchema: Schema = new Schema(
     {
-        deckId: String,
-        deck: Array,
+        deckId: {
+            type: String,
+            required: true
+        },
+        deck: {
+            type: Array,
+            required: true
+        },
         data: {
-            shuffled: Boolean,
-            remainingCards: Number
+            shuffled: {
+                type: Boolean,
+                required: true,
+                default: false
+            },
+            remainingCards: {
+                type: Number,
+                required: true,
+                default: 52
+            }
         }
     }, {
         timestamps: true,

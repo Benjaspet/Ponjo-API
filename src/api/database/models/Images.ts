@@ -19,10 +19,16 @@
 import {Schema} from "mongoose";
 import DatabaseConnection from "../DatabaseConnection";
 
-const ImageSchema = new Schema(
+const ImageSchema: Schema = new Schema(
     {
-        filePath: String,
-        imageId: String
+        filePath: {
+            type: String,
+            required: true
+        },
+        imageId: {
+            type: String,
+            required: true
+        }
     },
     {
         timestamps: true,

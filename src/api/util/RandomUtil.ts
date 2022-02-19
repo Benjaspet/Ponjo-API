@@ -21,20 +21,6 @@ import Chance from "chance";
 export default class RandomUtil {
 
     /**
-     * Get a random paragraph of text.
-     * @param ?sentences number
-     * @return string
-     */
-
-    public static getRandomParagraph(sentences?: number): string {
-        if (sentences) {
-            return new Chance().paragraph({sentences: sentences})
-        } else {
-            return new Chance().paragraph();
-        }
-    }
-
-    /**
      * Get a random user profile.
      * @param ?amount number
      * @return object[]

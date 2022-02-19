@@ -24,7 +24,7 @@ export default class Config {
 
     /**
      * Get a value from the config.
-     * @param key
+     * @param key The key to fetch.
      * @return string
      */
 

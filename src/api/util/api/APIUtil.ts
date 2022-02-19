@@ -17,21 +17,22 @@
  */
 
 import Requests from "../../database/models/Requests";
+import {APITimestamps} from "../../structs/APIResponses";
 
 export default class APIUtil {
 
-    /*
-     Get the current timestamp as a Locale Time String.
-     @return string
+    /**
+     * Get the current timestamp as a locale time string.
+     * @return string
      */
 
     public static getTimestamp(): string {
         return new Date().toLocaleTimeString();
     }
 
-    /*
-     Get the current request timestamps.
-     @return object
+    /**
+     * Get the current API request timestamps.
+     * @return APITimestamps
      */
 
     public static getTimestamps(): object {
@@ -41,9 +42,9 @@ export default class APIUtil {
         }
     }
 
-    /*
-     Generate a unique ID.
-     @return string
+    /**
+     * Generate a unique ID.
+     * @return string
      */
 
     public static generateUniqueId(): string {
@@ -53,14 +54,14 @@ export default class APIUtil {
         });
     }
 
-    /*
-     Init a promise-based delay.
-     @param ms: number
-     @return Promise<any>
+    /**
+     * Create a promise-based delay.
+     * @param ms The amount of milliseconds to wait.
+     * @return Promise<any>
      */
 
     public static async sleep(ms): Promise<any> {
-        new Promise(res => setTimeout(res, ms));
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     /*
@@ -74,9 +75,9 @@ export default class APIUtil {
         return array.slice(0, amount)
     }
 
-    /*
-     Get the total amount of API requests.
-     @return Promise<object>
+    /**
+     * Get the total amount of API requests.
+     * @return Promise<object>
      */
 
     public static async getTotalApiRequests(): Promise<object> {
@@ -89,9 +90,7 @@ export default class APIUtil {
             };
         } catch (error) {
             return {
-                total: 0,
-                gets: 0,
-                posts: 0
+                total: 0, gets: 0, posts: 0
             };
         }
     }

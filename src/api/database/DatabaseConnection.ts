@@ -29,7 +29,8 @@ export default class DatabaseConnection {
         this.ponjoDatabase = mongoose.createConnection(Config.get("PONJOAPI-URI"), {
             // @ts-ignore
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            useCreateIndex: true
         });
         this.roboEerieDatabase = this.ponjoDatabase.useDb("RoboEerie");
         Logger.info("Connected to all databases.");

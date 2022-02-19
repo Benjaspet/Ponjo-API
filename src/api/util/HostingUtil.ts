@@ -21,7 +21,6 @@ import Image from "../database/models/Images";
 import APIUtil from "./api/APIUtil";
 import path from "path";
 import Images from "../database/models/Images";
-import PonjoUpload from "../objects/PonjoUpload";
 import {DiskStorageOptions} from "multer";
 
 export default class HostingUtil {
@@ -86,30 +85,6 @@ export default class HostingUtil {
             imageId: HostingUtil.imageData[1],
             date: date
         });
-    }
-
-    /**
-     * Get the disk storage options.
-     * @return DiskStorageOptions
-     */
-
-    public static getDiskStorageOptions(): DiskStorageOptions {
-        return {
-            destination: (req, file, cb) => {
-                cb(null, path.join(__dirname + "/../../images"));
-            },
-            filename: (req, file, cb) => {
-                const ext = path.extname(file.originalname);
-                const id = APIUtil.generateUniqueId();
-                const upload: PonjoUpload = new PonjoUpload(id, `/${id}${ext}`);
-                Image.create({filePath: upload.filePath, imageId: upload.id})
-                    .then(() => {
-                        cb(null, upload.filePath);
-                        // HostingUtil.imageData[0] = filePath;
-                        // HostingUtil.imageData[1] = id;
-                    });
-            }
-        }
     }
 
     /**
