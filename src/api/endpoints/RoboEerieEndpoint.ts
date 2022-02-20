@@ -18,8 +18,8 @@
 
 import {Request, Response} from "express";
 import ErrorUtil from "../util/ErrorUtil";
-import RoboEerieUtil from "../util/RoboEerieUtil";
 import APIUtil from "../util/api/APIUtil";
+import DatabaseUtil from "../util/DatabaseUtil";
 
 export default class RoboEerieEndpoint {
 
@@ -36,7 +36,7 @@ export default class RoboEerieEndpoint {
         const count = req.query.count || req.params.count as string;
         try {
             if (count) {
-                await RoboEerieUtil.fetchTags(parseInt(<string> count))
+                await DatabaseUtil.fetchTags(parseInt(<string> count))
                     .then(result => {
                         res.status(200).send({
                             status: res.statusCode,
@@ -46,7 +46,7 @@ export default class RoboEerieEndpoint {
                         });
                     });
             } else {
-                await RoboEerieUtil.fetchTags()
+                await DatabaseUtil.fetchTags()
                     .then(result => {
                         res.status(200).send({
                             status: res.statusCode,

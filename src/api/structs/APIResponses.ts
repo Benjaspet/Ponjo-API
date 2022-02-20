@@ -18,5 +18,16 @@
 
 export interface APITimestamps {
     date: string,
-    unix: bigint
+    unix: number
+}
+
+export interface CreatedAPIKey {
+    status: number,
+    message: string,
+    data: {
+        key: string,
+        user: string,
+        requests: number
+    },
+    timestamps: APITimestamps
 }

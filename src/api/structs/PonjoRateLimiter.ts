@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Ben Petrillo. All rights reserved.
+ * Copyright © 2022 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -16,29 +16,20 @@
  * credit is given to the original author(s).
  */
 
-import {Schema} from "mongoose";
-import DatabaseConnection from "../DatabaseConnection";
+import rateLimit, {RateLimit} from "express-rate-limit";
+import {Request, Response} from "express";
+import ErrorUtil from "../util/ErrorUtil";
 
-const KeySchema: Schema = new Schema(
-    {
-        key: {
-            type: String,
-            required: true
-        },
-        user: {
-            type: String,
-            required: true
-        },
-        requests: {
-            type: Number,
-            required: true
+export interface PonjoRateLimiter {
+    ratelimiter: RateLimit
+}
+
+export default {
+    rateLimiter: rateLimit({
+        max: 50,
+        windowMs: 60 * 3 * 1000,
+        handler(req: Request, res: Response): void {
+            ErrorUtil.send429Response(req, res);
         }
-    },
-    {
-        timestamps: true,
-        versionKey: false
-    }
-);
-
-const Key = new DatabaseConnection().ponjoDatabase.model("keys", KeySchema);
-export default Key;
+    })
+};

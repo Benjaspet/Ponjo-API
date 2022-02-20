@@ -33,14 +33,14 @@ import AuthEndpoint from "./endpoints/AuthEndpoint";
 import HostingUtil from "./util/HostingUtil";
 import URLShortenerEndpoint from "./endpoints/URLShortenerEndpoint";
 import ElixirEndpoint from "./endpoints/ElixirEndpoint";
-import {Application} from "./Application";
+import PonjoRateLimiter from "./structs/PonjoRateLimiter";
 
 const router: Router = express.Router();
 const premiumRouter: Router = express.Router();
 const uploadRouter: Router = express.Router();
 
-router.use(Application.getRateLimiter);
-premiumRouter.use(Application.getRateLimiter);
+router.use(PonjoRateLimiter.rateLimiter);
+premiumRouter.use(PonjoRateLimiter.rateLimiter);
 
 premiumRouter.use(async (req: Request, res: Response, next: NextFunction) => {
     await AuthorizationUtil.checkKeyValidity(req, res, next);
@@ -123,7 +123,7 @@ premiumRouter.get("/random/timezone/:count", RandomEndpoint.getRandomTimezone);
 premiumRouter.post("/auth/keys/create", AuthEndpoint.createKey);
 premiumRouter.get("/auth/keys/list", AuthEndpoint.getAllKeys);
 
-const storage = multer.diskStorage(HostingUtil.getDiskStorageOptions());
+const storage = multer.diskStorage({});
 
 uploadRouter.post("/post", multer({storage}).array("avatar"), (req: Request, res: Response) => {
     return HostingUtil.sendImagePostResponse(req, res);

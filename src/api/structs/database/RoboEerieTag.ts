@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Ben Petrillo. All rights reserved.
+ * Copyright © 2022 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -16,32 +16,14 @@
  * credit is given to the original author(s).
  */
 
-import {Schema} from "mongoose";
-import DatabaseConnection from "../DatabaseConnection";
-
-const RequestSchema: Schema = new Schema(
-    {
-        total: {
-            type: Number,
-            required: true,
-            default: 0
-        },
-        gets: {
-            type: Number,
-            required: true,
-            default: 0
-        },
-        posts: {
-            type: Number,
-            required: true,
-            default: 0
-        }
-    },
-    {
-        timestamps: false,
-        versionKey: false
+export interface RoboEerieTag {
+    id: string,
+    tag: string,
+    content: string,
+    author: string,
+    guild: string,
+    timestamps: {
+        created: string,
+        lastUpdated: string
     }
-);
-
-const TotalRequests = new DatabaseConnection().ponjoDatabase.model("requests", RequestSchema);
-export default TotalRequests;
+}

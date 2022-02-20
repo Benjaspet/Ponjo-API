@@ -18,8 +18,12 @@
 
 import {NextFunction, Request, Response} from "express";
 import * as uuid from "uuid";
-import Keys from "../../database/models/Keys";
 import APIUtil from "./APIUtil";
+import {CreatedAPIKey} from "../../structs/APIResponses";
+import DatabaseManager from "../../database/DatabaseManager";
+import {PonjoKey} from "../../structs/database/PonjoKey";
+import {Document} from "mongodb";
+import {OptionalId} from "mongodb";
 
 export default class AuthorizationUtil {
 
@@ -49,44 +53,37 @@ export default class AuthorizationUtil {
      * @return Promise<any>
      */
 
-    public static async createApiKey(key: string, user: string): Promise<object> {
-        return new Promise(async(resolve, reject) => {
-            await Keys.create({
-                key: key,
+    public static async createApiKey(apiKey: string, user: string): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            const document: OptionalId<Document> = {
+                key: apiKey,
                 user: user,
-                requests: 0
-            }).then(() => {
-                resolve({
-                    status: 200,
-                    message: "New API key created.",
-                    data: {
-                        key: key,
-                        user: user,
-                        requests: 0
-                    },
-                    timestamps: APIUtil.getTimestamps()
-                });
-            }).catch(error => reject(error));
+                requests: 0,
+                timestamps: {
+                    created: new Date().getTime().toLocaleString(),
+                    lastUpdated: new Date().getTime().toLocaleString()
+                }
+            };
+            const promise = await DatabaseManager.getAPIKeyCollection().insertOne(document as any);
+            if (!promise) reject();
+            resolve(promise)
         });
     }
 
-    /*
-     Get a collection of all API keys.
-     @return Promise<object[]>
+    /**
+     * Get a collection of all API keys.
+     * @return Promise<any[]>
      */
 
-    public static async getAllApiKeys(): Promise<object[]> {
-        const keys: object[] = [];
-        return new Promise((resolve, reject) => {
-            Keys.find().then(async result => {
-                result.forEach(query => keys.push(query));
-                resolve(keys);
-            }).catch(async error => {
-                reject({
-                    status: 500,
-                    message: error.message
-                });
-            });
+    public static async getAllApiKeys(): Promise<any[]> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const promise = await DatabaseManager.getAPIKeyCollection().find({}).toArray();
+                if (!promise) reject();
+                resolve(promise);
+            } catch (error: any) {
+                reject(error);
+            }
         });
     }
 
@@ -103,6 +100,7 @@ export default class AuthorizationUtil {
             data.save();
         } catch ({}) {}
     }
+
 
     /**
      * The middleware to check API key validity.

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Ben Petrillo. All rights reserved.
+ * Copyright © 2022 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -16,25 +16,12 @@
  * credit is given to the original author(s).
  */
 
-import {Schema} from "mongoose";
-import DatabaseConnection from "../DatabaseConnection";
-
-const ImageSchema: Schema = new Schema(
-    {
-        filePath: {
-            type: String,
-            required: true
-        },
-        imageId: {
-            type: String,
-            required: true
-        }
-    },
-    {
-        timestamps: true,
-        versionKey: false
-    },
-);
-
-const Image = new DatabaseConnection().ponjoDatabase.model("uploads", ImageSchema);
-export default Image;
+export interface PonjoKey {
+    key: string,
+    user: string,
+    requests: number,
+    timestamps: {
+        created: string,
+        lastUpdated: string
+    }
+}

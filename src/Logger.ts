@@ -16,8 +16,6 @@
  * credit is given to the original author(s).
  */
 
-import APIUtil from "./api/util/api/APIUtil";
-
 export default class Logger {
 
     /**
@@ -27,7 +25,7 @@ export default class Logger {
      */
 
     public static info(message: string = "None specified."): void {
-        console.log(`[${APIUtil.getTimestamp()}] [PONJO-API] ${message}`);
+        console.log(`[${new Date().toLocaleTimeString()}] [PONJO-API] ${message}`);
     }
 
     /**
@@ -37,7 +35,7 @@ export default class Logger {
      */
 
     public static error(message: string = "Unknown."): void {
-        console.log(`[${APIUtil.getTimestamp()}] [PONJO-API] ${message}`);
+        console.log(`[${new Date().toLocaleTimeString()}] [PONJO-API] ${message}`);
     }
 
     /**

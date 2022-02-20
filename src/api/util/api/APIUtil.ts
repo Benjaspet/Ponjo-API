@@ -35,7 +35,7 @@ export default class APIUtil {
      * @return APITimestamps
      */
 
-    public static getTimestamps(): object {
+    public static getTimestamps(): APITimestamps {
         return {
             date: new Date().toLocaleString(),
             unix: Math.round(+ new Date() / 1000)

@@ -16,23 +16,15 @@
  * credit is given to the original author(s).
  */
 
-import mongoose from "mongoose";
-import Config from "../../Config";
-import Logger from "../../Logger";
-
-export default class DatabaseConnection {
-
-    public ponjoDatabase;
-    public roboEerieDatabase;
-
-    constructor() {
-        this.ponjoDatabase = mongoose.createConnection(Config.get("PONJOAPI-URI"), {
-            // @ts-ignore
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true
-        });
-        this.roboEerieDatabase = this.ponjoDatabase.useDb("RoboEerie");
-        Logger.info("Connected to all databases.");
+export interface CardDeck {
+    deckId: string,
+    deck: string[],
+    data: {
+        shuffled: boolean,
+        remainingCards: number
+    },
+    timestamps: {
+        created: string,
+        lastUpdated: string
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Ben Petrillo. All rights reserved.
+ * Copyright © 2022 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -16,12 +16,11 @@
  * credit is given to the original author(s).
  */
 
-import Config from "./Config";
-
-export default class Constants {
-
-    public static API_URI = Config.get("PONJOAPI-URI");
-    public static API_PORT = Config.get("PORT");
-    public static MONGODB_URI = Config.get("MONGODB-URI");
-
+export interface PonjoUpload {
+    imageData: string,
+    imageId: string,
+    timestamps: {
+        created: string,
+        lastUpdated: string
+    }
 }

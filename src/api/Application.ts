@@ -21,42 +21,38 @@ import * as express from "express";
 import * as path from "path";
 import * as bodyParser from "body-parser";
 import Router from "./Router";
-import rateLimit from "express-rate-limit";
 import URLShortenerEndpoint from "./endpoints/URLShortenerEndpoint";
 import APIUtil from "./util/api/APIUtil";
 import Keys from "./database/models/Keys";
 import WebhookUtil from "./util/api/WebhookUtil";
 import Middleware from "./Middleware";
-import ErrorUtil from "./util/ErrorUtil";
+import DatabaseManager from "./database/DatabaseManager";
 
 export class Application {
 
     constructor(app: Express) {
-        this.init(app);
+        this.init(app).then(() => {});
     }
 
-    private init(app: Express): void {
+    private async init(app: Express): Promise<void> {
 
-        /**
-         * Setting up the view engine and our public static directories.
-         */
+        // Connect to the database.
+
+        await DatabaseManager.connectToAll();
+
+        // Setting up the view engine and our public static directories.
 
         app.use(express.static(path.join(__dirname, "/public")));
         app.use(express.static(path.join(__dirname, "/uploads")));
         app.set("view engine", "ejs");
         app.set("views", __dirname + "/views");
 
-        /**
-         * Handling the NGINX reverse proxy to accept all requests originating
-         * from the Google DNS.
-         */
+        // Handling the NGINX reverse proxy to accept all requests originating from the Google DNS.
 
         app.set("trust proxy", "8.8.8.8");
         app.set("trust proxy", 1);
 
-        /**
-         * URL encoding and other configuration settings.
-         */
+        // URL encoding and other configuration settings.
 
         app.use(express.urlencoded({extended: false}));
         app.use(bodyParser.urlencoded({extended: true}));
@@ -70,9 +66,7 @@ export class Application {
             next();
         });
 
-        /*
-         * Setting our base endpoints and their callbacks.
-         */
+        // Setting our base endpoints and their callbacks.
 
         app.get("/", async (req: Request, res: Response) => {return res.render("index", {requests: await APIUtil.getTotalApiRequests(), keys: await Keys.find()})});
         app.get("/hosting", (req: Request, res: Response) => {return res.render("hosting")});
@@ -80,38 +74,17 @@ export class Application {
         app.get("/endpoints", (req: Request, res: Response) => {return res.render("endpoints")});
         app.get("/short/:shortURL", URLShortenerEndpoint.getShortenedURL);
 
-        /*
-         * Initialize the routers.
-         */
+        // Initialize the routers.
 
         app.use("/v1", Router.v1);
         app.use("/v1", Router.premium);
         app.use("/uploads", Router.hosting);
 
-        /*
-         * FINAL: DEFAULT HTTP ERROR CALLBACKS BELOW.
-         * Only run if all above methods fail or cannot be found.
-         */
+        // FINAL: DEFAULT HTTP ERROR CALLBACKS BELOW.
+        // Only run if all above methods fail or cannot be found.
 
         app.use((req: Request, res: Response) => {
             return res.status(404).render("404")
         });
-    }
-
-    /**
-     * Get the API rate limiter.
-     * @return object
-     */
-
-    public static getRateLimiter(): object {
-        return {
-            rateLimiter: rateLimit({
-                max: 50,
-                windowMs: 60 * 3 * 1000,
-                handler(req: Request, res: Response): void {
-                    ErrorUtil.send429Response(req, res);
-                }
-            })
-        }
     }
 }

@@ -16,54 +16,74 @@
  * credit is given to the original author(s).
  */
 
-import Tags from "../database/models/roboeerie/TagSchema";
+import DatabaseManager from "../database/DatabaseManager";
+import {APIData} from "../structs/database/APIData";
+import {RoboEerieTag} from "../structs/database/RoboEerieTag";
 
 export default class DatabaseUtil {
 
-    /**
-     * Fetch a collection of RoboEerie tags.
-     * @param ?count number
-     * @return Promise<any>
-     */
-
-    public static async fetchTags(count?: number): Promise<any> {
-        return new Promise((resolve, reject) => {
-            try {
-                if (count) {
-                    Tags.find().then(result => {
-                        const tags: object[] = [];
-                        result.forEach(key => {
-                            tags.push({
-                                tag: key.tag,
-                                content: key.content,
-                                author: key.author,
-                                guild: key.guild,
-                                createdAt: key.createdAt,
-                                updatedAt: key.updatedAt
-                            });
-                        });
-                        const sliced = tags.slice(0, count);
-                        resolve(sliced);
-                    });
-                } else {
-                    Tags.find().then(result => {
-                        const tags: object[] = [];
-                        result.forEach(key => {
-                            tags.push({
-                                tag: key.tag,
-                                content: key.content,
-                                author: key.author,
-                                guild: key.guild,
-                                createdAt: key.createdAt,
-                                updatedAt: key.updatedAt
-                            });
-                        });
-                        resolve(tags);
-                    });
-                }
-            } catch (error) {
-                reject({});
-            }
+    public static async fetchTags(count?: number): Promise<RoboEerieTag[]> {
+        const parsed: RoboEerieTag[] = [];
+        const tags: any[] = await DatabaseManager.getRoboEerieTagDocuments().find().toArray();
+        tags.forEach(document => {
+            parsed.push({
+                id: document.id,
+                tag: document.tag,
+                content: document.content,
+                author: document.author,
+                guild: document.guild,
+                timestamps: document.timestamps
+            });
         });
+        if (count) {
+            parsed.slice(0, tags.length);
+            return parsed;
+        }
+        return parsed;
     }
+
+    // public static async fetchAPIStats(): Promise<APIData> {
+    //     const stats: Document = await DatabaseManager.getPonjoAPIStatsDocuments().findOne();
+    //     return stats.
+    // }
+
+    // public static async fetchTags(count?: number): Promise<any> {
+    //     return new Promise((resolve, reject) => {
+    //         try {
+    //             if (count) {
+    //                 Tags.find().then(result => {
+    //                     const tags: object[] = [];
+    //                     result.forEach(key => {
+    //                         tags.push({
+    //                             tag: key.tag,
+    //                             content: key.content,
+    //                             author: key.author,
+    //                             guild: key.guild,
+    //                             createdAt: key.createdAt,
+    //                             updatedAt: key.updatedAt
+    //                         });
+    //                     });
+    //                     const sliced = tags.slice(0, count);
+    //                     resolve(sliced);
+    //                 });
+    //             } else {
+    //                 Tags.find().then(result => {
+    //                     const tags: object[] = [];
+    //                     result.forEach(key => {
+    //                         tags.push({
+    //                             tag: key.tag,
+    //                             content: key.content,
+    //                             author: key.author,
+    //                             guild: key.guild,
+    //                             createdAt: key.createdAt,
+    //                             updatedAt: key.updatedAt
+    //                         });
+    //                     });
+    //                     resolve(tags);
+    //                 });
+    //             }
+    //         } catch (error) {
+    //             reject({});
+    //         }
+    //     });
 }
