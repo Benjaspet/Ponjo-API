@@ -23,10 +23,9 @@ import * as bodyParser from "body-parser";
 import Router from "./Router";
 import URLShortenerEndpoint from "./endpoints/URLShortenerEndpoint";
 import APIUtil from "./util/api/APIUtil";
-import Keys from "./database/models/Keys";
 import WebhookUtil from "./util/api/WebhookUtil";
 import Middleware from "./Middleware";
-import DatabaseManager from "./database/DatabaseManager";
+import Models from "./database/Models";
 
 export class Application {
 
@@ -36,14 +35,10 @@ export class Application {
 
     private async init(app: Express): Promise<void> {
 
-        // Connect to the database.
-
-        await DatabaseManager.connectToAll();
-
         // Setting up the view engine and our public static directories.
 
         app.use(express.static(path.join(__dirname, "/public")));
-        app.use(express.static(path.join(__dirname, "/uploads")));
+        app.use(express.static(path.join(__dirname, "/../../uploads")));
         app.set("view engine", "ejs");
         app.set("views", __dirname + "/views");
 
@@ -68,7 +63,7 @@ export class Application {
 
         // Setting our base endpoints and their callbacks.
 
-        app.get("/", async (req: Request, res: Response) => {return res.render("index", {requests: await APIUtil.getTotalApiRequests(), keys: await Keys.find()})});
+        app.get("/", async (req: Request, res: Response) => {return res.render("index", {data: await APIUtil.getTotalApiRequests(), keys: await Models.Keys.find()})});
         app.get("/hosting", (req: Request, res: Response) => {return res.render("hosting")});
         app.get("/image-hosting", Middleware.imageHostingMiddleware);
         app.get("/endpoints", (req: Request, res: Response) => {return res.render("endpoints")});

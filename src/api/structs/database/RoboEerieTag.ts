@@ -17,13 +17,12 @@
  */
 
 export interface RoboEerieTag {
-    id: string,
     tag: string,
     content: string,
     author: string,
     guild: string,
     timestamps: {
-        created: string,
-        lastUpdated: string
+        createdAt: string,
+        updatedAt: string
     }
 }

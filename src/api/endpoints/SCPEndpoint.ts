@@ -26,13 +26,13 @@ import APIUtil from "../util/api/APIUtil";
 
 export default class SCPEndpoint {
 
-    /*
-     Get data on a specific SCP item.
-     @method GET
-     @header Authentication: token
-     @uri /v1/scp?item=005
-     @param item: string | int
-     @return Promise<Express.Response>
+    /**
+     * Get data on a specific SCP item.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/scp?item=005
+     * @param item: string|int
+     * @return Promise<Express.Response>
      */
 
     public static async getScpData(req: Request, res: Response): Promise<Response> {
@@ -67,12 +67,12 @@ export default class SCPEndpoint {
         }
     }
 
-    /*
-     Get all SCP Foundation branches.
-     @method GET
-     @header Authentication: token
-     @uri /v1/scp/branches
-     @return Promise<Express.Response>
+    /**
+     * Get all SCP Foundation branches.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/scp/branches
+     * @return Promise<Express.Response>
      */
 
     public static async getFoundationBranches(req: Request, res: Response): Promise<Response> {
@@ -96,6 +96,14 @@ export default class SCPEndpoint {
      @return Promise<any>
      */
 
+    /**
+     * Get all SCP Foundation task forces.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/scp/taskforces
+     * @return Promise<any>
+     */
+
     public static async getFoundationTaskForce(req: Request, res: Response): Promise<any> {
         try {
             await SCPTaskForceUtil.getTaskForceData()
@@ -112,12 +120,12 @@ export default class SCPEndpoint {
         }
     }
 
-    /*
-     Get all SCP Foundation sites & their category data.
-     @method GET
-     @header Authentication: token
-     @uri /v1/scp/sites
-     @return Promise<Express.Response>
+    /**
+     * Get all SCP Foundation sites & their category data.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/scp/sites
+     * @return Promise<Express.Response>
      */
 
     public static async getFoundationSites(req: Request, res: Response): Promise<Response> {
@@ -133,12 +141,12 @@ export default class SCPEndpoint {
         }
     }
 
-    /*
-     Get all SCP Foundation personnel.
-     @method GET
-     @header Authentication: token
-     @uri /v1/scp/personnel
-     @return Promise<Express.Response>
+    /**
+     * Get all SCP Foundation personnel.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/scp/personnel
+     * @return Promise<Express.Response>
      */
 
     public static async getFoundationPersonnel(req: Request, res: Response): Promise<Response> {
@@ -154,12 +162,12 @@ export default class SCPEndpoint {
         }
     }
 
-    /*
-     Get all SCP Foundation areas.
-     @method GET
-     @header Authentication: token
-     @uri /v1/scp/areas
-     @return Promise<Express.Response>
+    /**
+     * Get all SCP Foundation areas.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/scp/areas
+     * @return Promise<Express.Response>
      */
 
     public static async getFoundationAreas(req: Request, res: Response): Promise<Response> {
@@ -175,19 +183,18 @@ export default class SCPEndpoint {
         }
     }
 
-    /*
-     Get all SCP Foundation data.
-     @method GET
-     @header Authentication: token
-     @uri /v1/scp/all
-     @return Promise<Express.Response>
+    /**
+     * Get all SCP Foundation data.
+     * @method GET
+     * @header Authentication: token
+     * @uri /v1/scp/all
+     * @return Promise<Express.Response>
      */
 
     public static async getAllFoundationData(req: Request, res: Response): Promise<Response> {
         try {
             return res.status(200).json({
                 status: res.statusCode,
-                message: res.statusMessage,
                 personnel: SCPFoundationDataUtil.getScpPersonnel(),
                 branches: SCPFoundationDataUtil.getAllBranchData(),
                 areas: SCPFoundationDataUtil.getAllAreaData(),

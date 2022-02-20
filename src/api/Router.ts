@@ -18,7 +18,8 @@
 
 import {NextFunction, Request, Response, Router} from "express";
 import * as express from "express";
-import multer from "multer";
+import multer, {StorageEngine} from "multer";
+import PonjoRateLimiter from "./structs/PonjoRateLimiter";
 import ColorEndpoint from "./endpoints/ColorEndpoint";
 import LGBTQEndpoint from "./endpoints/LGBTQEndpoint";
 import DataEndpoint from "./endpoints/DataEndpoint";
@@ -33,7 +34,6 @@ import AuthEndpoint from "./endpoints/AuthEndpoint";
 import HostingUtil from "./util/HostingUtil";
 import URLShortenerEndpoint from "./endpoints/URLShortenerEndpoint";
 import ElixirEndpoint from "./endpoints/ElixirEndpoint";
-import PonjoRateLimiter from "./structs/PonjoRateLimiter";
 
 const router: Router = express.Router();
 const premiumRouter: Router = express.Router();
@@ -121,16 +121,15 @@ premiumRouter.get("/random/timezone", RandomEndpoint.getRandomTimezone);
 premiumRouter.get("/random/timezone/:count", RandomEndpoint.getRandomTimezone);
 
 premiumRouter.post("/auth/keys/create", AuthEndpoint.createKey);
-premiumRouter.get("/auth/keys/list", AuthEndpoint.getAllKeys);
 
-const storage = multer.diskStorage({});
+const storage: StorageEngine = multer.diskStorage(HostingUtil.getDiskStorageOptions());
 
-uploadRouter.post("/post", multer({storage}).array("avatar"), (req: Request, res: Response) => {
-    return HostingUtil.sendImagePostResponse(req, res);
+uploadRouter.post("/post", multer({storage: storage}).single("upload"), (req: Request, res: Response) => {
+    return HostingUtil.sendSuccessfulUploadResponse(req, res);
 });
 
 uploadRouter.get("/list", (req: Request, res: Response) => {
-    return HostingUtil.sendArrayOfAllImages(req, res).then(() => {});
+    return HostingUtil.sendArrayOfAllUploads(req, res).then(() => {});
 });
 
 uploadRouter.get("/:image", async (req: Request, res: Response) => {

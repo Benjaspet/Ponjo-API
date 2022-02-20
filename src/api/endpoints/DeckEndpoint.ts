@@ -18,10 +18,10 @@
 
 import {Request, Response} from "express";
 import DeckUtil from "../util/DeckUtil";
-import Deck from "../database/models/Decks";
 import APIUtil from "../util/api/APIUtil";
 import ErrorUtil from "../util/ErrorUtil";
 import Logger from "../../Logger";
+import Models from "../database/Models";
 
 export default class DeckEndpoint {
 
@@ -68,7 +68,7 @@ export default class DeckEndpoint {
         try {
             const deck = DeckUtil.createDeck();
             const deckId = APIUtil.generateUniqueId();
-            Deck.create({
+            Models.Decks.create({
                 deckId: deckId,
                 deck: deck,
                 data: {
@@ -88,11 +88,7 @@ export default class DeckEndpoint {
                     timestamps: APIUtil.getTimestamps()
                 });
             }).catch(() => {
-                return res.status(400).json({
-                    status: res.statusCode,
-                    message: res.statusMessage,
-                    timestamps: APIUtil.getTimestamps()
-                });
+                return ErrorUtil.send400Status(req, res);
             });
         } catch (error) {
             Logger.error(error.message);
@@ -109,29 +105,29 @@ export default class DeckEndpoint {
      * @return Express.Response|any
      */
 
-    public static getDeckById(req: Request, res: Response): Response|any {
+    public static async getDeckById(req: Request, res: Response): Promise<Response> {
         const deckId = req.query.id as string;
         if (!deckId) return ErrorUtil.send400Status(req, res);
         try {
-            Deck.findOne({deckId: deckId})
-                .then(deck => {
-                    if (!deck) {
-                        return res.status(400).json({
-                            status: res.statusCode,
-                            message: "Could not find a deck by that ID.",
-                            timestamps: APIUtil.getTimestamps()
-                        });
-                    } else {
-                        return res.status(200).json({
-                            status: res.statusCode,
-                            message: res.statusMessage,
-                            deckId: deck.deckId,
-                            deck: deck.deck,
-                            data: deck.data,
-                            timestamps: APIUtil.getTimestamps()
-                        });
-                    }
-            });
+            const result: any = await Models.Decks.findOne({deckId: deckId});
+            if (result) {
+                return res.status(200).json({
+                    status: res.statusCode,
+                    deckId: result.deckId,
+                    deck: result.deck,
+                    data: {
+                        shuffled: result.data.shuffled,
+                        remainingCards: result.deck.length
+                    },
+                    timestamps: APIUtil.getTimestamps()
+                });
+            } else {
+                return res.status(400).json({
+                    status: res.statusCode,
+                    message: "Could not find a deck by that ID.",
+                    timestamps: APIUtil.getTimestamps()
+                });
+            }
         } catch (error) {
             Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
@@ -151,38 +147,42 @@ export default class DeckEndpoint {
         const deckId = req.query.id as string;
         if (!deckId) return ErrorUtil.send400Status(req, res);
         try {
-            Deck.findOne({deckId: deckId}, async function (error, deck) {
-                if (!deck) {
+            const result: any = await Models.Decks.findOne({deckId: deckId});
+            if (result) {
+                const shuffledDeck = DeckUtil.shuffleDeck(result.deck);
+                const secondResult: any = await Models.Decks.findOneAndUpdate({
+                    deckId: deckId
+                }, {
+                    deck: shuffledDeck,
+                    data: {
+                        shuffled: true, remainingCards: shuffledDeck.length
+                    }
+                });
+                if (secondResult) {
+                    return res.status(200).json({
+                        status: 200,
+                        deckId: deckId,
+                        deck: shuffledDeck,
+                        data: {
+                            shuffled: true,
+                            remainingCards: secondResult.deck.length
+                        },
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                } else {
                     return res.status(400).json({
                         status: res.statusCode,
                         message: "Could not find a deck by that ID.",
                         timestamps: APIUtil.getTimestamps()
                     });
-                } else {
-                    const shuffledDeck = DeckUtil.shuffleDeck(deck.deck);
-                    Deck.findOneAndUpdate({deckId: deckId}, {deck: shuffledDeck, data: {shuffled: true, remainingCards: shuffledDeck.length}}, (error, result) => {
-                        if (error) {
-                            return res.status(400).json({
-                                status: res.statusCode,
-                                message: "Could not find a deck by that ID.",
-                                timestamps: APIUtil.getTimestamps()
-                            });
-                        } else {
-                            return res.status(200).json({
-                                status: 200,
-                                message: res.statusMessage,
-                                deckId: deckId,
-                                deck: shuffledDeck,
-                                data: {
-                                    shuffled: true,
-                                    remainingCards: deck.deck.length
-                                },
-                                timestamps: APIUtil.getTimestamps()
-                            });
-                        }
-                    });
                 }
-            });
+            } else {
+                return res.status(400).json({
+                    status: res.statusCode,
+                    message: "Could not find a deck by that ID.",
+                    timestamps: APIUtil.getTimestamps()
+                });
+            }
         } catch (error) {
             Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
@@ -202,50 +202,54 @@ export default class DeckEndpoint {
     public static async drawCards(req: Request, res: Response): Promise<Response> {
         const deckId = req.query.id as string;
         const count = req.query.count as string;
-        if (!deckId) return ErrorUtil.send400Status(req, res);
+        if (!deckId || !count) return ErrorUtil.send400Status(req, res);
         try {
-            Deck.findOne({deckId: deckId}, async function (error, deck) {
-                if (!deck) {
-                    return res.status(400).json({
+            const result: any = await Models.Decks.findOne({deckId: deckId});
+            if (result) {
+                if (result.deck.length < parseInt(count)) {
+                    return res.status(500).json({
                         status: res.statusCode,
-                        message: "Invalid deck ID.",
+                        message: "There are not that many cards left in the deck.",
                         timestamps: APIUtil.getTimestamps()
                     });
-                } else if (!count) {
-                    return ErrorUtil.send400Status(req, res);
-                } else {
-                    if (deck.deck.length < parseInt(count)) {
-                        return res.status(500).json({
-                            status: res.statusCode,
-                            message: "There are not that many cards left in the deck.",
-                            timestamps: APIUtil.getTimestamps()
-                        });
+                }
+                const drawn = DeckUtil.drawCard(result.deck, parseInt(count));
+                const secondResult: any = await Models.Decks.findOneAndUpdate({
+                    deckId: deckId
+                }, {
+                    deck: drawn.updatedDeck,
+                    data: {
+                        shuffled: result.data.shuffled,
+                        remainingCards: drawn.remainingCards
                     }
-                    const drawn = DeckUtil.drawCard(deck.deck, parseInt(count));
-                    Deck.findOneAndUpdate({deckId: deckId}, {deck: drawn.updatedDeck, data: {shuffled: deck.data.shuffled, remainingCards: drawn.remainingCards}}, async function (error, deck) {
-                        if (!deck) {
-                            return res.status(400).json({
-                                status: res.statusCode,
-                                message: "Could not find a deck by that ID.",
-                                timestamps: APIUtil.getTimestamps()
-                            });
-                        } else {
-                            return res.status(200).json({
-                                status: res.statusCode,
-                                deckId: deckId,
-                                deck: drawn.updatedDeck,
-                                data: {
-                                    shuffled: deck.shuffled,
-                                    remainingCards: drawn.remainingCards,
-                                    drawnCards: drawn.cardsDrawn,
-                                    amountDrawn: drawn.amountDrawn
-                                },
-                                timestamps: APIUtil.getTimestamps()
-                            });
-                        }
+                });
+                if (secondResult) {
+                    return res.status(200).json({
+                        status: res.statusCode,
+                        deckId: deckId,
+                        deck: drawn.updatedDeck,
+                        data: {
+                            shuffled: secondResult.shuffled,
+                            remainingCards: drawn.remainingCards,
+                            drawnCards: drawn.cardsDrawn,
+                            amountDrawn: drawn.amountDrawn
+                        },
+                        timestamps: APIUtil.getTimestamps()
+                    });
+                } else {
+                    return res.status(400).json({
+                        status: res.statusCode,
+                        message: "Could not find a deck by that ID.",
+                        timestamps: APIUtil.getTimestamps()
                     });
                 }
-            });
+            } else {
+                return res.status(400).json({
+                    status: res.statusCode,
+                    message: "Could not find a deck by that ID.",
+                    timestamps: APIUtil.getTimestamps()
+                });
+            }
         } catch (error) {
             Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
@@ -265,27 +269,34 @@ export default class DeckEndpoint {
         const deckId = req.query.id as string;
         if (!deckId) return ErrorUtil.send400Status(req, res);
         try {
-            Deck.findOneAndUpdate({deckId: deckId}, {deck: DeckUtil.createDeck(), data: {shuffled: false, remainingCards: 52}}, async function (error, deck) {
-                if (!deck) {
-                    return res.status(400).json({
-                        status: res.statusCode,
-                        message: "Could not find a deck by that ID.",
-                        timestamps: APIUtil.getTimestamps()
-                    });
-                } else {
-                    return res.status(200).json({
-                        status: res.statusCode,
-                        message: res.statusMessage,
-                        deckId: deckId,
-                        deck: DeckUtil.createDeck(),
-                        data: {
-                            shuffled: false,
-                            remainingCards: deck.data.remainingCards
-                        },
-                        timestamps: APIUtil.getTimestamps()
-                    });
+            const result: any = await Models.Decks.findOneAndUpdate({
+                deckId: deckId
+            }, {
+                deck: DeckUtil.createDeck(),
+                data: {
+                    shuffled: false,
+                    remainingCards: 52
                 }
             });
+            if (result) {
+                return res.status(200).json({
+                    status: res.statusCode,
+                    message: res.statusMessage,
+                    deckId: deckId,
+                    deck: DeckUtil.createDeck(),
+                    data: {
+                        shuffled: false,
+                        remainingCards: 52
+                    },
+                    timestamps: APIUtil.getTimestamps()
+                });
+            } else {
+                return res.status(400).json({
+                    status: res.statusCode,
+                    message: "Could not find a deck by that ID.",
+                    timestamps: APIUtil.getTimestamps()
+                });
+            }
         } catch (error) {
             Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);

@@ -16,55 +16,16 @@
  * credit is given to the original author(s).
  */
 
-import {Collection, Db, MongoClient, Document} from "mongodb";
 import Constants from "../../Constants";
-import Logger from "../../Logger";
+import mongoose from "mongoose";
 
 export default class DatabaseManager {
 
-    private static ponjoAPICollection: Db;
-    private static roboEerieCollection: Db;
-    private static readonly database: MongoClient = new MongoClient(Constants.API_URI);
-    
-    public static async connectToAll(): Promise<void> {
-        this.ponjoAPICollection = this.database.db("Ponjo-API");
-        this.roboEerieCollection = this.database.db("RoboEerie");
-        await this.database.connect().then(async () => Logger.info("Connected to all databases."));
-    }
-    
-    public static getDatabase(): MongoClient {
-        return this.database;
-    }
+    public ponjoAPIDatabase;
+    public roboEerieDatabase;
 
-    public static getPonjoAPICollection(): Db {
-        return this.ponjoAPICollection;
-    }
-
-    public static getShortenedURLCollection(): Collection<Document> {
-        return this.ponjoAPICollection.collection("shorturls");
-    }
-
-    public static getAPIKeyCollection(): Collection<Document> {
-        return this.ponjoAPICollection.collection("keys");
-    }
-
-    public static getDeckCollection(): Collection<Document> {
-        return this.ponjoAPICollection.collection("decks");
-    }
-
-    public static getImageUploadCollection(): Collection<Document> {
-        return this.ponjoAPICollection.collection("uploads");
-    }
-
-    public static getPonjoAPIStatsDocuments(): Collection<Document> {
-        return this.ponjoAPICollection.collection("stats");
-    }
-
-    public static getRoboEerieCollection(): Db {
-        return this.roboEerieCollection;
-    }
-    
-    public static getRoboEerieTagDocuments(): Collection<Document> {
-        return this.roboEerieCollection.collection("tags");
+    constructor() {
+        this.ponjoAPIDatabase = mongoose.createConnection(Constants.PONJOAPI_MONGO_URI);
+        this.roboEerieDatabase = this.ponjoAPIDatabase.useDb("RoboEerie")
     }
 }

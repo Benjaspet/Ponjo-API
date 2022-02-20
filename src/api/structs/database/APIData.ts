@@ -24,9 +24,5 @@ export interface APIData {
         patches: number,
         puts: number,
         deletes: number
-    },
-    timestamps: {
-        created: string,
-        lastUpdated: string
     }
 }

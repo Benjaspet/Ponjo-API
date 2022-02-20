@@ -20,11 +20,11 @@ import path from "path";
 
 export default class PrideUtil {
 
-    /*
-     Get the file path of the specified pride flag.
-     @param type: string
-     @param displayAll?: boolean
-     @return Promise<any>
+    /**
+     * Get the file path of the specified pride flag.
+     * @param type: string
+     * @param displayAll?: boolean
+     * @return Promise<any>
      */
 
     public static async getFlag(type: string, displayAll?: boolean): Promise<any> {

@@ -33,11 +33,16 @@
                     <h4 class="mt-0 text-center" style="font-size: 30px;">View it below:</h4><br>
                     <p class="text-sm mb-0 text-center">
                         UUID: <%= imageId %> <br>
-                        Raw: <a class="ponjo-url" href="https://app.ponjo.club<%= filePath %>"><%= filePath %></a> <br>
-                        Embed: <a class="ponjo-url" href="https://app.ponjo.club/uploads/<%= imageId %>"><%= imageId %></a> <br>
-                        <%= date %> <br><br>
+                        Raw: <a class="ponjo-url" href="https://app.ponjo.club/<%= imageId %>.png">https://app.ponjo.club/<%= imageId %>.png</a> <br>
+                        Embed: <a class="ponjo-url" href="https://app.ponjo.club/uploads/<%= imageId %>">https://app.ponjo.club/uploads/<%= imageId %></a> <br>
+                        Uploaded: <%= date %> <br><br>
                         Want to upload another image? <a class="ponjo-url" href="https://app.ponjo.club/hosting">Click here</a>.
                     </p>
+                </div>
+            </section>
+            <section class="features section">
+                <div class="container">
+                    <img src="https://app.ponjo.club/<%= imageId %>.png" alt="">
                 </div>
             </section>
         </section>

@@ -30,4 +30,5 @@ Logger.clear();
 const server = http.createServer(app);
 server.listen(Constants.API_PORT || 3000, () => {
    Logger.info("Now running on port 3000.");
+   Logger.info("Connected to all databases.");
 });

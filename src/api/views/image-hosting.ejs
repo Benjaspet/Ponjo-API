@@ -60,12 +60,12 @@
             <div class="container">
                 <div class="features-inner section-inner has-bottom-divider">
                     <div class="features-wrap">
-                        <% const list = images.slice(Math.max(images.length - 6, 1)); %>
-                        <% list.forEach(image => { %>
+                        <% const reversed = images.reverse(); %>
+                        <% reversed.forEach(image => { %>
                             <div class="feature text-center is-revealing">
                                 <div class="feature-inner">
                                     <div class="feature-icon">
-                                        <img src="images/Feature-2.svg" alt="">
+                                        <img src="https://app.ponjo.club<%= image.filePath %>" alt="" width="100" height="100">
                                     </div>
                                     <h4 class="feature-title mt-24"><%= image.imageId %></h4>
                                     <p class="text-sm mb-0">

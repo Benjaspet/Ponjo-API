@@ -17,88 +17,50 @@
  */
 
 import {NextFunction, Request, Response} from "express";
+import {CreatedAPIKey} from "../../structs/APIResponses";
 import * as uuid from "uuid";
 import APIUtil from "./APIUtil";
-import {CreatedAPIKey} from "../../structs/APIResponses";
-import DatabaseManager from "../../database/DatabaseManager";
-import {PonjoKey} from "../../structs/database/PonjoKey";
-import {Document} from "mongodb";
-import {OptionalId} from "mongodb";
+import Models from "../../database/Models";
 
 export default class AuthorizationUtil {
-
-    /**
-     * Generate a unique API key.
-     * @return string
-     */
 
     public static generateUniqueApiKey(): string {
         return uuid.v4();
     }
 
-    /**
-     * Determine if an API key is valid.
-     * @param key The API key.
-     * @return boolean
-     */
-
     public static isValidApiKey(key: string): boolean {
         return uuid.validate(key);
     }
 
-    /**
-     * Create an API key.
-     * @param key The key to create.
-     * @param user The name of the user to which the key belongs.
-     * @return Promise<any>
-     */
-
-    public static async createApiKey(apiKey: string, user: string): Promise<any> {
-        return new Promise(async (resolve, reject) => {
-            const document: OptionalId<Document> = {
-                key: apiKey,
-                user: user,
-                requests: 0,
-                timestamps: {
-                    created: new Date().getTime().toLocaleString(),
-                    lastUpdated: new Date().getTime().toLocaleString()
-                }
-            };
-            const promise = await DatabaseManager.getAPIKeyCollection().insertOne(document as any);
-            if (!promise) reject();
-            resolve(promise)
-        });
-    }
-
-    /**
-     * Get a collection of all API keys.
-     * @return Promise<any[]>
-     */
-
-    public static async getAllApiKeys(): Promise<any[]> {
+    public static async createAPIKey(apiKey: string, user: string): Promise<CreatedAPIKey> {
         return new Promise(async (resolve, reject) => {
             try {
-                const promise = await DatabaseManager.getAPIKeyCollection().find({}).toArray();
-                if (!promise) reject();
-                resolve(promise);
+                const result: any = await Models.Keys.create(
+                    {
+                        key: apiKey,
+                        user: user,
+                        requests: 0
+                    }
+                );
+                if (result) {
+                    resolve({
+                        key: result.key,
+                        user: result.user,
+                        requests: result.requests
+                    });
+                } else reject();
             } catch (error: any) {
                 reject(error);
             }
         });
     }
 
-    /**
-     * Add a use to the specified API key.
-     * @param key string
-     * @return Promise<void>
-     */
-
-    public static async addApiKeyUse(key: string): Promise<void> {
+    public static async addApiKeyUse(apiKey: string): Promise<void> {
         try {
-            const data = await Keys.findOne({key: key});
-            data.request++;
-            data.save();
-        } catch ({}) {}
+            const result: any = await Models.Keys.findOne({key: apiKey});
+            result.requests++;
+            result.save();
+        } catch (error: any) {}
     }
 
 

@@ -17,30 +17,34 @@
  */
 
 import {Request, Response} from "express";
-import ShortURL from "../database/models/URLShortener";
 import ErrorUtil from "../util/ErrorUtil";
 import APIUtil from "../util/api/APIUtil";
+import Models from "../database/Models";
 
 export default class URLShortenerEndpoint {
 
-    /*
-     Create a shortened URL.
-     @method POST
-     @header Authentication: token
-     @uri /v1/urlshortener/create
-     @param url: <uri-encoded> string
-     @return Promise<Express.Response>
+    /**
+     * Create a shortened URL.
+     * @method POST
+     * @header Authentication: token
+     * @uri /v1/urlshortener/create
+     * @param url: <uri-encoded> string
+     * @return Promise<Express.Response>
      */
 
     public static async createShortenedURL(req: Request, res: Response): Promise<Response> {
         const url = req.query.url as string;
         try {
             if (!url) return ErrorUtil.send400Status(req, res);
-            const short = await ShortURL.create({full: decodeURIComponent(url)});
+            const result: any = await Models.ShortURLs.create({full: decodeURIComponent(url)});
             return res.status(200).json({
                 status: res.statusCode,
                 message: res.statusMessage,
-                data: short,
+                data: {
+                    full: result.full,
+                    short: result.short,
+                    clicks: result.clicks
+                },
                 timestamps: APIUtil.getTimestamps()
             });
         } catch (error) {
@@ -48,20 +52,20 @@ export default class URLShortenerEndpoint {
         }
     }
 
-    /*
-     Redirect a user to the specified short URL.
-     @method GET
-     @header none
-     @uri /short/78d5Adv2Aq
-     @return Promise<Express.Response|void>
+    /**
+     * Redirect a user to the specified short URL.
+     * @method GET
+     * @header none
+     * @uri /short/78d5Adv2Aq
+     * @return Promise<Express.Response|void>
      */
 
     public static async getShortenedURL(req: Request, res: Response): Promise<Response|void> {
         const url: string = req.params.shortURL as string;
         try {
             if (!url) return ErrorUtil.send400Status(req, res);
-            const shortURL = await ShortURL.findOne({short: url});
-            if (shortURL == null) return ErrorUtil.send404Response(req, res);
+            const shortURL: any = await Models.ShortURLs.findOne({short: url});
+            if (!shortURL) return ErrorUtil.send404Response(req, res);
             shortURL.clicks++; shortURL.save();
             return res.redirect(shortURL.full);
         } catch (error) {
@@ -80,8 +84,12 @@ export default class URLShortenerEndpoint {
     public static async getAllShortURLs(req: Request, res: Response): Promise<Response> {
         try {
             let urls: object[] = [];
-            const shortURLs = await ShortURL.find();
-            shortURLs.forEach(element => urls.push(element));
+            const result: any = await Models.ShortURLs.find();
+            result.forEach(element => urls.push({
+                full: element.full,
+                short: element.short,
+                clicks: element.clicks
+            }));
             return res.status(200).json({
                 status: res.statusCode,
                 message: res.statusMessage,

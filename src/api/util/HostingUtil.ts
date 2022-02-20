@@ -17,16 +17,15 @@
  */
 
 import {Request, Response} from "express";
-import Image from "../database/models/Images";
 import APIUtil from "./api/APIUtil";
+import Models from "../database/Models";
 import path from "path";
-import Images from "../database/models/Images";
 import {DiskStorageOptions} from "multer";
 
 export default class HostingUtil {
 
-    public static imageData: string[] = [];
-    public static htmlData: string[] = [];
+    public static imageId: string;
+    public static filePath: string;
 
     /**
      * Determine if an image exists.
@@ -36,8 +35,8 @@ export default class HostingUtil {
      */
 
     public static imageExists(id: string, array: any[]): boolean {
-        return array.some(function(el) {
-            return el.imageId === id;
+        return array.some(element => {
+            return element.imageId === id;
         });
     }
 
@@ -53,37 +52,59 @@ export default class HostingUtil {
     }
 
     /**
+     * Get the disk storage options.
+     * @return object
+     */
+
+    public static getDiskStorageOptions(): DiskStorageOptions {
+        return {
+            destination: (req: Request, file: any, cb: any) => {
+                cb(null, path.join(__dirname + "/../../../uploads"));
+            },
+            filename: (req: Request, file: any, cb: any) => {
+                const ext = path.extname(file.originalname);
+                const id = APIUtil.generateUniqueId();
+                const filePath = `/${id}${ext}`;
+                Models.Uploads.create({filePath: filePath, imageId: id})
+                    .then(() => {
+                        cb(null, filePath);
+                        HostingUtil.filePath = filePath;
+                        HostingUtil.imageId = id;
+                    });
+            }
+        }
+    }
+
+    /**
      * Send an array of all images.
      * @param req Express.Request
      * @param res Express.Response
      * @return Promise<any>
      */
 
-    public static async sendArrayOfAllImages(req: Request, res: Response): Promise<any> {
-        Image.find()
-            .then(images => {
-                return res.status(200).json({
-                    status: res.statusCode,
-                    images: images,
-                    timestamps: APIUtil.getTimestamps()
-                });
+    public static async sendArrayOfAllUploads(req: Request, res: Response): Promise<any> {
+        const result: any = await Models.Uploads.find();
+        if (result) {
+            return res.status(200).json({
+                status: res.statusCode,
+                uploads: result,
+                timestamps: APIUtil.getTimestamps()
             });
+        }
     }
 
     /**
      * Render the EJS response after an image has been uploaded.
      * @param req Express.Request
      * @param res Express.Response
-     * @return Promise<any>
+     * @return void
      */
 
-    public static async sendImagePostResponse(req: Request, res: Response): Promise<any> {
-        const query = await Image.findOne({imageId: HostingUtil.imageData[1]});
-        const date = query.createdAt;
-        return res.render("uploadedImage", {
-            filePath: HostingUtil.imageData[0],
-            imageId: HostingUtil.imageData[1],
-            date: date
+    public static sendSuccessfulUploadResponse(req: Request, res: Response): void {
+        return res.render("successfulUpload", {
+            imageId: HostingUtil.imageId,
+            filePath: HostingUtil.filePath,
+            date: APIUtil.getDate()
         });
     }
 
@@ -95,12 +116,12 @@ export default class HostingUtil {
      */
 
     public static async getImage(req: Request, res: Response): Promise<any> {
-        Images.find().then(images => {
+        Models.Uploads.find().then(images => {
             if (HostingUtil.imageExists(req.params.image, images)) {
                 const imagePath = HostingUtil.getImageData(req.params.image, images).filePath;
                 const imageId = HostingUtil.getImageData(req.params.image, images).imageId;
-                HostingUtil.htmlData[0] = "../" + imagePath;
-                HostingUtil.htmlData[1] = imageId;
+                HostingUtil.filePath = path + imagePath;
+                HostingUtil.imageId = imageId;
                 res.set("Content-Type", "text/html")
                 return HostingUtil.sendEmbeddedResponse(imagePath, imageId, req, res);
             } else {

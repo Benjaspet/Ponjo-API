@@ -20,10 +20,10 @@ import axios from "axios";
 
 export default class CovidDataUtil {
 
-    /*
-     Get COVID-19 stats by country.
-     @param country: string
-     @return Promise<object>
+    /**
+     * Get COVID-19 stats by country.
+     * @param country: string
+     * @return Promise<object>
      */
 
     public static async getCovidDataByCountry(country: string): Promise<object> {
@@ -62,9 +62,9 @@ export default class CovidDataUtil {
         });
     }
 
-    /*
-     Get global COVID-19 stats.
-     @return Promise<object>
+    /**
+     * Get global COVID-19 stats.
+     * @return Promise<object>
      */
 
     public static async getWorldWideCovidData(): Promise<object> {

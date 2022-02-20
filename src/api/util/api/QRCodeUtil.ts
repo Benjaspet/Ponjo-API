@@ -20,12 +20,12 @@ import {AwesomeQR} from "awesome-qr";
 
 export default class QRCodeUtil {
 
-    /*
-     Generate a QR code with options.
-     @param text: string
-     @param size: number
-     @param backgroundImage?: string <URL>
-     @return Promise<any>
+    /**
+     *
+     * @param text: string
+     * @param size: number
+     * @param backgroundImage?: string <URL>
+     * @return Promise<any>
      */
 
     public static async generateQRCode(text: string, size: number, backgroundImage?: string): Promise<any> {

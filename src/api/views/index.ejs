@@ -45,7 +45,7 @@
                             never been easier.
                         </p>
                         <p>
-                            <strong><%= cleanFormat(requests.total) %></strong> total requests and counting.
+                            <strong><%= cleanFormat(data.requests.total) %></strong> total requests and counting.
                         </p>
                         <div class="hero-cta">
                             <a class="button button-primary" href="https://docs.ponjo.club">DOCUMENTATION</a>
@@ -124,9 +124,9 @@
                         <% function cleanFormat(str) {
                             return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         } %>
-                        <strong><%= cleanFormat(requests.total) %></strong> ─ total requests. <br>
-                        <strong><%= cleanFormat(requests.gets) %></strong> ─ GET requests. <br>
-                        <strong><%= cleanFormat(requests.posts) %></strong> ─ POST requests. <br>
+                        <strong><%= cleanFormat(data.requests.total) %></strong> ─ total requests. <br>
+                        <strong><%= cleanFormat(data.requests.gets) %></strong> ─ GET requests. <br>
+                        <strong><%= cleanFormat(data.requests.posts) %></strong> ─ POST requests. <br>
                         <strong><%= cleanFormat(keys.length) %></strong> ─ API keys generated. <br>
                         <strong>57</strong> ─ total endpoints. <br>
                         <strong><%= new Date("August 24, 2021 18:30:00").toLocaleString() %></strong> ─ first API deployment.

@@ -20,10 +20,6 @@ import rateLimit, {RateLimit} from "express-rate-limit";
 import {Request, Response} from "express";
 import ErrorUtil from "../util/ErrorUtil";
 
-export interface PonjoRateLimiter {
-    ratelimiter: RateLimit
-}
-
 export default {
     rateLimiter: rateLimit({
         max: 50,

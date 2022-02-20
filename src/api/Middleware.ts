@@ -17,8 +17,7 @@
  */
 
 import {NextFunction, Request, Response} from "express";
-import Requests from "./database/models/Requests";
-import Images from "./database/models/Images";
+import Models from "./database/Models";
 
 export default class Middleware {
 
@@ -35,9 +34,9 @@ export default class Middleware {
             case "/": case "/hosting": case "/endpoints": case "/uploads": case "/image-hosting":
                 next(); break;
             default:
-                const current = await Requests.findOne();
+                const current: any = await Models.Requests.findOne();
                 if (!current) {
-                    await Requests.create({total: 0, gets: 0, posts: 0});
+                    await Models.Requests.create({total: 0, gets: 0, posts: 0});
                     next();
                 } else {
                     current.total++;
@@ -58,7 +57,7 @@ export default class Middleware {
      */
 
     public static async imageHostingMiddleware(req: Request, res: Response, next: NextFunction): Promise<Response|void> {
-        const images = await Images.find();
+        const images = await Models.Uploads.find();
         return res.render("image-hosting", {images: images});
     }
 }

@@ -22,12 +22,7 @@ export interface APITimestamps {
 }
 
 export interface CreatedAPIKey {
-    status: number,
-    message: string,
-    data: {
-        key: string,
-        user: string,
-        requests: number
-    },
-    timestamps: APITimestamps
+    key: string,
+    user: string,
+    requests: number
 }

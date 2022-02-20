@@ -16,24 +16,15 @@
  * credit is given to the original author(s).
  */
 
-import Requests from "../../database/models/Requests";
 import {APITimestamps} from "../../structs/APIResponses";
+import {APIData} from "../../structs/database/APIData";
+import Models from "../../database/Models";
 
 export default class APIUtil {
-
-    /**
-     * Get the current timestamp as a locale time string.
-     * @return string
-     */
 
     public static getTimestamp(): string {
         return new Date().toLocaleTimeString();
     }
-
-    /**
-     * Get the current API request timestamps.
-     * @return APITimestamps
-     */
 
     public static getTimestamps(): APITimestamps {
         return {
@@ -42,11 +33,6 @@ export default class APIUtil {
         }
     }
 
-    /**
-     * Generate a unique ID.
-     * @return string
-     */
-
     public static generateUniqueId(): string {
         return "yxxx-4xx-xxxxxx".replace(/[xy]/g, function(c) {
             const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -54,52 +40,29 @@ export default class APIUtil {
         });
     }
 
-    /**
-     * Create a promise-based delay.
-     * @param ms The amount of milliseconds to wait.
-     * @return Promise<any>
-     */
-
     public static async sleep(ms): Promise<any> {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-
-    /*
-     Obtain multiple elements from the provided array.
-     @param array: string[]
-     @param amount: number
-     @return string[]
-     */
 
     public static getMultipleElementsFromArray(array: string[], amount: number): string[] {
         return array.slice(0, amount)
     }
 
-    /**
-     * Get the total amount of API requests.
-     * @return Promise<object>
-     */
-
-    public static async getTotalApiRequests(): Promise<object> {
+    public static async getTotalApiRequests(): Promise<APIData> {
         try {
-            const requests = await Requests.findOne({});
+            const result: any = await Models.Requests.findOne();
             return {
-                total: requests.total,
-                gets: requests.gets,
-                posts: requests.posts
+                requests: {
+                    total: result.total,
+                    gets: result.gets,
+                    posts: result.posts,
+                    patches: result.patches,
+                    puts: result.puts,
+                    deletes: result.deletes
+                }
             };
-        } catch (error) {
-            return {
-                total: 0, gets: 0, posts: 0
-            };
-        }
+        } catch (error) {}
     }
-
-    /*
-     Shuffle the provided array.
-     @param array: any[]
-     @return any[]
-     */
 
     public static shuffleArray(array: any[]): any[] {
         let currentIndex = array.length, randomIndex;
@@ -113,43 +76,25 @@ export default class APIUtil {
         return array;
     }
 
-    /*
-     Replace all characters in a string.
-     @param str: string
-     @param find: string
-     @param replace: string
-     @return string
-     */
+    public static getDate(): string {
+        let date = new Date();
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        return month + "/" + day + "/" + year;
+    }
 
     public static replaceAll(str: string, find: string, replace: string): string {
         return str.replace(new RegExp(find, "g"), replace);
     }
 
-    /**
-     * Base64 encode a string (URI safe).
-     * @param str
-     * @return string
-     */
-
     public static base64Encode(str: string): string {
         return Buffer.from(str).toString("base64url");
     }
 
-    /**
-     * Base64 decode a string (URI safe).
-     * @param str
-     * @return string
-     */
-
     public static base64Decode(str: string): string {
         return Buffer.from(str, "base64url").toString("utf-8");
     }
-
-    /**
-     * Convert hex to hexadecimal.
-     * @param hex
-     * @return string
-     */
 
     public static hexToHexadecimal(hex: string): string {
         return parseInt(hex, 16).toString(16);

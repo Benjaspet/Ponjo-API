@@ -39,12 +39,12 @@ export default class AuthEndpoint {
                 return ErrorUtil.send400Status(req, res);
             }
             const key = AuthorizationUtil.generateUniqueApiKey() as string;
-            await AuthorizationUtil.createApiKey(key, user)
+            await AuthorizationUtil.createAPIKey(key, user)
                 .then(result => {
                     return res.status(200).json({
                         status: 200,
                         message: res.statusMessage,
-                        data: result.data,
+                        data: result,
                         timestamps: APIUtil.getTimestamps()
                     });
                 });
@@ -52,29 +52,5 @@ export default class AuthEndpoint {
             Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
-    }
-
-    /**
-     * Returns an array of all API keys.
-     * @method GET
-     * @header none
-     * @uri /v1/auth/keys/list
-     * @return Promise<any>
-     */
-
-    public static async getAllKeys(req: Request, res: Response): Promise<any> {
-        await AuthorizationUtil.getAllApiKeys()
-            .then(result => {
-                return res.status(200).json({
-                    status: 200,
-                    message: res.statusMessage,
-                    keys: result,
-                    timestamps: APIUtil.getTimestamps()
-                });
-            })
-            .catch(error => {
-                Logger.error(error.message);
-                return ErrorUtil.sent500Status(req, res);
-            });
     }
 }
