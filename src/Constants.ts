@@ -23,5 +23,6 @@ export default class Constants {
     public static API_URI = Config.get("PONJOAPI-URI");
     public static API_PORT = Config.get("PORT");
     public static PONJOAPI_MONGO_URI = Config.get("PONJOAPI-URI");
+    public static REQUEST_LOG_WEBHOOK = Config.get("REQUEST-LOG-WEBHOOK");
 
 }

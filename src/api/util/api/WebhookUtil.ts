@@ -18,19 +18,20 @@
 
 import {Request} from "express";
 import {Webhook, MessageBuilder} from "discord-webhook-node";
-import Config from "../../../Config";
+import Constants from "../../../Constants";
 
 export default class WebhookUtil {
 
-    public static async sendBaseLogWebhook(req: Request): Promise<any> {
-        const webhook: Webhook = new Webhook(Config.get("REQUEST-LOG-WEBHOOK"));
-        const embed: MessageBuilder = new MessageBuilder()
-            .setTitle(`New Request`)
-            .setColor(parseInt("36aae0", 16))
-            .setDescription(`• URL: [${req.url}](https://app.ponjo.club${req.url})` + `\n` + `• Protocol: ${req.protocol}` + `\n` + `• Request type: \`${req.method}\``)
-            .addField("Headers", "```json" + "\n" + JSON.stringify(req.headers, null, 4) + "```", false)
-            .setFooter(`Method type: ${req.method}`)
-            .setTimestamp()
-        await webhook.send(embed);
+    public static async sendBaseLogWebhook(req: Request): Promise<void> {
+        const webhook: Webhook = new Webhook(Constants.REQUEST_LOG_WEBHOOK);
+        try {
+            await webhook.send(new MessageBuilder()
+                .setTitle(`New Request`)
+                .setColor(parseInt("36aae0", 16))
+                .setDescription(`• URL: [${req.url}](https://app.ponjo.club${req.url})` + `\n` + `• Protocol: ${req.protocol}` + `\n` + `• Request type: \`${req.method}\``)
+                .addField("Headers", "```json" + "\n" + JSON.stringify(req.headers, null, 4) + "```", false)
+                .setFooter(`Method type: ${req.method}`)
+                .setTimestamp());
+        } catch (error: any) { return; }
     }
 }
