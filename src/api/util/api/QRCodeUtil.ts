@@ -17,6 +17,7 @@
  */
 
 import {AwesomeQR} from "awesome-qr";
+import * as buffer from "buffer";
 
 export default class QRCodeUtil {
 

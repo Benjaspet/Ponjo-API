@@ -73,10 +73,10 @@ export default class ErrorUtil {
      * @return Express.Response
      */
 
-    public static sent500Status(req: Request, res: Response): Response {
+    public static sent500Status(req: Request, res: Response, message?: string): Response {
         return res.status(500).json({
             status: res.statusCode,
-            message: "An error occurred. Please contact an API developer.",
+            message: message ? message : "An error occurred. Please contact an API developer.",
             timestamps: APIUtil.getTimestamps()
         });
     }

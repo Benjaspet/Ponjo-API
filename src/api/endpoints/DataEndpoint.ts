@@ -26,6 +26,7 @@ import fetch from "node-fetch";
 import APIUtil from "../util/api/APIUtil";
 import MemeUtil from "../util/api/MemeUtil";
 import QRCodeUtil from "../util/api/QRCodeUtil";
+import axios from "axios";
 
 export default class DataEndpoint {
 
@@ -116,27 +117,30 @@ export default class DataEndpoint {
         const size = req.query.size as string;
         const backgroundImage = req.query.background as string;
         if (!text || !size) return ErrorUtil.send400Status(req, res);
-        try {
-            let code;
-            if (!backgroundImage) {
-                code = await QRCodeUtil.generateQRCode(decodeURIComponent(text), JSON.parse(size));
-                res.writeHead(200, {
-                    "Content-Type": "image/png",
-                    "Content-Length": code.length
-                });
-                return res.end(code);
-            } else {
-                code = await QRCodeUtil.generateQRCode(decodeURIComponent(text), JSON.parse(size), decodeURIComponent(backgroundImage));
-                res.writeHead(200, {
-                    "Content-Type": "image/png",
-                    "Content-Length": code.length
-                });
-                return res.end(code);
-            }
-        } catch (error) {
-            Logger.error(error.message);
-            return ErrorUtil.sent500Status(req, res);
-        }
+        await axios.get(decodeURIComponent(backgroundImage))
+            .then(async response => {
+                const contentType = response.headers["content-type"];
+                const acceptedContentTypes: string[] = ["image/jpeg", "image/jpg", "image/png"];
+                if (response.status != 200) {
+                    return ErrorUtil.sent500Status(req, res, "Unable to fetch the provided background image.");
+                } else if (!acceptedContentTypes.includes(contentType)) {
+                    return ErrorUtil.sent500Status(req, res, "Invalid file type provided. Supported: png, jpeg");
+                }
+                try {
+                    const textDecoded = decodeURIComponent(text);
+                    const backgroundOperational = backgroundImage ? decodeURIComponent(backgroundImage) : null;
+                    const image = await QRCodeUtil.generateQRCode(textDecoded, JSON.parse(size), backgroundOperational);
+                    res.writeHead(200, {
+                        "Content-Type": "image/png",
+                        "Content-Length": image.length
+                    });
+                    return res.end(image);
+                } catch (error: any) {
+                    return ErrorUtil.sent500Status(req, res);
+                }
+            }).catch(() => {
+                return ErrorUtil.sent500Status(req, res);
+            });
     }
 
     /**
