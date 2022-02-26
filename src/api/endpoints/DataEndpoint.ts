@@ -124,7 +124,7 @@ export default class DataEndpoint {
                 if (response.status != 200) {
                     return ErrorUtil.sent500Status(req, res, "Unable to fetch the provided background image.");
                 } else if (!acceptedContentTypes.includes(contentType)) {
-                    return ErrorUtil.sent500Status(req, res, "Invalid file type provided. Supported: png, jpeg");
+                    return ErrorUtil.sent500Status(req, res, "Invalid file type provided. Supported: png, jpeg.");
                 }
                 try {
                     const textDecoded = decodeURIComponent(text);

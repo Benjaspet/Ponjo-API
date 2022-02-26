@@ -20,9 +20,17 @@ import Config from "./Config";
 
 export default class Constants {
 
-    public static API_URI = Config.get("PONJOAPI-URI");
-    public static API_PORT = Config.get("PORT");
-    public static PONJOAPI_MONGO_URI = Config.get("PONJOAPI-URI");
-    public static REQUEST_LOG_WEBHOOK = Config.get("REQUEST-LOG-WEBHOOK");
+    public static API_PORT: string = Config.get("PORT");
+    public static HOST_ADDRESS: string = Config.get("HOST-ADDRESS");
+    public static ELIXIR_API_PORT: string = Config.get("ELIXIR-API-PORT");
+    public static ELIXIR_PREMIUM_API_PORT: string = Config.get("ELIXIR-PREMIUM-API-PORT");
+    public static ELIXIR_TWO_API_PORT: string = Config.get("ELIXIR-TWO-API-PORT");
+    public static ELIXIR_BLUE_API_PORT: string = Config.get("ELIXIR-BLUE-API-PORT");
+    public static ELIXIR_BOT_ID: string = Config.get("ELIXIR-BOT-ID");
+    public static ELIXIR_PREMIUM_BOT_ID: string = Config.get("ELIXIR-PREMIUM-BOT-ID");
+    public static ELIXIR_TWO_BOT_ID: string = Config.get("ELIXIR-TWO-BOT-ID");
+    public static ELIXIR_BLUE_BOT_ID: string = Config.get("ELIXIR-BLUE-BOT-ID");
+    public static PONJOAPI_MONGO_URI: string = Config.get("PONJOAPI-URI");
+    public static REQUEST_LOG_WEBHOOK: string = Config.get("REQUEST-LOG-WEBHOOK");
 
 }

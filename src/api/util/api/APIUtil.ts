@@ -19,6 +19,7 @@
 import {APITimestamps} from "../../structs/APIResponses";
 import {APIData} from "../../structs/database/APIData";
 import Models from "../../database/Models";
+import Constants from "../../../Constants";
 
 export default class APIUtil {
 
@@ -82,6 +83,20 @@ export default class APIUtil {
         let month = date.getMonth() + 1;
         let year = date.getFullYear();
         return month + "/" + day + "/" + year;
+    }
+
+    public static getPortByBotID(bot: string): string {
+        if (bot == Constants.ELIXIR_BOT_ID) {
+            return Constants.ELIXIR_API_PORT;
+        } else if (bot === Constants.ELIXIR_PREMIUM_BOT_ID) {
+            return Constants.ELIXIR_PREMIUM_API_PORT;
+        } else if (bot == Constants.ELIXIR_TWO_BOT_ID) {
+            return Constants.ELIXIR_TWO_API_PORT;
+        } else if (bot == Constants.ELIXIR_BLUE_BOT_ID) {
+            return Constants.ELIXIR_BLUE_API_PORT;
+        } else {
+            return Constants.ELIXIR_API_PORT;
+        }
     }
 
     public static replaceAll(str: string, find: string, replace: string): string {

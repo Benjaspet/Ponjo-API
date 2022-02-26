@@ -79,6 +79,8 @@ premiumRouter.post("/elixir/resume", ElixirEndpoint.resumePlayer);
 premiumRouter.post("/elixir/shuffle", ElixirEndpoint.shufflePlayer);
 premiumRouter.post("/elixir/play", ElixirEndpoint.playTrackInGuild);
 premiumRouter.post("/elixir/playlist/queue", ElixirEndpoint.queuePlaylist);
+premiumRouter.post("/elixir/join", ElixirEndpoint.joinChannel);
+premiumRouter.post("/elixir/stop", ElixirEndpoint.stopQueue);
 
 premiumRouter.get("/chatbot", DataEndpoint.sendChatbotMessage);
 premiumRouter.get("/captcha", DataEndpoint.getCaptchaData);
