@@ -45,7 +45,6 @@ export default class ColorEndpoint {
                     const colorInfo = colors(hex);
                     return res.status(200).json({
                         status: 200,
-                        message: res.statusMessage,
                         hex: hex,
                         name: colorInfo.name,
                         hueHex: colorInfo.hueHex,

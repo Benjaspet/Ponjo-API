@@ -19,14 +19,12 @@
 import {Request, Response} from "express";
 import ErrorUtil from "../util/ErrorUtil";
 import * as weather from "weather-js";
+import fetch from "node-fetch";
 import Captcha from "@haileybot/captcha-generator";
 import CovidDataUtil from "../util/api/CovidDataUtil";
 import Logger from "../../Logger";
-import fetch from "node-fetch";
 import APIUtil from "../util/api/APIUtil";
 import MemeUtil from "../util/api/MemeUtil";
-import QRCodeUtil from "../util/api/QRCodeUtil";
-import axios from "axios";
 
 export default class DataEndpoint {
 
@@ -99,48 +97,6 @@ export default class DataEndpoint {
             Logger.error(error.message);
             return ErrorUtil.sent500Status(req, res);
         }
-    }
-
-    /**
-     * Generate a custom QR code.
-     * @method GET
-     * @header Authentication: token
-     * @uri /v1/qr?text=hello%20there&size=500
-     * @param text: string
-     * @param size: number
-     * @param background?: string
-     * @return Promise<any>
-     */
-
-    public static async generateQRCode(req: Request, res: Response): Promise<any> {
-        const text = req.query.text as string;
-        const size = req.query.size as string;
-        const backgroundImage = req.query.background as string;
-        if (!text || !size) return ErrorUtil.send400Status(req, res);
-        await axios.get(decodeURIComponent(backgroundImage))
-            .then(async response => {
-                const contentType = response.headers["content-type"];
-                const acceptedContentTypes: string[] = ["image/jpeg", "image/jpg", "image/png"];
-                if (response.status != 200) {
-                    return ErrorUtil.sent500Status(req, res, "Unable to fetch the provided background image.");
-                } else if (!acceptedContentTypes.includes(contentType)) {
-                    return ErrorUtil.sent500Status(req, res, "Invalid file type provided. Supported: png, jpeg.");
-                }
-                try {
-                    const textDecoded = decodeURIComponent(text);
-                    const backgroundOperational = backgroundImage ? decodeURIComponent(backgroundImage) : null;
-                    const image = await QRCodeUtil.generateQRCode(textDecoded, JSON.parse(size), backgroundOperational);
-                    res.writeHead(200, {
-                        "Content-Type": "image/png",
-                        "Content-Length": image.length
-                    });
-                    return res.end(image);
-                } catch (error: any) {
-                    return ErrorUtil.sent500Status(req, res);
-                }
-            }).catch(() => {
-                return ErrorUtil.sent500Status(req, res);
-            });
     }
 
     /**
@@ -260,26 +216,5 @@ export default class DataEndpoint {
                 Logger.error(error.message);
                 return ErrorUtil.sent500Status(req, res);
             });
-    }
-
-    /**
-     * The route to check the API's status/health.
-     * @method GET
-     * @header none
-     * @uri /v1/health
-     * @return Express.Response
-     */
-
-    public static getApiHealth(req: Request, res: Response): Response {
-        try {
-            return res.status(200).json({
-                status: res.statusCode,
-                message: "API health check succeeded.",
-                timestamps: APIUtil.getTimestamps()
-            });
-        } catch (error) {
-            Logger.error(error.message);
-            return ErrorUtil.sent500Status(req, res);
-        }
     }
 }

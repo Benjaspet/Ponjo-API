@@ -214,7 +214,7 @@ export default class ImageManipulationEndpoint {
         const format = req.query.format as string;
         if (!image) return ErrorUtil.sent500Status(req, res);
         try {
-            const result = await Canvacord.burn(image, parseInt(intensity) || 1);
+            const result = await Canvacord.burn(image, parseInt(intensity) || 5);
             const data = result.toString("base64");
             const img = Buffer.from(data, "base64");
             if (!format) {

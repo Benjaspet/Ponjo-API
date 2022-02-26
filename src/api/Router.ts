@@ -46,9 +46,7 @@ premiumRouter.use(async (req: Request, res: Response, next: NextFunction) => {
     await AuthorizationUtil.checkKeyValidity(req, res, next);
 });
 
-router.get("/health", DataEndpoint.getApiHealth);
 router.get("/affirmations", RandomEndpoint.getRandomAffirmation);
-
 router.get("/color", ColorEndpoint.hexToImage);
 
 router.post("/trigger", ImageManipulationEndpoint.sendTriggeredImage);
@@ -67,8 +65,6 @@ router.get("/pride/orientations", LGBTQEndpoint.searchForOrientation);
 
 router.post("/urlshortener/create", URLShortenerEndpoint.createShortenedURL);
 router.get("/urlshortener/all", URLShortenerEndpoint.getAllShortURLs);
-
-premiumRouter.get("/qr", DataEndpoint.generateQRCode);
 
 premiumRouter.get("/elixir/nowplaying", ElixirEndpoint.getNowPlayingTrackInGuild);
 premiumRouter.get("/elixir/queue", ElixirEndpoint.getGuildMusicQueue);
