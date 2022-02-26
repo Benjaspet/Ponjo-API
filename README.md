@@ -32,6 +32,7 @@ Created & developed by: Ben Petrillo (Eerie6560)
 ### Documentation
 
 You can view the API's full documentation [here](https://docs.ponjo.club).
+Documentation also includes API wrappers.
 
 ### License
 
