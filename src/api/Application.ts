@@ -38,7 +38,7 @@ export class Application {
         // Setting up the view engine and our public static directories.
 
         app.use(express.static(path.join(__dirname, "/public")));
-        app.use(express.static(path.join(__dirname, "/../../uploads")));
+        // app.use(express.static(path.join(__dirname, "/../../uploads")));
         app.set("view engine", "ejs");
         app.set("views", __dirname + "/views");
 
@@ -64,8 +64,8 @@ export class Application {
         // Setting our base endpoints and their callbacks.
 
         app.get("/", async (req: Request, res: Response) => {return res.render("index", {data: await APIUtil.getTotalApiRequests(), keys: await Models.Keys.find()})});
-        app.get("/hosting", (req: Request, res: Response) => {return res.render("hosting")});
-        app.get("/image-hosting", Middleware.imageHostingMiddleware);
+        // app.get("/hosting", (req: Request, res: Response) => {return res.render("hosting")});
+        // app.get("/image-hosting", Middleware.imageHostingMiddleware);
         app.get("/endpoints", (req: Request, res: Response) => {return res.render("endpoints")});
         app.get("/short/:shortURL", URLShortenerEndpoint.getShortenedURL);
 
