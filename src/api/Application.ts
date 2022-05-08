@@ -67,7 +67,7 @@ export class Application {
         // app.get("/hosting", (req: Request, res: Response) => {return res.render("hosting")});
         // app.get("/image-hosting", Middleware.imageHostingMiddleware);
         app.get("/endpoints", (req: Request, res: Response) => {return res.render("endpoints")});
-        app.get("/short/:shortURL", URLShortenerEndpoint.getShortenedURL);
+        app.get("/:shortURL", URLShortenerEndpoint.getShortenedURL);
 
         // Initialize the routers.
 

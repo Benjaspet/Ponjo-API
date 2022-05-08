@@ -65,7 +65,7 @@ export default class URLShortenerEndpoint {
         try {
             if (!url) return ErrorUtil.send400Status(req, res);
             const shortURL: any = await Models.ShortURLs.findOne({short: url});
-            if (!shortURL) return ErrorUtil.send404Response(req, res);
+            if (!shortURL) return res.render("404");
             shortURL.clicks++; shortURL.save();
             return res.redirect(shortURL.full);
         } catch (error) {
